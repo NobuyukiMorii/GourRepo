@@ -1,98 +1,23 @@
-.movie-list-photo-a {
-	display:block;
+.gallery-div {
+	margin-top: 15px;
+	margin-left: -15px;
 }
 
-.movie-list-div {
-
-}
-
-.movie-list-table {
-	margin-top: 10px;
-}
-
-.movie-list-tr {
-
-
-}
-
-.movie-list-photo-td{
-	width:150px;
-}
-
-.movie-list-photo {
-	width:150px;
-}
-
-.movie-list-description-td {
-
-}
-
-.movie-list-description-div {
-
-}
-
-.movie-list-description-title-ahref {
-	display:block;
-}
-
-.movie-list-description-title-ahref:hover {
-	text-decoration: none;
-}
-
-.movie-list-description-title {
-	color:#4aa3df;
-	font-size: 20px;
-}
-
-.movie-list-description-title:hover {
-	color: #ff9a00;
-	font-size: 20px;
-}
-
-.movie-list-reporter-name-ahref {
-
-}
-
-.movie-list-reporter-name-ahref:hover {
-	text-decoration: none;
-}
-
-.movie-list-reporter-name {
-	display:block;
+.menu-name {
 	font-size: 15px;
 	color: #4aa3df;
 }
 
-.movie-list-reporter-name:hover {
-	color: #ff9a00;
+.menu-name:hover {
 	font-size: 15px;
+	color: #ff9a00;
 }
 
-.movie-date {
-	font-size: 10px;
-	color:black;
-}
-
-.movie-date:hover {
-	font-size: 10px;
-	color:black;
-}
-
-.movie-list-reporter-introduction {
-	font-size: 7px;
-	color: black;
-}
-
-.movie-list-reporter-introduction-ahref {
-	display:block;
-}
-
-.movie-list-reporter-introduction-ahref:hover {
+.menu-ahref:hover {
 	text-decoration: none;
 }
 
-.movie-list-reporter-introduction:hover {
-	font-size: 7px;
-	color: black;
-
+.menu-price:hover {
+	font-size: 15px;
+	color: #ff9a00;
 }
