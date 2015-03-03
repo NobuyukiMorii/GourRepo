@@ -15,7 +15,7 @@
 
     <!-- Custom styles for this template -->
     <link href="assets/css/soon.css" rel="stylesheet">
-
+    <link href="assets/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -29,13 +29,15 @@
   </head>
   <!-- START BODY -->
   <body class="nomobile">
+    <div class="row">
 
     <!-- START HEADER -->
-    <section id="header">
+    <section id="header" class="margin-bottom">
         <div class="container">
             <header>
                 <!-- HEADLINE -->
-                <h1 data-animated="GoIn"><b>ぐるれぽ</b> is coming soon...</h1>
+                <h1 data-animated="GoIn"><b class="Gururepo-Name">ぐるれぽ</b><br> is coming soon...</h1>
+                <a href="http://mory.weblike.jp/GourRepo/design_test/view-main.html" class="btn btn-default btn-lg" role="button">サンプルサイトを見る</a>
             </header>
             <!-- START TIMER -->
             <div id="timer" data-animated="FadeIn">
@@ -46,15 +48,7 @@
                 <div id="seconds" class="timer_box"></div>
             </div>
             <!-- END TIMER -->
-            <div class="col-lg-4 col-lg-offset-4 mt centered">
-            	<h4>LET ME KNOW WHEN YOU LAUNCH</h4>
-				<form class="form-inline" role="form">
-				  <div class="form-group">
-				    <label class="sr-only" for="exampleInputEmail2">Email address</label>
-				    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
-				  </div>
-				  <button type="submit" class="btn btn-info">Submit</button>
-				</form>            
+            <div class="col-lg-4 col-lg-offset-4 mt centered">         
 			</div>
             
         </div>
@@ -64,24 +58,28 @@
         <!-- START SLIDER -->
         <div id="slider" class="rev_slider">
             <ul>
-              <li data-transition="slideleft" data-slotamount="1" data-thumb="assets/img/slider/1.jpg">
-                <img src="assets/img/slider/img22.jpg">
-              </li>
               <li data-transition="slideleft" data-slotamount="1" data-thumb="assets/img/slider/2.jpg">
-                <img src="assets/img/slider/img23.jpg">
-              </li>
-              <li data-transition="slideleft" data-slotamount="1" data-thumb="assets/img/slider/3.jpg">
-                <img src="assets/img/slider/img25.jpg">
-              </li>
-              <li data-transition="slideleft" data-slotamount="1" data-thumb="assets/img/slider/4.jpg">
-                <img src="assets/img/slider/img26.jpg">
-              </li>
+                <img src="assets/img/slider/img24.jpg">
             </ul>
         </div>
         <!-- END SLIDER -->
     </section>
-    <!-- END HEADER -->
 
+    <!-- Page Content -->
+    <div class="container margin-header">
+        <div class="row">
+            <div class="col-sm-4 image-margin">
+                <img class="img-responsive img-center" src="assets/img/GourRepo.png" alt="">
+            </div>
+            <div class="col-sm-8">
+                <p class="orange">もっともっとお店のことが知れるみんなのお食事レポートサービス</p>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+
+
+    <!-- END HEADER -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
