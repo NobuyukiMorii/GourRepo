@@ -20,6 +20,16 @@ class MoviesController extends Controller {
 	}
 
 	/*
+	*動画投稿前のレストラン選択画面
+	*/
+	public function select_restaurants(){
+		/*
+		*
+		*
+		*/
+	}
+
+	/*
 	*動画投稿画面
 	*/
 	public function add(){
