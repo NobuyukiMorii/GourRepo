@@ -1,0 +1,35 @@
+.Gururepo-Name {
+	color:#ff9a00;
+	font-size: 100px;
+}
+
+.orange {
+	color:#ffffff;
+	margin-top: 120px;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+.background-image {
+	width:100%;
+	background-image:url("assets/img/slider/img24.jpg");
+}
+
+.margin-header {
+	margin-top: :-2500px;
+}
+
+.feature {
+	color:#ff9a00;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+.margin-bottom {
+	margin-bottom: -150px;
+}
+
+.image-margin {
+	margin-top: 0px;
+	margin-bottom: 100px;
+}
