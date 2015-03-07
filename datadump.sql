@@ -107,30 +107,6 @@ LOCK TABLES `restaurants` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `shoheis`
---
-
-DROP TABLE IF EXISTS `shoheis`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `shoheis` (
-  `kawata` varchar(255) NOT NULL,
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `title` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `shoheis`
---
-
-LOCK TABLES `shoheis` WRITE;
-/*!40000 ALTER TABLE `shoheis` DISABLE KEYS */;
-/*!40000 ALTER TABLE `shoheis` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tag_relations`
 --
 
@@ -315,4 +291,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-03-07  9:16:23
+-- Dump completed on 2015-03-07 12:45:13
+
