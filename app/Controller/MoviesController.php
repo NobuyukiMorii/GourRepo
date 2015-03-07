@@ -1,9 +1,14 @@
 <?php
-class MoviesController extends Controller {
+class MoviesController extends AppController {
 	/*
 	*利用するモデル
 	*/
 	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation');
+
+	/*
+	*利用するコンポーネント
+	*/
+	public $components = array('Gurunabi');
 
 	/*
 	*トップ画面
@@ -28,6 +33,7 @@ class MoviesController extends Controller {
 		*②formから動画のurlが送られてくる
 		*③送られてきた情報をsaveする
 		*/
+
 	}
 	/*
 	*検索結果画面
@@ -60,7 +66,7 @@ class MoviesController extends Controller {
 		*③ビューに渡す
 		*/
 	}
-	
+
 	/*
 	*「アップロードボタン」が押された時のムービーの選択画面
 	*/
@@ -72,6 +78,11 @@ class MoviesController extends Controller {
 		*④ビューの中のテーブルにボタンをつけて、そのボタンを押された店のデータをmovie_addにポストする
 		*/
 
+		//都道府県マスタ取得
+		$pref_search_info = $this->Gurunabi->prefSearch();
+		//大業態マスタ取得
+		$category_large_search_info = $this->Gurunabi->categoryLargeSearch();
+		$this->set(compact('pref_search_info' , 'category_large_search_info'));
 	}
 
 	/*
