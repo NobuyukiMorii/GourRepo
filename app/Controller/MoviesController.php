@@ -34,7 +34,7 @@ class MoviesController extends AppController {
 	public function index2(){
 
 
-		
+	
 	}
 
 	/*
