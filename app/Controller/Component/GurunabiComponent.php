@@ -29,7 +29,18 @@ class GurunabiComponent extends Component {
 		/*
 		*データの取得+連想配列への変換
 		*/
-		$pref_serch_info = $this->parseXmlToArray($access_url);
+		$pref_serch_array = $this->parseXmlToArray($access_url);
+		/*
+		*セレクトボックス用の配列に変換
+		*/
+		foreach ($pref_serch_array['pref'] as $key => $value) {
+			$pref_serch_info[$value['pref_code']] = $value['pref_name'];
+		}
+		/*
+		*指定なしの場合の配列を追加
+		*/
+		$not_specified_array[0] = "指定なし";
+		array_unshift($pref_serch_info, $not_specified_array[0]);
 		return $pref_serch_info;
 	}
 
@@ -46,112 +57,112 @@ class GurunabiComponent extends Component {
 		/*
 		*データの取得+連想配列への変換
 		*/
-		$pref_serch_info = $this->parseXmlToArray($access_url);
-		return $pref_serch_info;
+		$category_serch_large_array = $this->parseXmlToArray($access_url);
+		/*
+		*セレクトボックス用の配列に変換
+		*/
+		foreach ($category_serch_large_array['category_l'] as $key => $value) {
+			$category_serch_large_info[$value['category_l_code']] = $value['category_l_name'];
+		}
+		/*
+		*指定なしの場合の配列を追加
+		*/
+		$not_specified_array[0] = "指定なし";
+		array_unshift($category_serch_large_info, $not_specified_array[0]);
+		return $category_serch_large_info;
+
+	}
+
+	/*
+	*店舗情報を取得するapi
+	*/
+	public function RestSearch($data = null){
+		/*
+		*URLの定義
+		*/
+		$base_url = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=';
+		$key = '6f13d54e08f1c5397b1aaa3091cab074';
+		/*
+		*アクセスurlの作成（基本）
+		*/
+		$format = '&format=xml';
+		$hit_per_page = '&hit_per_page=30';
+		$sort = '&sort=2'; //1が店舗名順、2が業態順
+		$access_url = $base_url . $key . $format . $hit_per_page . $sort;
+		/*
+		*アクセスurlの作成（オプション）
+		*/
+		if($data !== null){
+			foreach ($data as $key => $value) {
+				if($value !== '0'){
+					$access_url = $access_url . '&' . $key . '=' . $value;
+				}
+			}
+		}
+		/*
+		*データの取得+連想配列への変換
+		*/
+		$rest_search_array = $this->parseXmlToArray($access_url);
+		/*
+		*エラーハンドリング
+		*該当のお店がない場合は、restキーにnullを代入sるう
+		*/
+		if(isset($rest_search_array['error'])){
+			$rest_search_array['rest'] = null;
+		}
+		return $rest_search_array;
+	}
+
+	/*
+	*ぐるなびapiの情報をぐるれぽのDBに保存するためのコード
+	*/
+	public function ParseArrayForDB($GourNaviData){
+		$rest_save_data['name'] = $GourNaviData['rest']['name'];
+		$rest_save_data['tel'] = $GourNaviData['rest']['tel'];
+		$rest_save_data['address'] = $GourNaviData['rest']['address'];
+		$rest_save_data['latitude'] = $GourNaviData['rest']['latitude'];
+		$rest_save_data['longitude'] = $GourNaviData['rest']['longitude'];
+		$rest_save_data['category'] = $GourNaviData['rest']['category'];
+		$rest_save_data['url'] = $GourNaviData['rest']['url'];
+		$rest_save_data['url_mobile'] = $GourNaviData['rest']['url_mobile'];
+		$rest_save_data['opentime'] = $GourNaviData['rest']['opentime'];
+		$rest_save_data['holliday'] = $GourNaviData['rest']['holliday'];
+		$rest_save_data['access_line'] = $GourNaviData['rest']['access']['line'];
+		$rest_save_data['access_station'] = $GourNaviData['rest']['access']['station'];
+		$rest_save_data['access_station_exit'] = $GourNaviData['rest']['access']['station_exit'];
+		$rest_save_data['access_walk'] = $GourNaviData['rest']['access']['walk'];
+		$rest_save_data['access_note'] = $GourNaviData['rest']['access']['note'];
+		$rest_save_data['parking_lots'] = $GourNaviData['rest']['parking_lots'];	
+		$rest_save_data['pr'] = $GourNaviData['rest']['pr'];
+		$rest_save_data['code_areacode'] = $GourNaviData['rest']['code_areacode'];
+		$rest_save_data['code_areaname'] = $GourNaviData['rest']['code_areaname'];
+
+
+	
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+		pr($GourNaviData);
+
+
+
+		exit;
+
+
+
 	}
 
 
-
-    //アクセスするURLを作成するメソッド
-    public function make_gnaviapi_url($lati,$long) {
-    	//urlの指定
-        $api = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?';
-        //キーの指定
-        $key = '6f13d54e08f1c5397b1aaa3091cab074';
-        //jsonに設定
-        $format = 'json';
-        //世界緯度系に設定
-        $coordinates_mode = 2;
-        //ヒット件数
-        $hit_per_page = 99;
-        //アクセスするurlの指定
-        $query = $api.'keyid='.$key.'&format='.$format.'&hit_per_page='.$hit_per_page.'&coordinates_mode='.$coordinates_mode;
-        //値を返す
-        return $query;
-    }
-
-    //連想配列から特定の値を取り出す
-    public function get_rest_info($restaurant_data) {
-
-		foreach($restaurant_data['rest'] as $i=>$val) {
-			//お店の名前
-		  	$info[$i]['name'] = $restaurant_data['rest'][$i]['name'];
-		  	//画像
-		  	$info[$i]['image_url'] = $restaurant_data['rest'][$i]['image_url']['shop_image1'];
-		  	//URL
-		  	$info[$i]['url'] = $restaurant_data['rest'][$i]['url'];
-		  	//電話番号
-		  	$info[$i]['tel_number'] = $restaurant_data['rest'][$i]['tel'];
-		  	//住所
-		  	$info[$i]['address'] = $restaurant_data['rest'][$i]['address'];
-		  	//説明分
-		  	$info[$i]['pr'] = $restaurant_data['rest'][$i]['pr']['pr_short'];
-		  	//カテゴリー
-		  	$info[$i]['category'] = $restaurant_data['rest'][$i]['category'];
-		  	//予算
-		  	$info[$i]['budget'] = $restaurant_data['rest'][$i]['budget'];
-		  	//緯度
-		  	$info[$i]['latitude'] = $restaurant_data['rest'][$i]['latitude'];
-		  	//経度
-		  	$info[$i]['longitude'] = $restaurant_data['rest'][$i]['longitude'];
-		}
-		//値を返す
-		return $info;
-    }
-
-    //prから不要なデータを削除する
-    public function delete_disuse_data_from_pr($info) {
-
-		foreach($info as $i=>$val) {
-
-			if (strstr($info[$i]['pr'], "〒") == true || strstr($info[$i]['pr'], "TELL") == true) {
-				$info[$i]['pr'] = null;
-			}
-
-		}
-		//値を返す
-		return $info;
-    }   
-
-    //mapURLを作成
-    public function get_map_url($info) {
-
-		foreach($info as $i=>$val) {
-		  	//URL（携帯用）
-		  	list($domain[$i],$dir_01[$i],$dir_02[$i],$dir_03[$i],$dir_04[$i]) = explode("/",$info[$i]['url']);
-		  	$info[$i]['map_url'] = $domain[$i].'//'.$dir_02[$i].'/'.$dir_03[$i].'/map/';
-		}
-		//値を返す
-		return $info;
-    }
-
-    //画像URLのあるデータとないデータを分ける
-    public function divide_image_exist($info) {
-    	//画像URLのあるデータとないデータを分ける
-		foreach($info as $i=>$val) {
-
-			//URLがあるがない場合
-		  	if(empty($info[$i]['image_url'])) {
-		  		$info['image_not_exist'][$i] = $info[$i];
-		  		unset($info[$i]);
-		  	} elseif (isset($info[$i]['image_url'])) {
-				//URLに接続出来ない場合
-				$get_contents[$i] = @file_get_contents($info[$i]['image_url']);
-				if($get_contents[$i] == false) {
-					$info['image_not_exist'][$i] = $info[$i];
-					unset($info[$i]);
-				} else {
-					$info['image_exist'][$i] = $info[$i];
-					unset($info[$i]);
-				}
-									
-		  	} 
-		}
-		//配列をつめる
-		$info['image_exist'] = array_values($info['image_exist']); 
-		$info['image_not_exist'] = array_values($info['image_not_exist']); 
-		//値を返す
-		return $info;
-    }
 
 }
