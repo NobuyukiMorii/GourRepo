@@ -31,6 +31,30 @@ class MoviesController extends AppController {
 	}
 
 	/*
+	*「アップロードボタン」が押された時のムービーの選択画面
+	*/
+	public function myMovieIndex(){
+		/*
+		*①ユーザーがformに検索項目を書いて、送信する
+		*②ぐるなびのapiに接続して、jsonでデータをダウンロードしてくる
+		*③ビューに表示する
+		*④ビューの中のテーブルにボタンをつけて、そのボタンを押された店のデータをmovie_addにポストする
+		*/
+
+		//都道府県マスタ取得
+		$pref_search_info = $this->Gurunabi->prefSearch();
+		//大業態マスタ取得
+		$category_large_search_info = $this->Gurunabi->categoryLargeSearch();
+		//お店情報の取得
+		if(!empty($this->request->data)){
+			$rest_search_info = $this->Gurunabi->RestSearch($this->request->data);
+		} else {
+			$rest_search_info = $this->Gurunabi->RestSearch();
+		}
+		$this->set(compact('pref_search_info' , 'category_large_search_info' , 'rest_search_info'));
+	}
+
+	/*
 	*動画投稿画面
 	*/
 	public function add(){
@@ -40,7 +64,19 @@ class MoviesController extends AppController {
 		*③送られてきた情報をsaveする
 		*/
 
+		//パラメーターからぐるなびidを取得する
+		pr($this->params['pass'][0]);
+		$option['id'] = $this->params['pass'][0];
+
+		//レストランをぐるなびから検索して取得する
+		$rest_search_info = $this->Gurunabi->RestSearch($option);
+
+		//DBに保存出来る形に配列を整理する
+		$rest_save_data = $this->Gurunabi->ParseArrayForDB($rest_search_info);
+
+
 	}
+
 	/*
 	*検索結果画面
 	*/
@@ -71,24 +107,6 @@ class MoviesController extends AppController {
 		*②user_idをキーに、$this->user_watch_movie_list->findで検索する
 		*③ビューに渡す
 		*/
-	}
-
-	/*
-	*「アップロードボタン」が押された時のムービーの選択画面
-	*/
-	public function myMovieIndex(){
-		/*
-		*①ユーザーがformに検索項目を書いて、送信する
-		*②ぐるなびのapiに接続して、jsonでデータをダウンロードしてくる
-		*③ビューに表示する
-		*④ビューの中のテーブルにボタンをつけて、そのボタンを押された店のデータをmovie_addにポストする
-		*/
-
-		//都道府県マスタ取得
-		$pref_search_info = $this->Gurunabi->prefSearch();
-		//大業態マスタ取得
-		$category_large_search_info = $this->Gurunabi->categoryLargeSearch();
-		$this->set(compact('pref_search_info' , 'category_large_search_info'));
 	}
 
 	/*
