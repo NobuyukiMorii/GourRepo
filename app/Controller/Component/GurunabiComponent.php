@@ -117,50 +117,41 @@ class GurunabiComponent extends Component {
 	*ぐるなびapiの情報をぐるれぽのDBに保存するためのコード
 	*/
 	public function ParseArrayForDB($GourNaviData){
-		$rest_save_data['name'] = $GourNaviData['rest']['name'];
-		$rest_save_data['tel'] = $GourNaviData['rest']['tel'];
-		$rest_save_data['address'] = $GourNaviData['rest']['address'];
-		$rest_save_data['latitude'] = $GourNaviData['rest']['latitude'];
-		$rest_save_data['longitude'] = $GourNaviData['rest']['longitude'];
-		$rest_save_data['category'] = $GourNaviData['rest']['category'];
-		$rest_save_data['url'] = $GourNaviData['rest']['url'];
-		$rest_save_data['url_mobile'] = $GourNaviData['rest']['url_mobile'];
-		$rest_save_data['opentime'] = $GourNaviData['rest']['opentime'];
-		$rest_save_data['holliday'] = $GourNaviData['rest']['holliday'];
-		$rest_save_data['access_line'] = $GourNaviData['rest']['access']['line'];
-		$rest_save_data['access_station'] = $GourNaviData['rest']['access']['station'];
-		$rest_save_data['access_station_exit'] = $GourNaviData['rest']['access']['station_exit'];
-		$rest_save_data['access_walk'] = $GourNaviData['rest']['access']['walk'];
-		$rest_save_data['access_note'] = $GourNaviData['rest']['access']['note'];
-		$rest_save_data['parking_lots'] = $GourNaviData['rest']['parking_lots'];	
-		$rest_save_data['pr'] = $GourNaviData['rest']['pr'];
-		$rest_save_data['code_areacode'] = $GourNaviData['rest']['code_areacode'];
-		$rest_save_data['code_areaname'] = $GourNaviData['rest']['code_areaname'];
 
-
-	
-
-
-
-
-
-		
-
-
-
-
-
-
-
-
-		pr($GourNaviData);
-
-
-
-		exit;
-
-
-
+		$rest_save_data['name'] 								= $GourNaviData['rest']['name'];
+		$rest_save_data['tel'] 									= $GourNaviData['rest']['tel'];
+		$rest_save_data['address'] 								= $GourNaviData['rest']['address'];
+		$rest_save_data['latitude'] 							= $GourNaviData['rest']['latitude'];
+		$rest_save_data['longitude'] 							= $GourNaviData['rest']['longitude'];
+		$rest_save_data['category'] 							= $GourNaviData['rest']['category'];
+		$rest_save_data['url'] 									= $GourNaviData['rest']['url'];
+		$rest_save_data['url_mobile'] 							= $GourNaviData['rest']['url_mobile'];
+		$rest_save_data['opentime'] 							= $GourNaviData['rest']['opentime'];
+		$rest_save_data['holiday'] 								= $GourNaviData['rest']['holiday'];
+		$rest_save_data['access_line'] 							= $GourNaviData['rest']['access']['line'];
+		$rest_save_data['access_station'] 						= $GourNaviData['rest']['access']['station'];
+		$rest_save_data['access_station_exit'] 					= $GourNaviData['rest']['access']['station_exit'];
+		$rest_save_data['access_walk'] 							= $GourNaviData['rest']['access']['walk'];
+		$rest_save_data['access_note'] 							= null;
+		$rest_save_data['parking_lots'] 						= null;	
+		$rest_save_data['pr'] 									= $GourNaviData['rest']['pr']['pr_short'] ;
+		$rest_save_data['code_areacode'] 						= $GourNaviData['rest']['code']['areacode'];
+		$rest_save_data['code_areaname'] 						= $GourNaviData['rest']['code']['areaname'];
+		$rest_save_data['code_prefname'] 						= $GourNaviData['rest']['code']['prefname'];
+		$rest_save_data['code_category_code_I'] 				= $GourNaviData['rest']['code']['category_code_s'][0];
+		$rest_save_data['code_category_code_I_order'] 			= null;
+		$rest_save_data['code_category_name_I']					= $GourNaviData['rest']['code']['category_name_s'][0];
+		$rest_save_data['code_category_name_I_order'] 			= null;
+		$rest_save_data['code_category_code_s'] 				= $GourNaviData['rest']['code']['category_code_s'][0];
+		$rest_save_data['code_category_code_s_order'] 			= null;
+		$rest_save_data['code_category_name_s'] 				= $GourNaviData['rest']['code']['category_name_s'][0];
+		$rest_save_data['code_category_name_s_order'] 			= null;
+		$rest_save_data['budget'] 								= $GourNaviData['rest']['budget'];
+		$rest_save_data['party'] 								= $GourNaviData['rest']['party'];
+		$rest_save_data['lunch'] 								= $GourNaviData['rest']['lunch'];
+		$rest_save_data['credit_card'] 							= $GourNaviData['rest']['credit_card'];
+		$rest_save_data['equipment']							= $GourNaviData['rest']['equipment'];
+		return $rest_save_data;
 	}
 
 

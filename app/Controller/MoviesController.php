@@ -63,16 +63,20 @@ class MoviesController extends AppController {
 		*②formから動画のurlが送られてくる
 		*③送られてきた情報をsaveする
 		*/
-
 		//パラメーターからぐるなびidを取得する
-		pr($this->params['pass'][0]);
 		$option['id'] = $this->params['pass'][0];
-
 		//レストランをぐるなびから検索して取得する
 		$rest_search_info = $this->Gurunabi->RestSearch($option);
-
 		//DBに保存出来る形に配列を整理する
 		$rest_save_data = $this->Gurunabi->ParseArrayForDB($rest_search_info);
+		//登録時の基本情報を追加する
+		$rest_save_data['del_flg'] = 0; //あとで削除
+		$rest_save_data['created_user_id'] = 1;
+		$rest_save_data['modified_user_id'] = 1;
+		//保存する
+		$this->Restaurant->create();
+		$flg = $this->Restaurant->save($rest_save_data);
+		//保存の判定
 
 
 	}
