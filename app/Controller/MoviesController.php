@@ -24,6 +24,13 @@ class MoviesController extends AppController {
 		*/
 	}
 
+	/*
+	*お店の個別画面
+	*/
+	public function view(){
+		
+	}
+
 	public function index2(){
 
 
@@ -33,7 +40,7 @@ class MoviesController extends AppController {
 	/*
 	*「アップロードボタン」が押された時のムービーの選択画面
 	*/
-	public function myMovieIndex(){
+	public function selectMovieForAdd(){
 		/*
 		*①ユーザーがformに検索項目を書いて、送信する
 		*②ぐるなびのapiに接続して、jsonでデータをダウンロードしてくる
