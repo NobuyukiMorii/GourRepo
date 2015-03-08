@@ -24,6 +24,12 @@ class MoviesController extends AppController {
 		*/
 	}
 
+	public function index2(){
+
+
+		
+	}
+
 	/*
 	*動画投稿画面
 	*/

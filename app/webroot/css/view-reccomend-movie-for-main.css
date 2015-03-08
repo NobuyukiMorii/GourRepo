@@ -1,0 +1,68 @@
+.recommend-movie-sidebar {
+	padding-right: 70px;
+}
+
+.reccomend-movie-table {
+
+}
+
+.reccomend-movie-photo-td {
+	width: 120px;
+}
+
+.recommend-movie-detail-td {
+	padding-left: 15px;
+}
+
+.reccomend-movie-name-div {
+	margin-right: 0px;
+}
+
+.reccomend-movie-place-name {
+	font-size: 15px;
+}
+
+.a-href-for-reccomend-movie-place-name {
+	color:#4aa3df;
+	display:block;
+}
+
+.a-href-for-reccomend-movie-place-name:hover {
+	color:#ff9a00;
+	text-decoration: none;
+	display:block;
+}
+
+
+.reccomend-movie-genre {
+	font-size: 10px;
+}
+
+.reccomend-movie-station {
+	font-size: 10px;
+}
+
+.reccomend-movie-name {
+	font-size: 11px;
+}
+
+.a_href_for_reccomend-movie-td {
+	display:block;
+	text-decoration: none;
+	color:black;
+}
+
+.a_href_for_reccomend-movie-td:hover {
+	text-decoration: none;
+	color:black;
+}
+
+.tr-for-reccomend-movie {
+	background-color: #eeeeee;
+}
+
+.between-reccomend-movie-tr {
+	width:100%;
+	height:5px;
+	background-color: #ffffff;
+}

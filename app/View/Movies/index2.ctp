@@ -7,6 +7,7 @@
   <?php echo $this->Html->css('view-reccomend-movie-for-main.css'); ?>
   <?php echo $this->Html->css('movie_index.css'); ?>
   <!-- CONTENT MORII============-->
+
   <div class="row main-content">
 
     <div class="row">
@@ -16,6 +17,11 @@
 
     </div>
 
+    <style type="text/css">
+  <!--
+  p {
+    background-color: #D3D3D3;
+  
     <div class="row reccomend-div">
       <div class="col-md-4 col-md-offset-2">
         <style type="text/css">
@@ -23,17 +29,18 @@
         </style>
         <p class="example"><font size="5">はやし</font></p>
         <p><font size="3">渋谷駅各線、徒歩5分。渋谷駅から377m</font></p>
-        <p><font size="3" color="#ff0000">夜の予算～￥999  昼の予算 ～￥999</font></p>
+        <p><font size="3" color="00bfff">夜の予算～￥999  昼の予算 ～￥999</font></p>
        　言わずと知れた渋谷の名店。マークシティの横にある昼営業のみの店。
           食している時、周りを見ると多くの人が完飲する丁寧に作られたスープの旨みと麺とのバランスが最高です。
           難点は昼営業のみなので行けるタイミングが中々つかめないこと。
           行列の目安：平日13:30頃まで-10人〜20人程、14:00以降が狙い目だがチャーシュー・味玉は売り切れてる可能性大。
           オススメ；らーめん(というからーめん＋トッピングしかないです。注文の際に裏メニューに変更可。)
       </div>
-      <div class="col-md-4">
-        <img src="https://i.ytimg.com/vi/L6PujWVBmRo/default.jpg"  class="reccomend-movie-photo">
+      <div class="col-md-4 recommend-div">
+           <img src="https://i.ytimg.com/vi_webp/31eHmMs5uCQ/mqdefault.webp"  class="reccomend-movie-photo">
       </div>
     </div>
+    }
 
     <div class="row reccomend-div">
       <div class="col-md-4 col-md-offset-2">
@@ -80,8 +87,3 @@
 
   <!-- CONTENT MORII============-->
   <div class="row main-content">
-
-     
-
-      
-<!-- /CONTENT MORII============-->
