@@ -9,6 +9,12 @@
     <?php echo $this->Html->css('bootstrap.min'); ?>
     <?php echo $this->Html->css('header'); ?>
     <?php echo $this->Html->css('footer.css'); ?>
+
+    <?php
+    echo $this->Html->css('bootstrap');
+    echo $this->Html->css('bootstrap-responsive');
+    echo $this->Html->script('bootstrap');
+    ?>
   </head>
   <body>
   <!-- HEADER ============-->
