@@ -7,6 +7,7 @@
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <?php echo $this->Html->css('bootstrap.min'); ?>
+    <?php echo $this->Html->css('bootstrap-responsive'); ?>
     <?php echo $this->Html->css('header'); ?>
     <?php echo $this->Html->css('footer.css'); ?>
 
@@ -70,6 +71,7 @@
         </div>
     </div>
   <!-- /FOOTER ============-->
+
   <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <?php echo $this->Html->script('bootstrap.min');?>
