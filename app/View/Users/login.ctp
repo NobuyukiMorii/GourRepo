@@ -1,4 +1,5 @@
-<!-- app/View/Users/signUp.ctp -->
+<!-- //app/View/Users/login.ctp-->
+<?php echo $this->Session->flash('auth'); ?>
 
 <?php echo $this->Form->create('User', array(
 	'inputDefaults' => array(
@@ -9,7 +10,7 @@
 	'class' => 'well'
 )); ?>
 	<fieldset>
-		<legend>メルアド・パスワードを入力して登録！</legend>
+		<legend>メルアド・パスワードを入力してログイン！</legend>
 		<?php echo $this->Form->input('email', array(
 			'label' => '',
 			'placeholder' => 'メールアドレス',
@@ -20,10 +21,7 @@
 			'placeholder' => 'パスワード',
 			// 'after' => '<span style="color:#FF0000">必須入力</span>'
 		)); ?>
-		<?php echo $this->Form->hidden('role', array(
-			'value' => 'admin',
-		)); ?>
-		<?php echo $this->Form->submit('登録', array(
+		<?php echo $this->Form->submit('ログイン', array(
 			'div' => 'form-group',
 			'class' => 'btn btn-default'
 		)); ?>

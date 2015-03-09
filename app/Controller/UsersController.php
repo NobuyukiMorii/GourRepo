@@ -4,12 +4,11 @@
 class UsersController extends AppController {
 
     public $helpers = array('Html', 'Form', 'Session');
-    public $components = array('Session');
     public $uses = array('User', 'Group');
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('login', 'signUp');
+        $this->Auth->allow();
 
     }
 
@@ -29,6 +28,20 @@ class UsersController extends AppController {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }
         }
+    }
+
+    public function login() {
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                $this->redirect($this->Auth->redirect());
+            } else {
+                $this->Session->setFlash(__('Invalid username or password, try again'));
+            }
+        }
+    }
+
+    public function logout() {
+        $this->redirect($this->Auth->logout());
     }
 
 }

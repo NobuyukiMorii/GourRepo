@@ -1,33 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html>
-<head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
-        echo $this->Html->css('bootstrap');
-        echo $this->Html->css('bootstrap-responsive');
-
-        echo $this->Html->script('bootstrap');
-
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
-</head>
-<body>
-	<div id="container">
-		<div id="header">
-<!-- 			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1> -->
-		</div>
-		<div id="content">
-=======
 <html lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -49,7 +20,7 @@
       <div class="col-md-6 header">
         <div class="btn-group header-drop-button">
           <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <span class="glyphicon glyphicon-align-justify"></span> <span class="caret"></span>
+            < span class="glyphicon glyphicon-align-justify"></span> <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">アカウントを作成</a></li>
@@ -79,7 +50,6 @@
   <!-- /HEADER ============-->
 
   <?php echo $this->fetch('content'); ?>
->>>>>>> 8c0b57ea00a33bc2ca054869c13986af582be939
 
   <!-- FOOTER ============-->
     <div class="row footer-area">
@@ -94,29 +64,8 @@
         </div>
     </div>
   <!-- /FOOTER ============-->
-
-<<<<<<< HEAD
-			<?php echo $this->fetch('content'); ?>
-		</div>
-<!-- 		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-			?>
-			<p>
-				<?php echo $cakeVersion; ?>
-			</p>
-		</div> -->
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
-</body>
-</html>
-=======
   <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <?php echo $this->Html->script('bootstrap.min');?>
   </body>
 </html>
->>>>>>> 8c0b57ea00a33bc2ca054869c13986af582be939
