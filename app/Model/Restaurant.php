@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 class Restaurant extends AppModel {
 	public $name = 'Restaurant';
     public $hasMany = array(
@@ -9,12 +8,11 @@ class Restaurant extends AppModel {
         )
     );
 }
-=======
 
+/*
 class Restaurant extends AppModel{
 	public function getAll(){
 		return $this->find('all');
 	}
 }
-
->>>>>>> feature/Shohei
+*/
