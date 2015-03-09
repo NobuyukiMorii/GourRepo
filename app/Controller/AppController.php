@@ -42,12 +42,12 @@ class AppController extends Controller {
         'Session',
 		'Auth' => array(
             'loginRedirect' => array(
-                'controller' => 'posts',
+                'controller' => 'movies',
                 'action' => 'index'
             ),
             'logoutRedirect' => array(
-                'controller' => 'users',
-                'action' => 'login',
+                'controller' => 'movies',
+                'action' => 'index',
                 'home'
             ),
             'authenticate' => array(
@@ -58,4 +58,8 @@ class AppController extends Controller {
             'authorize' => array('Controller') // この行を追加しました
         ),
 	);
+
+        public function beforeFilter() {
+        $this->Auth->allow();
+    }
 }
