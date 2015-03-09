@@ -33,7 +33,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 	public $helpers = array(
 		'Html' => array('className' => 	'TwitterBootstrap.BootstrapHtml'),
-		'Form' => array('className' => 'TwitterBootstrap.BootstraoForm'),
+		'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
 		'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator')
 	);
 
