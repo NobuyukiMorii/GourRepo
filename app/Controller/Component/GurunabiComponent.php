@@ -138,19 +138,26 @@ class GurunabiComponent extends Component {
 		$rest_save_data['code_areacode'] 						= $GourNaviData['rest']['code']['areacode'];
 		$rest_save_data['code_areaname'] 						= $GourNaviData['rest']['code']['areaname'];
 		$rest_save_data['code_prefname'] 						= $GourNaviData['rest']['code']['prefname'];
-		$rest_save_data['code_category_code_I'] 				= $GourNaviData['rest']['code']['category_code_s'][0];
+		$rest_save_data['code_category_code_I'] 				= null;
 		$rest_save_data['code_category_code_I_order'] 			= null;
-		$rest_save_data['code_category_name_I']					= $GourNaviData['rest']['code']['category_name_s'][0];
+		$rest_save_data['code_category_name_I']					= null;
 		$rest_save_data['code_category_name_I_order'] 			= null;
-		$rest_save_data['code_category_code_s'] 				= $GourNaviData['rest']['code']['category_code_s'][0];
+		$rest_save_data['code_category_code_s'] 				= null;
 		$rest_save_data['code_category_code_s_order'] 			= null;
-		$rest_save_data['code_category_name_s'] 				= $GourNaviData['rest']['code']['category_name_s'][0];
+		$rest_save_data['code_category_name_s'] 				= null;
 		$rest_save_data['code_category_name_s_order'] 			= null;
 		$rest_save_data['budget'] 								= $GourNaviData['rest']['budget'];
 		$rest_save_data['party'] 								= $GourNaviData['rest']['party'];
 		$rest_save_data['lunch'] 								= $GourNaviData['rest']['lunch'];
 		$rest_save_data['credit_card'] 							= $GourNaviData['rest']['credit_card'];
 		$rest_save_data['equipment']							= $GourNaviData['rest']['equipment'];
+
+		foreach ($rest_save_data as $key => $value) {
+			if(empty($value)){
+				$rest_save_data[$key] = null;
+			}
+		}
+
 		return $rest_save_data;
 	}
 

@@ -10,26 +10,22 @@
 
   <div class="row main-content">
 
-    <div class="row">
-      <div class="col-md-12">
-        <iframe src=" https://www.youtube.com/embed/aV-8Dc4uPRQ?autoplay=1" frameborder="0" class="movie"></iframe>
+    <div class="row reccomend-div2">
+      <div class="row">
+        <div class="col-md-12">
+          <iframe src=" https://www.youtube.com/embed/aV-8Dc4uPRQ?autoplay=1" frameborder="0" class="movie"></iframe>
+        </div>
       </div>
-
     </div>
 
-    <style type="text/css">
-  <!--
-  p {
-    background-color: #D3D3D3;
-  
-    <div class="row reccomend-div">
+    <div class="row reccomend-div0 well">
       <div class="col-md-4 col-md-offset-2">
         <style type="text/css">
         p.example { font-weight: bold; }
         </style>
         <p class="example"><font size="5">はやし</font></p>
         <p><font size="3">渋谷駅各線、徒歩5分。渋谷駅から377m</font></p>
-        <p><font size="3" color="00bfff">夜の予算～￥999  昼の予算 ～￥999</font></p>
+        <p><font size="3" color="FF6928"><span class="label label-warning">夜の予算</span>～￥999 <span class="label label-warning">昼の予算</span> ～￥999</font></p>
        　言わずと知れた渋谷の名店。マークシティの横にある昼営業のみの店。
           食している時、周りを見ると多くの人が完飲する丁寧に作られたスープの旨みと麺とのバランスが最高です。
           難点は昼営業のみなので行けるタイミングが中々つかめないこと。
@@ -40,9 +36,8 @@
            <img src="https://i.ytimg.com/vi_webp/31eHmMs5uCQ/mqdefault.webp"  class="reccomend-movie-photo">
       </div>
     </div>
-    }
 
-    <div class="row reccomend-div">
+    <div class="row reccomend-div0">
       <div class="col-md-4 col-md-offset-2">
         <img src="https://i.ytimg.com/vi/WAmiSoklrbY/default.jpg"  class="reccomend-movie-photo">
       </div>
@@ -53,32 +48,28 @@
           <p class="example"><font size="2">上海小籠包専門店</font></p>
           <p class="example"><font size="5">鵬天閣 新館</font></p>
           <p><font size="3">地下鉄みなとみらい線元町中華街駅山下町2番出口より徒歩1分、JR石川町駅北口より徒歩8分元町・中華街駅から391m</font></p>
-          <p><font size="3" color="#ff0000">夜間の予算￥3,000～￥3,999昼の予算 ～￥999</font></p>
+          <p><font size="3" color="#FF6928"><span class="label label-warning">夜の予算</span>￥3,000～￥3,999<span class="label label-warning">昼の予算</span> ～￥999</font></p>
          　テレビでもよく紹介される，行列のできる焼き小龍包のお店。時間を問わず行列ができています。
           行列といっても，焼き小龍包を買うだけですから，そこまで長いこと待たされることはあまりないと思います。
           メニューは焼き小龍包の数種類のみで，今回はフカヒレ入りのものと普通のものが２個ずつ入っているものをいただきました（写真）！
-          ここの小龍包は作り置きせず，常に中で作り続け，焼き続けているらしいです。そのため，出来立てアッツアツ！ハフハフ言いながら食べます。少しかじるとすごい量の肉汁が！これを吸うのが醍醐味ですね～～美味しい！
+          ここの小龍包は作り置きせず，常に中で作り続け，焼き続けているらしいです。そのため，出来立てアッツアツ！ハフハフ言いながら食べます。
       </div>
     </div>
 
-    <div class="row reccomend-div">
+    <div class="row reccomend-div0 well">
       <div class="col-md-4 col-md-offset-2">
         <style type="text/css">
         p.example { font-weight: bold; }
         </style>
         <p class="example"><font size="5">南風 日進店 （ナンプウ）</font></p>
         <p><font size="3">地下鉄鶴舞線「赤池」駅より徒歩10分赤池駅から817m</font></p>
-        <p><font size="3" color="#ff0000">夜の予算￥3,000～￥3,999</font></p>
+        <p><font size="3" color="#FF6928"><span class="label label-warning">夜の予算</span>￥3,000～￥3,999</font></p>
        　沖縄料理は、ゴーヤなど少し好みの別れるものも味付けを工夫してあるのでとても食べやすいです。現に、私自身もゴーヤは苦手でしたが、南風のゴーヤと豚トロの味噌チャンプルーは美味しくて行くたびにに頼む一品です。また、沖縄料理の品揃えもきちんとあり、それ以外にもピザや鉄板焼きなどもあるので、沖縄料理が苦手な子供さんでも食べれます！雰囲気もよく個室もあります。トイレも清潔感があり、とても綺麗なのも好感が持てました。
       </div>
       <div class="col-md-4 recommend-div">
         <img src="https://i.ytimg.com/vi_webp/31eHmMs5uCQ/mqdefault.webp"  class="reccomend-movie-photo">
       </div>
     </div>
-
-
-
-
   </div>
   <!-- /CONTENT MORII============-->
 
@@ -86,4 +77,4 @@
 
 
   <!-- CONTENT MORII============-->
-  <div class="row main-content">
+
