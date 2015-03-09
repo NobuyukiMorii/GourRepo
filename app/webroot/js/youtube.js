@@ -140,14 +140,18 @@ limitations under the License.
       /*
       *ここから自作
       */
-      console.log(response.snippet.description);
-      console.log(response.snippet.title);
-      console.log(response.snippet.thumbnails.default.url);
-      $("#name").val(response.snippet.title);
-      $("#description").val(response.snippet.description);
-      $("#movie-url").val(videoId);
-      $("#thumbnails-url").val(response.snippet.thumbnails.default.url);
-      $( "#submit-botton" ).show();
+      var title = response.snippet.title;
+      var description = response.snippet.description;
+      var thumbnailsUrl = response.snippet.thumbnails.default.url;
+      console.log(title);
+      console.log(description);
+      console.log(thumbnailsUrl);
+
+      $("#name_form").val(title);
+      $("#description_form").val(description);
+      $("#videoId_form").val(videoId);
+      $("#thumbnailsUrl_form").val(thumbnailsUrl);
+      $("#submit-botton").show();
       /*
       *ここまで自作
       */
