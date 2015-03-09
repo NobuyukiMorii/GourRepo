@@ -1,0 +1,24 @@
+ .movie-detail-div {
+ 	text-align: left;
+ 	margin-top: 20px;
+ 	margin-bottom: 20px;
+ }
+
+.movie-name {
+	font-size: 20px;
+	margin-left: 10px;
+}
+
+.movie-description {
+	margin-left: 10px;
+}
+
+.movie-reporter-photo-div {
+	text-align: center;
+	padding-left: 40px;
+	padding-top: 10px;
+}
+
+.movie-reporter-photo {
+	height:50px;
+}
