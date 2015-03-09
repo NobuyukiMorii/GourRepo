@@ -1,33 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html>
-<head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
-        echo $this->Html->css('bootstrap');
-        echo $this->Html->css('bootstrap-responsive');
-
-        echo $this->Html->script('bootstrap');
-
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
-</head>
-<body>
-	<div id="container">
-		<div id="header">
-<!-- 			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1> -->
-		</div>
-		<div id="content">
-=======
 <html lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -36,6 +7,7 @@
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <?php echo $this->Html->css('bootstrap.min'); ?>
+    <?php echo $this->Html->css('bootstrap-responsive'); ?>
     <?php echo $this->Html->css('header'); ?>
     <?php echo $this->Html->css('footer.css'); ?>
   </head>
@@ -79,7 +51,6 @@
   <!-- /HEADER ============-->
 
   <?php echo $this->fetch('content'); ?>
->>>>>>> 8c0b57ea00a33bc2ca054869c13986af582be939
 
   <!-- FOOTER ============-->
     <div class="row footer-area">
@@ -95,28 +66,8 @@
     </div>
   <!-- /FOOTER ============-->
 
-<<<<<<< HEAD
-			<?php echo $this->fetch('content'); ?>
-		</div>
-<!-- 		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-			?>
-			<p>
-				<?php echo $cakeVersion; ?>
-			</p>
-		</div> -->
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
-</body>
-</html>
-=======
   <!-- script references -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <?php echo $this->Html->script('bootstrap.min');?>
   </body>
 </html>
->>>>>>> 8c0b57ea00a33bc2ca054869c13986af582be939
