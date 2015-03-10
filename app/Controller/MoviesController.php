@@ -107,6 +107,10 @@ class MoviesController extends AppController {
 		*その際に、論理削除済みを除外し、moviesテーブルのcount順とする
 		*③検索したデータをビューに表示する
 		*/
+		//必要なデータを取得
+		$serchs = $this->user->find("all");
+		$results = hash::extract($serchs, '{n}.serch.id');
+		
 	}
 	/*
 	*お気に入りのムービーリスト
