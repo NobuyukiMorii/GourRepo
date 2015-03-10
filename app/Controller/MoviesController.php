@@ -31,12 +31,6 @@ class MoviesController extends AppController {
 
 	}
 
-	public function index2(){
-
-
-	
-	}
-
 	/*
 	*「アップロードボタン」が押された時のムービーの選択画面
 	*/
