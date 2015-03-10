@@ -35,13 +35,7 @@ class MoviesController extends AppController {
 	*「アップロードボタン」が押された時のムービーの選択画面
 	*/
 	public function selectMovieForAdd(){
-		/*
-		*①ユーザーがformに検索項目を書いて、送信する
-		*②ぐるなびのapiに接続して、jsonでデータをダウンロードしてくる
-		*③ビューに表示する
-		*④ビューの中のテーブルにボタンをつけて、そのボタンを押された店のデータをmovie_addにポストする
-		*/
-
+		
 		//都道府県マスタ取得
 		$pref_search_info = $this->Gurunabi->prefSearch();
 		//大業態マスタ取得
@@ -52,6 +46,9 @@ class MoviesController extends AppController {
 		} else {
 			$rest_search_info = $this->Gurunabi->RestSearch();
 		}
+		//お店情報のバリデーション
+		$rest_search_info = $this->Gurunabi->ValidateRestInfo($rest_search_info);
+
 		$this->set(compact('pref_search_info' , 'category_large_search_info' , 'rest_search_info'));
 	}
 
