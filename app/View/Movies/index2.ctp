@@ -10,7 +10,7 @@
 
   <div class="row main-content">
 
-    <div class="row reccomend-div2">
+    <div class="row reccomend-div0">
       <div class="row">
         <div class="col-md-12">
           <iframe src=" https://www.youtube.com/embed/aV-8Dc4uPRQ?autoplay=1" frameborder="0" class="movie"></iframe>
@@ -48,7 +48,7 @@
           <p class="example"><font size="2">上海小籠包専門店</font></p>
           <p class="example"><font size="5">鵬天閣 新館</font></p>
           <p><font size="3">地下鉄みなとみらい線元町中華街駅山下町2番出口より徒歩1分、JR石川町駅北口より徒歩8分元町・中華街駅から391m</font></p>
-          <p><font size="3" color="#FF6928"><span class="label label-warning">夜の予算</span>￥3,000～￥3,999<span class="label label-warning">昼の予算</span> ～￥999</font></p>
+          <p><font size="3" color="#FF6928"><span class="label label-warning">夜の予算</span>￥3,000～￥3,999 <span class="label label-warning">昼の予算</span> ～￥999</font></p>
          　テレビでもよく紹介される，行列のできる焼き小龍包のお店。時間を問わず行列ができています。
           行列といっても，焼き小龍包を買うだけですから，そこまで長いこと待たされることはあまりないと思います。
           メニューは焼き小龍包の数種類のみで，今回はフカヒレ入りのものと普通のものが２個ずつ入っているものをいただきました（写真）！
