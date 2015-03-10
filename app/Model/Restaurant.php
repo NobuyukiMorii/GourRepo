@@ -1,8 +1,10 @@
 <?php
 
 class Restaurant extends AppModel{
-	public function getAll(){
-		return $this->find('all');
-	}
+	public $restaurant = "Restaurant";	
 }
 
+//view(表示)
+//edit
+//delete
+//add

@@ -5,7 +5,7 @@
 		<th>Name</th>
 		<th>Tel</th>
 		<th>Address</th>
-		<th>Latitude</th>
+		<!-- <th>Latitude</th>
 		<th>Longitued</th>
 		<th>Category</th>
 		<th>Url</th>
@@ -40,8 +40,8 @@
 		<th>Created</th>
 		<th>Created_user_id</th>
 		<th>Modified</th>
-		<th>Modified_user_id</th>
-	<tr>
+		<th>Modified_user_id</th> -->
+	</tr>
 
 		<?php foreach ($restaurants as $restaurant): ?>
 		<tr>
