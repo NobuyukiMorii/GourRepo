@@ -31,22 +31,10 @@ class MoviesController extends AppController {
 
 	}
 
-	public function index2(){
-
-
-	
-	}
-
 	/*
 	*「アップロードボタン」が押された時のムービーの選択画面
 	*/
 	public function selectMovieForAdd(){
-		/*
-		*①ユーザーがformに検索項目を書いて、送信する
-		*②ぐるなびのapiに接続して、jsonでデータをダウンロードしてくる
-		*③ビューに表示する
-		*④ビューの中のテーブルにボタンをつけて、そのボタンを押された店のデータをmovie_addにポストする
-		*/
 
 		//都道府県マスタ取得
 		$pref_search_info = $this->Gurunabi->prefSearch();
@@ -58,6 +46,9 @@ class MoviesController extends AppController {
 		} else {
 			$rest_search_info = $this->Gurunabi->RestSearch();
 		}
+		//お店情報のバリデーション
+		$rest_search_info = $this->Gurunabi->ValidateRestInfo($rest_search_info);
+
 		$this->set(compact('pref_search_info' , 'category_large_search_info' , 'rest_search_info'));
 	}
 
@@ -71,18 +62,24 @@ class MoviesController extends AppController {
 		*③送られてきた情報をsaveする
 		*/
 		if(empty($this->request->data)){
-			$this->set('videoId' , $this->params['pass'][0]);
+			$this->set('gournabi_id' , $this->params['pass'][0]);
 		}
 
 		if(!empty($this->request->data)){
-			//パラメーターからぐるなびidを取得する
-			$option['id'] = $this->params['pass'][0];
+			//ぐるなびidを取得する
+			$option['id'] = $this->request->data['gournabi_id'];
+
 			//レストランをぐるなびから検索して取得する
 			$rest_search_info = $this->Gurunabi->RestSearch($option);
 			//DBに保存出来る形に配列を整理する
 			$rest_save_data = $this->Gurunabi->ParseArrayForDB($rest_search_info);
+
+			//バリデーションする
+			$rest_save_data = $this->Gurunabi->ValidationBeforeSave($rest_save_data);
+
+
+
 			//登録時の基本情報を追加する
-			$rest_save_data['del_flg'] = 0; //あとで削除
 			$rest_save_data['created_user_id'] = 1;
 			$rest_save_data['modified_user_id'] = 1;
 			//保存する
@@ -90,7 +87,7 @@ class MoviesController extends AppController {
 			$flg = $this->Restaurant->save($rest_save_data);
 			//保存の判定
 
-			pr($this->request->data);
+			pr($flg);
 			exit;
 		}
 

@@ -19,22 +19,26 @@
 			<div class="row">	
       			<div class="col-md-8 col-md-offset-2 well">
 
-		      		<!-- お店の概要 ============-->
+		      	<!-- お店の概要 ============-->
 		    		<span class="view-header-place-name">
 		            	フォリオリーナ・デッラ・ポルタ・フォルトゥーナ （Fogliolina della Porta Fortuna）
-		         	</span>
+		        </span>
 		          	<div class="view-header-label-div">
-			            <p><font size="3" color="#FF6928"><span class="label label-default">エリア</span></font> 東京都目黒区</p>
-			            <p><font size="3" color="#FF6928"><span class="label label-warning">夜の予算</span>￥3,000～￥3,999</font></p>
+
+
+			            <p><font size="3" color="#FF6928">エリア</font></p> 東京都目黒区
 			            &nbsp;&nbsp;
+
+                  <p><font size="3" color="#ff0000">夜の予算￥3,000～￥3,999</font></p>
+
 			            <span class="label label-default">ジャンル</span> イタリアン
 			            &nbsp;&nbsp;
 			            <span class="label label-default">予算</span>￥20,000～￥29,999
 			            &nbsp;&nbsp;
 			            <span class="label label-default">定休日</span> 木曜日
 			            &nbsp;&nbsp;
-					    <img src="image/phone.png"  class="header-phone-image">
-					    <span class="view-header-place-tel-number">
+    					    <img src="image/phone.png"  class="header-phone-image">
+    					    <span class="view-header-place-tel-number">
 					        0267-41-0612
 					    </span>			      
 			    	</div>

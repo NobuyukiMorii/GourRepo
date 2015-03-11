@@ -48,6 +48,7 @@
   } ?>
 " method="post" accept-charset="utf-8">
 <input name="name" type="hidden" id="name_form" value="" />
+<input name="gournabi_id" type="hidden" value=<?php if(isset($gournabi_id)){ echo $gournabi_id; } ?> />
 <input name="description" type="hidden" id="description_form" value="" />
 <input name="videoId" type="hidden" id="videoId_form" value="" />
 <input name="thumbnailsUrl" type="hidden" id="thumbnailsUrl_form" value="" />

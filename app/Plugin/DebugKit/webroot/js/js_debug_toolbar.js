@@ -1,4 +1,4 @@
-/**
+/*
  * Debug Toolbar Javascript.
  *
  * Creates the DEBUGKIT namespace and provides methods for extending

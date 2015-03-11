@@ -33,29 +33,12 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 	public $helpers = array(
 		'Html' => array('className' => 	'TwitterBootstrap.BootstrapHtml'),
-		'Form' => array('className' => 'TwitterBootstrap.BootstraoForm'),
+		'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
 		'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator')
 	);
 
 	public $components = array(
 		'DebugKit.Toolbar', 
-        'Session',
-		'Auth' => array(
-            'loginRedirect' => array(
-                'controller' => 'posts',
-                'action' => 'index'
-            ),
-            'logoutRedirect' => array(
-                'controller' => 'users',
-                'action' => 'login',
-                'home'
-            ),
-            'authenticate' => array(
-                'Form' => array(
-                    'passwordHasher' => 'Simple'
-                )
-            ),
-            'authorize' => array('Controller') // この行を追加しました
-        ),
+        'Session'
 	);
 }
