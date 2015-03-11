@@ -31,5 +31,35 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	public $components = array('DebugKit.Toolbar'); 
+	public $helpers = array(
+		'Html' => array('className' => 	'TwitterBootstrap.BootstrapHtml'),
+		'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
+		'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator')
+	);
+
+	public $components = array(
+		'DebugKit.Toolbar', 
+        'Session',
+		'Auth' => array(
+            'loginRedirect' => array(
+                'controller' => 'movies',
+                'action' => 'index'
+            ),
+            'logoutRedirect' => array(
+                'controller' => 'movies',
+                'action' => 'index',
+                'home'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Simple'
+                )
+            ),
+            'authorize' => array('Controller') // この行を追加しました
+        ),
+	);
+
+        public function beforeFilter() {
+        $this->Auth->allow();
+    }
 }
