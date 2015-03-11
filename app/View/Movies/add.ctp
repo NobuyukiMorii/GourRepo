@@ -47,14 +47,12 @@
     echo $videoId ;
   } ?>
 " method="post" accept-charset="utf-8">
-<input name="title" type="hidden" id="name_form" value="" />
-<input name="gournabi_id" type="hidden" value=<?php if(isset($gournabi_id)){ echo $gournabi_id; } ?> />
+<input name="name" type="hidden" id="name_form" value="" />
 <input name="description" type="hidden" id="description_form" value="" />
-<input name="youtube_url" type="hidden" id="videoId_form" value="" />
-<input name="thumbnails_url" type="hidden" id="thumbnailsUrl_form" value="" />
+<input name="videoId" type="hidden" id="videoId_form" value="" />
+<input name="thumbnailsUrl" type="hidden" id="thumbnailsUrl_form" value="" />
 <input type="submit" value="phpにフォームを送信" id="submit-botton" />
 </form>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<?php echo $this->Html->script('jquery-1.11.2.min');?>
 <?php echo $this->Html->script('youtube');?>

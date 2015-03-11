@@ -22,8 +22,7 @@
             &nbsp;&nbsp;
             <span class="label label-default">ジャンル</span> イタリアン
             &nbsp;&nbsp;
-            <?php echo $this->Html->image('day.png', array('alt' => 'Day' , 'class' => 'view-header-day-image')); ?>
-            ￥20,000～￥29,999
+            <span class="label label-default">予算</span> <img src="image/day.png" class="view-header-day-image">￥20,000～￥29,999
             &nbsp;&nbsp;
             <span class="label label-default">定休日</span> 木曜日
           </div>
@@ -31,7 +30,7 @@
       </div>
       <div class="col-md-2 view-header-place-tel-number-div">
         <div class="row">
-          <?php echo $this->Html->image('phone.png', array('alt' => 'Day' , 'class' => 'header-phone-image')); ?>
+          <img src="image/phone.png"  class="header-phone-image">
           <span class="view-header-place-tel-number">
             0267-41-0612
           </span>
@@ -49,7 +48,7 @@
           <iframe src="https://www.youtube.com/embed/xjam_iydg3g" frameborder="0" class="movie"></iframe>
           <div class="movie-detail-div">
             <div class="col-md-1 movie-reporter-photo-div">
-              <?php echo $this->Html->image('AsukaMoko.jpeg', array('alt' => 'Day' , 'class' => 'movie-reporter-photo img-circle')); ?>
+              <img src="image/AsukaMoko.jpeg"  class="movie-reporter-photo img-circle">
             </div>
             <div class="col-md-9">
               <span class="movie-name">明日川もこのぐるめレポーター</span><br>
@@ -60,6 +59,22 @@
           </div>
         </div>
         <!-- /動画 ============-->
+
+        <div class="row">
+          <div class="row select-page-button-area">
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <a href="http://mory.weblike.jp/GourRepo/design_test/view-main.html" class="btn btn-default btn-lg select-movie-page-button" role="button" disabled="disabled">動画を見る</a>
+              </div>
+              <div class="btn-group" role="group">
+                <a href="http://mory.weblike.jp/GourRepo/design_test/view-movie.html" class="btn btn-default btn-lg select-menu-page-button" role="button" disabled="disabled">その他の動画を見る</a>
+              </div>
+              <div class="btn-group" role="group">
+                <a href="http://mory.weblike.jp/GourRepo/design_test/view-menu.html" class="btn btn-default btn-lg select-menu-page-button" role="button" disabled="disabled">その他の動画を見る</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- お店基本情報 ============-->
         <div class="col-md-12 info-detail">
@@ -114,9 +129,9 @@
             <tr>
               <td class="table-heading">予算（ユーザーより）</td>
               <td>
-                <?php echo $this->Html->image('day.png', array('alt' => 'Day' , 'class' => 'day-image')); ?>
+                <img src="image/day.png"  class="day-image">
                 ￥20,000～￥29,999
-                <?php echo $this->Html->image('night.png', array('alt' => 'Night' , 'class' => 'night-image')); ?>
+                <img src="image/night.png"  class="night-image">
                 ￥20,000～￥29,999
               </td>
             </tr>
