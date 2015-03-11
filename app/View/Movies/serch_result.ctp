@@ -1,61 +1,25 @@
-<?php echo $this->Html->css('common-setting'); ?>
-<?php echo $this->Html->css('place-title.css'); ?>
-<?php echo $this->Html->css('main-movie.css'); ?>
-<?php echo $this->Html->css('main-movie-description.css'); ?>
-<?php echo $this->Html->css('select-page-button-main.css'); ?>
-<?php echo $this->Html->css('fundamental-place-info.css'); ?>
-<?php echo $this->Html->css('view-reccomend-movie-for-main.css'); ?>
-<?php echo $this->Html->css('movie_index.css'); ?>
+<?php echo $this->Html->css('view-serchResult/common-setting'); ?>
+<?php echo $this->Html->css('view-serchResult/place-title.css'); ?>
+<?php echo $this->Html->css('view-serchResult/movie-list.css'); ?>
+<?php echo $this->Html->css('view-serchResult/select-page-button-movie.cs'); ?>
+<?php echo $this->Html->css('view-serchResult/view-reccomend-movie-for-movie.css'); ?>
 
+  <!-- CONTENT ============-->
+  <div class="row main-content">
 
-<!-- CONTENT MORII============-->
-
-<!DOCTYPE html>
-<html lang="en">
-  <body>
-  <!--検索ワード表示-->
-    <div class="row main-content">
-		<div class="row reccomend-1">
-			<div class="row">	
-      			<div class="col-md-8 col-md-offset-2 well">
-
-		      	<!-- お店の概要 ============-->
-		    		<span class="view-header-place-name">
-		            	フォリオリーナ・デッラ・ポルタ・フォルトゥーナ （Fogliolina della Porta Fortuna）
-		        </span>
-		          	<div class="view-header-label-div">
-
-
-			            <p><font size="3" color="#FF6928">エリア</font></p> 東京都目黒区
-			            &nbsp;&nbsp;
-
-                  <p><font size="3" color="#ff0000">夜の予算￥3,000～￥3,999</font></p>
-
-			            <span class="label label-default">ジャンル</span> イタリアン
-			            &nbsp;&nbsp;
-			            <span class="label label-default">予算</span>￥20,000～￥29,999
-			            &nbsp;&nbsp;
-			            <span class="label label-default">定休日</span> 木曜日
-			            &nbsp;&nbsp;
-    					    <img src="image/phone.png"  class="header-phone-image">
-    					    <span class="view-header-place-tel-number">
-					        0267-41-0612
-					    </span>			      
-			    	</div>
-		 		</div>
-			</div>
-		</div>
-      		<!--<style type="text/css">
-        	p.example { font-weight: bold; }
-        	</style>
-      		<p class="example"><font size="5">銀座　寿司　駅近</font></p>
-      		</div>      
-     	</div>
-	</div>-->
+    <!-- お店の概要 ============-->
+    <div class="row">
+      <div class="col-md-12 view-header-place-name-div">
+          <span class="view-header-place-name">
+            検索結果
+          </span>
+      </div>
+  </div>
+  <!-- /お店の概要 ============-->
 
   <!-- 動画とお店の詳細 ============-->
   <div class="row">
-    <div class="col-md-4 col-md-offset-1">
+    <div class="col-md-8">
       <div class="row">
         <!-- 動画 ============-->
         <table class="movie-list-table table table-striped">
@@ -315,9 +279,4 @@
     </div>
 
   </div>
-
-	<!-- script references -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-	</body>
-</html>
+<!-- /CONTENT ============-->

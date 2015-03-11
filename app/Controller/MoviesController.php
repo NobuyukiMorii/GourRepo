@@ -105,8 +105,10 @@ class MoviesController extends AppController {
 		*③検索したデータをビューに表示する
 		*/
 		//必要なデータを取得
-		$serchs = $this->user->find("all");
-		$results = hash::extract($serchs, '{n}.serch.id');
+
+		
+		// $serchs = $this->user->find("all");
+		// $results = hash::extract($serchs, '{n}.serch.id');
 		
 	}
 	/*

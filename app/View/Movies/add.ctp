@@ -1,4 +1,4 @@
-<?php echo $this->Html->css('youtube');?>
+<?php echo $this->Html->css('view-add/youtube');?>
 <span id="signinButton" class="pre-sign-in">
   <span
       class="g-signin"

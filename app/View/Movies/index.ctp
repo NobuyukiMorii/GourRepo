@@ -1,11 +1,11 @@
-<?php echo $this->Html->css('common-setting'); ?>
-<?php echo $this->Html->css('place-title.css'); ?>
-<?php echo $this->Html->css('main-movie.css'); ?>
-<?php echo $this->Html->css('main-movie-description.css'); ?>
-<?php echo $this->Html->css('select-page-button-main.css'); ?>
-<?php echo $this->Html->css('fundamental-place-info.css'); ?>
-<?php echo $this->Html->css('view-reccomend-movie-for-main.css'); ?>
-<?php echo $this->Html->css('movie_index.css'); ?>
+<?php echo $this->Html->css('view-index/common-setting'); ?>
+<?php echo $this->Html->css('view-index/place-title.css'); ?>
+<?php echo $this->Html->css('view-index/main-movie.css'); ?>
+<?php echo $this->Html->css('view-index/main-movie-description.css'); ?>
+<?php echo $this->Html->css('view-index/select-page-button-main.css'); ?>
+<?php echo $this->Html->css('view-index/fundamental-place-info.css'); ?>
+<?php echo $this->Html->css('view-index/view-reccomend-movie-for-main.css'); ?>
+<?php echo $this->Html->css('view-index/movie_index.css'); ?>
 <!-- CONTENT ============-->
 
 <div class="row main-content">
