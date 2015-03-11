@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2015 年 3 月 11 日 11:22
+-- Generation Time: 2015 年 3 月 11 日 11:42
 -- サーバのバージョン： 5.6.22
 -- PHP Version: 5.5.21
 
@@ -161,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL,
   `del_flg` tinyint(1) NOT NULL DEFAULT '0',
   `created` datetime NOT NULL,
   `created_user_id` int(11) NOT NULL,
