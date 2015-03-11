@@ -141,7 +141,7 @@ class GurunabiComponent extends Component {
 			}
 		}
 		return $rest_search_info;
-		
+
 	}
 
 	/*
@@ -149,6 +149,7 @@ class GurunabiComponent extends Component {
 	*/
 	public function ParseArrayForDB($GourNaviData){
 
+		$rest_save_data['gournabi_id'] 							= $GourNaviData['rest']['id'];
 		$rest_save_data['name'] 								= $GourNaviData['rest']['name'];
 		$rest_save_data['tel'] 									= $GourNaviData['rest']['tel'];
 		$rest_save_data['address'] 								= $GourNaviData['rest']['address'];
@@ -163,34 +164,40 @@ class GurunabiComponent extends Component {
 		$rest_save_data['access_station'] 						= $GourNaviData['rest']['access']['station'];
 		$rest_save_data['access_station_exit'] 					= $GourNaviData['rest']['access']['station_exit'];
 		$rest_save_data['access_walk'] 							= $GourNaviData['rest']['access']['walk'];
-		$rest_save_data['access_note'] 							= null;
-		$rest_save_data['parking_lots'] 						= null;	
+		$rest_save_data['access_note'] 							= $GourNaviData['rest']['access']['note'];
+		$rest_save_data['parking_lots'] 						= $GourNaviData['rest']['parking_lots'];
 		$rest_save_data['pr'] 									= $GourNaviData['rest']['pr']['pr_short'] ;
 		$rest_save_data['code_areacode'] 						= $GourNaviData['rest']['code']['areacode'];
 		$rest_save_data['code_areaname'] 						= $GourNaviData['rest']['code']['areaname'];
 		$rest_save_data['code_prefname'] 						= $GourNaviData['rest']['code']['prefname'];
-		$rest_save_data['code_category_code_I'] 				= null;
-		$rest_save_data['code_category_code_I_order'] 			= null;
-		$rest_save_data['code_category_name_I']					= null;
-		$rest_save_data['code_category_name_I_order'] 			= null;
-		$rest_save_data['code_category_code_s'] 				= null;
-		$rest_save_data['code_category_code_s_order'] 			= null;
-		$rest_save_data['code_category_name_s'] 				= null;
-		$rest_save_data['code_category_name_s_order'] 			= null;
 		$rest_save_data['budget'] 								= $GourNaviData['rest']['budget'];
 		$rest_save_data['party'] 								= $GourNaviData['rest']['party'];
 		$rest_save_data['lunch'] 								= $GourNaviData['rest']['lunch'];
 		$rest_save_data['credit_card'] 							= $GourNaviData['rest']['credit_card'];
 		$rest_save_data['equipment']							= $GourNaviData['rest']['equipment'];
 
+		return $rest_save_data;
+	}
+
+	/*
+	*ぐるなびapi保存の前のバリデーション
+	*/
+	public function ValidationBeforeSave($rest_save_data){
+
 		foreach ($rest_save_data as $key => $value) {
 			if(empty($value)){
 				$rest_save_data[$key] = null;
 			}
+			if (is_array($value)) {
+				$rest_save_data[$key] = null;
+			}
 		}
-
 		return $rest_save_data;
+		
 	}
+
+
+
 
 
 }
