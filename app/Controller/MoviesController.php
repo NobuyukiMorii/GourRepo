@@ -71,24 +71,44 @@ class MoviesController extends AppController {
 
 			//レストランをぐるなびから検索して取得する
 			$rest_search_info = $this->Gurunabi->RestSearch($option);
+
 			//DBに保存出来る形に配列を整理する
 			$rest_save_data = $this->Gurunabi->ParseArrayForDB($rest_search_info);
 
 			//バリデーションする
 			$rest_save_data = $this->Gurunabi->ValidationBeforeSave($rest_save_data);
 
-
-
-			//登録時の基本情報を追加する
-			$rest_save_data['created_user_id'] = 1;
-			$rest_save_data['modified_user_id'] = 1;
-			//保存する
+			//保存する（レストラン）
+			$rest_save_data['user_id'] = 1; //後ほど削除
+			$rest_save_data['created_user_id'] = 1; //後ほど削除
+			$rest_save_data['modified_user_id'] = 1; //後ほど削除
 			$this->Restaurant->create();
-			$flg = $this->Restaurant->save($rest_save_data);
-			//保存の判定
+			$flg_restaurant = $this->Restaurant->save($rest_save_data);
 
-			pr($flg);
-			exit;
+			//保存する（ムービー）
+			$movie_save_data['restaurant_id'] = $flg_restaurant['Restaurant']['id'];
+			$movie_save_data['user_id'] = 1;
+			$movie_save_data['title'] = $this->request->data['title'];
+			$movie_save_data['description'] = $this->request->data['description'];
+			$movie_save_data['youtube_url'] = 'https://www.youtube.com/watch?v=' . $this->request->data['youtube_url'];
+			$movie_save_data['thumbnails_url'] = $this->request->data['thumbnails_url'];
+			$movie_save_data['created_user_id'] = 1; //後ほど削除
+			$movie_save_data['modified_user_id'] = 1; //後ほど削除
+			$this->Movie->create();
+			$flg_movie = $this->Movie->save($movie_save_data);
+
+			//保存の判定（失敗時）
+			if($flg_restaurant === false || $flg_movie === false){
+				$this->Session->setFlash('お店と動画の登録に失敗しました。改めて登録しなおして下さい。');
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+			}
+
+			//保存の判定（成功時）
+			if($flg_restaurant === true && $flg_movie === true){
+				$this->Session->setFlash('登録に成功しました。');
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'index'));
+			}
+
 		}
 
 
