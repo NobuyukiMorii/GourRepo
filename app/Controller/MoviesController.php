@@ -56,11 +56,7 @@ class MoviesController extends AppController {
 	*動画投稿画面
 	*/
 	public function add(){
-		/*
-		*①formからレストラン情報が送られてくる
-		*②formから動画のurlが送られてくる
-		*③送られてきた情報をsaveする
-		*/
+
 		if(empty($this->request->data)){
 			$this->set('gournabi_id' , $this->params['pass'][0]);
 		}
@@ -104,14 +100,9 @@ class MoviesController extends AppController {
 			}
 
 			//保存の判定（成功時）
-			if($flg_restaurant === true && $flg_movie === true){
-				$this->Session->setFlash('登録に成功しました。');
-				return $this->redirect(array('controller' => 'Movies', 'action' => 'index'));
-			}
-
+			$this->Session->setFlash('登録に成功しました。');
+			$this->redirect(array('controller' => 'Movies', 'action' => 'view' , $flg_restaurant['Restaurant']['id']));
 		}
-
-
 	}
 
 	/*
@@ -164,4 +155,15 @@ class MoviesController extends AppController {
 		*②idをキーにmovieの論理削除カラムをアップデートする
 		*/
 	}
+
+	/*
+	*自分の投稿したムービーの管理画面
+	*/
+	public function myMovieIndex(){
+
+
+	}
+
+
+
 }
