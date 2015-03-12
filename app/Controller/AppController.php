@@ -62,5 +62,6 @@ class AppController extends Controller {
         public function beforeFilter() {
         //コメントアウトしています。
         // $this->Auth->allow();
+
     }
 }
