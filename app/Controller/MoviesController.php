@@ -166,6 +166,12 @@ class MoviesController extends AppController {
 	*自分の投稿したムービーの管理画面
 	*/
 	public function myMovieIndex(){
+		/*
+		*ユーザー情報を取得する
+		*（現在取得できない）
+		*/
+		//$user = $this->Auth->user();
+		//pr($user);
 
 
 

@@ -18,23 +18,31 @@
             フォリオリーナ・デッラ・ポルタ・フォルトゥーナ （Fogliolina della Porta Fortuna）
           </span>
           <div class="view-header-label-div">
-            <span class="label label-default">エリア</span> 東京都目黒区
-            &nbsp;&nbsp;
-            <span class="label label-default">ジャンル</span> イタリアン
-            &nbsp;&nbsp;
-            <?php echo $this->Html->image('day.png', array('alt' => 'Day' , 'class' => 'view-header-day-image')); ?>
-            ￥20,000～￥29,999
-            &nbsp;&nbsp;
-            <span class="label label-default">定休日</span> 木曜日
-          </div>
-
+            <div class="col-md-9">
+              <span class="label label-default">エリア</span> 東京都目黒区
+              &nbsp;&nbsp;
+              <span class="label label-default">ジャンル</span> イタリアン
+              &nbsp;&nbsp;
+              <?php echo $this->Html->image('day.png', array('alt' => 'Day' , 'class' => 'view-header-day-image')); ?>
+              ￥20,000～￥29,999
+              &nbsp;&nbsp;
+              <span class="label label-default">定休日</span> 木曜日
+            </div>
+        </div>
       </div>
-      <div class="col-md-2 view-header-place-tel-number-div">
+
+      <div class="col-md-3 view-header-place-tel-number-div">
         <div class="row">
           <?php echo $this->Html->image('phone.png', array('alt' => 'Day' , 'class' => 'header-phone-image')); ?>
           <span class="view-header-place-tel-number">
             0267-41-0612
           </span>
+          <a href="<?php echo $this->html->url(array('controller' => 'UserFavoriteMovieLists' , 'action' => 'add', 1)) ;?>" class="header-favorite-image-ahref">
+            <?php echo $this->Html->image('star.png', array('alt' => 'Favorite' , 'class' => 'header-favorite-image')); ?>
+          </a>
+          <a href="<?php echo $this->html->url(array('controller' => 'UserFavoriteMovieLists' , 'action' => 'add' , 1)) ;?>" class="view-header-favorite-text">
+            favorite
+          </a>
         </div>
       </div>
   </div>
