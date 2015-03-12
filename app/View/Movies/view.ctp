@@ -1,10 +1,10 @@
-  <?php echo $this->Html->css('view-css/common-setting'); ?>
-  <?php echo $this->Html->css('view-css/place-title.css'); ?>
-  <?php echo $this->Html->css('view-css/main-movie.css'); ?>
-  <?php echo $this->Html->css('view-css/main-movie-description.css'); ?>
-  <?php echo $this->Html->css('view-css/select-page-button-main.css'); ?>
-  <?php echo $this->Html->css('view-css/fundamental-place-info.css'); ?>
-  <?php echo $this->Html->css('view-css/view-reccomend-movie-for-main.css'); ?>
+  <?php echo $this->Html->css('view-view/common-setting'); ?>
+  <?php echo $this->Html->css('view-view/place-title.css'); ?>
+  <?php echo $this->Html->css('view-view/main-movie.css'); ?>
+  <?php echo $this->Html->css('view-view/main-movie-description.css'); ?>
+  <?php echo $this->Html->css('view-view/select-page-button-main.css'); ?>
+  <?php echo $this->Html->css('view-view/fundamental-place-info.css'); ?>
+  <?php echo $this->Html->css('view-view/view-reccomend-movie-for-main.css'); ?>
 
 
 

@@ -7,9 +7,9 @@
     <title>GourRepo</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <?php echo $this->Html->css('bootstrap.min'); ?>
-    <?php echo $this->Html->css('header'); ?>
-    <?php echo $this->Html->css('footer.css'); ?>
+    <?php echo $this->Html->css('view-default/bootstrap.min'); ?>
+    <?php echo $this->Html->css('view-default/header'); ?>
+    <?php echo $this->Html->css('view-default/footer.css'); ?>
   </head>
   <body>
   <!-- HEADER ============-->
