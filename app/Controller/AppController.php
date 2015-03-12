@@ -56,22 +56,22 @@ class AppController extends Controller {
                     'fields' => array('username' => 'email')
                 )
             ),
-            'authorize' => array('Controller') // この行を追加しました
+            // 'authorize' => array('Controller') // この行を追加しました
         ),
 	);
 
-    public function isAuthorized($user) {
-    if (isset($user['role']) && $user['role'] === 'admin') {
-        return true;
-    }
+//     public function isAuthorized($user) {
+//     if (isset($user['role']) && $user['role'] === 'admin') {
+//         return true;
+//     }
 
-    // デフォルトは拒否
-    return false;
-}
+//     // デフォルトは拒否
+//     return false;
+// }
 
-        public function beforeFilter() {
+    public function beforeFilter() {
         //コメントアウトしています。
-        // $this->Auth->allow();
+        $this->Auth->allow();
 
     }
 }
