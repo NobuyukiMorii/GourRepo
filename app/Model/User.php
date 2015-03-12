@@ -20,7 +20,7 @@ class User extends AppModel {
         ),
         'role' => array(
             'valid' => array(
-                'rule' => array('inList', array('admin', 'author')),
+                'rule' => array('inList', array('admin', 'contributor')),
                 'message' => 'Please enter a valid role',
                 'allowEmpty' => false
             )
@@ -57,11 +57,5 @@ class User extends AppModel {
         )
     );
 
-    public $belongsTo = array(
-        'Restaurant' => array(
-            'className' => 'Restaurant',
-            'foreignKey' => 'user_id'
-        )
-    );
 
 }

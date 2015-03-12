@@ -10,6 +10,12 @@ class MoviesController extends AppController {
 	*/
 	public $components = array('Gurunabi');
 
+	//MoviesControllerの中でログイン無しで入れるところの設定
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('index', 'serchResult', 'view');
+    }
+
 	/*
 	*トップ画面
 	*/
