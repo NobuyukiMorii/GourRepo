@@ -8,3 +8,11 @@ class Restaurant extends AppModel {
         )
     );
 }
+
+/*
+class Restaurant extends AppModel{
+	public function getAll(){
+		return $this->find('all');
+	}
+}
+*/

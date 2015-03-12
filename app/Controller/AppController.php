@@ -39,6 +39,27 @@ class AppController extends Controller {
 
 	public $components = array(
 		'DebugKit.Toolbar', 
-        'Session'
+        'Session',
+		'Auth' => array(
+            'loginRedirect' => array(
+                'controller' => 'movies',
+                'action' => 'index'
+            ),
+            'logoutRedirect' => array(
+                'controller' => 'movies',
+                'action' => 'index',
+                'home'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Simple'
+                )
+            ),
+            'authorize' => array('Controller') // この行を追加しました
+        ),
 	);
+
+    public function beforeFilter() {
+        $this->Auth->allow();
+    }
 }
