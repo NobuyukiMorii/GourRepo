@@ -164,6 +164,4 @@ class MoviesController extends AppController {
 
 	}
 
-
-
 }
