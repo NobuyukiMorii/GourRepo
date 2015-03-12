@@ -13,6 +13,16 @@
 	margin-top: -7px;
 }
 
+.header-favorite-image-ahref:hover {
+	text-decoration: none;
+}
+
+.header-favorite-image {
+	width: 50px;
+	margin-top: -7px;
+	margin-left: 20px;
+}
+
 .view-header-place-tel-number-div {
 	margin-bottom: 15px;
 }
@@ -20,6 +30,15 @@
 .view-header-place-tel-number {
 	font-size: 20px;
 	color: #e74c3c
+}
+
+.view-header-favorite-text {
+	font-size: 20px;
+	color: #e74c3c;
+}
+
+.view-header-favorite-text:hover {
+	text-decoration: none;
 }
 
 .view-header-label-div {
