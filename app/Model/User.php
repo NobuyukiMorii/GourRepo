@@ -57,11 +57,5 @@ class User extends AppModel {
         )
     );
 
-    public $belongsTo = array(
-        'Restaurant' => array(
-            'className' => 'Restaurant',
-            'foreignKey' => 'user_id'
-        )
-    );
 
 }
