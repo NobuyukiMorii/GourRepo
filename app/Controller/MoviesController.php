@@ -162,6 +162,7 @@ class MoviesController extends AppController {
 	public function myMovieIndex(){
 
 
+
 	}
 
 }
