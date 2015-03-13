@@ -68,4 +68,8 @@ class AppController extends Controller {
     // return false;
 
     }
+
+        public function beforeFilter() {
+            $this->set('userSession', $this->Auth->user());
+        }
 }
