@@ -56,13 +56,12 @@ class MoviesController extends AppController {
 		$data['modified_user_id'] = $data['user_id'];
 
 		//レストランidの取得
-		$data['movie_id'] = $this->request['pass'][0];
-		
-		/*
-		*閲覧履歴データの登録
-		*/
-		$this->UserWatchMovieList->create();
-		$flg = $this->UserWatchMovieList->save($data);
+		if(isset($this->request['pass'][0])){
+			$data['movie_id'] = $this->request['pass'][0];
+			/*閲覧履歴データの登録*/
+			$this->UserWatchMovieList->create();
+			$flg = $this->UserWatchMovieList->save($data);
+		}
 
 	}
 
