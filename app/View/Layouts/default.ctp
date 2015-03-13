@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <?php echo $this->Html->css('view-default/bootstrap.min'); ?>
     <?php echo $this->Html->css('view-default/header'); ?>
+    <?php echo $this->Html->css('view-default/flash'); ?>
+    <?php echo $this->Html->css('view-default/body.css'); ?>
     <?php echo $this->Html->css('view-default/footer.css'); ?>
   </head>
   <body>
@@ -17,40 +19,24 @@
       <div class="col-md-6 header">
         <?php echo $this->Html->image('GourRepo.png', array('alt' => 'GourRepo Logo' , 'class' => 'header-logo')); ?>
       </div>
-      <div class="col-md-6 header">
-        <div class="btn-group header-drop-button">
-          <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <span class="glyphicon glyphicon-align-justify"></span> <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">アカウントを作成</a></li>
-            <li><a href="#">過去に投稿した動画を見る</a></li>
-            <li><a href="#">プロフィールを編集する</a></li>
-            <li class="divider"></li>
-            <li><a href="#">ログアウト</a></li>
-          </ul>
-        </div>
-      </div>  
+      <?php echo $this->element('dropDownButton'); ?>
     </div>
-    <div class="col-md-8 header">
-      <div class="input-group input-group-sm header-margin header-form">
-        <span class="input-group-addon" id="sizing-addon1">Search</span>
-        <input type="text" class="form-control" placeholder="エリア・ジャンル" aria-describedby="sizing-addon1">
-      </div>
-    </div>
-    <div class="col-md-1 header">
-      <p class="header-margin">
-        <button type="button" class="btn btn-default btn-sm header-upload-button">お食事動画を投稿</button>
-      </p>
-    </div>
-    <div class="col-md-1 header text-align-center">
-      <?php echo $this->Html->image('girl.png', array('alt' => 'Profile Image' , 'class' => 'header-profile-photo img-circle')); ?>
-    </div>
+    
+    <?php echo $this->element('serchInput'); ?>
+    <?php echo $this->element('movieUploadButton'); ?>
+    <?php echo $this->element('profileImage'); ?>
+
   </div>
   <!-- /HEADER ============-->
   
+  <!-- CONTENT ============-->
   <?php echo $this->Session->flash(); ?>
   <?php echo $this->fetch('content'); ?>
+
+  <!-- 開発用に追加 -->
+  <?php pr($userSession['role']) ;?>
+  <?php pr($userSession['email']) ;?>
+  <!-- CONTENT ============-->
 
   <!-- FOOTER ============-->
   <div class="row footer-area">
