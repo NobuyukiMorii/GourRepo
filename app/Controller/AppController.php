@@ -47,8 +47,7 @@ class AppController extends Controller {
             ),
             'logoutRedirect' => array(
                 'controller' => 'movies',
-                'action' => 'index',
-                'home'
+                'action' => 'index'
             ),
             'authenticate' => array(
                 'Form' => array(
@@ -61,17 +60,12 @@ class AppController extends Controller {
 	);
 
     public function isAuthorized($user) {
-    if (isset($user['role']) && $user['role'] === 'admin') {
-        return true;
-    }
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
 
-    // デフォルトは拒否
-    return false;
-}
-
-        public function beforeFilter() {
-        //コメントアウトしています。
-        // $this->Auth->allow();
+    // デフォルトは拒否を外してadminでない場合はそれぞれのControllerのisAuthorizedに任せる。
+    // return false;
 
     }
 }
