@@ -9,6 +9,7 @@
     <?php echo $this->Html->css('view-default/bootstrap.min'); ?>
     <?php echo $this->Html->css('view-default/header'); ?>
     <?php echo $this->Html->css('view-default/flash'); ?>
+    <?php echo $this->Html->css('view-default/body.css'); ?>
     <?php echo $this->Html->css('view-default/footer.css'); ?>
   </head>
   <body>
