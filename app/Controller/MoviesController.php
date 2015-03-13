@@ -16,6 +16,19 @@ class MoviesController extends AppController {
         $this->Auth->allow('index', 'serchResult', 'view');
     }
 
+    public function isAuthorized($user) {
+
+    	//contributorに権限を与えております。
+        if (isset($user['role']) && $user['role'] === 'contributor') {
+        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'userFavoriteMovieList', 'userWatchMovieList', 'movieEdit', 'movieDelete', 'myMovieIndex'))) {
+        		return true;
+        	}
+        }
+
+        
+        return parent::isAuthorized($user);
+    }
+
 	/*
 	*トップ画面
 	*/
