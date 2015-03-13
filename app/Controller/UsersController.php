@@ -16,7 +16,7 @@ class UsersController extends AppController {
 
         //contributorに権限を与えております。
         if (isset($user['role']) && $user['role'] === 'contributor') {
-            if(in_array($this->action, array('add', 'selectMovieForAdd', 'userFavoriteMovieList', 'userWatchMovieList', 'movieEdit', 'movieDelete', 'myMovieIndex'))) {
+            if(in_array($this->action, array('dashboard', 'profileedit', 'passwordedit', 'delete'))) {
                 return true;
             }
         }
@@ -25,10 +25,6 @@ class UsersController extends AppController {
         return parent::isAuthorized($user);
     }
 
-    public function dashBoard() {
-        $this->User->recursive = 0;
-        $this->set('users', $this->paginate());
-    }
 
     public function signup() {
 
@@ -59,7 +55,23 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('ログアウトしました'));        
         $this->redirect($this->Auth->logout());
     }
-
 }
+
+    public function dashboard() {
+        $this->User->recursive = 0;
+        $this->set('users', $this->paginate());
+    }
+
+    public function profileedit() {
+
+    }
+
+    public function passwordedit() {
+
+    }
+
+    public function delete() {
+
+    }
 
 ?>
