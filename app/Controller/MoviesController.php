@@ -3,7 +3,7 @@ class MoviesController extends AppController {
 	/*
 	*利用するモデル
 	*/
-	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation');
+	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList');
 
 	/*
 	*利用するコンポーネント
@@ -21,12 +21,12 @@ class MoviesController extends AppController {
 	*/
 	public function index(){
 		/*
-		*①広告とする動画を検索する
-		*②オススメ動画として、東京のお店を、moviesのcount順に検索する。その際に、論理削除済みのデータは除外する。
-		*③user_idを取得する
-		*④user_idをキーにして、閲覧履歴を取得する
-		*⑤user_idをキーにして、お気に入り動画を取得する
-		*⑥ビューに渡す
+		*１）広告とする動画を検索する
+		*２）オススメ動画として、東京のお店を、moviesのcount順に検索する。その際に、論理削除済みのデータは除外する。
+		*３）user_idを取得する
+		*４）user_idをキーにして、閲覧履歴を取得する
+		*５）user_idをキーにして、お気に入り動画を取得する
+		*６）ビューに渡す
 		*/
 	}
 
@@ -116,10 +116,10 @@ class MoviesController extends AppController {
 	*/
 	public function serchResult(){
 		/*
-		*①キーワードを空欄で区切って配列に変換する
-		*②moviesのname、description、restaurantsのname、access_line、access_station、category、投稿したユーザーのカラムからfindする
-		*その際に、論理削除済みを除外し、moviesテーブルのcount順とする
-		*③検索したデータをビューに表示する
+		*１）キーワードを空欄で区切って配列に変換する
+		*２）moviesのname、description、restaurantsのname、access_line、access_station、category、投稿したユーザーのカラムからfindする
+		*３）その際に、論理削除済みを除外し、moviesテーブルのcount順とする
+		*４）検索したデータをビューに表示する
 		*/
 	}
 	/*
@@ -127,9 +127,9 @@ class MoviesController extends AppController {
 	*/
 	public function userFavoriteMovieList(){
 		/*
-		*①user_idを取得する
-		*②user_idをキーに、$this->UserFavoriteMovieList->findで検索する
-		*③ビューに渡す
+		*１）user_idを取得する
+		*２）user_idをキーに、$this->UserFavoriteMovieList->findで検索する
+		*３）ビューに渡す
 		*/
 	}
 	/*
@@ -137,9 +137,9 @@ class MoviesController extends AppController {
 	*/
 	public function userWatchMovieList(){
 		/*
-		*①user_idを取得する
-		*②user_idをキーに、$this->user_watch_movie_list->findで検索する
-		*③ビューに渡す
+		*１）user_idを取得する
+		*２）user_idをキーに、$this->user_watch_movie_list->findで検索する
+		*３）ビューに渡す
 		*/
 	}
 
@@ -148,17 +148,17 @@ class MoviesController extends AppController {
 	*/
 	public function movieEdit(){
 		/*
-		*①フォームからムービーのidが送られてくる。
-		*②idをキーにMovieをfindする。それをviewに渡す。
-		*③フォームからmoviesの値が送られてくる。
-		*④umovieにsaveする
-		*⑤saveに成功したらUserDashBordにリダイレクトする、失敗したらMovie.movie_editにリダイレクトする
+		*１）フォームからムービーのidが送られてくる。
+		*２）idをキーにMovieをfindする。それをviewに渡す。
+		*３）フォームからmoviesの値が送られてくる。
+		*４）umovieにsaveする
+		*５）saveに成功したらUserDashBordにリダイレクトする、失敗したらMovie.movie_editにリダイレクトする
 		*/
 	}
 	public function movieDelete(){
 		/*
-		*①フォームからムービーのidが送られてくる
-		*②idをキーにmovieの論理削除カラムをアップデートする
+		*１）フォームからムービーのidが送られてくる
+		*２）idをキーにmovieの論理削除カラムをアップデートする
 		*/
 	}
 
@@ -168,13 +168,21 @@ class MoviesController extends AppController {
 	public function myMovieIndex(){
 		/*
 		*ユーザー情報を取得する
-		*（現在取得できない）
 		*/
-		//$user = $this->Auth->user();
-		//pr($user);
-
-
-
+		$user = $this->Auth->user('id');
+		$data = $this->UserFavoriteMovieList->find('all' , array(
+			 'recursive' => 2
+		));
+		/*
+		*お気に入りの登録がない場合
+		*/
+		if(empty($data)){
+			$this->Session->setFlash('お気に入りはまだありません。');
+		}
+		/*
+		*ビューに渡す
+		*/
+		$this->set(compact('data'));
 	}
 
 }
