@@ -7,3 +7,21 @@
 .text-bold {
 	font-weight: bold;
 }
+
+.black-text {
+	color: black;
+}
+
+.black-text:hover {
+	color: black;
+}
+
+.recommend {
+	margin-left: 0px;
+	background-color: #ff9a00;
+	color:#ffffff;
+	text-align: center;
+	padding: 5px;
+	margin-top: -2px;
+	margin-bottom: -5px;
+}

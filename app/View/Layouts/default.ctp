@@ -53,7 +53,7 @@
   <!-- /FOOTER ============-->
 
   <!-- script references -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+  <?php echo $this->Html->script('jquery-1.11.2.min');?>
   <?php echo $this->Html->script('bootstrap');?>
   </body>
 </html>
