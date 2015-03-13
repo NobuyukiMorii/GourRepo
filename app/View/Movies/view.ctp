@@ -6,8 +6,6 @@
   <?php echo $this->Html->css('view-view/fundamental-place-info.css'); ?>
   <?php echo $this->Html->css('view-view/view-reccomend-movie-for-main.css'); ?>
 
-
-
   <!-- CONTENT ============-->
   <div class="row main-content">
 
