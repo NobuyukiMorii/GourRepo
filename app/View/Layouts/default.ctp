@@ -49,10 +49,12 @@
     </div>
   </div>
   <!-- /HEADER ============-->
-  
   <?php echo $this->Session->flash(); ?>
   <?php echo $this->fetch('content'); ?>
 
+  <!-- 開発用に追加 -->
+  <?php pr($userSession['role']) ;?>
+  <?php pr($userSession['email']) ;?>
   <!-- FOOTER ============-->
   <div class="row footer-area">
     <div class="col-md-1 footer-logo-div">
