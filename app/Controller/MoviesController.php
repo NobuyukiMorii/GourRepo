@@ -3,7 +3,7 @@ class MoviesController extends AppController {
 	/*
 	*利用するモデル
 	*/
-	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList');
+	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList' , 'UserWatchMovieList');
 
 	/*
 	*利用するコンポーネント
@@ -47,6 +47,22 @@ class MoviesController extends AppController {
 	*お店の個別画面
 	*/
 	public function view(){
+		/*
+		*ユーザーの閲覧履歴の登録
+		*/
+		//ユーザー情報の取得
+		$data['user_id'] = $this->Auth->user('id');
+		$data['created_user_id'] = $data['user_id'];
+		$data['modified_user_id'] = $data['user_id'];
+
+		//レストランidの取得
+		$data['movie_id'] = $this->request['pass'][0];
+		
+		/*
+		*閲覧履歴データの登録
+		*/
+		$this->UserWatchMovieList->create();
+		$flg = $this->UserWatchMovieList->save($data);
 
 	}
 
@@ -142,16 +158,6 @@ class MoviesController extends AppController {
 		/*
 		*１）user_idを取得する
 		*２）user_idをキーに、$this->UserFavoriteMovieList->findで検索する
-		*３）ビューに渡す
-		*/
-	}
-	/*
-	*閲覧履歴
-	*/
-	public function userWatchMovieList(){
-		/*
-		*１）user_idを取得する
-		*２）user_idをキーに、$this->user_watch_movie_list->findで検索する
 		*３）ビューに渡す
 		*/
 	}
