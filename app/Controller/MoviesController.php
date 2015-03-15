@@ -224,10 +224,20 @@ class MoviesController extends AppController {
 		/*
 		*ユーザーのお気に入りの動画を検索する（ページネーション）
 		*/
+		$this->Movie->unbindModel(
+            array('belongsTo' =>array('User'))
+        );
+		$this->Restaurant->unbindModel(
+            array('hasMany' =>array('Movie'))
+        );
+		$this->TagRelation->unbindModel(
+            array('belongsTo' =>array('Movie'))
+        );
 		$this->Paginator->settings =array(
 			'conditions' => array('UserFavoriteMovieList.user_id' => $this->userSession['id']),
 			'order' => array('UserFavoriteMovieList.created' => 'DESC'),
-			'limit' => 1
+			'limit' => 5,
+			'recursive' => 3
 		);
 		$UserFavoriteMovieList = $this->Paginator->paginate('UserFavoriteMovieList');
 		/*
@@ -243,10 +253,20 @@ class MoviesController extends AppController {
 		/*
 		*ユーザーが過去に見た動画を検索する（ページネーション）
 		*/
+		$this->Movie->unbindModel(
+            array('belongsTo' =>array('User'))
+        );
+		$this->Restaurant->unbindModel(
+            array('hasMany' =>array('Movie'))
+        );
+		$this->TagRelation->unbindModel(
+            array('belongsTo' =>array('Movie'))
+        );
 		$this->Paginator->settings =array(
 			'conditions' => array('UserWatchMovieList.user_id' => $this->userSession['id']),
 			'order' => array('UserWatchMovieList.created' => 'DESC'),
-			'limit' => 1
+			'limit' => 5,
+			'recursive' => 3
 		);
 		$UserWatchMovieList = $this->Paginator->paginate('UserWatchMovieList');
 		/*
@@ -379,7 +399,7 @@ class MoviesController extends AppController {
 			 	'Movie.user_id' => $this->userSession['id'],
 			 	'Movie.del_flg' => 0
 			 ),
-			 'limit' => 1,
+			 'limit' => 5,
 			 'order' => array('Movie.created' => 'DESC'),
 			 'recursive' => 2
 		);
