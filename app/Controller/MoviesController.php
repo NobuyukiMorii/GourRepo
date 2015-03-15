@@ -50,7 +50,7 @@ class MoviesController extends AppController {
 			'conditions' => array('Movie.del_flg' => 0),
 			'order' => array('Movie.count' => 'DESC')
 		));
-		pr($data);
+		$this->set(compact('data'));
 	}
 
 	/*
