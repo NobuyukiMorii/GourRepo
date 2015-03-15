@@ -177,14 +177,10 @@ class MoviesController extends AppController {
 	*/
 	public function userFavoriteMovieList(){
 		/*
-		user_idを取得する
-		*/
-		$user_id = $this->userSession['id'];
-		/*
 		*ユーザーのお気に入りの動画を検索する（ページネーション）
 		*/
 		$this->Paginator->settings =array(
-			'conditions' => array('UserFavoriteMovieList.user_id' => $user_id),
+			'conditions' => array('UserFavoriteMovieList.user_id' => $this->userSession['id']),
 			'order' => array('UserFavoriteMovieList.created' => 'DESC'),
 			'limit' => 1
 		);
@@ -200,14 +196,10 @@ class MoviesController extends AppController {
 	*/
 	public function userWatchMovieList(){
 		/*
-		user_idを取得する
-		*/
-		$user_id = $this->userSession['id'];
-		/*
 		*ユーザーが過去に見た動画を検索する（ページネーション）
 		*/
 		$this->Paginator->settings =array(
-			'conditions' => array('UserWatchMovieList.user_id' => $user_id),
+			'conditions' => array('UserWatchMovieList.user_id' => $this->userSession['id']),
 			'order' => array('UserWatchMovieList.created' => 'DESC'),
 			'limit' => 1
 		);
@@ -244,20 +236,36 @@ class MoviesController extends AppController {
 		/*
 		*ユーザー情報を取得する
 		*/
-		$user = $this->userSession['id'];
-		$data = $this->UserFavoriteMovieList->find('all' , array(
+		$this->Movie->unbindModel(
+            array('belongsTo' =>array('User'))
+        );
+		$this->Restaurant->unbindModel(
+            array('hasMany' =>array('Movie'))
+        );
+		$this->TagRelation->unbindModel(
+            array('belongsTo' =>array('Movie'))
+        );
+		$this->Paginator->settings = array(
+			 'conditions' => array(
+			 	'Movie.user_id' => $this->userSession['id'],
+			 	'Movie.del_flg' => 0
+			 ),
+			 'limit' => 1,
+			 'order' => array('Movie.created' => 'DESC'),
 			 'recursive' => 2
-		));
+		);
+		$userMoviePostHistory = $this->Paginator->paginate('Movie');
 		/*
 		*登録した動画がまだない場合
 		*/
-		if(empty($data)){
-			$this->Session->setFlash('お気に入りはまだありません。');
+		if(empty($userMoviePostHistory)){
+			$this->Session->setFlash('投稿した動画はまだありません。');
+			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
 		}
 		/*
 		*ビューに渡す
 		*/
-		$this->set(compact('data'));
+		$this->set(compact('userMoviePostHistory'));
 	}
 
 }
