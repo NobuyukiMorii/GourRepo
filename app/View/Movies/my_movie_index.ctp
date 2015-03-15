@@ -51,6 +51,21 @@
 				                </a>  
 			              	</div>  
 			            </td>
+			            <td>
+			            	<a class="btn btn-info" href="<?php echo $this->Html->url(array('controller' => 'Movies' , 'action' => 'edit', $userMoviePostHistory[$i]['Movie']['id'])); ?>">
+                    			編集
+                    		</a>
+			            </td>
+			            <td>
+			            	<?php echo $this->Form->create('Movie', array('type' => 'post' , 'action' => 'delete')); ?>
+					        <?php echo $this->Form->input('Movie.id', array(
+					            'label' => false,
+					            'type' => 'hidden',
+					            'value' => $userMoviePostHistory[$i]['Movie']['id'],
+					        )); ?>
+					        <button type="submit" class="btn btn-warning">送信</button>
+					        <?php echo $this->Form->end(); ?>
+			            </td>
 		          	</tr>
 		          	<?php endfor ;?>
 

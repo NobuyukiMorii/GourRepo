@@ -288,7 +288,7 @@ class MoviesController extends AppController {
 		*/
 	    if (!$id) {
 			$this->Session->setFlash('申し訳ございません。こちらの動画はございませんでした');
-			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+			return $this->redirect(array('controller' => 'Movies', 'action' => 'myMovieIndex'));
 	    }
 
 	    /*
@@ -297,7 +297,7 @@ class MoviesController extends AppController {
 	    $movie = $this->Movie->findById($id);
 	    if (!$movie) {
 			$this->Session->setFlash('申し訳ございません。こちらの動画はございませんでした');
-			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+			return $this->redirect(array('controller' => 'Movies', 'action' => 'myMovieIndex'));
 	    }
 
 	    /*
@@ -305,7 +305,7 @@ class MoviesController extends AppController {
 	    */
 	    if($movie['Movie']['user_id'] !== $this->userSession['id']){
 			$this->Session->setFlash('申し訳ございません。こちらの動画は投稿したご本人様にのみご編集頂けます');
-			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+			return $this->redirect(array('controller' => 'Movies', 'action' => 'myMovieIndex'));
 	    }
 
 	    /*
@@ -331,7 +331,7 @@ class MoviesController extends AppController {
 
 	        if ($flg) {
 	            $this->Session->setFlash(__('動画の編集が完了しました.'));
-	            return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+	            return $this->redirect(array('controller' => 'Movies', 'action' => 'myMovieIndex'));
 	        }
 	        $this->Session->setFlash(__('申し訳ございません。動画の編集に失敗しました。'));
 	        return $this->redirect(array('controller' => 'Movies', 'action' => 'edit'));
@@ -347,7 +347,7 @@ class MoviesController extends AppController {
 		    $movie = $this->Movie->findById($this->request->data['Movie']['id']);
 		    if (!$movie) {
 				$this->Session->setFlash('申し訳ございません。こちらの動画はございませんでした');
-				return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'myMovieIndex'));
 		    }
 
 		    /*
@@ -355,7 +355,7 @@ class MoviesController extends AppController {
 		    */
 		    if($movie['Movie']['user_id'] !== $this->userSession['id']){
 				$this->Session->setFlash('申し訳ございません。こちらの動画は投稿したご本人様にのみご編集頂けます');
-				return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'myMovieIndex'));
 		    }
 
 	    	/*
@@ -370,7 +370,7 @@ class MoviesController extends AppController {
 			*/
 	        if ($flg) {
 	            $this->Session->setFlash(__('動画の編集が完了しました.'));
-	            return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+	            return $this->redirect(array('controller' => 'Movies', 'action' => 'myMovieIndex'));
 	        }
 	        $this->Session->setFlash(__('申し訳ございません。動画の編集に失敗しました。'));
 	        return $this->redirect(array('controller' => 'Movies', 'action' => 'edit'));
