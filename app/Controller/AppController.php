@@ -69,7 +69,14 @@ class AppController extends Controller {
 
     }
 
-        public function beforeFilter() {
-            $this->set('userSession', $this->Auth->user());
-        }
+    public function beforeFilter() {
+        /*
+        *controllerでログインユーザーを呼び出すメソッドを作成
+        */
+        $this->userSession = $this->Auth->user();
+        /*
+        *viewでログインユーザーの情報を受ける変数おw作成
+        */
+        $this->set('userSession', $this->Auth->user());
+    }
 }

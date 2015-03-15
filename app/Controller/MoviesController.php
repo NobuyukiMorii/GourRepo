@@ -51,7 +51,7 @@ class MoviesController extends AppController {
 		*ユーザーの閲覧履歴の登録
 		*/
 		//ユーザー情報の取得
-		$data['user_id'] = $this->Auth->user('id');
+		$data['user_id'] = $this->userSession['id'];
 		$data['created_user_id'] = $data['user_id'];
 		$data['modified_user_id'] = $data['user_id'];
 
@@ -109,33 +109,33 @@ class MoviesController extends AppController {
 			$rest_save_data = $this->Gurunabi->ValidationBeforeSave($rest_save_data);
 
 			//保存する（レストラン）
-			$rest_save_data['user_id'] = $this->Auth->user('id');
-			$rest_save_data['created_user_id'] = $this->Auth->user('id');
-			$rest_save_data['modified_user_id'] = $this->Auth->user('id');
+			$rest_save_data['user_id'] = $user = $this->userSession['id'];
+			$rest_save_data['created_user_id'] = $user = $this->userSession['id'];
+			$rest_save_data['modified_user_id'] = $user = $this->userSession['id'];
 			$this->Restaurant->create();
 			$flg_restaurant = $this->Restaurant->save($rest_save_data);
 
 			//保存する（ムービー）
 			$movie_save_data['restaurant_id'] = $flg_restaurant['Restaurant']['id'];
-			$movie_save_data['user_id'] = $this->Auth->user('id');
+			$movie_save_data['user_id'] = $user = $this->userSession['id'];
 			$movie_save_data['title'] = $this->request->data['title'];
 			$movie_save_data['description'] = $this->request->data['description'];
 			$movie_save_data['youtube_url'] = 'https://www.youtube.com/watch?v=' . $this->request->data['youtube_url'];
 			$movie_save_data['thumbnails_url'] = $this->request->data['thumbnails_url'];
-			$movie_save_data['created_user_id'] = $this->Auth->user('id');
-			$movie_save_data['modified_user_id'] = $this->Auth->user('id');
+			$movie_save_data['created_user_id'] = $user = $this->userSession['id'];
+			$movie_save_data['modified_user_id'] = $user = $this->userSession['id'];
 			$this->Movie->create();
 			$flg_movie = $this->Movie->save($movie_save_data);
 
 			//保存する（タグ関係）
-			$tag_save_data['created_user_id'] = $this->Auth->user('id');
-			$tag_save_data['modified_user_id'] = $this->Auth->user('id');
+			$tag_save_data['created_user_id'] = $user = $this->userSession['id'];
+			$tag_save_data['modified_user_id'] = $user = $this->userSession['id'];
 			$tag_save_data['name'] = $this->request->data['tag'];
 			$tag_save_data['name'] = mb_convert_kana($tag_save_data['name'], 's');
 			$tag_save_data['name'] = preg_split('/[\s]+/', $tag_save_data['name'] , -1, PREG_SPLIT_NO_EMPTY);
 
-			$tag_relation_save_data['created_user_id'] = $this->Auth->user('id');
-			$tag_relation_save_data['modified_user_id'] = $this->Auth->user('id');
+			$tag_relation_save_data['created_user_id'] = $user = $this->userSession['id'];
+			$tag_relation_save_data['modified_user_id'] = $user = $this->userSession['id'];
 			$tag_relation_save_data['movie_id'] = $this->Movie->getLastInsertID();
 
 			foreach($tag_save_data['name'] as $key => $val){
@@ -179,7 +179,7 @@ class MoviesController extends AppController {
 		/*
 		user_idを取得する
 		*/
-		$user_id = $this->Auth->user('id');
+		$user_id = $this->userSession['id'];
 		/*
 		*ユーザーのお気に入りの動画を検索する（ページネーション）
 		*/
@@ -221,12 +221,12 @@ class MoviesController extends AppController {
 		/*
 		*ユーザー情報を取得する
 		*/
-		$user = $this->Auth->user('id');
+		$user = $this->userSession['id'];
 		$data = $this->UserFavoriteMovieList->find('all' , array(
 			 'recursive' => 2
 		));
 		/*
-		*お気に入りの登録がない場合
+		*登録した動画がまだない場合
 		*/
 		if(empty($data)){
 			$this->Session->setFlash('お気に入りはまだありません。');
