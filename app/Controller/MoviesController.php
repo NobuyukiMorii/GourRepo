@@ -295,10 +295,40 @@ class MoviesController extends AppController {
 
 	}
 	public function delete(){
+	    /*
+	    *フォームが送信されていなければ、dashBordにリダイレクトする
+	    */
+	    if (!$this->request->data) {
+			$this->Session->setFlash('申し訳ございません。不具合が発生しました。もう一度やり直して下さい。');
+			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+	    }
 		/*
-		*１）フォームからムービーのidが送られてくる
-		*２）idをキーにmovieの論理削除カラムをアップデートする
+		*ポストされているかどうかの判定
 		*/
+	    if (empty($this->request->data)) {
+			$this->Session->setFlash('申し訳ございません。こちらの動画はございませんでした');
+			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+	    }
+	    /*
+	    *ムービを検索する
+	    */
+	    $movie = $this->Movie->findById($id);
+	    if (!$movie) {
+			$this->Session->setFlash('申し訳ございません。こちらの動画はございませんでした');
+			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+	    }
+	    /*
+	    *ムービーの投稿者と一致しているかを判定する
+	    */
+	    if($movie['Movie']['user_id'] !== $this->userSession['id']){
+			$this->Session->setFlash('申し訳ございません。こちらの動画は投稿したご本人様にのみご編集頂けます');
+			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+	    }
+
+
+
+
+
 	}
 
 	/*
