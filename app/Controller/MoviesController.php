@@ -238,16 +238,63 @@ class MoviesController extends AppController {
 	/*
 	*ムービー編集画面
 	*/
-	public function movieEdit(){
+	public function edit($id = null){
 		/*
-		*１）フォームからムービーのidが送られてくる。
-		*２）idをキーにMovieをfindする。それをviewに渡す。
-		*３）フォームからmoviesの値が送られてくる。
-		*４）umovieにsaveする
-		*５）saveに成功したらUserDashBordにリダイレクトする、失敗したらMovie.movie_editにリダイレクトする
+		*引数にidが指定してあるかどうかをチェックする
 		*/
+	    if (!$id) {
+			$this->Session->setFlash('申し訳ございません。こちらの動画はございませんでした');
+			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+	    }
+
+	    /*
+	    *ムービを検索する
+	    */
+	    $movie = $this->Movie->findById($id);
+	    if (!$movie) {
+			$this->Session->setFlash('申し訳ございません。こちらの動画はございませんでした');
+			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+	    }
+
+	    /*
+	    *ムービーの投稿者と一致しているかを判定する
+	    */
+	    if($movie['Movie']['user_id'] !== $this->userSession['id']){
+			$this->Session->setFlash('申し訳ございません。こちらの動画は投稿したご本人様にのみご編集頂けます');
+			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+	    }
+
+	    /*
+	    *フォームが送信されていなければ、formの初期値をviewに渡してあげる
+	    */
+	    if (!$this->request->data) {
+	        $this->request->data = $movie;
+	        $this->set(compact('movie'));
+	        return;
+	    }
+
+	    /*
+	    *フォームが送信されていれば、動画をアップデートする
+	    */
+	    if ($this->request->is(array('post', 'put'))) {
+
+	    	/*
+	    	*一部項目のみアップデート
+	    	*/
+			$data = array('Movie' => array('id' => $id, 'title' => $this->request->data['Movie']['title'] , 'description' => $this->request->data['Movie']['description']));
+			$fields = array('title' , 'description'); 
+			$this->Movie->save($data, false, $fields);
+
+	        if ($this->Movie->save($this->request->data)) {
+	            $this->Session->setFlash(__('動画の編集が完了しました.'));
+	            return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+	        }
+	        $this->Session->setFlash(__('申し訳ございません。動画の編集に失敗しました。'));
+	        return $this->redirect(array('controller' => 'Movies', 'action' => 'edit'));
+	    }
+
 	}
-	public function movieDelete(){
+	public function delete(){
 		/*
 		*１）フォームからムービーのidが送られてくる
 		*２）idをキーにmovieの論理削除カラムをアップデートする
