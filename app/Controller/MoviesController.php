@@ -8,7 +8,7 @@ class MoviesController extends AppController {
 	/*
 	*利用するコンポーネント
 	*/
-	public $components = array('Gurunabi');
+	public $components = array('Gurunabi' , 'Paginator');
 
 	//MoviesControllerの中でログイン無しで入れるところの設定
     public function beforeFilter() {
@@ -177,10 +177,22 @@ class MoviesController extends AppController {
 	*/
 	public function userFavoriteMovieList(){
 		/*
-		*１）user_idを取得する
-		*２）user_idをキーに、$this->UserFavoriteMovieList->findで検索する
-		*３）ビューに渡す
+		user_idを取得する
 		*/
+		$user_id = $this->Auth->user('id');
+		/*
+		*ユーザーのお気に入りの動画を検索する（ページネーション）
+		*/
+		$this->Paginator->settings =array(
+			'conditions' => array('UserFavoriteMovieList.user_id' => $user_id),
+			'order' => array('UserFavoriteMovieList.created' => 'DESC'),
+			'limit' => 1
+		);
+		$UserFavoriteMovieList = $this->Paginator->paginate('UserFavoriteMovieList');
+		/*
+		*viewにセット
+		*/
+		$this->set(compact('UserFavoriteMovieList'));
 	}
 
 	/*
