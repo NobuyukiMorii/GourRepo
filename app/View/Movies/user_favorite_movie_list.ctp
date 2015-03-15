@@ -1,3 +1,4 @@
+<?php echo $this->Html->css('bootstrap.min'); ?>
 <?php pr($UserFavoriteMovieList); ?>
 
 <div class="pagination">                         
