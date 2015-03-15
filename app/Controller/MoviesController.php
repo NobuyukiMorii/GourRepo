@@ -252,6 +252,7 @@ class MoviesController extends AppController {
 	*ムービー編集画面
 	*/
 	public function edit($id = null){
+		$this->layout = 'default-for-form';
 		/*
 		*引数にidが指定してあるかどうかをチェックする
 		*/
