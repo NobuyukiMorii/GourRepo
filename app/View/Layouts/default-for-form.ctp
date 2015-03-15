@@ -16,9 +16,7 @@
   <!-- HEADER ============-->
   <div class="row">
     <div class="col-md-2 header">
-      <div class="col-md-6 header">
-        <?php echo $this->Html->image('GourRepo.png', array('alt' => 'GourRepo Logo' , 'class' => 'header-logo')); ?>
-      </div>
+      <?php echo $this->element('headerLogo'); ?>
       <?php echo $this->element('dropDownButton'); ?>
     </div>
     
