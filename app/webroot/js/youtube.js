@@ -26,6 +26,7 @@ limitations under the License.
   /*
   *自分で書いた
   */
+  $("#tag").hide();
   $("#submit-botton").hide();
   /*
   *自分で書いた
@@ -151,6 +152,7 @@ limitations under the License.
       $("#description_form").val(description);
       $("#videoId_form").val(videoId);
       $("#thumbnailsUrl_form").val(thumbnailsUrl);
+      $("#tag").show();
       $("#submit-botton").show();
       /*
       *ここまで自作

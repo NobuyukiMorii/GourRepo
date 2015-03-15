@@ -52,6 +52,7 @@
 <input name="description" type="hidden" id="description_form" value="" />
 <input name="youtube_url" type="hidden" id="videoId_form" value="" />
 <input name="thumbnails_url" type="hidden" id="thumbnailsUrl_form" value="" />
+<input name="tag" type="text" id="tag" value="" />
 <input type="submit" value="phpにフォームを送信" id="submit-botton" />
 </form>
 
