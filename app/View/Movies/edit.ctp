@@ -1,7 +1,7 @@
  <?php echo $this->Form->create('Movie', array('class' => 'form-horizontal' , 'type' => 'post' , 'action' => 'edit')); ?>
 
     <!-- input -->
-	<div class="form-group">
+	<div class="form-group" style="margin-top:50px;">
 		<div class="col-md-8 col-md-offset-2">
   			<h4>動画の情報を編集して下さい</h4>
   		</div>
