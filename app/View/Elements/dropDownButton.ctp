@@ -14,6 +14,7 @@
         <li><a href="<?php echo $this->html->url(array('controller' => 'Users' , 'action' => 'dashBoard')) ;?>">ダッシュボード</a></li>
         <li><a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'userFavoriteMovieList')) ;?>">お気に入りを確認する</a></li>
         <li><a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'userWatchMovieList')) ;?>">閲覧履歴を確認する</a></li>
+        <li><a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'myMovieIndex')) ;?>">投稿した動画を管理する</a></li>
         <li><a href="<?php echo $this->html->url(array('controller' => 'Users' , 'action' => 'logout')) ;?>">ログアウト</a></li>
       <?php endif; ?>
     </ul>
