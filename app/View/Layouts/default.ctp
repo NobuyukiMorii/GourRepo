@@ -38,15 +38,9 @@
 
   <!-- FOOTER ============-->
   <div class="row footer-area">
-    <div class="col-md-1 footer-logo-div">
-      <?php echo $this->Html->image('GourRepo.png', array('alt' => 'GourRepo Logo' , 'class' => 'footer-logo')); ?>
-    </div>
-    <div class="col-md-5 footer-message-div">
-      お店がもっとよくわかる
-    </div>
-    <div class="col-md-6 copyright-div">
-      Copyright (c) <a href="">GourRepo.com</a>, Inc. All Rights Reserved. 無断転載禁止
-    </div>
+    <?php echo $this->element('footerLogo'); ?>
+    <?php echo $this->element('footerConcept'); ?>
+    <?php echo $this->element('footerCopyright'); ?>
   </div>
   <!-- /FOOTER ============-->
 
