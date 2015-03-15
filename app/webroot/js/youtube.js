@@ -47,9 +47,6 @@ limitations under the License.
           mine: true
         }
       }).done(function(response) {
-        $('#channel-name').text(response.items[0].snippet.title);
-        $('#channel-thumbnail').attr('src', response.items[0].snippet.thumbnails.default.url);
-
         $('.pre-sign-in').hide();
         $('.post-sign-in').show();
       });
@@ -136,8 +133,6 @@ limitations under the License.
 
     ajax.done(function(response) {
       var videoId = response.id;
-      $('#video-id').text(videoId);
-      $('.post-upload').show();
       /*
       *ここから自作
       */
@@ -152,6 +147,8 @@ limitations under the License.
       $("#description_form").val(description);
       $("#videoId_form").val(videoId);
       $("#thumbnailsUrl_form").val(thumbnailsUrl);
+
+      $("#youtube-form").hide();
       $("#tag").show();
       $("#submit-botton").show();
       /*
@@ -184,18 +181,15 @@ limitations under the License.
       var processingStatus = response.items[0].processingDetails.processingStatus;
       var uploadStatus = response.items[0].status.uploadStatus;
 
-      $('#post-upload-status').append('<li>Processing status: ' + processingStatus + ', upload status: ' + uploadStatus + '</li>');
-
       if (processingStatus == 'processing') {
         setTimeout(function() {
           checkVideoStatus(videoId, waitForNextPoll * 2);
         }, waitForNextPoll);
       } else {
         if (uploadStatus == 'processed') {
-          $('#player').append(response.items[0].player.embedHtml);
+
         }
 
-        $('#post-upload-status').append('<li>Final status.</li>');
       }
     });
   }

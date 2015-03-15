@@ -128,7 +128,14 @@ class MoviesController extends AppController {
 	*動画投稿画面
 	*/
 	public function add(){
+		/*
+		*レイアウトを変更
+		*/
+		$this->layout = 'default-for-form';
 
+		/*
+		*$this->request->dataがない時
+		*/
 		if(empty($this->request->data)){
 			$this->set('gournabi_id' , $this->params['pass'][0]);
 		}
@@ -195,7 +202,7 @@ class MoviesController extends AppController {
 
 			//保存の判定（成功時）
 			$this->Session->setFlash('登録に成功しました。');
-			$this->redirect(array('controller' => 'Movies', 'action' => 'view' , $flg_restaurant['Restaurant']['id']));
+			$this->redirect(array('controller' => 'Movies', 'action' => 'view' , $tag_relation_save_data['movie_id']));
 		}
 	}
 
@@ -252,6 +259,9 @@ class MoviesController extends AppController {
 	*ムービー編集画面
 	*/
 	public function edit($id = null){
+		/*
+		*レイアウトを変更
+		*/
 		$this->layout = 'default-for-form';
 		/*
 		*引数にidが指定してあるかどうかをチェックする
