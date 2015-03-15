@@ -31,13 +31,26 @@ class MoviesController extends AppController {
 	*/
 	public function index(){
 		/*
-		*１）広告とする動画を検索する
-		*２）オススメ動画として、東京のお店を、moviesのcount順に検索する。その際に、論理削除済みのデータは除外する。
-		*３）user_idを取得する
-		*４）user_idをキーにして、閲覧履歴を取得する
-		*５）user_idをキーにして、お気に入り動画を取得する
-		*６）ビューに渡す
+		*ユーザー情報を取得する
 		*/
+		$this->Movie->unbindModel(
+            array('belongsTo' =>array('User'))
+        );
+		$this->Restaurant->unbindModel(
+            array('hasMany' =>array('Movie'))
+        );
+		$this->TagRelation->unbindModel(
+            array('belongsTo' =>array('Movie'))
+        );
+        /*
+        *ムービーを検索する
+        */
+		$data = $this->Movie->find('all' ,array(
+			'limit' => 3,
+			'conditions' => array('Movie.del_flg' => 0),
+			'order' => array('Movie.count' => 'DESC')
+		));
+		pr($data);
 	}
 
 	/*
