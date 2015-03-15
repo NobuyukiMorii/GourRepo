@@ -196,6 +196,29 @@ class MoviesController extends AppController {
 	}
 
 	/*
+	*ユーザーの閲覧履歴
+	*/
+	public function userWatchMovieList(){
+		/*
+		user_idを取得する
+		*/
+		$user_id = $this->userSession['id'];
+		/*
+		*ユーザーが過去に見た動画を検索する（ページネーション）
+		*/
+		$this->Paginator->settings =array(
+			'conditions' => array('UserWatchMovieList.user_id' => $user_id),
+			'order' => array('UserWatchMovieList.created' => 'DESC'),
+			'limit' => 1
+		);
+		$UserWatchMovieList = $this->Paginator->paginate('UserWatchMovieList');
+		/*
+		*viewにセット
+		*/
+		$this->set(compact('UserWatchMovieList'));
+	}
+
+	/*
 	*ムービー編集画面
 	*/
 	public function movieEdit(){
