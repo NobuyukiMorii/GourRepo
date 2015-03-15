@@ -17,15 +17,12 @@ class MoviesController extends AppController {
     }
 
     public function isAuthorized($user) {
-
     	//contributorに権限を与えております。
         if (isset($user['role']) && $user['role'] === 'contributor') {
         	if(in_array($this->action, array('add', 'selectMovieForAdd', 'userFavoriteMovieList', 'userWatchMovieList', 'movieEdit', 'movieDelete', 'myMovieIndex'))) {
         		return true;
         	}
         }
-
-        
         return parent::isAuthorized($user);
     }
 
@@ -47,22 +44,50 @@ class MoviesController extends AppController {
 	*お店の個別画面
 	*/
 	public function view(){
-		/*
-		*ユーザーの閲覧履歴の登録
-		*/
-		//ユーザー情報の取得
-		$data['user_id'] = $this->userSession['id'];
-		$data['created_user_id'] = $data['user_id'];
-		$data['modified_user_id'] = $data['user_id'];
 
-		//レストランidの取得
 		if(isset($this->request['pass'][0])){
-			$data['movie_id'] = $this->request['pass'][0];
-			/*閲覧履歴データの登録*/
-			$this->UserWatchMovieList->create();
-			$flg = $this->UserWatchMovieList->save($data);
-		}
+				if(!empty(($this->userSession))) {
+				/*
+				*UserWatchMovieListの登録
+				*/
+				$data['user_id'] = $this->userSession['id'];
+				$data['created_user_id'] = $this->userSession['id'];
+				$data['modified_user_id'] = $this->userSession['id'];
+				$data['movie_id'] = $this->request['pass'][0];
+				$this->UserWatchMovieList->create();
+				$flg = $this->UserWatchMovieList->save($data);
+			}
+			/*
+			*Movieの検索
+			*/
+			$this->Restaurant->unbindModel(
+	            array('hasMany' =>array('Movie'))
+	        );
+			$this->TagRelation->unbindModel(
+	            array('belongsTo' =>array('Movie'))
+	        );
+			$this->User->unbindModel(
+	            array('hasMany' =>array('Movie' , 'UserFavoriteMovieList' , 'UserWatchMovieList'))
+	        );
+			$movie = $this->Movie->find('first', array(
+				'conditions' => array('Movie.id' => $this->request['pass'][0]),
+				'recursive' => 2
 
+			));
+			/*
+			*Movieの再生回数をUpdate
+			*/
+			$streaming_count = $movie['Movie']['count'] + 1;
+			$this->Movie->id = $this->request['pass'][0];  
+			$this->Movie->saveField('count', $streaming_count);
+			/*
+			*viewに表示
+			*/
+			$this->set(compact('movie'));
+		} else {
+			$this->Session->setFlash('お探しの動画はありませんでした。申し訳ございません。');
+			return $this->redirect(array('controller' => 'Movies', 'action' => 'index'));
+		}
 	}
 
 	/*

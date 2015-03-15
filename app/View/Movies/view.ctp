@@ -8,7 +8,7 @@
 
   <!-- CONTENT ============-->
   <div class="row main-content">
-
+<?php pr($movie) ;?>
       <!-- お店の概要 ============-->
     <div class="row">
       <div class="col-md-8 view-header-place-name-div">
