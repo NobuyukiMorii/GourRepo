@@ -283,9 +283,9 @@ class MoviesController extends AppController {
 	    	*/
 			$data = array('Movie' => array('id' => $id, 'title' => $this->request->data['Movie']['title'] , 'description' => $this->request->data['Movie']['description']));
 			$fields = array('title' , 'description'); 
-			$this->Movie->save($data, false, $fields);
+			$flg = $this->Movie->save($data, false, $fields);
 
-	        if ($this->Movie->save($this->request->data)) {
+	        if ($flg) {
 	            $this->Session->setFlash(__('動画の編集が完了しました.'));
 	            return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
 	        }
@@ -295,39 +295,42 @@ class MoviesController extends AppController {
 
 	}
 	public function delete(){
-	    /*
-	    *フォームが送信されていなければ、dashBordにリダイレクトする
-	    */
-	    if (!$this->request->data) {
-			$this->Session->setFlash('申し訳ございません。不具合が発生しました。もう一度やり直して下さい。');
-			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
-	    }
-		/*
-		*ポストされているかどうかの判定
-		*/
-	    if (empty($this->request->data)) {
-			$this->Session->setFlash('申し訳ございません。こちらの動画はございませんでした');
-			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
-	    }
-	    /*
-	    *ムービを検索する
-	    */
-	    $movie = $this->Movie->findById($id);
-	    if (!$movie) {
-			$this->Session->setFlash('申し訳ございません。こちらの動画はございませんでした');
-			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
-	    }
-	    /*
-	    *ムービーの投稿者と一致しているかを判定する
-	    */
-	    if($movie['Movie']['user_id'] !== $this->userSession['id']){
-			$this->Session->setFlash('申し訳ございません。こちらの動画は投稿したご本人様にのみご編集頂けます');
-			return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
-	    }
 
+ 		if ($this->request->is(array('post', 'put'))) {
+		    /*
+		    *ムービを検索する
+		    */
+		    $movie = $this->Movie->findById($this->request->data['Movie']['id']);
+		    if (!$movie) {
+				$this->Session->setFlash('申し訳ございません。こちらの動画はございませんでした');
+				return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+		    }
 
+		    /*
+		    *ムービーの投稿者と一致しているかを判定する
+		    */
+		    if($movie['Movie']['user_id'] !== $this->userSession['id']){
+				$this->Session->setFlash('申し訳ございません。こちらの動画は投稿したご本人様にのみご編集頂けます');
+				return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+		    }
 
+	    	/*
+	    	*del_flgのみアップデート
+	    	*/
+			$data = array('Movie' => array('id' => $this->request->data['Movie']['id'], 'del_flg' => 1));
+			$fields = array('del_flg'); 
+			$flg = $this->Movie->save($data, false, $fields);
 
+			/*
+			*エラーのハンドリング
+			*/
+	        if ($flg) {
+	            $this->Session->setFlash(__('動画の編集が完了しました.'));
+	            return $this->redirect(array('controller' => 'Users', 'action' => 'dashBoard'));
+	        }
+	        $this->Session->setFlash(__('申し訳ございません。動画の編集に失敗しました。'));
+	        return $this->redirect(array('controller' => 'Movies', 'action' => 'edit'));
+	    }
 
 	}
 
