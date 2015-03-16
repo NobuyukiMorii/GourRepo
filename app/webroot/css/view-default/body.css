@@ -2,3 +2,7 @@ body{
 	overflow-x : hidden;
 	overflow-y : auto;
 }
+
+TEXTAREA{
+font-size:19px !important;
+}

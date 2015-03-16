@@ -1,6 +1,5 @@
 body {
-  font-family: "Open Sans", sans-serif;
-  font-size: 1.5em;
+
 }
 
 .post-sign-in {
@@ -16,8 +15,7 @@ body {
 }
 
 #channel-name {
-  font-size: 60px;
-  margin-left: 10px;
+
 }
 
 label {
@@ -25,13 +23,7 @@ label {
 }
 
 input[type="text"], textarea, progress {
-  font-size: 0.75em;
-  width: 15em;
+  width: 100%;
   margin-bottom: 1em;
   padding: 0.5em;
-  font-family: "Open Sans", sans-serif;
-}
-
-textarea {
-  height: 7em;
 }

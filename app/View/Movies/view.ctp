@@ -8,23 +8,23 @@
 
   <!-- CONTENT ============-->
   <div class="row main-content">
-
       <!-- お店の概要 ============-->
     <div class="row">
       <div class="col-md-8 view-header-place-name-div">
           <span class="view-header-place-name">
-            フォリオリーナ・デッラ・ポルタ・フォルトゥーナ （Fogliolina della Porta Fortuna）
+            <?php echo $movie['Restaurant']['name'] ;?>
           </span>
           <div class="view-header-label-div">
             <div class="col-md-9">
-              <span class="label label-default">エリア</span> 東京都目黒区
+              <span class="label label-default">エリア</span> <?php echo $movie['Restaurant']['code_prefname'] ;?>
               &nbsp;&nbsp;
-              <span class="label label-default">ジャンル</span> イタリアン
+              <span class="label label-default">ジャンル</span> <?php echo $movie['Restaurant']['category'] ;?>
               &nbsp;&nbsp;
+
               <?php echo $this->Html->image('day.png', array('alt' => 'Day' , 'class' => 'view-header-day-image')); ?>
-              ￥20,000～￥29,999
+              ￥<?php echo $movie['Restaurant']['budget'] ;?>
               &nbsp;&nbsp;
-              <span class="label label-default">定休日</span> 木曜日
+              <span class="label label-default">定休日</span> <?php echo $movie['Restaurant']['holliday'] ;?>
             </div>
         </div>
       </div>
@@ -33,12 +33,12 @@
         <div class="row">
           <?php echo $this->Html->image('phone.png', array('alt' => 'Day' , 'class' => 'header-phone-image')); ?>
           <span class="view-header-place-tel-number">
-            0267-41-0612
+            <?php echo $movie['Restaurant']['tel'] ;?>
           </span>
-          <a href="<?php echo $this->html->url(array('controller' => 'UserFavoriteMovieLists' , 'action' => 'add', 1)) ;?>" class="header-favorite-image-ahref">
+          <a href="<?php echo $this->html->url(array('controller' => 'UserFavoriteMovieLists' , 'action' => 'add', $movie['Movie']['id'])) ;?>" class="header-favorite-image-ahref">
             <?php echo $this->Html->image('star.png', array('alt' => 'Favorite' , 'class' => 'header-favorite-image')); ?>
           </a>
-          <a href="<?php echo $this->html->url(array('controller' => 'UserFavoriteMovieLists' , 'action' => 'add' , 1)) ;?>" class="view-header-favorite-text">
+          <a href="<?php echo $this->html->url(array('controller' => 'UserFavoriteMovieLists' , 'action' => 'add' , $movie['Movie']['id'])) ;?>" class="view-header-favorite-text">
             favorite
           </a>
         </div>
@@ -52,15 +52,15 @@
       <div class="row">
         <!-- 動画 ============-->
         <div class="movie-div">
-          <iframe src="https://www.youtube.com/embed/xjam_iydg3g" frameborder="0" class="movie"></iframe>
+          <iframe src="<?php echo $movie['Movie']['youtube_url'] ;?>" frameborder="0" class="movie"></iframe>
           <div class="movie-detail-div">
             <div class="col-md-1 movie-reporter-photo-div">
               <?php echo $this->Html->image('AsukaMoko.jpeg', array('alt' => 'Day' , 'class' => 'movie-reporter-photo img-circle')); ?>
             </div>
             <div class="col-md-9">
-              <span class="movie-name">明日川もこのぐるめレポーター</span><br>
+              <span class="movie-name"><?php echo $movie['Movie']['title'] ;?></span><br>
               <div class="movie-description">
-                目黒ので話題のフォリオリーナ・デッラ・ポルタ・フォルトゥーナ （Fogliolina della Porta Fortuna）でお食事レポートしてきましたー！是非みて下さい！
+                <?php echo $movie['Movie']['description'] ;?>
               </div>
             </div>
           </div>
@@ -77,103 +77,75 @@
               <td class="table-heading">店名</td>
               <td>
                 <span class="text-bold">
-                  フォリオリーナ・デッラ・ポルタ・フォルトゥーナ （Fogliolina della Porta Fortuna）
+                  <?php echo $movie['Restaurant']['name'] ;?>
                 </span>
               </td>
             </tr>
             <tr>
               <td class="table-heading">ジャンル</td>
-              <td>イタリアン</td>
+              <td><?php echo $movie['Restaurant']['category'] ;?></td>
             </tr>
             <tr>
               <td class="table-heading">TEL・予約</td>
               <td>
-                <span class="tel-number">0267-41-0612</span><br>
+                <span class="tel-number">
+                  <?php echo $movie['Restaurant']['tel'] ;?>
+                </span>
+                <br>
                 <span class="tel-note-of-caution">※お問い合わせの際は「ぐるれぽを見た」とお伝えいただければ幸いです。</span>
               </td>
             </tr>
             <tr>
+              <td class="table-heading">最寄駅</td>
+              <td><?php echo $movie['Restaurant']['access_station'] ;?> <?php echo $movie['Restaurant']['access_station_exit'] ;?></td>
+            </tr>
+
+
+            <tr>
               <td class="table-heading">住所</td>
-              <td>東京都目黒区中目黒4-8-12
+              <td>東京都目黒区中目黒4-8-12<?php echo $movie['Restaurant']['address'] ;?>
               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1621.3335340152405!2d139.70562899999996!3d35.63593329999999!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b3b719b3529%3A0x89f752a000ad1b72!2z44CSMTUzLTAwNjEg5p2x5Lqs6YO955uu6buS5Yy65Lit55uu6buS77yU5LiB55uu77yY4oiS77yR77yS!5e0!3m2!1sja!2sjp!4v1425097991270" frameborder="0" class="map"></iframe>
               </td>
             </tr>
             <tr>
               <td class="table-heading">営業時間</td>
               <td>
-                1日1組限定<br>
-                12時から21時の間で開始<br>
-                7月上旬から８月末はトラットリアアルベリーニとして営業。<br>
-                アルベリーニの場合は、ランチタイムとディナータイムに分かれる。<br>
-                2014のアルベリーニは7月11日～9月5日まで（水曜定休）<br>
-                日曜営業<br>
+                <?php echo $movie['Restaurant']['opentime'] ;?>
               </td>
             </tr>
             <tr>
               <td class="table-heading">定休日</td>
               <td>
-                不定休<br>
-                7月、8月は屋根のないトラットリア「アルベリーニ」として営業。<br>
-                9月からフォリオリーナ・デッラ・ポルタ・フォルトゥーナとしての営業再開予定。
+                <?php echo $movie['Restaurant']['holliday'] ;?>
               </td>
             </tr>
             <tr>
               <td class="table-heading">予算（ユーザーより）</td>
               <td>
                 <?php echo $this->Html->image('day.png', array('alt' => 'Day' , 'class' => 'day-image')); ?>
-                ￥20,000～￥29,999
-                <?php echo $this->Html->image('night.png', array('alt' => 'Night' , 'class' => 'night-image')); ?>
-                ￥20,000～￥29,999
+                <?php echo $movie['Restaurant']['budget'] ;?>
               </td>
             </tr>
             <tr>
               <td class="table-heading">カード</td>
               <td>
-                <span class="text-bold">可</span> (VISA、JCB、AMEX、MASTER）
-              </td>
-            </tr>
-          </table>
-          <div class="info-title-second-div">
-            <span class="info-title-second-text">席・設備</span>
-          </div>
-          <table class="table table table-bordered fundamental-info-table">
-            <tr>
-              <td class="table-heading">席数</td>
-              <td><span class="text-bold">6席</span> 
-                （夏（7～8月）は屋根のないレストランとして芝生の庭とテラスを使って最大二十数席)</td>
-            </tr>
-            <tr>
-              <td class="table-heading">個室</td>
-              <td>
-                <span class="text-bold">あり</span><br> 
-                4人可、6人可 （4～6人の一部屋のみ）
+                <?php echo $movie['Restaurant']['credit_card'] ;?>
               </td>
             </tr>
             <tr>
-              <td class="table-heading">禁煙・喫煙</td>
+              <td class="table-heading">設備</td>
               <td>
-                <span class="text-bold">完全喫煙</span><br> 
+                <?php echo $movie['Restaurant']['equipment'] ;?>
               </td>
             </tr>
             <tr>
               <td class="table-heading">駐車場</td>
               <td>
-                <span class="text-bold">有</span>（3台）<br> 
-              </td>
-            </tr>
-            <tr>
-              <td class="table-heading">空間・設備</td>
-              <td>
-                オシャレな空間、落ち着いた空間、オープンテラスあり
-              </td>
-            </tr>
-            <tr>
-              <td class="table-heading">携帯電話</td>
-              <td>
-                docomo、SoftBank、au、Y!mobile
+                <?php echo $movie['Restaurant']['parking_lots'] ;?>台
               </td>
             </tr>
           </table>
+
         </div>
         <!-- お店基本情報 ============-->
       </div>

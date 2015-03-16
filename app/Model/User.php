@@ -46,6 +46,8 @@ class User extends AppModel {
         'Movie' => array(
             'className'     => 'Movie',
             'foreignKey'    => 'user_id',
+            'conditions'=> array('Movie.del_flg' => 0),
+            'order' => array('Movie.created' => 'DESC')
         ),
         'UserFavoriteMovieList' => array(
             'className'     => 'UserFavoriteMovieList',

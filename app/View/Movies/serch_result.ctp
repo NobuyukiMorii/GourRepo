@@ -12,17 +12,15 @@
 
     <!-- お店の概要 ============-->
     <div class="row">
-      <div class="col-md-12 view-header-place-name-div">
-          <span class="view-header-place-name">
-            検索結果
-          </span>
+      <div class="col-md-7 view-header-place-name-div bg-color">
       </div>
-  </div>
+
+    </div>
   <!-- /お店の概要 ============-->
 
   <!-- 動画とお店の詳細 ============-->
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-7">
       <div class="row">
         <!-- 動画 ============-->
         <table class="movie-list-table table table-striped">
@@ -36,9 +34,13 @@
             <td class="movie-list-description-td" valign="top">
               <div class="movie-list-description-div">
                 <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">フォリオリーナ・デッラ、美味しす！</span> <span class="movie-date">2015年3月1日</span> <span class="movie-list-reporter-name">れいな</span>
+                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
                 </a>
                 <a href="/" class="movie-list-reporter-introduction-ahref">
+                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
+                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
+                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
+                  <br>
                   <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
                 </a>  
               </div>  
@@ -54,10 +56,14 @@
             <td class="movie-list-description-td" valign="top">
               <div class="movie-list-description-div">
                 <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">パスタモンスターあかねの目黒探索</span> <span class="movie-date">2015年3月1日</span> <span class="movie-list-reporter-name">あかね</span>
+                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
                 </a>
                 <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="movie-list-reporter-introduction">カルボナーラがやばい！クリーミーでやばい！</span>
+                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
+                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
+                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
+                  <br>
+                  <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
                 </a>  
               </div>  
             </td>
@@ -72,10 +78,14 @@
             <td class="movie-list-description-td" valign="top">
               <div class="movie-list-description-div">
                 <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">美人な店員さんみーつけた</span> <span class="movie-date">2015年3月1日</span> <span class="movie-list-reporter-name">ちさと</span>
+                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
                 </a>
                 <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="movie-list-reporter-introduction">このお店の店員さん美人すぎる！</span>
+                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
+                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
+                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
+                  <br>
+                  <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
                 </a>  
               </div>  
             </td>
@@ -90,10 +100,14 @@
             <td class="movie-list-description-td" valign="top">
               <div class="movie-list-description-div">
                 <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">ワインの帝王の城だここは</span> <span class="movie-date">2015年3月1日</span> <span class="movie-list-reporter-name">ワイン妖怪</span>
+                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
                 </a>
                 <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="movie-list-reporter-introduction">ワインたらふく飲んで酔っちゃったー！はずかしー！</span>
+                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
+                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
+                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
+                  <br>
+                  <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
                 </a>  
               </div>  
             </td>
@@ -108,10 +122,14 @@
             <td class="movie-list-description-td" valign="top">
               <div class="movie-list-description-div">
                 <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">やばい、ここのお店のパスタ！</span> <span class="movie-date">2015年3月1日</span> <span class="movie-list-reporter-name">ラブラドールみほ</span>
+                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
                 </a>
                 <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="movie-list-reporter-introduction">とろっとろのカルボナーラがすごいの！私もとろとろになっちゃうー！</span>
+                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
+                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
+                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
+                  <br>
+                  <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
                 </a>  
               </div>  
             </td>
@@ -126,10 +144,14 @@
             <td class="movie-list-description-td" valign="top">
               <div class="movie-list-description-div">
                 <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">ペペロンチーノはおいちーの</span> <span class="movie-date">2015年3月1日</span> <span class="movie-list-reporter-name">ゆい</span>
+                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
                 </a>
                 <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="movie-list-reporter-introduction">今までペペロンチーノ100店くらい食べ歩いたけど、ここのが一番</span>
+                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
+                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
+                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
+                  <br>
+                  <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
                 </a>  
               </div>  
             </td>
@@ -145,6 +167,10 @@
 
       <!-- その他のお店のレコメンド ============-->
       <div class="col-md-4 recommend-movie-sidebar">
+
+        <div class="recommend">
+          おすすめのお店
+        </div>
 
         <table class="reccomend-movie-table">
           <tr class="tr-for-reccomend-movie">

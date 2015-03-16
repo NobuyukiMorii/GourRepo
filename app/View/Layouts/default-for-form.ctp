@@ -20,8 +20,7 @@
       <?php echo $this->element('dropDownButton'); ?>
     </div>
     
-    <?php echo $this->element('serchInput'); ?>
-    <?php echo $this->element('movieUploadButton'); ?>
+    <div class="col-md-9"></div>
     <?php echo $this->element('profileImage'); ?>
 
   </div>
