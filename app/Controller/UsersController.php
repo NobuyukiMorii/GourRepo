@@ -55,11 +55,9 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('ログアウトしました'));        
         $this->redirect($this->Auth->logout());
     }
-}
 
     public function dashboard() {
-        $this->User->recursive = 0;
-        $this->set('users', $this->paginate());
+        $this->set('dashboad', $this->Post->find('all');
     }
 
     public function profileedit() {
@@ -73,5 +71,7 @@ class UsersController extends AppController {
     public function delete() {
 
     }
+
+}   
 
 ?>
