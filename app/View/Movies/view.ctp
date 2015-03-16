@@ -52,7 +52,7 @@
       <div class="row">
         <!-- 動画 ============-->
         <div class="movie-div">
-          <iframe src="<?php echo $movie['Movie']['youtube_url'] ;?>" frameborder="0" class="movie"></iframe>
+          <iframe src="<?php echo $movie['Movie']['youtube_iframe_url'] ;?>" frameborder="0" class="movie"></iframe>
           <div class="movie-detail-div">
             <div class="col-md-1 movie-reporter-photo-div">
               <?php echo $this->Html->image('AsukaMoko.jpeg', array('alt' => 'Day' , 'class' => 'movie-reporter-photo img-circle')); ?>
