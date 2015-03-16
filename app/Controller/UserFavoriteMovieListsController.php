@@ -5,7 +5,20 @@ class UserFavoriteMovieListsController extends AppController {
 	/*
 	*ビューは使わない
 	*/
-	 public $autoRender = false;
+	public $autoRender = false;
+
+	//MoviesControllerの中でログイン無しで入れるところの設定
+
+    public function isAuthorized($user) {
+    	//contributorに権限を与えております。
+        if (isset($user['role']) && $user['role'] === 'contributor') {
+        	if(in_array($this->action, array('add'))) {
+        		return true;
+        	}
+        }
+        return parent::isAuthorized($user);
+    }
+
 	/*
 	*お気に入り追加のメソッド
 	*/
@@ -13,6 +26,8 @@ class UserFavoriteMovieListsController extends AppController {
 		/*
 		*パラメータでリクエストを受ける
 		*/
+		pr($this->request['pass'][0]);
+
 		$data['movie_id'] = $this->request['pass'][0];
 
 		/*
