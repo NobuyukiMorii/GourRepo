@@ -20,7 +20,7 @@ class User extends AppModel {
         ),
         'role' => array(
             'valid' => array(
-                'rule' => array('inList', array('admin', 'author')),
+                'rule' => array('inList', array('admin', 'contributor')),
                 'message' => 'Please enter a valid role',
                 'allowEmpty' => false
             )
@@ -46,6 +46,8 @@ class User extends AppModel {
         'Movie' => array(
             'className'     => 'Movie',
             'foreignKey'    => 'user_id',
+            'conditions'=> array('Movie.del_flg' => 0),
+            'order' => array('Movie.created' => 'DESC')
         ),
         'UserFavoriteMovieList' => array(
             'className'     => 'UserFavoriteMovieList',
@@ -56,12 +58,5 @@ class User extends AppModel {
             'foreignKey'    => 'user_id',
         )
     );
-
-    // public $belongsTo = array(
-    //     'Restaurant' => array(
-    //         'className' => 'Restaurant',
-    //         'foreignKey' => 'user_id'
-    //     )
-    // );
 
 }

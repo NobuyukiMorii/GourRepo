@@ -6,7 +6,7 @@ class TagRelation extends AppModel {
     public $belongsTo = array(
         'Movie' => array(
             'className' => 'Movie',
-            'foreignKey' => 'movie_id'
+            'foreignKey' => 'id'
         ),
         'Tag' => array(
             'className' => 'Tag',

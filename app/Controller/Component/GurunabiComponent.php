@@ -119,14 +119,14 @@ class GurunabiComponent extends Component {
 	public function ValidateRestInfo($rest_search_info){
 
 		foreach ($rest_search_info['rest'] as $key => $value) {
-			//画像URLのチェック
-			$url = $value['image_url']['shop_image1'];
-			$response = @file_get_contents($url, NULL, NULL, 0, 1);
-			if($value['image_url']['shop_image1'] == array()) {
-				$rest_search_info['rest'][$key]['image_url']['shop_image1'] = FULL_BASE_URL . '/GourRepo/img/NoImage.jpg';
-			} elseif($response == false){
-				$rest_search_info['rest'][$key]['image_url']['shop_image1'] = FULL_BASE_URL . '/GourRepo/img/NoImage.jpg';
-			}
+			// //画像URLのチェック
+			// $url = $value['image_url']['shop_image1'];
+			// $response = @file_get_contents($url, NULL, NULL, 0, 1);
+			// if($value['image_url']['shop_image1'] == array()) {
+			// 	$rest_search_info['rest'][$key]['image_url']['shop_image1'] = FULL_BASE_URL . '/GourRepo/img/NoImage.jpg';
+			// } elseif($response == false){
+			// 	$rest_search_info['rest'][$key]['image_url']['shop_image1'] = FULL_BASE_URL . '/GourRepo/img/NoImage.jpg';
+			// }
 			//店名のバリデーション
 			if($value['name'] === array()){
 				$rest_search_info['rest'][$key]['name'] = '-';
