@@ -18,31 +18,41 @@
     </div>
   <!-- /お店の概要 ============-->
 
-<?php pr($results) ; ?>
+<?php //pr($results) ; ?>
   <!-- 動画とお店の詳細 ============-->
   <div class="row">
     <div class="col-md-7">
       <div class="row">
         <!-- 動画 ============-->
         <table class="movie-list-table table table-striped">
-
+          <a href ="/" class="movie-list-photo-a">
+            <!--mysqlからデータ習得-->
+            <?php foreach ($results as $key => $result): ?>
+          </a>
           <tr class="movie-list-tr">
             <td class="movie-list-photo-td">
               <a href ="/" class="movie-list-photo-a">
-                <img src="http://www.pawanavi.com/cms/wp-content/uploads/2012/12/PIZZERAPORCO020.jpg"  class="movie-list-photo">
+                <!--画像表示-->
+                <img src="<?php echo $result['Movie']['thumbnails_url']; ?>">
+                <!-- <img src="http://www.pawanavi.com/cms/wp-content/uploads/2012/12/PIZZERAPORCO020.jpg"  class="movie-list-photo">-->     
               </a>
             </td>
             <td class="movie-list-description-td" valign="top">
               <div class="movie-list-description-div">
                 <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
+                  <!--タイトル表示-->
+                  <span class="movie-list-description-title"><?php echo $result['Movie']['title']; ?></span><br>
                 </a>
                 <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
-                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
-                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
+                  <!--最寄駅表示-->
+                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text"><?php echo $result['Restaurant']['access_line']; ?></span> &nbsp;&nbsp;
+                  <!--ジャンル表示-->
+                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text"><?php echo $result['Restaurant']['category']; ?></span> &nbsp;&nbsp;
+                  <!--料金表示-->
+                  <span class="label label-default">料金</span>&nbsp;<span class="black-text"><?php echo $result['Restaurant']['budget']; ?></span> &nbsp;&nbsp;
                   <br>
-                  <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
+                  <!--お店説明表示-->
+                  <span class="movie-list-reporter-introduction"><?php echo $result['Movie']['description']; ?></span>
                 </a>  
               </div>  
             </td>

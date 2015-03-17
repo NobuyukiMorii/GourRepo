@@ -301,6 +301,7 @@ class MoviesController extends AppController {
 								'`Restaurant`.`access_station` LIKE '=> '%'.$_POST['areaname'].'%',
 								'`Restaurant`.`category` LIKE '      => '%'.$_POST['areaname'].'%',
 								'`Restaurant`.`address` LIKE '       => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`budget` LIKE '        => '%'.$_POSt['areaname'].'%'
 								'`Movie`.`user_id` IN '        		 => $user_id_array
 							)
 						),
