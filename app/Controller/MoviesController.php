@@ -4,7 +4,7 @@ class MoviesController extends AppController {
 	/*
 	*利用するモデル
 	*/
-	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList' , 'UserWatchMovieList' , 'Tag' , 'TagRelation');
+	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList' , 'UserWatchMovieList' , 'Tag' , 'TagRelation' , 'UserProfile');
 
 	/*
 	*利用するコンポーネント
