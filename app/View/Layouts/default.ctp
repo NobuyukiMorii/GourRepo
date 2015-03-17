@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -21,7 +20,7 @@
       <div class="col-md-6 header">
         <div class="btn-group header-drop-button">
           <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <span class="glyphicon glyphicon-align-justify"></span> <span class="caret"></span>
+          <span class="glyphicon glyphicon-align-justify"></span> <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">アカウントを作成</a></li>
@@ -34,10 +33,12 @@
       </div>  
     </div>
     <div class="col-md-8 header">
-      <div class="input-group input-group-sm header-margin header-form">
-        <span class="input-group-addon" id="sizing-addon1">Search</span>
-        <input type="text" class="form-control" placeholder="エリア・ジャンル" aria-describedby="sizing-addon1">
-      </div>
+      <form action="../Movies/serchResult" method="post">
+        <div class="input-group input-group-sm header-margin header-form">
+          <input type="submit" class="input-group-addon" id="sizing-addon1" value="Search" style="width:50px; height:30px">
+          <input type="text" name="areaname" class="form-control" placeholder="エリア・ジャンル" aria-describedby="sizing-addon1">
+        </div>
+      </form>
     </div>
     <div class="col-md-1 header">
       <p class="header-margin">
@@ -68,6 +69,7 @@
 
   <!-- script references -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-  <?php echo $this->Html->script('bootstrap.min');?>
+  <?php echo $this->Html->script('bootstrap');?>
   </body>
 </html>
+

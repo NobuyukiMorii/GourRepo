@@ -3,7 +3,7 @@ class MoviesController extends AppController {
 	/*
 	*利用するモデル
 	*/
-	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation');
+	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation','UserProfile');
 
 	/*
 	*利用するコンポーネント
@@ -123,17 +123,32 @@ class MoviesController extends AppController {
 		$this->Restaurant->unbindModel(
             array('hasMany' =>array('Movie','UserProfile'))
         );
-        $this->UserProfile->find(
-        	array('hasMany' =>array('UserProfile','user_id'))
-        );
+        // $this->UserProfile->find(
+        // 	array('conditions' =>array('UserProfile','user_name' === $_POST['areaname']))
+        // );
 
-        // $results = $this->UserProfile->find('all',array(
-        // 	'conditions'=>
-        // 	array(
-        // 		'OR' =>
-        // 		array( '`UserProfile`.`user_id` LIKE ' => '%'.$_POST['areaname'].'%'
-        // 			))));        
-        //$this->User->recursive=2;
+        $UserName = $this->UserProfile->find('all',array(
+        	'conditions'=>
+        		array( '`UserProfile`.`name` LIKE ' => '%'.$_POST['areaname'].'%'
+        			),
+        	'fields' =>array('user_id','name')
+        	));
+        //echo var_dump($UserName);
+
+        //キーワードに合致したuser_idだけの配列を作成する
+        $user_id_array = array();
+
+        foreach ($UserName as $key => $value) {
+	        //debug($value);
+	        //配列に値を追加する
+	        $user_id_array[] = $value['UserProfile']['user_id'];
+
+        }
+
+        //echo var_dump($user_id_array);
+
+
+        // $this->User->recursive=2;
 		$results = $this->Movie->find('all',array(
 				'conditions'=>
 				array(
@@ -145,23 +160,13 @@ class MoviesController extends AppController {
 							'`Restaurant`.`access_station` LIKE '=> '%'.$_POST['areaname'].'%',
 							'`Restaurant`.`category` LIKE '      => '%'.$_POST['areaname'].'%',
 							'`Restaurant`.`address` LIKE '       => '%'.$_POST['areaname'].'%',
-							'`UserProfile`.`user_id` IN '        => '%'.$_POST['areaname'].'%'
+							'`Movie`.`user_id` IN '        		 => $user_id_array
 						)
 					),
 				'recursive' => 2
 				)
 		);
 
-
-
-
-		// $results = $this->Restaurant->find('all',array('conditions'=>array('OR' =>
-		// 												array('`Restaurant`.`name` LIKE '=> '%'.$_POST['areaname'].'%',
-		// 														'`Restaurant`.`access_line` LIKE '=> '%'.$_POST['areaname'].'%',
-		// 														'`Restaurant`.`access_station` LIKE '=> '%'.$_POST['areaname'].'%',
-		// 														'`Restaurant`.`category` LIKE '=> '%'.$_POST['areaname'].'%'
-		// 														)
-		// 												)));
 		// pr($results);
 		// exit;
 																

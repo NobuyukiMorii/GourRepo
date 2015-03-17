@@ -4,7 +4,15 @@ class Restaurant extends AppModel {
     public $hasMany = array(
         'Movie' => array(
             'className'     => 'Movie',
-            'foreignKey'    => 'movie_id',
+            'foreignKey'    => 'restaurant_id',
         )
     );
 }
+
+/*
+class Restaurant extends AppModel{
+	public function getAll(){
+		return $this->find('all');
+	}
+}
+*/
