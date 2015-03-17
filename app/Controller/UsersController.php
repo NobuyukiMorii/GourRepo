@@ -3,7 +3,7 @@
 
 class UsersController extends AppController {
 
-    public $helpers = array('Html', 'Form', 'Session');
+    public $helpers = array('Html', 'Form', 'Session', 'UploadPack.Upload');
     public $uses = array('User', 'Group');
 
     public function beforeFilter() {
@@ -57,7 +57,12 @@ class UsersController extends AppController {
     }
 
     public function dashboard() {
-        $this->set('dashboad', $this->Post->find('all');
+        $this->set('dashboard', $this->User->find('all',
+            array('conditions' => array('User.id' => $this->Auth->user('id')))
+            ));
+        // pr($this->User->find('all',
+        //     array('conditions' => array('User.id' => $this->Auth->user('id')))
+        //     ));
     }
 
     public function profileedit() {
