@@ -24,11 +24,11 @@
       <div class="row">
         <!-- 動画 ============-->
         <table class="movie-list-table table table-striped">
-
+          <?php for ($i = 0; $i < count($results); ++$i): ?>
           <tr class="movie-list-tr">
             <td class="movie-list-photo-td">
-              <a href ="/" class="movie-list-photo-a">
-                <img src="http://www.pawanavi.com/cms/wp-content/uploads/2012/12/PIZZERAPORCO020.jpg"  class="movie-list-photo">
+              <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $results[$i]['Movie']['id'])) ;?>" class="movie-list-photo-a">
+                <img src="<?php echo $results[$i]['Movie']['thumbnails_url'] ;?>"  class="movie-list-photo">
               </a>
             </td>
             <td class="movie-list-description-td" valign="top">
@@ -37,127 +37,16 @@
                   <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
                 </a>
                 <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
-                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
-                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
+                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text"><?php echo $results[$i]['Restaurant']['access_station'] ;?></span> &nbsp;&nbsp;
+                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text"><?php echo $results[$i]['Restaurant']['category'] ;?></span> &nbsp;&nbsp;
+                  <span class="label label-default">料金</span>&nbsp;<span class="black-text"><?php echo $results[$i]['Restaurant']['budget'] ;?>円</span> &nbsp;&nbsp;
                   <br>
-                  <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
+                  <span class="movie-list-reporter-introduction"><?php echo $results[$i]['Movie']['description'] ;?></span>
                 </a>  
               </div>  
             </td>
           </tr>
-
-          <tr class="movie-list-tr">
-            <td class="movie-list-photo-td">
-              <a href ="/" class="movie-list-photo-a">
-                <img src="http://i.ytimg.com/vi/_KtY6kIhoPw/hqdefault.jpg"  class="movie-list-photo">
-              </a>
-            </td>
-            <td class="movie-list-description-td" valign="top">
-              <div class="movie-list-description-div">
-                <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
-                </a>
-                <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
-                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
-                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
-                  <br>
-                  <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
-                </a>  
-              </div>  
-            </td>
-          </tr>
-
-          <tr class="movie-list-tr">
-            <td class="movie-list-photo-td">
-              <a href ="/" class="movie-list-photo-a">
-                <img src="http://up.gc-img.net/post_img/2013/02/4xc9W3XzxePnfGc_ZoEz8_45.jpeg"  class="movie-list-photo">
-              </a>
-            </td>
-            <td class="movie-list-description-td" valign="top">
-              <div class="movie-list-description-div">
-                <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
-                </a>
-                <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
-                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
-                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
-                  <br>
-                  <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
-                </a>  
-              </div>  
-            </td>
-          </tr>
-
-          <tr class="movie-list-tr">
-            <td class="movie-list-photo-td">
-              <a href ="/" class="movie-list-photo-a">
-                <img src="http://www.paylessimages.jp/preview/af/pic14/af9920065049.jpg"  class="movie-list-photo">
-              </a>
-            </td>
-            <td class="movie-list-description-td" valign="top">
-              <div class="movie-list-description-div">
-                <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
-                </a>
-                <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
-                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
-                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
-                  <br>
-                  <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
-                </a>  
-              </div>  
-            </td>
-          </tr>
-
-          <tr class="movie-list-tr">
-            <td class="movie-list-photo-td">
-              <a href ="/" class="movie-list-photo-a">
-                <img src="http://dengekionline.com/elem/000/000/185/185920/c20090811_osama_01_cs1w1_300x.jpg"  class="movie-list-photo">
-              </a>
-            </td>
-            <td class="movie-list-description-td" valign="top">
-              <div class="movie-list-description-div">
-                <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
-                </a>
-                <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
-                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
-                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
-                  <br>
-                  <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
-                </a>  
-              </div>  
-            </td>
-          </tr>
-
-          <tr class="movie-list-tr">
-            <td class="movie-list-photo-td">
-              <a href ="/" class="movie-list-photo-a">
-                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSoFUj8NwZaAM8xlhs42zqGk8GDCF7HHMfovRDL-eBrmJTu..."  class="movie-list-photo">
-              </a>
-            </td>
-            <td class="movie-list-description-td" valign="top">
-              <div class="movie-list-description-div">
-                <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
-                </a>
-                <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text">六本木</span> &nbsp;&nbsp;
-                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text">イタリアン</span> &nbsp;&nbsp;
-                  <span class="label label-default">料金</span>&nbsp;<span class="black-text">3500円</span> &nbsp;&nbsp;
-                  <br>
-                  <span class="movie-list-reporter-introduction">目黒で見つけた私のだーいすきなピザ！ダイエット中だったんだけど、１人で３枚も貪っちゃった！</span>
-                </a>  
-              </div>  
-            </td>
-          </tr>
-
-
+          <?php endfor ; ?>
 
         </table>
         <!-- /動画 ============-->

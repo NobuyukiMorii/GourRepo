@@ -4,7 +4,7 @@ class MoviesController extends AppController {
 	/*
 	*利用するモデル
 	*/
-	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList' , 'UserWatchMovieList' , 'Tag' , 'TagRelation');
+	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList' , 'UserWatchMovieList' , 'Tag' , 'TagRelation' , 'UserProfile');
 
 	/*
 	*利用するコンポーネント
@@ -247,13 +247,76 @@ class MoviesController extends AppController {
 	*検索結果画面
 	*/
 	public function serchResult(){
-		/*
-		*１）キーワードを空欄で区切って配列に変換する
-		*２）moviesのname、description、restaurantsのname、access_line、access_station、category、投稿したユーザーのカラムからfindする
-		*３）その際に、論理削除済みを除外し、moviesテーブルのcount順とする
-		*４）検索したデータをビューに表示する
-		*/
+
+		//ユーザープロフィールを検索する
+		$this->User->unbindModel(
+            array('hasMany' =>array('Movie' , 'UserFavoriteMovieList', 'UserWatchMovieList'))
+        );
+		$this->Restaurant->unbindModel(
+            array('hasMany' =>array('Movie','UserProfile'))
+        );
+        $UserName = $this->UserProfile->find('all',array(
+        	'conditions'=>
+        		array( '`UserProfile`.`name` LIKE ' => '%'.$_POST['areaname'].'%'
+        			),
+        	'fields' =>array('user_id','name')
+        	));
+
+        //ユーザープロフィールがあるかどうかを判定する
+        if(!empty($UserName)){
+
+	        //キーワードに合致したuser_idだけの配列を作成する
+	        $user_id_array = array();
+	        foreach ($UserName as $key => $value) {
+		        $user_id_array[] = $value['UserProfile']['user_id'];
+
+	        }
+
+	        //ユーザー名で検索する
+			$results = $this->Movie->find('all',array(
+					'conditions'=>
+					array(
+						'OR' =>
+						array(	'`Movie`.`title` LIKE '			     =>	'%'.$_POST['areaname'].'%',
+							 	'`Movie`.`description` LIKE '	     => '%'.$_POST['areaname'].'%',
+							 	'`Restaurant`.`name` LIKE '          => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`access_line` LIKE '   => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`access_station` LIKE '=> '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`category` LIKE '      => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`address` LIKE '       => '%'.$_POST['areaname'].'%',
+								'`Movie`.`user_id` IN '        		 => $user_id_array
+							)
+						),
+					'recursive' => 2
+					)
+			);
+		}
+
+		if(empty($UserName)){
+
+	        //ユーザー名以外で検索する
+			$results = $this->Movie->find('all',array(
+					'conditions'=>
+					array(
+						'OR' =>
+						array(	'`Movie`.`title` LIKE '			     =>	'%'.$_POST['areaname'].'%',
+							 	'`Movie`.`description` LIKE '	     => '%'.$_POST['areaname'].'%',
+							 	'`Restaurant`.`name` LIKE '          => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`access_line` LIKE '   => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`access_station` LIKE '=> '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`category` LIKE '      => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`address` LIKE '       => '%'.$_POST['areaname'].'%',
+							)
+						),
+					'recursive' => 2
+					)
+			);
+		} 
+		
+
+		$this->set('results',$results);
 	}
+
 	/*
 	*お気に入りのムービーリスト
 	*/
