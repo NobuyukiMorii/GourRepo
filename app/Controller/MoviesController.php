@@ -311,8 +311,7 @@ class MoviesController extends AppController {
 					'recursive' => 2
 					)
 			);
-		} 
-		
+		}
 
 		$this->set('results',$results);
 	}

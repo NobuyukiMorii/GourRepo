@@ -3,7 +3,15 @@
 		<span class="input-group-addon" id="sizing-addon1">Search</span>
 		<?php echo $this->Form->create('Movie', array('type' => 'post' , 'action' => 'serchResult')); ?>
 		<input type="text" name="areaname" class="form-control" placeholder="エリア・ジャンル" aria-describedby="sizing-addon1">
-		<input type="submit" value="送信">
 		<?php $this->Form->end() ;?>
 	</div>
 </div>
+
+<script>
+$("input").keypress(function(event) {
+    if (event.which == 13) {
+        event.preventDefault();
+        $("form").submit();
+    }
+});
+</script>

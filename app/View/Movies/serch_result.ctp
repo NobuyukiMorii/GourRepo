@@ -34,7 +34,7 @@
             <td class="movie-list-description-td" valign="top">
               <div class="movie-list-description-div">
                 <a href="/" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title">フォリオリーナ・デッラ</span><br>
+                  <span class="movie-list-description-title"><?php echo $results[$i]['Movie']['title'] ;?>（<?php echo $results[$i]['Restaurant']['name'] ;?>）</span><br>
                 </a>
                 <a href="/" class="movie-list-reporter-introduction-ahref">
                   <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text"><?php echo $results[$i]['Restaurant']['access_station'] ;?></span> &nbsp;&nbsp;
