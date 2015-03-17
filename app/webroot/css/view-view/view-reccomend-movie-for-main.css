@@ -16,6 +16,8 @@
 
 .recommend-movie-detail-td {
 	padding-left: 15px;
+	padding-right: 15px;
+	width: 500px;
 }
 
 .reccomend-movie-name-div {

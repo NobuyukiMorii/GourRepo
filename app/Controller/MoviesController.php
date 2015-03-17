@@ -73,7 +73,7 @@ class MoviesController extends AppController {
 			}
 
 			/*
-			*Movieの検索
+			*Movieの検索（メインの動画）
 			*/
 			$this->Restaurant->unbindModel(
 	            array('hasMany' =>array('Movie'))
@@ -87,7 +87,27 @@ class MoviesController extends AppController {
 			$movie = $this->Movie->find('first', array(
 				'conditions' => array('Movie.id' => $this->request['pass'][0]),
 				'recursive' => 2
+			));
 
+			/*
+			*Movieの検索（レコメンドの動画）
+			*/
+			$this->Restaurant->unbindModel(
+	            array('hasMany' =>array('Movie'))
+	        );
+			$this->TagRelation->unbindModel(
+	            array('belongsTo' =>array('Movie'))
+	        );
+			$this->User->unbindModel(
+	            array('hasMany' =>array('Movie' , 'UserFavoriteMovieList' , 'UserWatchMovieList'))
+	        );
+			$movies_in_same_restaurant = $this->Movie->find('all' , array(
+				'conditions' => array(
+					'Movie.restaurant_id' => $movie['Restaurant']['id'],
+					'Movie.del_flg' => 0,
+					'not' => array('Movie.id' => $this->request['pass'][0])
+				),
+				'recursive' => 2
 			));
 
 			/*
@@ -100,7 +120,8 @@ class MoviesController extends AppController {
 			/*
 			*viewに表示
 			*/
-			$this->set(compact('movie'));
+			$this->set(compact('movie' , 'movies_in_same_restaurant'));
+
 		} else {
 			$this->Session->setFlash('お探しの動画はありませんでした。申し訳ございません。');
 			return $this->redirect(array('controller' => 'Movies', 'action' => 'index'));
@@ -147,26 +168,33 @@ class MoviesController extends AppController {
 		if(!empty($this->request->data)){
 			//ぐるなびidを取得する
 			$option['id'] = $this->request->data['gournabi_id'];
-
-			//レストランをぐるなびから検索して取得する
-			$rest_search_info = $this->Gurunabi->RestSearch($option);
-
-			//DBに保存出来る形に配列を整理する
-			$rest_save_data = $this->Gurunabi->ParseArrayForDB($rest_search_info);
-
-			//バリデーションする
-			$rest_save_data = $this->Gurunabi->ValidationBeforeSave($rest_save_data);
-
-			//保存する（レストラン）
-			$rest_save_data['user_id'] = $this->userSession['id'];
-			$rest_save_data['created_user_id'] = $this->userSession['id'];
-			$rest_save_data['modified_user_id'] = $this->userSession['id'];
-			$this->Restaurant->create();
-			$flg_restaurant = $this->Restaurant->save($rest_save_data);
-
-			if($flg_restaurant === false){
-				$this->Session->setFlash('レストランの登録に失敗しました。改めて登録しなおして下さい。');
-				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+			//同じぐるなびidがあれば新規にsaveする
+			$existent_restraunt = $this->Restaurant->find('all' , array(
+				'conditions' => array('Restaurant.gournabi_id' => $option['id'])
+			));
+			//レストランが未登録の場合
+			if(empty($existent_restraunt)){
+				//レストランをぐるなびから検索して取得する
+				$rest_search_info = $this->Gurunabi->RestSearch($option);
+				//DBに保存出来る形に配列を整理する
+				$rest_save_data = $this->Gurunabi->ParseArrayForDB($rest_search_info);
+				//バリデーションする
+				$rest_save_data = $this->Gurunabi->ValidationBeforeSave($rest_save_data);
+				//保存する（レストラン）
+				$rest_save_data['user_id'] = $this->userSession['id'];
+				$rest_save_data['created_user_id'] = $this->userSession['id'];
+				$rest_save_data['modified_user_id'] = $this->userSession['id'];
+				$this->Restaurant->create();
+				$flg_restaurant = $this->Restaurant->save($rest_save_data);
+				//エラーハンドリング
+				if($flg_restaurant === false){
+					$this->Session->setFlash('レストランの登録に失敗しました。改めて登録しなおして下さい。');
+					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+				}
+			}
+			//既にレストランが登録してある場合
+			if(!empty($existent_restraunt)){
+				$flg_restaurant['Restaurant']['id'] = $existent_restraunt[0]['Restaurant']['id'];
 			}
 
 			//保存する（ムービー）
