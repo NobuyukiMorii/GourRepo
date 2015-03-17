@@ -1,7 +1,7 @@
 <?php echo $this->Html->css('view-serchResult/common-setting'); ?>
 <?php echo $this->Html->css('view-serchResult/place-title.css'); ?>
 <?php echo $this->Html->css('view-serchResult/movie-list.css'); ?>
-<?php echo $this->Html->css('view-serchResult/select-page-button-movie.cs'); ?>
+<?php echo $this->Html->css('view-serchResult/select-page-button-movie.css'); ?>
 <?php echo $this->Html->css('view-serchResult/view-reccomend-movie-for-movie.css'); ?>
 
 <!--ビューにファイルをアップロードする-->
@@ -9,14 +9,6 @@
 
   <!-- CONTENT ============-->
   <div class="row main-content">
-
-    <!-- お店の概要 ============-->
-    <div class="row">
-      <div class="col-md-7 view-header-place-name-div bg-color">
-      </div>
-
-    </div>
-  <!-- /お店の概要 ============-->
 
   <!-- 動画とお店の詳細 ============-->
   <div class="row">
@@ -33,7 +25,7 @@
             </td>
             <td class="movie-list-description-td" valign="top">
               <div class="movie-list-description-div">
-                <a href="/" class="movie-list-description-title-ahref">
+                <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $results[$i]['Movie']['id'])) ;?>" class="movie-list-description-title-ahref">
                   <span class="movie-list-description-title"><?php echo $results[$i]['Movie']['title'] ;?>（<?php echo $results[$i]['Restaurant']['name'] ;?>）</span><br>
                 </a>
                 <a href="/" class="movie-list-reporter-introduction-ahref">
@@ -50,6 +42,14 @@
 
         </table>
         <!-- /動画 ============-->
+        <div class="pagination" style="margin-left:55px;">                         
+          <ul>                                           
+            <?php echo $this->Paginator->prev(__('prev'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+            <?php echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>                              
+            <?php echo $this->Paginator->next(__('next'), array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+          </ul>                                          
+        </div>
+
       </div>
     </div>
     <!-- /動画とお店の詳細 ============-->
