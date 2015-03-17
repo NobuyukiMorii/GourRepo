@@ -1,4 +1,5 @@
 <?php
+
 class MoviesController extends AppController {
 	/*
 	*利用するモデル
@@ -8,7 +9,7 @@ class MoviesController extends AppController {
 	/*
 	*利用するコンポーネント
 	*/
-	public $components = array('Gurunabi' , 'Paginator');
+	public $components = array('Gurunabi' , 'YouTube' , 'Paginator');
 
 	//MoviesControllerの中でログイン無しで入れるところの設定
     public function beforeFilter() {
@@ -59,7 +60,7 @@ class MoviesController extends AppController {
 	public function view(){
 
 		if(isset($this->request['pass'][0])){
-				if(!empty(($this->userSession))) {
+			if(!empty(($this->userSession))) {
 				/*
 				*UserWatchMovieListの登録
 				*/
@@ -70,6 +71,7 @@ class MoviesController extends AppController {
 				$this->UserWatchMovieList->create();
 				$flg = $this->UserWatchMovieList->save($data);
 			}
+
 			/*
 			*Movieの検索
 			*/
@@ -87,12 +89,14 @@ class MoviesController extends AppController {
 				'recursive' => 2
 
 			));
+
 			/*
 			*Movieの再生回数をUpdate
 			*/
 			$streaming_count = $movie['Movie']['count'] + 1;
 			$this->Movie->id = $this->request['pass'][0];  
 			$this->Movie->saveField('count', $streaming_count);
+
 			/*
 			*viewに表示
 			*/
@@ -154,33 +158,44 @@ class MoviesController extends AppController {
 			$rest_save_data = $this->Gurunabi->ValidationBeforeSave($rest_save_data);
 
 			//保存する（レストラン）
-			$rest_save_data['user_id'] = $user = $this->userSession['id'];
-			$rest_save_data['created_user_id'] = $user = $this->userSession['id'];
-			$rest_save_data['modified_user_id'] = $user = $this->userSession['id'];
+			$rest_save_data['user_id'] = $this->userSession['id'];
+			$rest_save_data['created_user_id'] = $this->userSession['id'];
+			$rest_save_data['modified_user_id'] = $this->userSession['id'];
 			$this->Restaurant->create();
 			$flg_restaurant = $this->Restaurant->save($rest_save_data);
 
+			if($flg_restaurant === false){
+				$this->Session->setFlash('レストランの登録に失敗しました。改めて登録しなおして下さい。');
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+			}
+
 			//保存する（ムービー）
 			$movie_save_data['restaurant_id'] = $flg_restaurant['Restaurant']['id'];
-			$movie_save_data['user_id'] = $user = $this->userSession['id'];
+			$movie_save_data['user_id'] = $this->userSession['id'];
 			$movie_save_data['title'] = $this->request->data['title'];
 			$movie_save_data['description'] = $this->request->data['description'];
 			$movie_save_data['youtube_url'] = 'https://www.youtube.com/watch?v=' . $this->request->data['youtube_url'];
+			$movie_save_data['youtube_iframe_url'] = $this->YouTube->get_youtube_iframe_url($movie_save_data['youtube_url']);
 			$movie_save_data['thumbnails_url'] = $this->request->data['thumbnails_url'];
-			$movie_save_data['created_user_id'] = $user = $this->userSession['id'];
-			$movie_save_data['modified_user_id'] = $user = $this->userSession['id'];
+			$movie_save_data['created_user_id'] = $this->userSession['id'];
+			$movie_save_data['modified_user_id'] = $this->userSession['id'];
 			$this->Movie->create();
 			$flg_movie = $this->Movie->save($movie_save_data);
 
+			if($flg_movie === false){
+				$this->Session->setFlash('動画の登録に失敗しました。改めて登録しなおして下さい。');
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+			}
+
 			//保存する（タグ関係）
-			$tag_save_data['created_user_id'] = $user = $this->userSession['id'];
-			$tag_save_data['modified_user_id'] = $user = $this->userSession['id'];
+			$tag_save_data['created_user_id'] = $this->userSession['id'];
+			$tag_save_data['modified_user_id'] = $this->userSession['id'];
 			$tag_save_data['name'] = $this->request->data['tag'];
 			$tag_save_data['name'] = mb_convert_kana($tag_save_data['name'], 's');
 			$tag_save_data['name'] = preg_split('/[\s]+/', $tag_save_data['name'] , -1, PREG_SPLIT_NO_EMPTY);
 
-			$tag_relation_save_data['created_user_id'] = $user = $this->userSession['id'];
-			$tag_relation_save_data['modified_user_id'] = $user = $this->userSession['id'];
+			$tag_relation_save_data['created_user_id'] = $this->userSession['id'];
+			$tag_relation_save_data['modified_user_id'] = $this->userSession['id'];
 			$tag_relation_save_data['movie_id'] = $this->Movie->getLastInsertID();
 
 			foreach($tag_save_data['name'] as $key => $val){
@@ -192,12 +207,6 @@ class MoviesController extends AppController {
 				$tag_relation_save_data['tag_id'] = $this->Tag->getLastInsertID();
 				$this->TagRelation->create();
 				$this->TagRelation->save($tag_relation_save_data);
-			}
-
-			//保存の判定（失敗時）
-			if($flg_restaurant === false || $flg_movie === false){
-				$this->Session->setFlash('登録に失敗しました。改めて登録しなおして下さい。');
-				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
 			}
 
 			//保存の判定（成功時）

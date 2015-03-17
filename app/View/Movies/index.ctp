@@ -42,7 +42,9 @@
         <?php echo $data[$i]['Restaurant']['pr'] ;?>
       </div>
       <div class="col-md-4 recommend-div">
-           <img src="https://i.ytimg.com/vi_webp/31eHmMs5uCQ/mqdefault.webp"  class="reccomend-movie-photo">
+          <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $data[$i]['Movie']['id'])) ;?>">
+            <img src="https://i.ytimg.com/vi_webp/31eHmMs5uCQ/mqdefault.webp"  class="reccomend-movie-photo">
+          </a>
       </div>
     </div>
   <?php endfor ; ?>
