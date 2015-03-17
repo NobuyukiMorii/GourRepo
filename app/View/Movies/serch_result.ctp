@@ -1,7 +1,7 @@
 <?php echo $this->Html->css('view-serchResult/common-setting'); ?>
 <?php echo $this->Html->css('view-serchResult/place-title.css'); ?>
 <?php echo $this->Html->css('view-serchResult/movie-list.css'); ?>
-<?php echo $this->Html->css('view-serchResult/select-page-button-movie.cs'); ?>
+<?php echo $this->Html->css('view-serchResult/select-page-button-movie.css'); ?>
 <?php echo $this->Html->css('view-serchResult/view-reccomend-movie-for-movie.css'); ?>
 
 <!--ビューにファイルをアップロードする-->
