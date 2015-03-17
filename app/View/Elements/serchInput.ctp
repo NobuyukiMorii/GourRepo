@@ -1,3 +1,4 @@
+<?php echo $this->Html->script('input-keypress');?>
 <div class="col-md-8 header">
 	<div class="input-group input-group-sm header-margin header-form">
 		<span class="input-group-addon" id="sizing-addon1">Search</span>
@@ -6,12 +7,3 @@
 		<?php $this->Form->end() ;?>
 	</div>
 </div>
-
-<script>
-$("input").keypress(function(event) {
-    if (event.which == 13) {
-        event.preventDefault();
-        $("form").submit();
-    }
-});
-</script>
