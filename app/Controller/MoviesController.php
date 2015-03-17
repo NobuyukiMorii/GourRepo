@@ -248,95 +248,76 @@ class MoviesController extends AppController {
 	*検索結果画面
 	*/
 	public function serchResult(){
-		 /*
-		*１）キーワードを空欄で区切って配列に変換する
-		*２）moviesのname、description、restaurantsのname、access_line、access_station、category、投稿したユーザーのカラムからfindする
-		*３）その際に、論理削除済みを除外し、moviesテーブルのcount順とする
-		*４）検索したデータをビューに表示する
-		*/
 
-		// select * from movies where id = 9;とおなじ
+		//ユーザープロフィールを検索する
 		$this->User->unbindModel(
-		            array('hasMany' =>array('Movie' , 'UserFavoriteMovieList', 'UserWatchMovieList'))
-		        );
+            array('hasMany' =>array('Movie' , 'UserFavoriteMovieList', 'UserWatchMovieList'))
+        );
 		$this->Restaurant->unbindModel(
-		            array('hasMany' =>array('Movie','UserProfile'))
-		        );
-        // $this->UserProfile->find(
-        // array('conditions' =>array('UserProfile','user_name' === $_POST['areaname']))
-        // );
-
+            array('hasMany' =>array('Movie','UserProfile'))
+        );
         $UserName = $this->UserProfile->find('all',array(
-        'conditions'=>
-        array( '`UserProfile`.`name` LIKE ' => '%'.$_POST['areaname'].'%'
-        ),
-        'fields' =>array('user_id','name')
-        ));
+        	'conditions'=>
+        		array( '`UserProfile`.`name` LIKE ' => '%'.$_POST['areaname'].'%'
+        			),
+        	'fields' =>array('user_id','name')
+        	));
 
+        //ユーザープロフィールがあるかどうかを判定する
         if(!empty($UserName)){
-	        //echo var_dump($UserName);
 
 	        //キーワードに合致したuser_idだけの配列を作成する
 	        $user_id_array = array();
-
 	        foreach ($UserName as $key => $value) {
-	        //debug($value);
-	        //配列に値を追加する
-	        $user_id_array[] = $value['UserProfile']['user_id'];
+		        $user_id_array[] = $value['UserProfile']['user_id'];
 
 	        }
 
-	        //echo var_dump($user_id_array);
-
-
-			// $this->User->recursive=2;
+	        //ユーザー名で検索する
 			$results = $this->Movie->find('all',array(
-				'conditions'=>
+					'conditions'=>
 					array(
-					'OR' =>
-						array( 
-							'`Movie`.`title` LIKE '     => '%'.$_POST['areaname'].'%',
-							'`Movie`.`description` LIKE '     => '%'.$_POST['areaname'].'%',
-							'`Restaurant`.`name` LIKE '          => '%'.$_POST['areaname'].'%',
-							'`Restaurant`.`access_line` LIKE '  => '%'.$_POST['areaname'].'%',
-							'`Restaurant`.`access_station` LIKE '=> '%'.$_POST['areaname'].'%',
-							'`Restaurant`.`category` LIKE '      => '%'.$_POST['areaname'].'%',
-							'`Restaurant`.`address` LIKE '      => '%'.$_POST['areaname'].'%',
-							'`Movie`.`user_id` IN '        => $user_id_array
-						)
-					),
-				'recursive' => 2
-				)
+						'OR' =>
+						array(	'`Movie`.`title` LIKE '			     =>	'%'.$_POST['areaname'].'%',
+							 	'`Movie`.`description` LIKE '	     => '%'.$_POST['areaname'].'%',
+							 	'`Restaurant`.`name` LIKE '          => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`access_line` LIKE '   => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`access_station` LIKE '=> '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`category` LIKE '      => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`address` LIKE '       => '%'.$_POST['areaname'].'%',
+								'`Movie`.`user_id` IN '        		 => $user_id_array
+							)
+						),
+					'recursive' => 2
+					)
 			);
 		}
 
 		if(empty($UserName)){
 
-		    // $this->User->recursive=2;
+	        //ユーザー名以外で検索する
 			$results = $this->Movie->find('all',array(
-				'conditions'=>
-				array(
-					'OR' =>
-						array( 
-							'`Movie`.`title` LIKE '     => '%'.$_POST['areaname'].'%',
-							'`Movie`.`description` LIKE '     => '%'.$_POST['areaname'].'%',
-							'`Restaurant`.`name` LIKE '          => '%'.$_POST['areaname'].'%',
-							'`Restaurant`.`access_line` LIKE '  => '%'.$_POST['areaname'].'%',
-							'`Restaurant`.`access_station` LIKE '=> '%'.$_POST['areaname'].'%',
-							'`Restaurant`.`category` LIKE '      => '%'.$_POST['areaname'].'%',
-							'`Restaurant`.`address` LIKE '      => '%'.$_POST['areaname'].'%',
-						)
-					),
+					'conditions'=>
+					array(
+						'OR' =>
+						array(	'`Movie`.`title` LIKE '			     =>	'%'.$_POST['areaname'].'%',
+							 	'`Movie`.`description` LIKE '	     => '%'.$_POST['areaname'].'%',
+							 	'`Restaurant`.`name` LIKE '          => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`access_line` LIKE '   => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`access_station` LIKE '=> '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`category` LIKE '      => '%'.$_POST['areaname'].'%',
+								'`Restaurant`.`address` LIKE '       => '%'.$_POST['areaname'].'%',
+							)
+						),
 					'recursive' => 2
-				)
+					)
 			);
-
 		} 
-		// exit;
+		
 
 		$this->set('results',$results);
-		//echo var_dump($_POST['areaname']);
 	}
+
 	/*
 	*お気に入りのムービーリスト
 	*/
