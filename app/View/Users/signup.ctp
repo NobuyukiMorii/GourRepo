@@ -21,7 +21,7 @@
 			// 'after' => '<span style="color:#FF0000">必須入力</span>'
 		)); ?>
 		<?php echo $this->Form->hidden('role', array(
-			'value' => 'admin',
+			'value' => 'contributor',
 		)); ?>
 		<?php echo $this->Form->submit('登録', array(
 			'div' => 'form-group',

@@ -6,7 +6,8 @@ class UserWatchMovieList extends AppModel {
     public $belongsTo = array(
         'Movie' => array(
             'className' => 'Movie',
-            'foreignKey' => 'movie_id'
+            'foreignKey' => 'movie_id',
+            'conditions'=> array('Movie.del_flg' => 0)
         )
     );
 

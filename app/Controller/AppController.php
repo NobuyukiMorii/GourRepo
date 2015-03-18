@@ -47,19 +47,36 @@ class AppController extends Controller {
             ),
             'logoutRedirect' => array(
                 'controller' => 'movies',
-                'action' => 'index',
-                'home'
+                'action' => 'index'
             ),
             'authenticate' => array(
                 'Form' => array(
-                    'passwordHasher' => 'Simple'
+                    'passwordHasher' => 'Simple',
+                    'fields' => array('username' => 'email')
                 )
             ),
             'authorize' => array('Controller') // この行を追加しました
         ),
 	);
 
-        public function beforeFilter() {
-        $this->Auth->allow();
+    public function isAuthorized($user) {
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+
+    // デフォルトは拒否を外してadminでない場合はそれぞれのControllerのisAuthorizedに任せる。
+    // return false;
+
+    }
+
+    public function beforeFilter() {
+        /*
+        *controllerでログインユーザーを呼び出すメソッドを作成
+        */
+        $this->userSession = $this->Auth->user();
+        /*
+        *viewでログインユーザーの情報を受ける変数おw作成
+        */
+        $this->set('userSession', $this->Auth->user());
     }
 }
