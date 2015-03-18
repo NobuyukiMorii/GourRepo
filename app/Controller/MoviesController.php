@@ -209,9 +209,11 @@ class MoviesController extends AppController {
 			$movie_save_data['created_user_id'] = $this->userSession['id'];
 			$movie_save_data['modified_user_id'] = $this->userSession['id'];
 			$this->Movie->create();
-			$flg_movie = $this->Movie->save($movie_save_data);
 
-			if($flg_movie === false){
+			//エラーの判定（ムービー）
+			try {
+				$flg_movie = $this->Movie->save($movie_save_data);
+			} catch (Exception $e) {
 				$this->Session->setFlash('動画の登録に失敗しました。改めて登録しなおして下さい。');
 				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
 			}
