@@ -1,6 +1,5 @@
 <?php
 
-
 class UsersController extends AppController {
 
     public $helpers = array('Html', 'Form', 'Session', 'UploadPack.Upload');
@@ -55,15 +54,13 @@ class UsersController extends AppController {
     }
 
     public function dashboard() {
-        $this->set('dashboard', $this->User->find('all',
-            array('conditions' => array('User.id' => $this->Auth->user('id')))
-            ));
-// pr($this->request->data);
-// pr($this->userSession['UserProfile']['id']);
+        $this->set('dashboard', $this->User->findById($this->Auth->user('id'))
+            );
+
         if ($this->request->is('post')) {
             $this->UserProfile->id = $this->userSession['UserProfile']['id'];
             if ($this->UserProfile->save($this->request->data)) {
-                // $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
                 // $this->Session->setFlash(__('The user has been saved'));
             } else {
                 // $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
