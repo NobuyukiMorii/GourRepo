@@ -58,25 +58,28 @@
       <div class="col-md-4 recommend-movie-sidebar">
 
         <div class="recommend">
-          おすすめのお店
+          最新の投稿
         </div>
 
         <table class="reccomend-movie-table">
+
+          <?php for ($i = 0; $i < count($new_movies); ++$i): ?>
+
           <tr class="tr-for-reccomend-movie">
             <td class="reccomend-movie-photo-td">
-              <a href ="/">
-                <img src="https://i.ytimg.com/vi/L6PujWVBmRo/default.jpg"  class="reccomend-movie-photo">
+              <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $new_movies[$i]['Movie']['id'])) ;?>">
+                <img src="<?php echo $new_movies[$i]['Movie']['thumbnails_url'] ;?>"  class="reccomend-movie-photo">
               </a>
             </td>
             <td class="recommend-movie-detail-td" valign="top">
               <div class="reccomend-movie-name-div">
-                <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold">パンチョ</span>
-                  <span class="reccomend-movie-genre">（イタリアン </span>
-                  <span class="reccomend-movie-station"> 秋葉原)</span><br>
+                <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $new_movies[$i]['Movie']['id'])) ;?>" class="a-href-for-reccomend-movie-place-name">
+                  <span class="reccomend-movie-place-name text-bold"><?php echo $new_movies[$i]['Movie']['title'] ;?> （<?php echo $new_movies[$i]['Restaurant']['name'] ;?>）</span>
+                  <span class="reccomend-movie-genre">（<?php echo $new_movies[$i]['Restaurant']['category'] ;?> </span>
+                  <span class="reccomend-movie-station"> <?php echo $new_movies[$i]['Restaurant']['access_station'] ;?>)</span><br>
                 </a>
                 <a href="/" class="a_href_for_reccomend-movie-td">
-                  <span class="reccomend-movie-name text-bold">【大食い】情熱の大食漢 第１回 秋葉原「パンチョ」 ミートソース２．３㎏ ２０１４ ＳＱダイアリー</span><br>
+                  <span class="reccomend-movie-name text-bold"><?php echo $new_movies[$i]['Movie']['description'] ;?></span><br>
                 </a>
               </div>    
             </td>
@@ -84,113 +87,7 @@
 
           <tr class="between-reccomend-movie-tr"></tr>
 
-          <tr class="tr-for-reccomend-movie">
-            <td class="reccomend-movie-photo-td">
-              <a href ="/">
-                <img src="https://i.ytimg.com/vi/WAmiSoklrbY/default.jpg"  class="reccomend-movie-photo">
-              </a>
-            </td>
-            <td class="recommend-movie-detail-td" valign="top">
-              <div class="reccomend-movie-name-div">
-                <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold">パティスリー・ラブリコチエ（Patisserie l’abricotier）</span>
-                  <span class="reccomend-movie-genre">（スイーツ </span>
-                  <span class="reccomend-movie-station"> 高円寺)</span><br>
-                </a>
-                <a href="/" class="a_href_for_reccomend-movie-td">
-                  <span class="reccomend-movie-name text-bold">アイドル加藤未来のグルメリポート</span><br>
-                </a>
-              </div>    
-            </td>
-          </tr>
-
-          <tr class="between-reccomend-movie-tr"></tr>
-
-          <tr class="tr-for-reccomend-movie">
-            <td class="reccomend-movie-photo-td">
-              <a href ="/">
-                <img src="https://i.ytimg.com/vi/cVAPlrCX1KM/mqdefault.jpg"  class="reccomend-movie-photo">
-              </a>
-            </td>
-            <td class="recommend-movie-detail-td" valign="top">
-              <div class="reccomend-movie-name-div">
-                <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold">林屋</span>
-                  <span class="reccomend-movie-genre">（寿司 </span>
-                  <span class="reccomend-movie-station"> 淡路島)</span><br>
-                </a>
-                <a href="/" class="a_href_for_reccomend-movie-td">
-                  <span class="reccomend-movie-name text-bold">山田菜々のぽんこつグルメレポート</span><br>
-                </a>
-              </div>    
-            </td>
-          </tr>
-
-          <tr class="between-reccomend-movie-tr"></tr>
-
-          <tr class="tr-for-reccomend-movie">
-            <td class="reccomend-movie-photo-td">
-              <a href ="/">
-                <img src="https://i.ytimg.com/vi_webp/31eHmMs5uCQ/mqdefault.webp"  class="reccomend-movie-photo">
-              </a>
-            </td>
-            <td class="recommend-movie-detail-td" valign="top">
-              <div class="reccomend-movie-name-div">
-                <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold">WORLD SUSHI DINING BAR 粋</span>
-                  <span class="reccomend-movie-genre">（寿司 </span>
-                  <span class="reccomend-movie-station"> 福岡)</span><br>
-                </a>
-                <a href="/" class="a_href_for_reccomend-movie-td">
-                  <span class="reccomend-movie-name text-bold">HKT48 田島芽瑠のグルメレポート</span><br>
-                </a>
-              </div>    
-            </td>
-          </tr>
-
-          <tr class="between-reccomend-movie-tr"></tr>
-
-          <tr class="tr-for-reccomend-movie">
-            <td class="reccomend-movie-photo-td">
-              <a href ="/">
-                <img src="https://i.ytimg.com/vi/apmRAbKVnV0/mqdefault.jpg"  class="reccomend-movie-photo">
-              </a>
-            </td>
-            <td class="recommend-movie-detail-td" valign="top">
-              <div class="reccomend-movie-name-div">
-                <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold">マル壱そば</span>
-                  <span class="reccomend-movie-genre">（ラーメン </span>
-                  <span class="reccomend-movie-station"> 沖縄)</span><br>
-                </a>
-                <a href="/" class="a_href_for_reccomend-movie-td">
-                  <span class="reccomend-movie-name text-bold">やまもとなおこのツアー グルメレポート沖縄編！</span><br>
-                </a>
-              </div>    
-            </td>
-          </tr>
-
-          <tr class="between-reccomend-movie-tr"></tr>
-
-          <tr class="tr-for-reccomend-movie">
-            <td class="reccomend-movie-photo-td">
-              <a href ="/">
-                <img src="https://i.ytimg.com/vi_webp/zRDqmN77CO4/mqdefault.webp"  class="reccomend-movie-photo">
-              </a>
-            </td>
-            <td class="recommend-movie-detail-td" valign="top">
-              <div class="reccomend-movie-name-div">
-                <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold">お食事処塩田</span>
-                  <span class="reccomend-movie-genre">（ラーメン </span>
-                  <span class="reccomend-movie-station"> 宮城県気仙沼市)</span><br>
-                </a>
-                <a href="/" class="a_href_for_reccomend-movie-td">
-                  <span class="reccomend-movie-name text-bold">リアルタイム東北レポート25〜グルメレポート編〜＜お食事処塩田＞さん</span><br>
-                </a>
-              </div>    
-            </td>
-          </tr>
+          <?php endfor ;?>
 
         </table>
       </div>
