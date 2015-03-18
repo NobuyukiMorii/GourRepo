@@ -259,12 +259,10 @@ class MoviesController extends AppController {
 		$this->User->unbindModel(
             array('hasMany' =>array('Movie' , 'UserFavoriteMovieList', 'UserWatchMovieList'))
         );
+
 		$this->Restaurant->unbindModel(
             array('hasMany' =>array('Movie','UserProfile'))
         );
-        // $this->UserProfile->find(
-        // 	array('conditions' =>array('UserProfile','user_name' === $_POST['areaname']))
-        // );
 
         $UserName = $this->UserProfile->find('all',array(
         	'conditions'=>
@@ -286,9 +284,6 @@ class MoviesController extends AppController {
 
 	        }
 
-	        //echo var_dump($user_id_array);
-
-
 	        // $this->User->recursive=2;
 			$results = $this->Movie->find('all',array(
 					'conditions'=>
@@ -301,7 +296,7 @@ class MoviesController extends AppController {
 								'`Restaurant`.`access_station` LIKE '=> '%'.$_POST['areaname'].'%',
 								'`Restaurant`.`category` LIKE '      => '%'.$_POST['areaname'].'%',
 								'`Restaurant`.`address` LIKE '       => '%'.$_POST['areaname'].'%',
-								'`Restaurant`.`budget` LIKE '        => '%'.$_POSt['areaname'].'%'
+								'`Restaurant`.`budget` LIKE '        => '%'.$_POSt['areaname'].'%',
 								'`Movie`.`user_id` IN '        		 => $user_id_array
 							)
 						),
@@ -332,15 +327,26 @@ class MoviesController extends AppController {
 
 		} 
 		// exit;
-																
-															
-
 													
 		$this->set('results',$results);
 		//echo var_dump($_POST['areaname']);
 
 
+		//サブ画面
+		// $condition = array();
+		// $fields = array();
+		// $order = 'RAND()';
+		// $limit = '';
+		// $data = $this->Movie->find('all',array(
+		// 	'conditions' => $condition,
+		// 	'fields' => $fields,
+		// 	'order' => $order,
+		// 	'limit' => $limit
+		// 	));
+		//debug($results);
 	}
+
+	
 	/*
 	*お気に入りのムービーリスト
 	*/

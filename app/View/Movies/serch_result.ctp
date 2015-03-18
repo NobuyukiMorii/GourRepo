@@ -53,8 +53,8 @@
                   </div>  
                 </td>
               </tr>
-          <?php } ?>
-        </table>
+            <?php } ?>
+          </table>
         <!-- /動画 ============-->
       </div>
     </div>
@@ -68,25 +68,33 @@
         </div>
 
         <table class="reccomend-movie-table">
+          $order = ‘RAND()';
+           <?php foreach ($results as $key => $movie){ ?>
           <tr class="tr-for-reccomend-movie">
             <td class="reccomend-movie-photo-td">
               <a href ="/">
-                <img src="https://i.ytimg.com/vi/L6PujWVBmRo/default.jpg"  class="reccomend-movie-photo">
+                <!--画像表示-->
+                <img src="<?php echo $movie['Movie']['thumbnails_url']; ?>">
               </a>
             </td>
             <td class="recommend-movie-detail-td" valign="top">
               <div class="reccomend-movie-name-div">
                 <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold">パンチョ</span>
-                  <span class="reccomend-movie-genre">（イタリアン </span>
-                  <span class="reccomend-movie-station"> 秋葉原)</span><br>
+                  <!--タイトル表示-->
+                  <span class="reccomend-movie-place-name text-bold"><?php echo $movie['Movie']['title']; ?></span>
+                  <!--ジャンル表示-->
+                  <span class="reccomend-movie-genre"><?php echo $movie['Moive']['category']; ?></span>
+                  <!--エリア表示-->
+                  <span class="reccomend-movie-station"><?php echo $moive['Movie']['access_line']; ?></span><br>
                 </a>
                 <a href="/" class="a_href_for_reccomend-movie-td">
-                  <span class="reccomend-movie-name text-bold">【大食い】情熱の大食漢 第１回 秋葉原「パンチョ」 ミートソース２．３㎏ ２０１４ ＳＱダイアリー</span><br>
+                  <!--お店説明表示-->
+                  <span class="reccomend-movie-name text-bold"><?php echo $movie['Movie']['description']; ?></span><br>
                 </a>
               </div>    
             </td>
           </tr>
+        <?php } ?>
 
           <tr class="between-reccomend-movie-tr"></tr>
 
