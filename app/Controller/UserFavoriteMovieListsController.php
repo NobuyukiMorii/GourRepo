@@ -26,7 +26,6 @@ class UserFavoriteMovieListsController extends AppController {
 		/*
 		*パラメータでリクエストを受ける
 		*/
-		pr($this->request['pass'][0]);
 
 		$data['movie_id'] = $this->request['pass'][0];
 
