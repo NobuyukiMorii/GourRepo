@@ -7,10 +7,12 @@
 			プロフィール画像	
 		</div>
 		<div class="col-md-10">
-			<?php echo $this->Form->create('User', array('type' => 'file')); ?>
+			<?php $this->upload->image($userSession,'UserProfile.avatar',array('style'=>'thumb')) ?>
+ 			<?php echo $this->Html->image('../upload/user_profiles/'. $userSession['UserProfile']['id'] . '/' .  $userSession['UserProfile']['avatar_file_name']); ?>
+ 			<?php echo $this->Form->create('UserProfile', array('type' => 'file')); ?>
 			<?php echo $this->Form->input('avatar', array('type' => 'file', 'label'=> false)); ?>
-			<button type="submit" class="btn btn-default btn-lg">送信する</button>
-			<?php echo $this->Form->end(); ?>
+<!-- 			<button type="submit" class="btn btn-default btn-lg">送信する</button> -->
+			<?php echo $this->Form->end(__('登録')); ?>
 		</div>
 	</div>
 	<div class="row">

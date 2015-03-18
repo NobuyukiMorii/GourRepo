@@ -29,10 +29,10 @@ class User extends AppModel {
 
     public $actsAs = array(
         'UploadPack.Upload' => array(
-            'avatar_file_name' => array(
+            'avatar' => array(
             'styles' => array(
                 'thumb' => '85x85'
-                )
+            )
             )
         )
     );
