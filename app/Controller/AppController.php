@@ -73,10 +73,10 @@ class AppController extends Controller {
         /*
         *controllerでログインユーザーを呼び出すメソッドを作成
         */
-        $this->userSession = $this->Auth->user();
+        // $this->userSession = $this->Auth->user();
         /*
         *viewでログインユーザーの情報を受ける変数おw作成
         */
-        $this->set('userSession', $this->Auth->user());
+        // $this->set('userSession', $this->Auth->user());
     }
 }
