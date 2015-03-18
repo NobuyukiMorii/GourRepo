@@ -150,6 +150,7 @@ class GurunabiComponent extends Component {
 	public function ParseArrayForDB($GourNaviData){
 
 		$rest_save_data['gournabi_id'] 							= $GourNaviData['rest']['id'];
+		$rest_save_data['image_url'] 							= $GourNaviData['rest']['image_url']['shop_image1'];
 		$rest_save_data['name'] 								= $GourNaviData['rest']['name'];
 		$rest_save_data['tel'] 									= $GourNaviData['rest']['tel'];
 		$rest_save_data['address'] 								= $GourNaviData['rest']['address'];

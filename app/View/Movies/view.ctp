@@ -103,8 +103,8 @@
 
             <tr>
               <td class="table-heading">住所</td>
-              <td>東京都目黒区中目黒4-8-12<?php echo $movie['Restaurant']['address'] ;?>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1621.3335340152405!2d139.70562899999996!3d35.63593329999999!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b3b719b3529%3A0x89f752a000ad1b72!2z44CSMTUzLTAwNjEg5p2x5Lqs6YO955uu6buS5Yy65Lit55uu6buS77yU5LiB55uu77yY4oiS77yR77yS!5e0!3m2!1sja!2sjp!4v1425097991270" frameborder="0" class="map"></iframe>
+              <td><?php echo $movie['Restaurant']['address'] ;?>
+                <iframe src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCgCauF4jrJHZxT41rZ6NocFHSuOMbA6UY&=<?php echo $movie['Restaurant']['latitude'] ;?>,<?php echo $movie['Restaurant']['longitude'] ;?>&q=35.508591,139.4427722&zoom=16&q=%E9%A3%B2%E9%A3%9F%E5%BA%97" frameborder="0" class="map"></iframe>
               </td>
             </tr>
             <tr>
