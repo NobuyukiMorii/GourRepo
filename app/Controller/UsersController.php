@@ -4,7 +4,7 @@
 class UsersController extends AppController {
 
     public $helpers = array('Html', 'Form', 'Session', 'UploadPack.Upload');
-    public $uses = array('User', 'Group');
+    public $uses = array('User', 'Group', 'UserProfile');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -60,6 +60,18 @@ class UsersController extends AppController {
         $this->set('dashboard', $this->User->find('all',
             array('conditions' => array('User.id' => $this->Auth->user('id')))
             ));
+// pr($this->request->data);
+// pr($this->userSession['UserProfile']['id']);
+        if ($this->request->is('post')) {
+            $this->UserProfile->id = $this->userSession['UserProfile']['id'];
+            if ($this->UserProfile->save($this->request->data)) {
+                // $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                // $this->Session->setFlash(__('The user has been saved'));
+            } else {
+                // $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+            }
+        }
+
         // pr($this->User->find('all',
         //     array('conditions' => array('User.id' => $this->Auth->user('id')))
         //     ));
