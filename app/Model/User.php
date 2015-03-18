@@ -27,6 +27,16 @@ class User extends AppModel {
         )
     );
 
+    public $actsAs = array(
+        'UploadPack.Upload' => array(
+            'avatar' => array(
+            'styles' => array(
+                'thumb' => '85x85'
+            )
+            )
+        )
+    );
+
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
             $passwordHasher = new SimplePasswordHasher();
@@ -58,6 +68,5 @@ class User extends AppModel {
             'foreignKey'    => 'user_id',
         )
     );
-
 
 }

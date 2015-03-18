@@ -139,9 +139,9 @@ class MoviesController extends AppController {
 		$category_large_search_info = $this->Gurunabi->categoryLargeSearch();
 		//お店情報の取得
 		if(!empty($this->request->data)){
-			$rest_search_info = $this->Gurunabi->RestSearch($this->request->data);
+		$rest_search_info = $this->Gurunabi->RestSearch($this->request->data);
 		} else {
-			$rest_search_info = $this->Gurunabi->RestSearch();
+		$rest_search_info = $this->Gurunabi->RestSearch();
 		}
 		//お店情報のバリデーション
 		$rest_search_info = $this->Gurunabi->ValidateRestInfo($rest_search_info);
@@ -162,10 +162,11 @@ class MoviesController extends AppController {
 		*$this->request->dataがない時
 		*/
 		if(empty($this->request->data)){
-			$this->set('gournabi_id' , $this->params['pass'][0]);
+		$this->set('gournabi_id' , $this->params['pass'][0]);
 		}
 
 		if(!empty($this->request->data)){
+
 			//ぐるなびidを取得する
 			$option['id'] = $this->request->data['gournabi_id'];
 			//同じぐるなびidがあれば新規にsaveする
