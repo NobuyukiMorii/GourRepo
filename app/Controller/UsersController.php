@@ -2,8 +2,8 @@
 
 class UsersController extends AppController {
 
-    public $helpers = array('Html', 'Form', 'Session', 'UploadPack.Upload');
-    public $uses = array('User', 'Group', 'UserProfile');
+    public $helpers = array('Html', 'Form', 'Session');
+    public $uses = array('User', 'Group');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -11,19 +11,10 @@ class UsersController extends AppController {
 
     }
 
-    public function isAuthorized($user) {
-
-        //contributorに権限を与えております。
-        if (isset($user['role']) && $user['role'] === 'contributor') {
-            if(in_array($this->action, array('dashboard', 'profileedit', 'passwordedit', 'delete'))) {
-                return true;
-            }
-        }
-
-        
-        return parent::isAuthorized($user);
+    public function dashBoard() {
+        $this->User->recursive = 0;
+        $this->set('users', $this->paginate());
     }
-
 
     public function signup() {
 
@@ -41,8 +32,10 @@ class UsersController extends AppController {
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
+                // pr($this->request->data);
                 $this->redirect($this->Auth->redirect());
             } else {
+                 // pr($this->request->data);
                 $this->Session->setFlash(__('Invalid username or password, try again'));
             }
         }
@@ -53,6 +46,7 @@ class UsersController extends AppController {
         $this->redirect($this->Auth->logout());
     }
 
+<<<<<<< HEAD
     public function dashboard() {
         $this->set('dashboard', $this->User->findById($this->Auth->user('id'))
             );
@@ -85,5 +79,8 @@ class UsersController extends AppController {
     }
 
 }   
+=======
+}
+>>>>>>> 1bad9090aa79680d595dd0af4c6165c7d63bf550
 
 ?>

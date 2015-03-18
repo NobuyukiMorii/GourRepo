@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2015 年 3 月 18 日 20:05
+-- Generation Time: 2015 年 3 月 12 日 08:49
 -- サーバのバージョン： 5.6.22
 -- PHP Version: 5.5.21
 
@@ -26,14 +26,12 @@ SET time_zone = "+00:00";
 -- テーブルの構造 `movies`
 --
 
-DROP TABLE IF EXISTS `movies`;
-CREATE TABLE `movies` (
+CREATE TABLE IF NOT EXISTS `movies` (
   `id` int(11) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
   `count` int(11) NOT NULL DEFAULT '0',
   `description` varchar(1600) NOT NULL,
   `youtube_url` varchar(500) DEFAULT NULL,
-  `youtube_iframe_url` varchar(255) NOT NULL,
   `thumbnails_url` varchar(500) NOT NULL,
   `user_id` int(11) NOT NULL,
   `restaurant_id` int(11) NOT NULL,
@@ -42,7 +40,7 @@ CREATE TABLE `movies` (
   `created_user_id` int(11) NOT NULL,
   `modified` datetime NOT NULL,
   `modified_user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -50,17 +48,15 @@ CREATE TABLE `movies` (
 -- テーブルの構造 `restaurants`
 --
 
-DROP TABLE IF EXISTS `restaurants`;
-CREATE TABLE `restaurants` (
+CREATE TABLE IF NOT EXISTS `restaurants` (
   `id` int(11) unsigned NOT NULL,
   `user_id` int(11) NOT NULL,
   `gournabi_id` varchar(255) NOT NULL,
-  `image_url` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `tel` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `latitude` decimal(12,9) DEFAULT NULL,
-  `longitude` decimal(12,9) DEFAULT NULL,
+  `latitude` int(11) DEFAULT NULL,
+  `longitude` int(11) DEFAULT NULL,
   `category` varchar(255) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
   `url_mobile` varchar(255) DEFAULT NULL,
@@ -87,7 +83,7 @@ CREATE TABLE `restaurants` (
   `created_user_id` int(11) NOT NULL,
   `modified` datetime NOT NULL,
   `modified_user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -95,15 +91,14 @@ CREATE TABLE `restaurants` (
 -- テーブルの構造 `tags`
 --
 
-DROP TABLE IF EXISTS `tags`;
-CREATE TABLE `tags` (
+CREATE TABLE IF NOT EXISTS `tags` (
   `id` int(11) unsigned NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` int(11) NOT NULL,
   `created` datetime NOT NULL,
   `created_user_id` int(11) NOT NULL,
   `modified` datetime NOT NULL,
   `modified_user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -111,8 +106,7 @@ CREATE TABLE `tags` (
 -- テーブルの構造 `tag_relations`
 --
 
-DROP TABLE IF EXISTS `tag_relations`;
-CREATE TABLE `tag_relations` (
+CREATE TABLE IF NOT EXISTS `tag_relations` (
   `id` int(11) unsigned NOT NULL,
   `tag_id` int(11) NOT NULL,
   `movie_id` int(11) NOT NULL,
@@ -120,7 +114,7 @@ CREATE TABLE `tag_relations` (
   `created_user_id` int(11) NOT NULL,
   `modified` datetime NOT NULL,
   `modified_user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -128,8 +122,7 @@ CREATE TABLE `tag_relations` (
 -- テーブルの構造 `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -139,7 +132,7 @@ CREATE TABLE `users` (
   `created_user_id` int(11) NOT NULL,
   `modified` datetime NOT NULL,
   `modified_user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -147,8 +140,7 @@ CREATE TABLE `users` (
 -- テーブルの構造 `user_favorite_movie_lists`
 --
 
-DROP TABLE IF EXISTS `user_favorite_movie_lists`;
-CREATE TABLE `user_favorite_movie_lists` (
+CREATE TABLE IF NOT EXISTS `user_favorite_movie_lists` (
   `id` int(11) unsigned NOT NULL,
   `user_id` int(11) NOT NULL,
   `movie_id` int(11) NOT NULL,
@@ -156,7 +148,7 @@ CREATE TABLE `user_favorite_movie_lists` (
   `created_user_id` int(11) NOT NULL,
   `modified` datetime NOT NULL,
   `modified_user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -164,8 +156,7 @@ CREATE TABLE `user_favorite_movie_lists` (
 -- テーブルの構造 `user_profiles`
 --
 
-DROP TABLE IF EXISTS `user_profiles`;
-CREATE TABLE `user_profiles` (
+CREATE TABLE IF NOT EXISTS `user_profiles` (
   `id` int(11) unsigned NOT NULL,
   `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -189,8 +180,7 @@ CREATE TABLE `user_profiles` (
 -- テーブルの構造 `user_watch_movie_lists`
 --
 
-DROP TABLE IF EXISTS `user_watch_movie_lists`;
-CREATE TABLE `user_watch_movie_lists` (
+CREATE TABLE IF NOT EXISTS `user_watch_movie_lists` (
   `id` int(11) unsigned NOT NULL,
   `user_id` int(11) NOT NULL,
   `movie_id` int(11) NOT NULL,
@@ -198,7 +188,7 @@ CREATE TABLE `user_watch_movie_lists` (
   `created_user_id` int(11) NOT NULL,
   `modified` datetime NOT NULL,
   `modified_user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=272 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -260,32 +250,32 @@ ALTER TABLE `user_watch_movie_lists`
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tag_relations`
 --
 ALTER TABLE `tag_relations`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user_favorite_movie_lists`
 --
 ALTER TABLE `user_favorite_movie_lists`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user_profiles`
 --
@@ -295,7 +285,7 @@ ALTER TABLE `user_profiles`
 -- AUTO_INCREMENT for table `user_watch_movie_lists`
 --
 ALTER TABLE `user_watch_movie_lists`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=272;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -6,17 +6,11 @@
     <title>GourRepo</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <?php echo $this->Html->css('bootstrap.min'); ?>
+    <?php echo $this->Html->css('view-default/bootstrap'); ?>
     <?php echo $this->Html->css('view-default/header'); ?>
-    <?php echo $this->Html->css('view-default/serch-input.css'); ?>
     <?php echo $this->Html->css('view-default/flash'); ?>
     <?php echo $this->Html->css('view-default/body.css'); ?>
     <?php echo $this->Html->css('view-default/footer.css'); ?>
-    <style>
-.input-group-addon {
-
-}
-    </style>
   </head>
   <body>
   <!-- HEADER ============-->
@@ -53,7 +47,6 @@
   <!-- script references -->
   <?php echo $this->Html->script('jquery-1.11.2.min');?>
   <?php echo $this->Html->script('bootstrap');?>
-  <?php echo $this->Html->script('input-keypress');?>
   </body>
 </html>
 
