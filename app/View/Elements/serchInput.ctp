@@ -4,6 +4,6 @@
 		<span class="input-group-addon" id="sizing-addon1">Search</span>
 		<?php echo $this->Form->create('Movie', array('type' => 'post' , 'action' => 'serchResult' , 'class' => "form-serch")); ?>
 		<input type="text" name="areaname" class="form-control" placeholder="エリア・ジャンル" aria-describedby="sizing-addon1" id="form-input">
-		<?php $this->Form->end() ;?>
+		<?php echo $this->Form->end() ;?>
 	</div>
 </div>
