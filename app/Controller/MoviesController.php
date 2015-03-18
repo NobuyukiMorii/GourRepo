@@ -333,7 +333,26 @@ class MoviesController extends AppController {
 			$results = $this->Paginator->paginate('Movie');
 		}
 
-		$this->set('results',$results);
+		//最新の動画を検索する
+		$this->Movie->unbindModel(
+            array('belongsTo' =>array('User'))
+        );
+		$this->Restaurant->unbindModel(
+            array('hasMany' =>array('Movie'))
+        );
+		$this->TagRelation->unbindModel(
+            array('belongsTo' =>array('Movie'))
+        );
+		$new_movies = $this->Movie->find('all' , array(
+			 'conditions' => array(
+			 	'Movie.del_flg' => 0
+			 ),
+			 'limit' => 15,
+			 'order' => array('Movie.created' => 'DESC'),
+			 'recursive' => 2
+		));
+
+		$this->set(compact('results' , 'new_movies'));
 	}
 
 	/*
