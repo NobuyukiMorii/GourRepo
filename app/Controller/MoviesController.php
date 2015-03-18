@@ -205,6 +205,10 @@ class MoviesController extends AppController {
 			$movie_save_data['description'] = $this->request->data['description'];
 			$movie_save_data['youtube_url'] = 'https://www.youtube.com/watch?v=' . $this->request->data['youtube_url'];
 			$movie_save_data['youtube_iframe_url'] = $this->YouTube->get_youtube_iframe_url($movie_save_data['youtube_url']);
+			if(empty($movie_save_data['youtube_iframe_url'])){
+				$this->Session->setFlash('こちらの動画は登録出来ません。');
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+			}
 			$movie_save_data['thumbnails_url'] = $this->request->data['thumbnails_url'];
 			$movie_save_data['created_user_id'] = $this->userSession['id'];
 			$movie_save_data['modified_user_id'] = $this->userSession['id'];
