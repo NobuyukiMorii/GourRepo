@@ -25,3 +25,16 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+app/webroot/css/view-css/view-reccomend-movie-for-main.css
+app/webroot/css/view-css/view-reccomend-movie-for-menu.css
+app/webroot/css/view-css/view-reccomend-movie-for-movie.css
+app/webroot/css/view-default/header.css
+app/webroot/css/view-default/serch-input.css
+app/webroot/css/view-index/fundamental-place-info.css
+app/webroot/css/view-index/place-title.css
+app/webroot/css/view-index/select-page-button-main.css
+app/webroot/css/view-serchResult/select-page-button-movie.css
+app/webroot/js/input-keypress.js
+app/webroot/js/jquery-1.11.2.min.js
+app/webroot/upload/user_profiles/1/10461660_10202526315918164_8221118304086366243_n_original.jpg
+app/webroot/upload/user_profiles/1/10461660_10202526315918164_8221118304086366243_n_thumb.jpg
