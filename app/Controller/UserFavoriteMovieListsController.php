@@ -12,7 +12,7 @@ class UserFavoriteMovieListsController extends AppController {
     public function isAuthorized($user) {
     	//contributorに権限を与えております。
         if (isset($user['role']) && $user['role'] === 'contributor') {
-        	if(in_array($this->action, array('add'))) {
+        	if(in_array($this->action, array('add','delete'))) {
         		return true;
         	}
         }
@@ -71,6 +71,17 @@ class UserFavoriteMovieListsController extends AppController {
 			return $this->redirect(array('controller' => 'Movies', 'action' => 'view' , $data['movie_id']));
 		}
 
+	}
+
+	public function delete(){
+		$id = $this->request->data['UserFavoriteMovieListsController']['id'];
+		if($this->UserFavoriteMovieList->delete($id)){
+			$this->Session->setFlash('お気に入りに登録を削除しました');
+			return $this->redirect(array('controller' => 'Movies', 'action' => 'userFavoriteMovieList'));
+		} else {
+			$this->Session->setFlash('お気に入り登録に失敗しました');
+			return $this->redirect(array('controller' => 'Movies', 'action' => 'userFavoriteMovieList'));
+		}
 	}
 
 }

@@ -51,6 +51,16 @@
 				                </a>  
 			              	</div>  
 			            </td>
+			            <td>
+			            	<?php echo $this->Form->create('UserFavoriteMovieLists', array('type' => 'post' , 'action' => 'delete')); ?>
+					        <?php echo $this->Form->input('UserFavoriteMovieListsController.id', array(
+					            'label' => false,
+					            'type' => 'hidden',
+					            'value' => $UserFavoriteMovieList[$i]['UserFavoriteMovieList']['id'],
+					        )); ?>
+					        <button type="submit" class="btn btn-warning">削除</button>
+					        <?php echo $this->Form->end(); ?>
+			            </td>
 		          	</tr>
 		          	<?php endfor ;?>
 
