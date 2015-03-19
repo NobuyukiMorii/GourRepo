@@ -209,9 +209,11 @@ class MoviesController extends AppController {
 			$movie_save_data['created_user_id'] = $this->userSession['id'];
 			$movie_save_data['modified_user_id'] = $this->userSession['id'];
 			$this->Movie->create();
-			$flg_movie = $this->Movie->save($movie_save_data);
 
-			if($flg_movie === false){
+			//エラーの判定（ムービー）
+			try {
+				$flg_movie = $this->Movie->save($movie_save_data);
+			} catch (Exception $e) {
 				$this->Session->setFlash('動画の登録に失敗しました。改めて登録しなおして下さい。');
 				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
 			}
@@ -255,98 +257,114 @@ class MoviesController extends AppController {
 		*４）検索したデータをビューに表示する
 		*/
 
-		// select * from movies where id = 9;とおなじ
-		$this->User->unbindModel(
-            array('hasMany' =>array('Movie' , 'UserFavoriteMovieList', 'UserWatchMovieList'))
-        );
+		//ポストされた場合
+		if(!empty($this->request->data)){
+			//ユーザープロフィールを検索する
+			$this->User->unbindModel(
+	            array('hasMany' =>array('Movie' , 'UserFavoriteMovieList', 'UserWatchMovieList'))
+	        );
+			$this->Restaurant->unbindModel(
+	            array('hasMany' =>array('Movie','UserProfile'))
+	        );
+	        $UserName = $this->UserProfile->find('all',array(
+	        	'conditions'=>
+	        		array( '`UserProfile`.`name` LIKE ' => '%'.$this->request->data['areaname'].'%'
+	        			),
+	        	'fields' =>array('user_id','name')
+	        ));
 
-		$this->Restaurant->unbindModel(
-            array('hasMany' =>array('Movie','UserProfile'))
-        );
+	        //ユーザープロフィールがあるかどうかを判定する
+	        if(!empty($UserName)){
 
-        $UserName = $this->UserProfile->find('all',array(
-        	'conditions'=>
-        		array( '`UserProfile`.`name` LIKE ' => '%'.$_POST['areaname'].'%'
-        			),
-        	'fields' =>array('user_id','name')
-        	));
+		        //キーワードに合致したuser_idだけの配列を作成する
+		        $user_id_array = array();
+		        foreach ($UserName as $key => $value) {
+			        $user_id_array[] = $value['UserProfile']['user_id'];
 
-        if(!empty($UserName)){
-	        //echo var_dump($UserName);
+		        }
 
-	        //キーワードに合致したuser_idだけの配列を作成する
-	        $user_id_array = array();
+		        //条件おw設定する
+	        	$conditions = array(
+					'OR' =>
+					array(	
+						'`Movie`.`title` LIKE '			     =>	'%'.$this->request->data['areaname'].'%',
+						'`Movie`.`description` LIKE '	     => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`name` LIKE '          => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`access_line` LIKE '   => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`access_station` LIKE '=> '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`category` LIKE '      => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`address` LIKE '       => '%'.$this->request->data['areaname'].'%',
+						'`Movie`.`user_id` IN '        		 => $user_id_array
+					),
+					'Movie.del_flg' => 0
+				);
+			}
 
-	        foreach ($UserName as $key => $value) {
-		        //debug($value);
-		        //配列に値を追加する
-		        $user_id_array[] = $value['UserProfile']['user_id'];
+			if(empty($UserName)){
 
-	        }
+		        //条件おw設定する
+	        	$conditions = array(
+					'OR' =>
+					array(	
+						'`Movie`.`title` LIKE '			     =>	'%'.$this->request->data['areaname'].'%',
+						'`Movie`.`description` LIKE '	     => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`name` LIKE '          => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`access_line` LIKE '   => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`access_station` LIKE '=> '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`category` LIKE '      => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`address` LIKE '       => '%'.$this->request->data['areaname'].'%',
+					),
+					'Movie.del_flg' => 0
+				);
+			}
 
-	        // $this->User->recursive=2;
-			$results = $this->Movie->find('all',array(
-					'conditions'=>
-					array(
-						'OR' =>
-						array(	'`Movie`.`title` LIKE '			     =>	'%'.$_POST['areaname'].'%',
-							 	'`Movie`.`description` LIKE '	     => '%'.$_POST['areaname'].'%',
-							 	'`Restaurant`.`name` LIKE '          => '%'.$_POST['areaname'].'%',
-								'`Restaurant`.`access_line` LIKE '   => '%'.$_POST['areaname'].'%',
-								'`Restaurant`.`access_station` LIKE '=> '%'.$_POST['areaname'].'%',
-								'`Restaurant`.`category` LIKE '      => '%'.$_POST['areaname'].'%',
-								'`Restaurant`.`address` LIKE '       => '%'.$_POST['areaname'].'%',
-								'`Restaurant`.`budget` LIKE '        => '%'.$_POSt['areaname'].'%',
-								'`Movie`.`user_id` IN '        		 => $user_id_array
-							)
-						),
-					'recursive' => 2
-					)
+
+			$this->Paginator->settings = array(
+				 'conditions' => $conditions,
+				 'limit' => 15,
+				 'order' => array('Movie.count' => 'DESC'),
+				 'recursive' => 2
 			);
+			$results = $this->Paginator->paginate('Movie');
+
 		}
 
-		if(empty($UserName)){
-
-	        // $this->User->recursive=2;
-			$results = $this->Movie->find('all',array(
-					'conditions'=>
-					array(
-						'OR' =>
-						array(	'`Movie`.`title` LIKE '			     =>	'%'.$_POST['areaname'].'%',
-							 	'`Movie`.`description` LIKE '	     => '%'.$_POST['areaname'].'%',
-							 	'`Restaurant`.`name` LIKE '          => '%'.$_POST['areaname'].'%',
-								'`Restaurant`.`access_line` LIKE '   => '%'.$_POST['areaname'].'%',
-								'`Restaurant`.`access_station` LIKE '=> '%'.$_POST['areaname'].'%',
-								'`Restaurant`.`category` LIKE '      => '%'.$_POST['areaname'].'%',
-								'`Restaurant`.`address` LIKE '       => '%'.$_POST['areaname'].'%',
-							)
-						),
-					'recursive' => 2
-					)
+		//ポストされなかった場合
+		if(empty($this->request->data)){
+			$conditions = array(
+				'Movie.del_flg' => 0
 			);
+			$this->Paginator->settings = array(
+				 'conditions' => $conditions,
+				 'limit' => 15,
+				 'order' => array('Movie.count' => 'DESC'),
+				 'recursive' => 2
+			);
+			$results = $this->Paginator->paginate('Movie');
+		}
 
-		} 
-		// exit;
-													
-		$this->set('results',$results);
-		//echo var_dump($_POST['areaname']);
+		//最新の動画を検索する
+		$this->Movie->unbindModel(
+            array('belongsTo' =>array('User'))
+        );
+		$this->Restaurant->unbindModel(
+            array('hasMany' =>array('Movie'))
+        );
+		$this->TagRelation->unbindModel(
+            array('belongsTo' =>array('Movie'))
+        );
+		$new_movies = $this->Movie->find('all' , array(
+			 'conditions' => array(
+			 	'Movie.del_flg' => 0
+			 ),
+			 'limit' => 15,
+			 'order' => array('Movie.created' => 'DESC'),
+			 'recursive' => 2
+		));
 
-
-		//サブ画面
-		// $condition = array();
-		// $fields = array();
-		// $order = 'RAND()';
-		// $limit = '';
-		// $data = $this->Movie->find('all',array(
-		// 	'conditions' => $condition,
-		// 	'fields' => $fields,
-		// 	'order' => $order,
-		// 	'limit' => $limit
-		// 	));
-		//debug($results);
+		$this->set(compact('results' , 'new_movies'));
 	}
 
-	
 	/*
 	*お気に入りのムービーリスト
 	*/

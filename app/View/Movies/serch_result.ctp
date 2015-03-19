@@ -9,53 +9,47 @@
 
   <!-- CONTENT ============-->
   <div class="row main-content">
-
-    <!-- お店の概要 ============-->
-    <div class="row">
-      <div class="col-md-7 view-header-place-name-div bg-color">
-      </div>
-
-    </div>
-  <!-- /お店の概要 ============-->
-
-<?php //pr($results) ; ?>
   <!-- 動画とお店の詳細 ============-->
   <div class="row">
     <div class="col-md-7">
       <div class="row">
         <!-- 動画 ============-->
         <table class="movie-list-table table table-striped">
-            <?php foreach ($results as $key => $result){ ?>
-              <tr class="movie-list-tr">
-                <td class="movie-list-photo-td">
-                  <a href ="/" class="movie-list-photo-a">
-                    <!--画像表示-->
-                    <img src="<?php echo $result['Movie']['thumbnails_url']; ?>">  
-                  </a>
-                </td>
-                <td class="movie-list-description-td" valign="top">
-                  <div class="movie-list-description-div">
-                    <a href="/" class="movie-list-description-title-ahref">
-                      <!--タイトル表示-->
-                      <span class="movie-list-description-title"><?php echo $result['Movie']['title']; ?></span><br>
-                    </a>
-                    <a href="/" class="movie-list-reporter-introduction-ahref">
-                      <!--最寄駅表示-->
-                      <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text"><?php echo $result['Restaurant']['access_line']; ?></span> &nbsp;&nbsp;
-                      <!--ジャンル表示-->
-                      <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text"><?php echo $result['Restaurant']['category']; ?></span> &nbsp;&nbsp;
-                      <!--料金表示-->
-                      <span class="label label-default">料金</span>&nbsp;<span class="black-text"><?php echo $result['Restaurant']['budget']; ?></span> &nbsp;&nbsp;
-                      <br>
-                      <!--お店説明表示-->
-                      <span class="movie-list-reporter-introduction"><?php echo $result['Movie']['description']; ?></span>
-                    </a>  
-                  </div>  
-                </td>
-              </tr>
-            <?php } ?>
-          </table>
+          <?php for ($i = 0; $i < count($results); ++$i): ?>
+          <tr class="movie-list-tr">
+            <td class="movie-list-photo-td">
+              <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $results[$i]['Movie']['id'])) ;?>" class="movie-list-photo-a">
+                <img src="<?php echo $results[$i]['Movie']['thumbnails_url'] ;?>"  class="movie-list-photo">
+              </a>
+            </td>
+            <td class="movie-list-description-td" valign="top">
+              <div class="movie-list-description-div">
+                <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $results[$i]['Movie']['id'])) ;?>" class="movie-list-description-title-ahref">
+                  <span class="movie-list-description-title"><?php echo $results[$i]['Movie']['title'] ;?>（<?php echo $results[$i]['Restaurant']['name'] ;?>）</span><br>
+                </a>
+                <a href="/" class="movie-list-reporter-introduction-ahref">
+                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text"><?php echo $results[$i]['Restaurant']['access_station'] ;?></span> &nbsp;&nbsp;
+                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text"><?php echo $results[$i]['Restaurant']['category'] ;?></span> &nbsp;&nbsp;
+                  <span class="label label-default">料金</span>&nbsp;<span class="black-text"><?php echo $results[$i]['Restaurant']['budget'] ;?>円</span> &nbsp;&nbsp;
+                  <br>
+                  <span class="movie-list-reporter-introduction"><?php echo $results[$i]['Movie']['description'] ;?></span>
+                </a>  
+              </div>  
+            </td>
+          </tr>
+          <?php endfor ; ?>
+
+        </table>
+
         <!-- /動画 ============-->
+        <div class="pagination" style="margin-left:55px;">                         
+          <ul>                                           
+            <?php echo $this->Paginator->prev(__('prev'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+            <?php echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>                              
+            <?php echo $this->Paginator->next(__('next'), array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+          </ul>                                          
+        </div>
+
       </div>
     </div>
     <!-- /動画とお店の詳細 ============-->
@@ -64,55 +58,27 @@
       <div class="col-md-4 recommend-movie-sidebar">
 
         <div class="recommend">
-          おすすめのお店
+          最新の投稿
         </div>
 
         <table class="reccomend-movie-table">
-          $order = ‘RAND()';
-           <?php foreach ($results as $key => $movie){ ?>
+          <?php for ($i = 0; $i < count($new_movies); ++$i): ?>
+
           <tr class="tr-for-reccomend-movie">
             <td class="reccomend-movie-photo-td">
-              <a href ="/">
-                <!--画像表示-->
-                <img src="<?php echo $movie['Movie']['thumbnails_url']; ?>">
+              <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $new_movies[$i]['Movie']['id'])) ;?>">
+                <img src="<?php echo $new_movies[$i]['Movie']['thumbnails_url'] ;?>"  class="reccomend-movie-photo">
               </a>
             </td>
             <td class="recommend-movie-detail-td" valign="top">
               <div class="reccomend-movie-name-div">
-                <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <!--タイトル表示-->
-                  <span class="reccomend-movie-place-name text-bold"><?php echo $movie['Movie']['title']; ?></span>
-                  <!--ジャンル表示-->
-                  <span class="reccomend-movie-genre"><?php echo $movie['Moive']['category']; ?></span>
-                  <!--エリア表示-->
-                  <span class="reccomend-movie-station"><?php echo $moive['Movie']['access_line']; ?></span><br>
+                <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $new_movies[$i]['Movie']['id'])) ;?>" class="a-href-for-reccomend-movie-place-name">
+                  <span class="reccomend-movie-place-name text-bold"><?php echo $new_movies[$i]['Movie']['title'] ;?> （<?php echo $new_movies[$i]['Restaurant']['name'] ;?>）</span>
+                  <span class="reccomend-movie-genre">（<?php echo $new_movies[$i]['Restaurant']['category'] ;?> </span>
+                  <span class="reccomend-movie-station"> <?php echo $new_movies[$i]['Restaurant']['access_station'] ;?>)</span><br>
                 </a>
                 <a href="/" class="a_href_for_reccomend-movie-td">
-                  <!--お店説明表示-->
-                  <span class="reccomend-movie-name text-bold"><?php echo $movie['Movie']['description']; ?></span><br>
-                </a>
-              </div>    
-            </td>
-          </tr>
-        <?php } ?>
-
-          <tr class="between-reccomend-movie-tr"></tr>
-
-          <tr class="tr-for-reccomend-movie">
-            <td class="reccomend-movie-photo-td">
-              <a href ="/">
-                <img src="https://i.ytimg.com/vi/WAmiSoklrbY/default.jpg"  class="reccomend-movie-photo">
-              </a>
-            </td>
-            <td class="recommend-movie-detail-td" valign="top">
-              <div class="reccomend-movie-name-div">
-                <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold">パティスリー・ラブリコチエ（Patisserie l’abricotier）</span>
-                  <span class="reccomend-movie-genre">（スイーツ </span>
-                  <span class="reccomend-movie-station"> 高円寺)</span><br>
-                </a>
-                <a href="/" class="a_href_for_reccomend-movie-td">
-                  <span class="reccomend-movie-name text-bold">アイドル加藤未来のグルメリポート</span><br>
+                  <span class="reccomend-movie-name text-bold"><?php echo $new_movies[$i]['Movie']['description'] ;?></span><br>
                 </a>
               </div>    
             </td>
@@ -120,91 +86,7 @@
 
           <tr class="between-reccomend-movie-tr"></tr>
 
-          <tr class="tr-for-reccomend-movie">
-            <td class="reccomend-movie-photo-td">
-              <a href ="/">
-                <img src="https://i.ytimg.com/vi/cVAPlrCX1KM/mqdefault.jpg"  class="reccomend-movie-photo">
-              </a>
-            </td>
-            <td class="recommend-movie-detail-td" valign="top">
-              <div class="reccomend-movie-name-div">
-                <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold">林屋</span>
-                  <span class="reccomend-movie-genre">（寿司 </span>
-                  <span class="reccomend-movie-station"> 淡路島)</span><br>
-                </a>
-                <a href="/" class="a_href_for_reccomend-movie-td">
-                  <span class="reccomend-movie-name text-bold">山田菜々のぽんこつグルメレポート</span><br>
-                </a>
-              </div>    
-            </td>
-          </tr>
-
-          <tr class="between-reccomend-movie-tr"></tr>
-
-          <tr class="tr-for-reccomend-movie">
-            <td class="reccomend-movie-photo-td">
-              <a href ="/">
-                <img src="https://i.ytimg.com/vi_webp/31eHmMs5uCQ/mqdefault.webp"  class="reccomend-movie-photo">
-              </a>
-            </td>
-            <td class="recommend-movie-detail-td" valign="top">
-              <div class="reccomend-movie-name-div">
-                <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold">WORLD SUSHI DINING BAR 粋</span>
-                  <span class="reccomend-movie-genre">（寿司 </span>
-                  <span class="reccomend-movie-station"> 福岡)</span><br>
-                </a>
-                <a href="/" class="a_href_for_reccomend-movie-td">
-                  <span class="reccomend-movie-name text-bold">HKT48 田島芽瑠のグルメレポート</span><br>
-                </a>
-              </div>    
-            </td>
-          </tr>
-
-          <tr class="between-reccomend-movie-tr"></tr>
-
-          <tr class="tr-for-reccomend-movie">
-            <td class="reccomend-movie-photo-td">
-              <a href ="/">
-                <img src="https://i.ytimg.com/vi/apmRAbKVnV0/mqdefault.jpg"  class="reccomend-movie-photo">
-              </a>
-            </td>
-            <td class="recommend-movie-detail-td" valign="top">
-              <div class="reccomend-movie-name-div">
-                <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold">マル壱そば</span>
-                  <span class="reccomend-movie-genre">（ラーメン </span>
-                  <span class="reccomend-movie-station"> 沖縄)</span><br>
-                </a>
-                <a href="/" class="a_href_for_reccomend-movie-td">
-                  <span class="reccomend-movie-name text-bold">やまもとなおこのツアー グルメレポート沖縄編！</span><br>
-                </a>
-              </div>    
-            </td>
-          </tr>
-
-          <tr class="between-reccomend-movie-tr"></tr>
-
-          <tr class="tr-for-reccomend-movie">
-            <td class="reccomend-movie-photo-td">
-              <a href ="/">
-                <img src="https://i.ytimg.com/vi_webp/zRDqmN77CO4/mqdefault.webp"  class="reccomend-movie-photo">
-              </a>
-            </td>
-            <td class="recommend-movie-detail-td" valign="top">
-              <div class="reccomend-movie-name-div">
-                <a href="/" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold">お食事処塩田</span>
-                  <span class="reccomend-movie-genre">（ラーメン </span>
-                  <span class="reccomend-movie-station"> 宮城県気仙沼市)</span><br>
-                </a>
-                <a href="/" class="a_href_for_reccomend-movie-td">
-                  <span class="reccomend-movie-name text-bold">リアルタイム東北レポート25〜グルメレポート編〜＜お食事処塩田＞さん</span><br>
-                </a>
-              </div>    
-            </td>
-          </tr>
+          <?php endfor ;?>
 
         </table>
       </div>
