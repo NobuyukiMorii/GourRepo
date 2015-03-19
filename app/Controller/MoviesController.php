@@ -20,7 +20,7 @@ class MoviesController extends AppController {
     public function isAuthorized($user) {
     	//contributorに権限を与えております。
         if (isset($user['role']) && $user['role'] === 'contributor') {
-        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'userFavoriteMovieList', 'userWatchMovieList', 'movieEdit', 'movieDelete', 'myMovieIndex'))) {
+        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'userFavoriteMovieList', 'userWatchMovieList', 'edit', 'delete', 'myMovieIndex'))) {
         		return true;
         	}
         }
@@ -228,6 +228,8 @@ class MoviesController extends AppController {
 			$tag_save_data['name'] = $this->request->data['tag'];
 			$tag_save_data['name'] = mb_convert_kana($tag_save_data['name'], 's');
 			$tag_save_data['name'] = preg_split('/[\s]+/', $tag_save_data['name'] , -1, PREG_SPLIT_NO_EMPTY);
+			$tag_save_data['name'] = array_unique($tag_save_data['name']);
+			$tag_save_data['name'] = array_merge($tag_save_data['name']);
 
 			$tag_relation_save_data['created_user_id'] = $this->userSession['id'];
 			$tag_relation_save_data['modified_user_id'] = $this->userSession['id'];
