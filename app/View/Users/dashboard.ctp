@@ -7,12 +7,11 @@
 			プロフィール画像	
 		</div>
 		<div class="col-md-10">
-			<?php $this->upload->image($userSession,'UserProfile.avatar',array('style'=>'thumb')) ?>
- 			<?php echo $this->Html->image('../upload/user_profiles/'. $userSession['UserProfile']['id'] . '/' .  $userSession['UserProfile']['avatar_file_name']); ?>
- 			<?php echo $this->Form->create('UserProfile', array('type' => 'file')); ?>
+			<!-- ここの一文でサムネイルを表示している。第一引数でデータの入っている配列をしてしてあげている。 -->
+			<?php echo $this->upload->uploadImage($user['UserProfile'],'UserProfile.avatar',array('style'=>'thumb')); ?>
+<!--  			<?php echo $this->Form->create('UserProfile', array('type' => 'file')); ?>
 			<?php echo $this->Form->input('avatar', array('type' => 'file', 'label'=> false)); ?>
-<!-- 			<button type="submit" class="btn btn-default btn-lg">送信する</button> -->
-			<?php echo $this->Form->end(__('登録')); ?>
+			<?php echo $this->Form->end(__('変更/登録')); ?> -->
 		</div>
 	</div>
 	<div class="row">
@@ -20,7 +19,7 @@
 			名前
 		</div>
 		<div class="col-md-10">
-			<?php echo $dashboard['0']['UserProfile']['name']; ?>
+			<?php echo $user['UserProfile']['name']; ?>
 		</div>
 	</div>
 	<div class="row">
@@ -28,7 +27,7 @@
 			メールアドレス
 		</div>
 		<div class="col-md-10">
-			<?php echo $dashboard['0']['User']['email']; ?>
+			<?php echo $user['User']['email']; ?>
 		</div>
 	</div>
 	<div class="row">
@@ -36,7 +35,7 @@
 			好きな食べ物
 		</div>
 		<div class="col-md-10">
-			<?php echo $dashboard['0']['UserProfile']['like_food']; ?>
+			<?php echo $user['UserProfile']['like_food']; ?>
 		</div>
 	</div>
 	<div class="row">
@@ -44,7 +43,7 @@
 			好きなジャンル
 		</div>
 		<div class="col-md-10">
-			<?php echo $dashboard['0']['UserProfile']['like_genre']; ?>
+			<?php echo $user['UserProfile']['like_genre']; ?>
 		</div>
 	</div>
 	<div class="row">
@@ -52,7 +51,7 @@
 			よく使う価格帯
 		</div>
 		<div class="col-md-10">
-			<?php echo $dashboard['0']['UserProfile']['like_price_zone']; ?>
+			<?php echo $user['UserProfile']['like_price_zone']; ?>
 		</div>
 	</div>
 	<div class="row">
@@ -60,7 +59,7 @@
 			最寄り駅
 		</div>
 		<div class="col-md-10">
-			<?php echo $dashboard['0']['UserProfile']['near_station']; ?>
+			<?php echo $user['UserProfile']['near_station']; ?>
 		</div>
 	</div>
 	<div class="row">
@@ -68,7 +67,7 @@
 			住んでいる地域
 		</div>
 		<div class="col-md-10">
-			<?php echo $dashboard['0']['UserProfile']['living_area']; ?>
+			<?php echo $user['UserProfile']['living_area']; ?>
 		</div>
 	</div>
 	<div class="row">
@@ -76,7 +75,15 @@
 			自己紹介文
 		</div>
 		<div class="col-md-10">
-			<?php echo $dashboard['0']['UserProfile']['introduction']; ?>
+			<?php echo $user['UserProfile']['introduction']; ?>
 		</div>
 	</div>
+		<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-10">
+			<a href="<?php echo $this->Html->url(array('controller' => 'users', 'action'=>'profileedit')) ;?>" class="btn btn-default">編集する</a>
+		</div>
+	</div>
+
 </fieldset>

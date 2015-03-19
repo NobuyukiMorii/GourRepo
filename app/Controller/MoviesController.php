@@ -20,7 +20,7 @@ class MoviesController extends AppController {
     public function isAuthorized($user) {
     	//contributorに権限を与えております。
         if (isset($user['role']) && $user['role'] === 'contributor') {
-        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'userFavoriteMovieList', 'userWatchMovieList', 'movieEdit', 'movieDelete', 'myMovieIndex'))) {
+        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'userFavoriteMovieList', 'userWatchMovieList', 'edit', 'delete', 'myMovieIndex'))) {
         		return true;
         	}
         }
@@ -205,6 +205,10 @@ class MoviesController extends AppController {
 			$movie_save_data['description'] = $this->request->data['description'];
 			$movie_save_data['youtube_url'] = 'https://www.youtube.com/watch?v=' . $this->request->data['youtube_url'];
 			$movie_save_data['youtube_iframe_url'] = $this->YouTube->get_youtube_iframe_url($movie_save_data['youtube_url']);
+			if(empty($movie_save_data['youtube_iframe_url'])){
+				$this->Session->setFlash('こちらの動画は登録出来ません。');
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+			}
 			$movie_save_data['thumbnails_url'] = $this->request->data['thumbnails_url'];
 			$movie_save_data['created_user_id'] = $this->userSession['id'];
 			$movie_save_data['modified_user_id'] = $this->userSession['id'];
@@ -224,6 +228,8 @@ class MoviesController extends AppController {
 			$tag_save_data['name'] = $this->request->data['tag'];
 			$tag_save_data['name'] = mb_convert_kana($tag_save_data['name'], 's');
 			$tag_save_data['name'] = preg_split('/[\s]+/', $tag_save_data['name'] , -1, PREG_SPLIT_NO_EMPTY);
+			$tag_save_data['name'] = array_unique($tag_save_data['name']);
+			$tag_save_data['name'] = array_merge($tag_save_data['name']);
 
 			$tag_relation_save_data['created_user_id'] = $this->userSession['id'];
 			$tag_relation_save_data['modified_user_id'] = $this->userSession['id'];
