@@ -67,9 +67,6 @@ class UsersController extends AppController {
             }
         }
 
-        // pr($this->User->find('all',
-        //     array('conditions' => array('User.id' => $this->Auth->user('id')))
-        //     ));
     }
 
     public function profileedit() {
@@ -85,6 +82,8 @@ class UsersController extends AppController {
                 // $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }
         }
+
+
 
     }
 
