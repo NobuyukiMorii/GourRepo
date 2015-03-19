@@ -1,6 +1,5 @@
 <?php
 
-
 class UsersController extends AppController {
 
     public $helpers = array('Html', 'Form', 'Session');
@@ -47,6 +46,41 @@ class UsersController extends AppController {
         $this->redirect($this->Auth->logout());
     }
 
+<<<<<<< HEAD
+    public function dashboard() {
+        $this->set('dashboard', $this->User->findById($this->Auth->user('id'))
+            );
+
+        if ($this->request->is('post')) {
+            $this->UserProfile->id = $this->userSession['UserProfile']['id'];
+            if ($this->UserProfile->save($this->request->data)) {
+                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                // $this->Session->setFlash(__('The user has been saved'));
+            } else {
+                // $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+            }
+        }
+
+        // pr($this->User->find('all',
+        //     array('conditions' => array('User.id' => $this->Auth->user('id')))
+        //     ));
+    }
+
+    public function profileedit() {
+
+    }
+
+    public function passwordedit() {
+
+    }
+
+    public function delete() {
+
+    }
+
+}   
+=======
 }
+>>>>>>> 1bad9090aa79680d595dd0af4c6165c7d63bf550
 
 ?>

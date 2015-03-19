@@ -23,12 +23,6 @@ echo $this->Form->input(
 </form>
 
 <table>
-	<tr>
-		<th>写真</th>
-		<th>店名</th>
-		<th>カテゴリー</th>
-		<th>選択</th>
-	</tr>
 	<?php for ($i = 0; $i < count($rest_search_info['rest']); ++$i): ?>
 	<tr>
 		<td>
@@ -44,12 +38,12 @@ echo $this->Form->input(
 			選択ボタン
 			</a>
 		</td>
-		<td>
+<!-- 		<td>
 			<img src="<?php echo $rest_search_info['rest'][$i]['image_url']['shop_image1'] ;?>" width='150px';>
-		</td>
+		</td> -->
 		<td><?php echo $rest_search_info['rest'][$i]['name'] ;?></td>
 		<td><?php echo $rest_search_info['rest'][$i]['category'] ;?></td>
 		<td><?php echo $rest_search_info['rest'][$i]['address'] ;?></td>
-	<?php endfor; ?>
 	</tr>
+	<?php endfor; ?>
 </table>
