@@ -427,6 +427,7 @@ class MoviesController extends AppController {
 	*ムービー編集画面
 	*/
 	public function edit($id = null){
+
 		/*
 		*レイアウトを変更
 		*/
@@ -477,10 +478,37 @@ class MoviesController extends AppController {
 			$fields = array('title' , 'description'); 
 			$flg = $this->Movie->save($data, false, $fields);
 
+		    /*
+		    *タグを保存する
+		    */
+			$tag_save_data['created_user_id'] = $this->userSession['id'];
+			$tag_save_data['modified_user_id'] = $this->userSession['id'];
+			$tag_save_data['name'] = $this->request->data['Tag']['name'];
+			$tag_save_data['name'] = mb_convert_kana($tag_save_data['name'], 's');
+			$tag_save_data['name'] = preg_split('/[\s]+/', $tag_save_data['name'] , -1, PREG_SPLIT_NO_EMPTY);
+			$tag_save_data['name'] = array_unique($tag_save_data['name']);
+			$tag_save_data['name'] = array_merge($tag_save_data['name']);
+
+			$tag_relation_save_data['created_user_id'] = $this->userSession['id'];
+			$tag_relation_save_data['modified_user_id'] = $this->userSession['id'];
+			$tag_relation_save_data['movie_id'] = $flg['Movie']['id'];
+
+			foreach($tag_save_data['name'] as $key => $val){
+				//タグそのもの
+				$this->Tag->create();
+				$tag_save_data['name'] = $val;
+				$flg = $this->Tag->save($tag_save_data);
+				//保存する（タグリレーションズ）
+				$tag_relation_save_data['tag_id'] = $this->Tag->getLastInsertID();
+				$this->TagRelation->create();
+				$this->TagRelation->save($tag_relation_save_data);
+			}
+
 	        if ($flg) {
 	            $this->Session->setFlash(__('動画の編集が完了しました.'));
 	            return $this->redirect(array('controller' => 'Movies', 'action' => 'myMovieIndex'));
 	        }
+
 	        $this->Session->setFlash(__('申し訳ございません。動画の編集に失敗しました。'));
 	        return $this->redirect(array('controller' => 'Movies', 'action' => 'edit'));
 	    }
