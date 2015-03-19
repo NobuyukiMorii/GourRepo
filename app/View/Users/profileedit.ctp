@@ -1,5 +1,3 @@
-</br ></br >
-
 <fieldset>
 	<legend>ユーザープロフィール</legend>
 	<div class="row">
@@ -30,7 +28,7 @@
 			メールアドレス
 		</div>
 		<div class="col-md-10">
-			<?php echo $this->Form->input('UserProfile.email', array('value' => $user['User']['email'], 'label' => false)); ?>
+			<?php echo $this->Form->input('User.email', array('value' => $user['User']['email'], 'label' => false)); ?>
 		</div>
 	</div>
 	<div class="row">
