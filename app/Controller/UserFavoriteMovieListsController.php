@@ -32,9 +32,27 @@ class UserFavoriteMovieListsController extends AppController {
 		/*
 		*ユーザー情報を受ける
 		*/
-		$data['user_id'] = $this->Auth->user('id');
-		$data['created_user_id'] = $this->Auth->user('id');
-		$data['modified_user_id'] = $this->Auth->user('id');
+		$data['user_id'] = $this->userSession['id'];
+		$data['created_user_id'] = $this->userSession['id'];
+		$data['modified_user_id'] = $this->userSession['id'];
+
+		/*
+		*同じお気に入りが登録されているかどうかを検索する
+		*/
+		$doubled_data = $this->UserFavoriteMovieList->find('count' , array(
+			'conditions' => array(
+				'UserFavoriteMovieList.user_id' => $this->userSession['id'] ,
+				'UserFavoriteMovieList.movie_id' => $this->request['pass'][0] ,
+			)
+		));
+
+		/*
+		*お気に入りへの追加登録のキャンセル
+		*/
+		if($doubled_data > 0){
+			$this->Session->setFlash('お気に入りに登録しました');
+			return $this->redirect(array('controller' => 'Movies', 'action' => 'view' , $data['movie_id']));	
+		}
 
 		/*
 		*お気に入りデータの登録
@@ -54,7 +72,5 @@ class UserFavoriteMovieListsController extends AppController {
 		}
 
 	}
-
-
 
 }
