@@ -258,7 +258,8 @@ class MoviesController extends AppController {
 	public function serchResult(){
 
 		//ポストされた場合
-		if(!empty($this->request->data)){
+		if(!empty($this->request->data['areaname'])){
+
 			//ユーザープロフィールを検索する
 			$this->User->unbindModel(
 	            array('hasMany' =>array('Movie' , 'UserFavoriteMovieList', 'UserWatchMovieList'))
@@ -329,7 +330,7 @@ class MoviesController extends AppController {
 		}
 
 		//ポストされなかった場合
-		if(empty($this->request->data)){
+		if(empty($this->request->data['areaname'])){
 			$conditions = array(
 				'Movie.del_flg' => 0
 			);
@@ -360,7 +361,7 @@ class MoviesController extends AppController {
 			 'order' => array('Movie.created' => 'DESC'),
 			 'recursive' => 2
 		));
-
+		
 		$this->set(compact('results' , 'new_movies'));
 	}
 
