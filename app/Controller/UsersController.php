@@ -54,7 +54,7 @@ class UsersController extends AppController {
     }
 
     public function dashboard() {
-        $this->set('dashboard', $this->User->findById($this->Auth->user('id'))
+        $this->set('user', $this->User->findById($this->Auth->user('id'))
             );
 
         if ($this->request->is('post')) {
@@ -73,6 +73,18 @@ class UsersController extends AppController {
     }
 
     public function profileedit() {
+        $this->set('user', $this->User->findById($this->Auth->user('id'))
+            );
+
+        if ($this->request->is('post')) {
+            $this->UserProfile->id = $this->userSession['UserProfile']['id'];
+            if ($this->UserProfile->save($this->request->data)) {
+                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                // $this->Session->setFlash(__('The user has been saved'));
+            } else {
+                // $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+            }
+        }
 
     }
 
