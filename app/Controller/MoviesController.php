@@ -118,6 +118,16 @@ class MoviesController extends AppController {
 			$this->Movie->saveField('count', $streaming_count);
 
 			/*
+			*お気に入りMovieの重複登録の確認
+			*/
+			if(!empty($same_movie)){
+				$userfavorite['UserFavorite']['user_id'] == $userfavorite['UserFavoriteLists']['UserFavoriteMovieList.user_id'] && $userfavorite['Movie']['id'] == $userfavorite['UserFavoriteLists']['movie_id'];
+						$this->UserFavorite->find('all',$same_movie);
+			}
+			//$movie_get_count++;
+
+
+			/*
 			*viewに表示
 			*/
 			$this->set(compact('movie' , 'movies_in_same_restaurant'));

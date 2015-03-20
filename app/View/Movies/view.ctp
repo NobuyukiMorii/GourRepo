@@ -41,12 +41,20 @@
           <span class="view-header-place-tel-number">
             <?php echo $movie['Restaurant']['tel'] ;?>
           </span>
+
+
+          <?php
+
+              if ($same_movie == 0){ 
+          ?>
           <a href="<?php echo $this->html->url(array('controller' => 'UserFavoriteMovieLists' , 'action' => 'add', $movie['Movie']['id'])) ;?>" class="header-favorite-image-ahref">
             <?php echo $this->Html->image('star.png', array('alt' => 'Favorite' , 'class' => 'header-favorite-image')); ?>
           </a>
           <a href="<?php echo $this->html->url(array('controller' => 'UserFavoriteMovieLists' , 'action' => 'add' , $movie['Movie']['id'])) ;?>" class="view-header-favorite-text">
             favorite
           </a>
+          <?php } ?>
+
         </div>
       </div>
   </div>
