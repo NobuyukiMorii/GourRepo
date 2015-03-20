@@ -68,11 +68,17 @@ class PostsController extends AppController{
 	}
 
 
+
+
+
+
+
 	public function api_add2(){
-		//都道府県データを取得する
+		//GurunabiComponetのprefSearchを使用して都道府県データを取得する
 		$areas = $this->Gurunabi->prefSearch();
+		//配列の最初の値を取り除く
 		array_shift($areas);
-		//カテフゴリーを全部取得する
+		//カテゴリーを全部取得する
 		$categories = $this->Gurunabi->categoryLargeSearch();
 		array_shift($categories);
 		//urlを作成する
@@ -85,35 +91,29 @@ class PostsController extends AppController{
 				$url2[$i] = $url.'&pref='.$key.'&category_l='.$key2;
 
 			}
+
 		}
-		//urlにアクセスして取得する
-		for($i = 1; $i < count($url2); $i++){
-			$data[$i] = $this->Gurunabi->parseXmlToArray($url2[$i]);
-			$data[$i] = $this->Gurunabi->ParseArrayForDB($data[$i]);
-			$this->Resutaurant->create();
-			$this->Resutaurant->save($data[$i]);
-		}
-
-
-
+		// //urlにアクセスして取得する
+		// for($i = 1; $i < count($url2); $i++){
+		// 	$data[$i] = $this->Gurunabi->parseXmlToArray($url2[$i]);
+		// 	$this->Resutaurant->create();
+		// 	$this->Resutaurant->save($data[$i]);
+		// }
 	}
+
+
+
 
 
 	public function api_add(){
 	//public function api(){
 		//ViewフォルダのLayoutsのdefault.ctpを使って表示したくない時にautoRenderを使用
 		$this->autoRender = false;
-
-
 		//$shohei = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=99&category_l=RSFST09000';
 		//$shohei = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=1&category_l=RSFST08000';
 		//$shohei = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=500&pref=PREF01';
 		//APIの基本URLを$urlに入れる
 		$url = 'http://api.gnavi.co.jp/ver2/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f';
-
-		$url2['hit']['hit_per_page'] = '';
-		$url3['prefacture']['pref'] = 'PREF'."$b";
-
 		//500ページ表示
 		//その後、
 		// // var_dump($options);
@@ -145,9 +145,6 @@ class PostsController extends AppController{
 
 
 
-
-
-
 		//	foreach ($key as $key2 => $value2) {
 		//	echo "$key2"."<br />";
 		//	echo "$value2";
@@ -167,6 +164,9 @@ class PostsController extends AppController{
 		// 	$url2[$key] = $url.$value;
 		// 	}
 		// }
+
+
+
 
 
 
