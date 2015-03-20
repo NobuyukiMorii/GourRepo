@@ -93,13 +93,17 @@ class PostsController extends AppController{
 			}
 
 		}
-		// //urlにアクセスして取得する
-		// for($i = 1; $i < count($url2); $i++){
-		// 	$data[$i] = $this->Gurunabi->parseXmlToArray($url2[$i]);
-		// 	$this->Resutaurant->create();
-		// 	$this->Resutaurant->save($data[$i]);
-		// }
-	}
+		//urlにアクセスして取得する
+		for($i = 1; $i < count($url2); $i++){
+			$data[$i] = $this->Gurunabi->parseXmlToArray($url2[$i]);
+		//exit;
+		$save_data['Post']['id'] = $data['rest']['id'];
+		$save_data['Post']['title'] = $data['rest']['name'];
+		$save_data['Post']['body'] = $data['rest']['tel'];
+
+			$this->Resutaurant->create();
+			$this->Resutaurant->save($data[$i]);
+		}
 
 
 
