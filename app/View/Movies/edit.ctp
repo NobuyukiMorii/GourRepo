@@ -33,6 +33,18 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <label class="col-md-2 control-label">タグの追加</label>
+      <div class="col-md-8">
+		<?php echo $this->Form->input('Tag.name', array(
+			'label' => false,
+			'type' => 'text',
+			'class' => 'form-control input-lg',
+		)); ?>
+		<?php echo $this->Form->error('Tag.name');?>
+      </div>
+    </div>
+
 	<div class="form-group">
 		<div class="col-md-2 col-md-offset-2">
   			<button type="submit" class="btn btn-default btn-lg">編集する</button>

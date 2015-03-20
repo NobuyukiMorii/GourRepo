@@ -5,7 +5,6 @@
 <?php echo $this->Html->css('view-myMovieIndex/select-page-button-movie.css'); ?>
 <?php echo $this->Html->css('view-myMovieIndex/view-reccomend-movie-for-movie.css'); ?>
 
-
 <div class="container">
 
   	<!-- CONTENT ============-->
@@ -45,6 +44,12 @@
 				                  		<?php echo $userMoviePostHistory[$i]['Restaurant']['budget'] ;?>
 				                  	</span> &nbsp;&nbsp;
 				                  	<br>
+					            	<?php for ($j = 0; $j < count($userMoviePostHistory[$i]['TagRelation']); ++$j): ?>
+					                  	<span class="label label-default">
+					                  		<?php echo $userMoviePostHistory[$i]['TagRelation'][$j]['Tag']['name'] ;?>
+					                  	</span>&nbsp;
+					            	<?php endfor ;?>
+					            	<br>
 				                  	<span class="movie-list-reporter-introduction">
 				                  		<?php echo $userMoviePostHistory[$i]['Movie']['description'] ;?>
 				                  	</span>
@@ -68,7 +73,6 @@
 			            </td>
 		          	</tr>
 		          	<?php endfor ;?>
-
 		        </table>
 		        <!-- /動画 ============-->
 		      </div>

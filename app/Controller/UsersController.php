@@ -27,20 +27,37 @@ class UsersController extends AppController {
 
     public function signup() {
 
-        if ($this->request->is('post')) {
-            $this->User->create();
-            if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved'));
-                $this->redirect(array('controller' => 'users', 'action' => 'login'));
-            } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-            }
+        if (!$this->request->is('post')) {
+            return;
+        }
+
+        $this->User->create();
+        if ($this->User->save($this->request->data)) {
+            $this->Session->setFlash(__('The user has been saved'));
+        } else {
+            $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+        }
+
+        $id = $this->User->getLastInsertID();
+        $this->UserProfile->create();
+        $this->request->data['UserProfile']['user_id'] = $id;
+        if ($this->UserProfile->save($this->request->data)) {
+            $this->Session->setFlash(__('The user has been saved'));
+            $this->redirect(array('controller' => 'users', 'action' => 'login'));
+        } else {
+            $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
         }
     }
 
     public function login() {
         if ($this->request->is('post')) {
+
+// pr($this->request->data['User']['del_flg']);
             if ($this->Auth->login()) {
+                if ($this->Auth->user('del_flg') == 1) {
+                $this->Session->setFlash(__('削除されています。'));
+                $this->redirect(array('controller' => 'users', 'action' => 'logout'));
+                }
                 $this->redirect($this->Auth->redirect());
             } else {
                 $this->Session->setFlash(__('Invalid username or password, try again'));
@@ -54,30 +71,20 @@ class UsersController extends AppController {
     }
 
     public function dashboard() {
+
         $this->set('user', $this->User->findById($this->Auth->user('id'))
             );
 
-        if ($this->request->is('post')) {
-            $this->UserProfile->id = $this->userSession['UserProfile']['id'];
-            if ($this->UserProfile->save($this->request->data)) {
-                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
-                // $this->Session->setFlash(__('The user has been saved'));
-            } else {
-                // $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-            }
-        }
-
-        // pr($this->User->find('all',
-        //     array('conditions' => array('User.id' => $this->Auth->user('id')))
-        //     ));
     }
 
     public function profileedit() {
-        $this->set('user', $this->User->findById($this->Auth->user('id'))
-            );
+        $this->set('user', $this->User->findById($this->Auth->user('id')));
 
         if ($this->request->is('post')) {
+
+
             $this->UserProfile->id = $this->userSession['UserProfile']['id'];
+
             if ($this->UserProfile->save($this->request->data)) {
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
                 // $this->Session->setFlash(__('The user has been saved'));
@@ -85,15 +92,40 @@ class UsersController extends AppController {
                 // $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }
         }
+
+
 
     }
 
     public function passwordedit() {
 
+       $this->set('password', $this->User->findById($this->Auth->user('id')));
+
+        if ($this->request->is('post')) {
+
+            $this->User->id = $this->userSession['id'];
+
+            if ($this->User->save($this->request->data)) {
+                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                // $this->Session->setFlash(__('The user has been saved'));
+            } else {
+                // $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+            }
+        }
+
     }
 
     public function delete() {
 
+       if ($this->request->is('post')) {
+
+            $this->User->id = $this->userSession['id'];
+
+            if ($this->User->save($this->request->data)) {
+                $this->redirect(array('controller' => 'users', 'action' => 'logout'));
+                $this->Session->setFlash(__('ご利用ありがとうございました。'));
+            }
+        }
     }
 
 }   

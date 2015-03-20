@@ -83,6 +83,7 @@
 		</div>
 		<div class="col-md-10">
 			<a href="<?php echo $this->Html->url(array('controller' => 'users', 'action'=>'profileedit')) ;?>" class="btn btn-default">編集する</a>
+			<a href="<?php echo $this->Html->url(array('controller' => 'users', 'action'=>'passwordedit')) ;?>" class="btn btn-default">パスワード変更</a>
 		</div>
 	</div>
 

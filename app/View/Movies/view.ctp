@@ -25,6 +25,12 @@
               ￥<?php echo $movie['Restaurant']['budget'] ;?>
               &nbsp;&nbsp;
               <span class="label label-default">定休日</span> <?php echo $movie['Restaurant']['holliday'] ;?>
+              <br>
+              <?php for ($j = 0; $j < count($movie['TagRelation']); ++$j): ?>
+                    <span class="label label-default">
+                      <?php echo $movie['TagRelation'][$j]['Tag']['name'] ;?>
+                    </span>&nbsp;
+              <?php endfor ;?>
             </div>
         </div>
       </div>
@@ -104,7 +110,7 @@
             <tr>
               <td class="table-heading">住所</td>
               <td><?php echo $movie['Restaurant']['address'] ;?>
-                <iframe src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCgCauF4jrJHZxT41rZ6NocFHSuOMbA6UY&=<?php echo $movie['Restaurant']['latitude'] ;?>,<?php echo $movie['Restaurant']['longitude'] ;?>&q=35.508591,139.4427722&zoom=16&q=%E9%A3%B2%E9%A3%9F%E5%BA%97" frameborder="0" class="map"></iframe>
+                <iframe src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCgCauF4jrJHZxT41rZ6NocFHSuOMbA6UY&q=<?php echo $movie['Restaurant']['latitude'] ;?>,<?php echo $movie['Restaurant']['longitude'] ;?>&zoom=16&q=%E9%A3%B2%E9%A3%9F%E5%BA%97" frameborder="0" class="map"></iframe>
               </td>
             </tr>
             <tr>

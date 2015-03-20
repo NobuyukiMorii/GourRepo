@@ -45,16 +45,33 @@
 				                  		<?php echo $UserFavoriteMovieList[$i]['Movie']['Restaurant']['budget'] ;?>
 				                  	</span> &nbsp;&nbsp;
 				                  	<br>
+					            	<?php for ($j = 0; $j < count($UserFavoriteMovieList[$i]['Movie']['TagRelation']); ++$j): ?>
+					                  	<span class="label label-default">
+					                  		<?php echo $UserFavoriteMovieList[$i]['Movie']['TagRelation'][$j]['Tag']['name'] ;?>
+					                  	</span>&nbsp;
+					            	<?php endfor ;?>
+					            	<br>
 				                  	<span class="movie-list-reporter-introduction">
 				                  		<?php echo $UserFavoriteMovieList[$i]['Movie']['description'] ;?>
 				                  	</span>
 				                </a>  
 			              	</div>  
 			            </td>
+			            <td>
+			            	<?php echo $this->Form->create('UserFavoriteMovieLists', array('type' => 'post' , 'action' => 'delete')); ?>
+					        <?php echo $this->Form->input('UserFavoriteMovieListsController.id', array(
+					            'label' => false,
+					            'type' => 'hidden',
+					            'value' => $UserFavoriteMovieList[$i]['UserFavoriteMovieList']['id'],
+					        )); ?>
+					        <button type="submit" class="btn btn-warning">削除</button>
+					        <?php echo $this->Form->end(); ?>
+			            </td>
 		          	</tr>
 		          	<?php endfor ;?>
 
 		        </table>
+
 		        <!-- /動画 ============-->
 		      </div>
 		    </div>

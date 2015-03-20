@@ -11,7 +11,7 @@
 
       <li class="divider"></li>
       <?php if(!empty($userSession)) : ?>
-        <li><a href="<?php echo $this->html->url(array('controller' => 'Users' , 'action' => 'dashBoard')) ;?>">ダッシュボード</a></li>
+        <li><a href="<?php echo $this->html->url(array('controller' => 'Users' , 'action' => 'dashboard')) ;?>">ダッシュボード</a></li>
         <li><a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'userFavoriteMovieList')) ;?>">お気に入りを確認する</a></li>
         <li><a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'userWatchMovieList')) ;?>">閲覧履歴を確認する</a></li>
         <li><a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'myMovieIndex')) ;?>">投稿した動画を管理する</a></li>

@@ -32,6 +32,12 @@
                   <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text"><?php echo $results[$i]['Restaurant']['category'] ;?></span> &nbsp;&nbsp;
                   <span class="label label-default">料金</span>&nbsp;<span class="black-text"><?php echo $results[$i]['Restaurant']['budget'] ;?>円</span> &nbsp;&nbsp;
                   <br>
+                  <?php for ($j = 0; $j < count($results[$i]['TagRelation']); ++$j): ?>
+                        <span class="label label-default">
+                          <?php echo $results[$i]['TagRelation'][$j]['Tag']['name'] ;?>
+                        </span>&nbsp;
+                  <?php endfor ;?>
+                  <br>
                   <span class="movie-list-reporter-introduction"><?php echo $results[$i]['Movie']['description'] ;?></span>
                 </a>  
               </div>  
@@ -78,6 +84,12 @@
                   <span class="reccomend-movie-station"> <?php echo $new_movies[$i]['Restaurant']['access_station'] ;?>)</span><br>
                 </a>
                 <a href="/" class="a_href_for_reccomend-movie-td">
+                  <?php for ($j = 0; $j < count($new_movies[$i]['TagRelation']); ++$j): ?>
+                        <span class="label label-default">
+                          <?php echo $new_movies[$i]['TagRelation'][$j]['Tag']['name'] ;?>
+                        </span>&nbsp;
+                  <?php endfor ;?>
+                  <br>
                   <span class="reccomend-movie-name text-bold"><?php echo $new_movies[$i]['Movie']['description'] ;?></span><br>
                 </a>
               </div>    
