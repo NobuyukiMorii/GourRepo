@@ -52,7 +52,7 @@
 			よく使う価格帯
 		</div>
 		<div class="col-md-10">
-			<?php echo $this->Form->input('UserProfile.like_genre', array('value' => $user['UserProfile']['like_genre'], 'label' => false)); ?>
+			<?php echo $this->Form->input('UserProfile.like_price_zone', array('value' => $user['UserProfile']['like_genre'], 'label' => false)); ?>
 		</div>
 	</div>
 	<div class="row">
