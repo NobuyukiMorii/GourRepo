@@ -1,0 +1,17 @@
+.reporter-img {
+	width: 50px;
+}
+
+.rest_name_x_reporter_name:hover {
+	text-decoration: none;
+}
+
+.movie-list-reporter-title {
+	font-style: bold;
+	color: black;
+}
+
+.margin-top {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}

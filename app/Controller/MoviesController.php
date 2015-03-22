@@ -2,6 +2,10 @@
 
 class MoviesController extends AppController {
 	/*
+	*利用するヘルパー
+	*/
+	public $helpers = array('UploadPack.Upload');
+	/*
 	*利用するモデル
 	*/
 	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList' , 'UserWatchMovieList' , 'Tag' , 'TagRelation' , 'UserProfile');
@@ -32,10 +36,13 @@ class MoviesController extends AppController {
 	*/
 	public function index(){
 		/*
-		*ユーザー情報を取得する
+		*動画情報を取得する
 		*/
-		$this->Movie->unbindModel(
-            array('belongsTo' =>array('User'))
+		$this->User->unbindModel(
+            array('hasMany' =>array('Movie' , 'UserFavoriteMovieList' , 'UserWatchMovieList'))
+        );
+		$this->TagRelation->unbindModel(
+            array('belongsTo' =>array('Movie'))
         );
 		$this->Restaurant->unbindModel(
             array('hasMany' =>array('Movie'))
@@ -49,7 +56,8 @@ class MoviesController extends AppController {
 		$data = $this->Movie->find('all' ,array(
 			'limit' => 3,
 			'conditions' => array('Movie.del_flg' => 0),
-			'order' => array('Movie.count' => 'DESC')
+			'order' => array('Movie.count' => 'DESC'),
+			'recursive' => 2
 		));
 		$this->set(compact('data'));
 	}
@@ -107,25 +115,24 @@ class MoviesController extends AppController {
 					'Movie.del_flg' => 0,
 					'not' => array('Movie.id' => $this->request['pass'][0])
 				),
-				'recursive' => 2
+				'recursive' => 2,
+				'limit' => 10
 			));
 
 			/*
 			*Movieの再生回数をUpdate
 			*/
 			$streaming_count = $movie['Movie']['count'] + 1;
-			$this->Movie->id = $this->request['pass'][0];  
-			$this->Movie->saveField('count', $streaming_count);
 
-			/*
-			*お気に入りMovieの重複登録の確認
-			*/
-			if(!empty($same_movie)){
-				$userfavorite['UserFavorite']['user_id'] == $userfavorite['UserFavoriteLists']['UserFavoriteMovieList.user_id'] && $userfavorite['Movie']['id'] == $userfavorite['UserFavoriteLists']['movie_id'];
-						$this->UserFavorite->find('all',$same_movie);
+			// 更新する内容を設定
+			$count_data = array('Movie' => array('id' => $this->request['pass'][0] , 'count' => $streaming_count));
+			// 更新する項目（フィールド指定）
+			$fields = array('count');
+			$flg_movie_count = $this->Movie->save($count_data, false, $fields);
+
+			if(empty($flg_movie_count)){
+				$this->Session->setFlash('なんか変だったよ。');
 			}
-			//$movie_get_count++;
-
 
 			/*
 			*viewに表示
@@ -338,7 +345,7 @@ class MoviesController extends AppController {
 
 			$this->Paginator->settings = array(
 				 'conditions' => $conditions,
-				 'limit' => 15,
+				 'limit' => 10,
 				 'order' => array('Movie.count' => 'DESC'),
 				 'recursive' => 2
 			);
@@ -353,7 +360,7 @@ class MoviesController extends AppController {
 			);
 			$this->Paginator->settings = array(
 				 'conditions' => $conditions,
-				 'limit' => 15,
+				 'limit' => 10,
 				 'order' => array('Movie.count' => 'DESC'),
 				 'recursive' => 2
 			);
@@ -374,7 +381,7 @@ class MoviesController extends AppController {
 			 'conditions' => array(
 			 	'Movie.del_flg' => 0
 			 ),
-			 'limit' => 15,
+			 'limit' => 10,
 			 'order' => array('Movie.created' => 'DESC'),
 			 'recursive' => 2
 		));
@@ -389,8 +396,8 @@ class MoviesController extends AppController {
 		/*
 		*ユーザーのお気に入りの動画を検索する（ページネーション）
 		*/
-		$this->Movie->unbindModel(
-            array('belongsTo' =>array('User'))
+		$this->User->unbindModel(
+            array('hasMany' =>array('Movie', 'UserFavoriteMovieList' , 'UserWatchMovieList'))
         );
 		$this->Restaurant->unbindModel(
             array('hasMany' =>array('Movie'))
@@ -399,7 +406,10 @@ class MoviesController extends AppController {
             array('belongsTo' =>array('Movie'))
         );
 		$this->Paginator->settings =array(
-			'conditions' => array('UserFavoriteMovieList.user_id' => $this->userSession['id']),
+			'conditions' => array(
+				'UserFavoriteMovieList.user_id' => $this->userSession['id'],
+				'Movie.del_flg' => 0
+			),
 			'order' => array('UserFavoriteMovieList.created' => 'DESC'),
 			'limit' => 5,
 			'recursive' => 3
@@ -418,8 +428,8 @@ class MoviesController extends AppController {
 		/*
 		*ユーザーが過去に見た動画を検索する（ページネーション）
 		*/
-		$this->Movie->unbindModel(
-            array('belongsTo' =>array('User'))
+		$this->User->unbindModel(
+            array('hasMany' =>array('Movie', 'UserFavoriteMovieList' , 'UserWatchMovieList'))
         );
 		$this->Restaurant->unbindModel(
             array('hasMany' =>array('Movie'))
@@ -428,7 +438,10 @@ class MoviesController extends AppController {
             array('belongsTo' =>array('Movie'))
         );
 		$this->Paginator->settings =array(
-			'conditions' => array('UserWatchMovieList.user_id' => $this->userSession['id']),
+			'conditions' => array(
+				'UserWatchMovieList.user_id' => $this->userSession['id'],
+				'Movie.del_flg' => 0
+			),
 			'order' => array('UserWatchMovieList.created' => 'DESC'),
 			'limit' => 5,
 			'recursive' => 3
@@ -562,10 +575,10 @@ class MoviesController extends AppController {
 			*エラーのハンドリング
 			*/
 	        if ($flg) {
-	            $this->Session->setFlash(__('動画の編集が完了しました.'));
+	            $this->Session->setFlash(__('動画を削除しました.'));
 	            return $this->redirect(array('controller' => 'Movies', 'action' => 'myMovieIndex'));
 	        }
-	        $this->Session->setFlash(__('申し訳ございません。動画の編集に失敗しました。'));
+	        $this->Session->setFlash(__('申し訳ございません。動画の削除に失敗しました。'));
 	        return $this->redirect(array('controller' => 'Movies', 'action' => 'edit'));
 	    }
 
@@ -578,8 +591,8 @@ class MoviesController extends AppController {
 		/*
 		*ユーザー情報を取得する
 		*/
-		$this->Movie->unbindModel(
-            array('belongsTo' =>array('User'))
+		$this->User->unbindModel(
+            array('hasMany' =>array('Movie', 'UserFavoriteMovieList' , 'UserWatchMovieList'))
         );
 		$this->Restaurant->unbindModel(
             array('hasMany' =>array('Movie'))
