@@ -1,0 +1,23 @@
+.movie {
+	width: 70%;
+	height: 500px;
+	margin-top: 20px;
+	margin-bottom: 0px;
+	margin-left: -107px;
+}
+
+.center {
+	text-align: center;
+}
+
+.top-movie-thmbnails {
+	height:300px;
+}
+
+.reporter-img{
+	width: 50px;
+}
+
+.restaurant-name:hover {
+	text-decoration: none;
+}
