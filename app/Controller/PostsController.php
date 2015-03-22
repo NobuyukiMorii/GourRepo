@@ -68,56 +68,84 @@ class PostsController extends AppController{
 	}
 
 
-
-
-
-
-
 	public function api_add2(){
-		//GurunabiComponetのprefSearchを使用して都道府県データを取得する
-		$areas = $this->Gurunabi->prefSearch();
-		//配列の最初の値を取り除く
-		array_shift($areas);
-		//カテゴリーを全部取得する
+
+		//カテフゴリーを全部取得する
 		$categories = $this->Gurunabi->categoryLargeSearch();
 		array_shift($categories);
 		//urlを作成する
 		$i = 0;
-		$url = 'http://api.gnavi.co.jp/ver2/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=500';
-		foreach ($areas as $key => $value) {
+		$url = 'http://api.gnavi.co.jp/ver2/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=500&pref=PREF13';
 
-			foreach ($categories as $key2 => $value2) {
-				$i++;
-				$url2[$i] = $url.'&pref='.$key.'&category_l='.$key2;
-
-			}
-
+		foreach ($categories as $key => $value) {
+			$i++;
+			$url2[$i] = $url.'&category_l='.$key;
 		}
+
 		//urlにアクセスして取得する
 		for($i = 1; $i < count($url2); $i++){
 			$data[$i] = $this->Gurunabi->parseXmlToArray($url2[$i]);
-		//exit;
-		$save_data['Post']['id'] = $data['rest']['id'];
-		$save_data['Post']['title'] = $data['rest']['name'];
-		$save_data['Post']['body'] = $data['rest']['tel'];
+			pr($data);
+			exit;
+		}
+			/*
+			*DB保存用の配列を作成する
+			*/
+			for($j = 0; $j < count($data[$i]['rest']; $j++)){
+				$save_data[$i][$j]['gournabi_id'] 							= $data[$i]['rest'][$j]['id'];
+				$save_data[$i][$j]['image_url'] 							= $data[$i]['rest'][$j]['image_url']['thumbnail'];
+				$save_data[$i][$j]['name'] 									= $data[$i]['rest'][$j]['name'];
+				$save_data[$i][$j]['tel'] 									= $data[$i]['rest'][$j]['tel'];
+				$save_data[$i][$j]['address'] 								= $data[$i]['rest'][$j]['address'];
+				$save_data[$i][$j]['latitude'] 								= $data[$i]['rest'][$j]['location']['latitude'];
+				$save_data[$i][$j]['longitude'] 							= $data[$i]['rest'][$j]['location']['longitude'];
+				$save_data[$i][$j]['category'] 								= $data[$i]['rest'][$j]['categories']['category_name_l'];
+				$save_data[$i][$j]['url'] 									= $data[$i]['rest'][$j]['url'];
+				$save_data[$i][$j]['url_mobile'] 							= $data[$i]['rest'][$j]['url_mobile'];
+				$save_data[$i][$j]['opentime'] 								= $data[$i]['rest'][$j]['business_hour'];
+				$save_data[$i][$j]['holiday'] 								= $data[$i]['rest'][$j]['holiday'];
+				$save_data[$i][$j]['access_line'] 							= $data[$i]['rest'][$j]['access'];
+				$save_data[$i][$j]['access_station'] 						= $data[$i]['rest'][$j]['area']['areaname_s'];
+				$save_data[$i][$j]['access_station_exit'] 					= null;
+				$save_data[$i][$j]['access_walk'] 							= null;
+				$save_data[$i][$j]['access_note'] 							= null;
+				$save_data[$i][$j]['parking_lots'] 							= null;
+				$save_data[$i][$j]['pr'] 									= $data[$i]['rest'][$j]['sales_point']['pr_short'] ;
+				$save_data[$i][$j]['code_areacode'] 						= $data[$i]['rest'][$j]['area']['district'];
+				$save_data[$i][$j]['code_areaname'] 						= $data[$i]['rest'][$j]['area']['areaname_s'];
+				$save_data[$i][$j]['code_prefname'] 						= $data[$i]['rest'][$j]['area']['prefname'];
+				$save_data[$i][$j]['budget'] 								= $data[$i]['rest'][$j]['budget'];
+				$save_data[$i][$j]['party'] 								= null;
+				$save_data[$i][$j]['lunch'] 								= null;
+				$save_data[$i][$j]['credit_card'] 							= null;
+				$save_data[$i][$j]['equipment']								= null;
 
-			$this->Resutaurant->create();
-			$this->Resutaurant->save($data[$i]);
+				$this->Resutaurant->create();
+				$this->Resutaurant->save($save_data[$i][$j]);
+			}
+
 		}
 
 
 
+	}
 
 
-	public function api_add(){
-	//public function api(){
+//		public function api_add(){
+//		public function api(){
 		//ViewフォルダのLayoutsのdefault.ctpを使って表示したくない時にautoRenderを使用
-		$this->autoRender = false;
+	//	$this->autoRender = false;
+
+
 		//$shohei = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=99&category_l=RSFST09000';
 		//$shohei = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=1&category_l=RSFST08000';
 		//$shohei = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=500&pref=PREF01';
 		//APIの基本URLを$urlに入れる
-		$url = 'http://api.gnavi.co.jp/ver2/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f';
+	//	$url = 'http://api.gnavi.co.jp/ver2/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f';
+
+	//	$url2['hit']['hit_per_page'] = '';
+	//	$url3['prefacture']['pref'] = 'PREF'."$b";
+
 		//500ページ表示
 		//その後、
 		// // var_dump($options);
@@ -138,6 +166,9 @@ class PostsController extends AppController{
 		// 		echo $url2;
 		// 	}
 		// }
+
+
+
 
 
 
@@ -172,26 +203,23 @@ class PostsController extends AppController{
 
 
 
-
-
-
-		$xml = simplexml_load_file($shohei);
-
-		$xml = get_object_vars($xml);
-		$data = json_decode(json_encode($xml), true);
-		pr($data);
+//		$xml = simplexml_load_file($shohei);
+//
+//		$xml = get_object_vars($xml);
+//		$data = json_decode(json_encode($xml), true);
+//		pr($data);
 		//exit;
 		
-		$save_data['Post']['id'] = $data['rest']['id'];
-		$save_data['Post']['title'] = $data['rest']['name'];
-		$save_data['Post']['body'] = $data['rest']['tel'];
+//		$save_data['Post']['id'] = $data['rest']['id'];
+//		$save_data['Post']['title'] = $data['rest']['name'];
+//		$save_data['Post']['body'] = $data['rest']['tel'];
 		//$save_data['Resutaurant']['name'] = $data['rest']['name'];
 		//$save_data['Resutaurant']['tel'] = $data['rest']['tel'];
 		// $save_data['Resutaurant']['address'] = $data['rest']['address'];
 		// $save_data['Resutaurant']['latitude'] = $data['rest']['latitude'];
 		// $save_data['Resutaurant']['longitude'] = $data['rest']['longitude'];
 		
-		pr($save_data);
+//		pr($save_data);
 		//exit;
 
 		//add_apiのなかて$save_dataとしてデータを使用できる
@@ -230,16 +258,16 @@ class PostsController extends AppController{
 		//フォームからpost送信されたデータがあるかどうかの確認
 		//if ($this->request->is('post')){
 			//createによって、save()メソッドをinsertとして使用すると言う意味
-			$this->Post->create();
+//			$this->Post->create();
 			//save()でデータのセーブ
 			//$this->request->dataにユーザーがフォームを使ってPOSTしたデータが格納されている
-			$this->Post->save($save_data);
+//			$this->Post->save($save_data);
 				//setFlash()メソッドでリダイレクト後のページでこれを表示する
 		//		$this->Session->setFlash(__('Your post has been saved.'));
 				//redirectでindex画面に遷移する
 		//		return $this->redirect(array('action' => 'index'));
 			
 		//	$this->Session->setFlash(__('Unable to add your post.'));
-		}
+//		}
 	}
 
