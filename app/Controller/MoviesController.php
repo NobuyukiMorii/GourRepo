@@ -67,17 +67,32 @@ class MoviesController extends AppController {
 	*/
 	public function view(){
 
+		$this->autoLayout = false; 
+
 		if(isset($this->request['pass'][0])){
 			if(!empty(($this->userSession))) {
 				/*
-				*UserWatchMovieListの登録
+				*20分以上前までに動画を見ていなければ閲覧履歴に登録
 				*/
-				$data['user_id'] = $this->userSession['id'];
-				$data['created_user_id'] = $this->userSession['id'];
-				$data['modified_user_id'] = $this->userSession['id'];
-				$data['movie_id'] = $this->request['pass'][0];
-				$this->UserWatchMovieList->create();
-				$flg = $this->UserWatchMovieList->save($data);
+				$last_watch_time =  date('Y-m-d H:i:s',strtotime( "-1 minute"));
+				$recent_watch = $this->UserWatchMovieList->find('count' , array(
+					'conditions' => array(
+						'UserWatchMovieList.movie_id' => $this->request['pass'][0],
+						'UserWatchMovieList.user_id' => $this->userSession['id'],
+						'UserWatchMovieList.created >' => $last_watch_time
+					)
+				));
+				/*
+				*動画を保存
+				*/
+				if($recent_watch > 0){
+					$data['user_id'] = $this->userSession['id'];
+					$data['created_user_id'] = $this->userSession['id'];
+					$data['modified_user_id'] = $this->userSession['id'];
+					$data['movie_id'] = $this->request['pass'][0];
+					$this->UserWatchMovieList->create();
+					$flg = $this->UserWatchMovieList->save($data);
+				}
 			}
 
 			/*
@@ -179,7 +194,7 @@ class MoviesController extends AppController {
 		*$this->request->dataがない時
 		*/
 		if(empty($this->request->data)){
-		$this->set('gournabi_id' , $this->params['pass'][0]);
+			$this->set('gournabi_id' , $this->params['pass'][0]);
 		}
 
 		if(!empty($this->request->data)){
@@ -283,6 +298,11 @@ class MoviesController extends AppController {
 		//ポストされた場合
 		if(!empty($this->request->data['areaname'])){
 
+			//送信されてきたデータをviewに渡す
+			$areaname = $this->request->data['areaname'];
+
+			$this->set('areaname',$areaname);
+
 			//ユーザープロフィールを検索する
 			$this->User->unbindModel(
 	            array('hasMany' =>array('Movie' , 'UserFavoriteMovieList', 'UserWatchMovieList'))
@@ -367,6 +387,10 @@ class MoviesController extends AppController {
 			$results = $this->Paginator->paginate('Movie');
 		}
 
+		if(empty($results)){
+			$this->Session->setFlash('お探しの動画はありませんでした。');
+		}
+
 		//最新の動画を検索する
 		$this->Movie->unbindModel(
             array('belongsTo' =>array('User'))
@@ -411,7 +435,7 @@ class MoviesController extends AppController {
 				'Movie.del_flg' => 0
 			),
 			'order' => array('UserFavoriteMovieList.created' => 'DESC'),
-			'limit' => 5,
+			'limit' => 20,
 			'recursive' => 3
 		);
 		$UserFavoriteMovieList = $this->Paginator->paginate('UserFavoriteMovieList');
@@ -443,7 +467,7 @@ class MoviesController extends AppController {
 				'Movie.del_flg' => 0
 			),
 			'order' => array('UserWatchMovieList.created' => 'DESC'),
-			'limit' => 5,
+			'limit' => 20,
 			'recursive' => 3
 		);
 		$UserWatchMovieList = $this->Paginator->paginate('UserWatchMovieList');

@@ -15,28 +15,38 @@
         <table class="movie-list-table table">
           <?php for ($i = 0; $i < count($UserWatchMovieList); ++$i): ?>
           <tr class="movie-list-tr">
-            <td class="movie-list-photo-td">
-              <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $UserWatchMovieList[$i]['Movie']['id'])) ;?>" class="movie-list-photo-a">
-                <img src="<?php echo $UserWatchMovieList[$i]['Movie']['thumbnails_url'] ;?>"  class="movie-list-photo">
-              </a>
+            <td class="movie-list-photo-td" style="width:20%;">
+                <?php 
+                  $date = new DateTime($UserWatchMovieList[$i]['UserWatchMovieList']['created']);
+                  echo $date->format('Y年n月t日 H時i分');
+                ;?>
             </td>
-            <td class="movie-list-description-td" valign="top">
-              <div class="movie-list-description-div" style="margin-top:10px;">
+            <td class="movie-list-description-td" valign="top" style="width:38%;">
+              <div class="movie-list-description-div">
                 <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $UserWatchMovieList[$i]['Movie']['id'])) ;?>" class="rest_name_x_reporter_name">
-                  <?php echo $this->upload->uploadImage($UserWatchMovieList[$i]['Movie']['User']['UserProfile'],'UserProfile.avatar',array('style'=>'thumb'),array('class' => 'img-circle reporter-img')); ?>&nbsp;&nbsp;
-                  <span class="view-header-place-name">
-                    <?php echo $UserWatchMovieList[$i]['Movie']['User']['UserProfile']['name'] ;?>
-                  </span>
-
-                  <img src="http://www.meshbelt.com/X.gif" width="30px">
-
                   <span class="view-header-place-name">
                     <?php echo $UserWatchMovieList[$i]['Movie']['Restaurant']['name'] ;?>
                   </span>
                 </a>
               </div>
-              <br>
-              <p><?php echo $UserWatchMovieList[$i]['Movie']['count'] ;?>回再生</p>
+            </td>
+            <td class="movie-list-description-td" valign="top" style="width:4%;">
+              <div class="movie-list-description-div">
+                <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $UserWatchMovieList[$i]['Movie']['id'])) ;?>" class="rest_name_x_reporter_name">
+                  <span class="view-header-place-name">
+                    x
+                  </span>
+                </a>
+              </div>
+            </td>
+            <td class="movie-list-description-td" valign="top" style="width:38%;">
+              <div class="movie-list-description-div">
+                <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $UserWatchMovieList[$i]['Movie']['id'])) ;?>" class="rest_name_x_reporter_name">
+                  <span class="view-header-place-name">
+                    <?php echo $UserWatchMovieList[$i]['Movie']['User']['UserProfile']['name'] ;?>
+                  </span>
+                </a>
+              </div>
             </td>
           </tr>
           <?php endfor ; ?>
