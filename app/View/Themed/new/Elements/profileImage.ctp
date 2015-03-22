@@ -1,3 +1,8 @@
 <div class="col-md-1 header text-align-center">
-  <?php echo $this->Html->image('girl.png', array('alt' => 'Profile Image' , 'class' => 'header-profile-photo img-circle')); ?>
+	<?php
+	if(!empty($userSession)) : ?>
+		<a href="<?php echo $this->html->url(array('controller' => 'Users' , 'action' => 'dashboard')) ;?>">
+			<?php echo $this->upload->uploadImage($userSession['UserProfile'],'UserProfile.avatar',array('style'=>'thumb'),array('class'=>'header-profile-photo img-circle')); ?>
+		</a>
+	<?php endif ; ?>
 </div>

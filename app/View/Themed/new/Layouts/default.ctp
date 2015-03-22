@@ -13,9 +13,8 @@
     <?php echo $this->Html->css('layout/body.css'); ?>
     <?php echo $this->Html->css('layout/footer.css'); ?>
     <style>
-.input-group-addon {
-
-}
+    .input-group-addon {
+    }
     </style>
   </head>
   <body>
