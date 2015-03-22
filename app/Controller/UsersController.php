@@ -2,8 +2,9 @@
 
 class UsersController extends AppController {
 
+    public $components = array('Gurunabi' , 'YouTube' , 'Paginator');
     public $helpers = array('Html', 'Form', 'Session', 'UploadPack.Upload');
-    public $uses = array('User', 'Group', 'UserProfile');
+    public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList' , 'UserWatchMovieList' , 'Tag' , 'TagRelation' , 'UserProfile');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -71,9 +72,61 @@ class UsersController extends AppController {
     }
 
     public function dashboard() {
-
+        //プロフィール表示
         $this->set('user', $this->User->findById($this->Auth->user('id'))
             );
+        //閲覧履歴、お気に入り動画、マイムービーの表示
+        /*
+        *ユーザーが過去に見た動画を検索する（ページネーション）
+        */
+        $UserWatchMovieList = $this->UserWatchMovieList->find('all', array(
+            'conditions' => array('UserWatchMovieList.user_id' => $this->userSession['id']),
+            'order' => array('UserWatchMovieList.created' => 'DESC'),
+            'limit' => 5,
+            'recursive' => 3
+        ));
+        /*
+        *viewにセット
+        */
+        $this->set('UserWatchMovieList', $UserWatchMovieList);
+
+        pr($UserWatchMovieList);
+
+        /*
+        *ユーザーのお気に入りの動画を検索する（ページネーション）
+        */
+        $UserFavoriteMovieList = $this->UserFavoriteMovieList->find('all', array(
+            'conditions' => array('UserFavoriteMovieList.user_id' => $this->userSession['id']),
+            'order' => array('UserFavoriteMovieList.created' => 'DESC'),
+            'limit' => 5,
+            'recursive' => 3
+        ));
+        /*
+        *viewにセット
+        */
+        $this->set('UserFavoriteMovieList', $UserFavoriteMovieList);
+
+        pr($UserFavoriteMovieList);
+
+        /*
+        *ユーザー情報を取得する
+        */
+        $userMoviePostHistory = $this->Movie->find('all', array(
+             'conditions' => array(
+                'Movie.user_id' => $this->userSession['id'],
+                'Movie.del_flg' => 0
+             ),
+             'limit' => 5,
+             'order' => array('Movie.created' => 'DESC'),
+             'recursive' => 2
+        ));
+        
+        /*
+        *ビューに渡す
+        */
+        $this->set('userMoviePostHistory', $userMoviePostHistory);
+
+        pr($userMoviePostHistory);
 
     }
 
@@ -99,7 +152,7 @@ class UsersController extends AppController {
 
     public function passwordedit() {
 
-       $this->set('password', $this->User->findById($this->Auth->user('id')));
+        $this->set('password', $this->User->findById($this->Auth->user('id')));
 
         if ($this->request->is('post')) {
 
