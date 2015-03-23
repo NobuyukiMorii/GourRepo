@@ -18,10 +18,11 @@
 
     <!-- Portfolio Item Row -->
     <div class="row">
-
-        <div class="col-md-8">
-            <?php echo $this->upload->uploadImage($user['UserProfile'],'UserProfile.avatar',array('style'=>'original'),array('class' => 'dashbord_img')); ?>
-        </div>
+    	<?php if(!empty($userSession['UserProfile']['avatar_file_name'])) : ?>
+        	<div class="col-md-8">
+            	<?php echo $this->upload->uploadImage($user['UserProfile'],'UserProfile.avatar',array('style'=>'original'),array('class' => 'dashbord_img')); ?>
+        	</div>
+        <?php endif ;?>
 
         <div class="col-md-4">
             <h3><?php echo $user['UserProfile']['name']; ?></h3>
