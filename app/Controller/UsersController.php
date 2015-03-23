@@ -79,10 +79,19 @@ class UsersController extends AppController {
         /*
         *ユーザーが過去に見た動画を検索する（ページネーション）
         */
+        $this->User->unbindModel(
+            array('hasMany' =>array('Movie', 'UserFavoriteMovieList' , 'UserWatchMovieList'))
+        );
+        $this->Restaurant->unbindModel(
+            array('hasMany' =>array('Movie'))
+        );
+        $this->TagRelation->unbindModel(
+            array('belongsTo' =>array('Movie'))
+        );
         $UserWatchMovieList = $this->UserWatchMovieList->find('all', array(
             'conditions' => array('UserWatchMovieList.user_id' => $this->userSession['id']),
             'order' => array('UserWatchMovieList.created' => 'DESC'),
-            'limit' => 5,
+            'limit' => 4,
             'recursive' => 3
         ));
         /*
@@ -90,23 +99,28 @@ class UsersController extends AppController {
         */
         $this->set('UserWatchMovieList', $UserWatchMovieList);
 
-        pr($UserWatchMovieList);
-
         /*
         *ユーザーのお気に入りの動画を検索する（ページネーション）
         */
+        $this->User->unbindModel(
+            array('hasMany' =>array('Movie', 'UserFavoriteMovieList' , 'UserWatchMovieList'))
+        );
+        $this->Restaurant->unbindModel(
+            array('hasMany' =>array('Movie'))
+        );
+        $this->TagRelation->unbindModel(
+            array('belongsTo' =>array('Movie'))
+        );
         $UserFavoriteMovieList = $this->UserFavoriteMovieList->find('all', array(
             'conditions' => array('UserFavoriteMovieList.user_id' => $this->userSession['id']),
             'order' => array('UserFavoriteMovieList.created' => 'DESC'),
-            'limit' => 5,
+            'limit' => 4,
             'recursive' => 3
         ));
         /*
         *viewにセット
         */
         $this->set('UserFavoriteMovieList', $UserFavoriteMovieList);
-
-        pr($UserFavoriteMovieList);
 
         /*
         *ユーザー情報を取得する
@@ -116,7 +130,7 @@ class UsersController extends AppController {
                 'Movie.user_id' => $this->userSession['id'],
                 'Movie.del_flg' => 0
              ),
-             'limit' => 5,
+             'limit' => 4,
              'order' => array('Movie.created' => 'DESC'),
              'recursive' => 2
         ));

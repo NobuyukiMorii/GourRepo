@@ -15,3 +15,8 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+.noneUnderline:hover {
+	text-decoration: none;
+}
+

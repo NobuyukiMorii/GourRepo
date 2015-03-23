@@ -201,11 +201,11 @@ class MoviesController extends AppController {
 
 			//ぐるなびidを取得する
 			$option['id'] = $this->request->data['gournabi_id'];
-			//同じぐるなびidがあれば新規にsaveする
+			//同じぐるなびidがなければ新規にsaveする
 			$existent_restraunt = $this->Restaurant->find('all' , array(
 				'conditions' => array('Restaurant.gournabi_id' => $option['id'])
 			));
-			//レストランが未登録の場合
+			//レストランが未登録の場合、レストランを登録する
 			if(empty($existent_restraunt)){
 				//レストランをぐるなびから検索して取得する
 				$rest_search_info = $this->Gurunabi->RestSearch($option);
@@ -218,14 +218,19 @@ class MoviesController extends AppController {
 				$rest_save_data['created_user_id'] = $this->userSession['id'];
 				$rest_save_data['modified_user_id'] = $this->userSession['id'];
 				$this->Restaurant->create();
-				$flg_restaurant = $this->Restaurant->save($rest_save_data);
+				try {
+					$flg_restaurant = $this->Restaurant->save($rest_save_data);
+				} catch (Exception $e) {
+					$this->Session->setFlash('レストランの登録に失敗しました。改めて登録しなおして下さい。');
+					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+				}
 				//エラーハンドリング
 				if($flg_restaurant === false){
 					$this->Session->setFlash('レストランの登録に失敗しました。改めて登録しなおして下さい。');
 					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
 				}
 			}
-			//既にレストランが登録してある場合
+			//既にレストランが登録してある場合、レストランを登録しないで、動画だけ登録する
 			if(!empty($existent_restraunt)){
 				$flg_restaurant['Restaurant']['id'] = $existent_restraunt[0]['Restaurant']['id'];
 			}
@@ -271,11 +276,21 @@ class MoviesController extends AppController {
 				//タグそのもの
 				$this->Tag->create();
 				$tag_save_data['name'] = $val;
-				$this->Tag->save($tag_save_data);
+				try {
+					$this->Tag->save($tag_save_data);
+				} catch(Exception $e) {
+					$this->Session->setFlash('タグの登録に失敗しました。改めて登録しなおして下さい。');
+					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+				}
 				//保存する（タグリレーションズ）
 				$tag_relation_save_data['tag_id'] = $this->Tag->getLastInsertID();
 				$this->TagRelation->create();
-				$this->TagRelation->save($tag_relation_save_data);
+				try {
+					$this->TagRelation->save($tag_relation_save_data);
+				} catch(Exception $e) {
+					$this->Session->setFlash('タグの登録に失敗しました。改めて登録しなおして下さい。');
+					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+				}
 			}
 
 			//保存の判定（成功時）
@@ -288,12 +303,6 @@ class MoviesController extends AppController {
 	*検索結果画面
 	*/
 	public function serchResult(){
-		/*
-		*１）キーワードを空欄で区切って配列に変換する
-		*２）moviesのname、description、restaurantsのname、access_line、access_station、category、投稿したユーザーのカラムからfindする
-		*３）その際に、論理削除済みを除外し、moviesテーブルのcount順とする
-		*４）検索したデータをビューに表示する
-		*/
 
 		//ポストされた場合
 		if(!empty($this->request->data['areaname'])){
@@ -467,7 +476,7 @@ class MoviesController extends AppController {
 				'Movie.del_flg' => 0
 			),
 			'order' => array('UserWatchMovieList.created' => 'DESC'),
-			'limit' => 20,
+			'limit' => 50,
 			'recursive' => 3
 		);
 		$UserWatchMovieList = $this->Paginator->paginate('UserWatchMovieList');
@@ -629,7 +638,7 @@ class MoviesController extends AppController {
 			 	'Movie.user_id' => $this->userSession['id'],
 			 	'Movie.del_flg' => 0
 			 ),
-			 'limit' => 5,
+			 'limit' => 20,
 			 'order' => array('Movie.created' => 'DESC'),
 			 'recursive' => 2
 		);
