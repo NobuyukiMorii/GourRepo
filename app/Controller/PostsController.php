@@ -28,7 +28,8 @@ class PostsController extends AppController{
 
 
 	public function index(){ //indexアクション
-		//viewのindex.ctpで$postsとして利用出来る
+		//viewのindex.ctpで$postsが利用出来る
+		//postsにテーブルの値を全て入れている
 		$this->set('posts', $this->Post->find('all'));
 	}
 
