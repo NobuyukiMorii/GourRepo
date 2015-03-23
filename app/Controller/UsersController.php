@@ -126,7 +126,6 @@ class UsersController extends AppController {
         */
         $this->set('userMoviePostHistory', $userMoviePostHistory);
 
-        pr($userMoviePostHistory);
 
     }
 
