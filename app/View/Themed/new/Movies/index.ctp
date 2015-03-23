@@ -1,6 +1,5 @@
 <?php echo $this->Html->css('movies-index/index.css'); ?>
 
-
   <div class="row reccomend-div2">
     <div class="row">
       <div class="col-md-12 center">

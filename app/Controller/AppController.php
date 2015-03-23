@@ -31,10 +31,14 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+    public $uses = array('UserProfile');
+
 	public $helpers = array(
 		'Html' => array('className' => 	'TwitterBootstrap.BootstrapHtml'),
 		'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
-		'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator')
+		'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
+        'UploadPack.Upload'
 	);
 
 	public $components = array(
@@ -84,7 +88,7 @@ class AppController extends Controller {
         /*
         *viewでログインユーザーの情報を受ける変数おw作成
         */
-        $this->set('userSession', $this->Auth->user());
+        $this->set('userSession', $this->User->findById($this->Auth->user('id')));
     }
 
 }
