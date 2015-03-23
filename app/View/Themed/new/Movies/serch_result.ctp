@@ -12,7 +12,7 @@
       <!-- Features Section -->
       <div class="row">
           <div class="col-lg-12">
-            <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view', $results[$i]['Movie']['id'])) ;?>" class="restaurant-name">
+            <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view', $results[$i]['Movie']['id'])) ;?>" class="restaurant-name noneUnderline">
               <h2 class="page-header">
                 <?php echo $this->upload->uploadImage($results[$i]['User']['UserProfile'],'UserProfile.avatar',array('style'=>'thumb'),array('class' => 'img-circle reporter-img')); ?>&nbsp;&nbsp;
                   <?php echo $results[$i]['Restaurant']['name'] ;?>
@@ -64,5 +64,14 @@
       </div>
       <!-- /.row -->
     <?php endfor ; ?>
+
+    <div class="pagination">                         
+      <ul>                                           
+        <?php echo $this->Paginator->prev(__('prev'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+        <?php echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>                              
+        <?php echo $this->Paginator->next(__('next'), array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+      </ul>                                          
+    </div>
+
   </div>
   <!-- /.container -->

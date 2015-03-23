@@ -1,3 +1,5 @@
 <div class="col-md-5 footer-message-div">
-  お店がもっとよくわかる
+	<?php if($this->action !== 'add') : ?>
+  		行きたいお店がもっとよくわかる
+  	<?php endif ;?>
 </div>

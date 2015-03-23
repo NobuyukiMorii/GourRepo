@@ -9,42 +9,45 @@
   <div class="row main-content">
   <!-- 動画とお店の詳細 ============-->
   <div class="row">
-    <div class="col-md-9 col-md-offset-1">
+
+    <div class="col-md-5 col-md-offset-3">
+
       <div class="row">
+        <h3 class="margin-left">閲覧履歴</h3>
         <!-- 動画 ============-->
-        <table class="movie-list-table table">
+        <table class="movie-list-table table table-font">
+
+          <tr class="movie-list-tr">
+            <td class="movie-list-photo-td">
+              時間
+            </td>
+            <td class="movie-list-description-td" valign="top">
+              レストラン名
+            </td>
+            <td class="movie-list-description-td" valign="top">
+              レポーター名
+            </td>
+          </tr>
+
           <?php for ($i = 0; $i < count($UserWatchMovieList); ++$i): ?>
           <tr class="movie-list-tr">
-            <td class="movie-list-photo-td" style="width:20%;">
+            <td class="movie-list-photo-td">
                 <?php 
                   $date = new DateTime($UserWatchMovieList[$i]['UserWatchMovieList']['created']);
                   echo $date->format('Y年n月t日 H時i分');
                 ;?>
             </td>
-            <td class="movie-list-description-td" valign="top" style="width:38%;">
+            <td class="movie-list-description-td" valign="top">
               <div class="movie-list-description-div">
                 <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $UserWatchMovieList[$i]['Movie']['id'])) ;?>" class="rest_name_x_reporter_name">
-                  <span class="view-header-place-name">
-                    <?php echo $UserWatchMovieList[$i]['Movie']['Restaurant']['name'] ;?>
-                  </span>
+                  <?php echo $UserWatchMovieList[$i]['Movie']['Restaurant']['name'] ;?>
                 </a>
               </div>
             </td>
-            <td class="movie-list-description-td" valign="top" style="width:4%;">
+            <td class="movie-list-description-td" valign="top">
               <div class="movie-list-description-div">
                 <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $UserWatchMovieList[$i]['Movie']['id'])) ;?>" class="rest_name_x_reporter_name">
-                  <span class="view-header-place-name">
-                    x
-                  </span>
-                </a>
-              </div>
-            </td>
-            <td class="movie-list-description-td" valign="top" style="width:38%;">
-              <div class="movie-list-description-div">
-                <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $UserWatchMovieList[$i]['Movie']['id'])) ;?>" class="rest_name_x_reporter_name">
-                  <span class="view-header-place-name">
-                    <?php echo $UserWatchMovieList[$i]['Movie']['User']['UserProfile']['name'] ;?>
-                  </span>
+                  <?php echo $UserWatchMovieList[$i]['Movie']['User']['UserProfile']['name'] ;?>                    
                 </a>
               </div>
             </td>

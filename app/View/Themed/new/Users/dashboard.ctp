@@ -1,90 +1,151 @@
-</br ></br >
+<?php echo $this->Html->css('users-dashboard/users-dashboard'); ?>
 
-<fieldset>
-	<legend>ユーザープロフィール</legend>
-	<div class="row">
-		<div class="col-md-2">
-			プロフィール画像	
-		</div>
-		<div class="col-md-10">
-			<!-- ここの一文でサムネイルを表示している。第一引数でデータの入っている配列をしてしてあげている。 -->
-			<?php echo $this->upload->uploadImage($user['UserProfile'],'UserProfile.avatar',array('style'=>'thumb')); ?>
-<!--  			<?php echo $this->Form->create('UserProfile', array('type' => 'file')); ?>
-			<?php echo $this->Form->input('avatar', array('type' => 'file', 'label'=> false)); ?>
-			<?php echo $this->Form->end(__('変更/登録')); ?> -->
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-			名前
-		</div>
-		<div class="col-md-10">
-			<?php echo $user['UserProfile']['name']; ?>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-			メールアドレス
-		</div>
-		<div class="col-md-10">
-			<?php echo $user['User']['email']; ?>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-			好きな食べ物
-		</div>
-		<div class="col-md-10">
-			<?php echo $user['UserProfile']['like_food']; ?>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-			好きなジャンル
-		</div>
-		<div class="col-md-10">
-			<?php echo $user['UserProfile']['like_genre']; ?>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-			よく使う価格帯
-		</div>
-		<div class="col-md-10">
-			<?php echo $user['UserProfile']['like_price_zone']; ?>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-			最寄り駅
-		</div>
-		<div class="col-md-10">
-			<?php echo $user['UserProfile']['near_station']; ?>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-			住んでいる地域
-		</div>
-		<div class="col-md-10">
-			<?php echo $user['UserProfile']['living_area']; ?>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2">
-			自己紹介文
-		</div>
-		<div class="col-md-10">
-			<?php echo $user['UserProfile']['introduction']; ?>
-		</div>
-	</div>
-		<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-10">
-			<a href="<?php echo $this->Html->url(array('controller' => 'users', 'action'=>'profileedit')) ;?>" class="btn btn-default">編集する</a>
-			<a href="<?php echo $this->Html->url(array('controller' => 'users', 'action'=>'passwordedit')) ;?>" class="btn btn-default">パスワード変更</a>
-		</div>
-	</div>
+<!-- Page Content -->
+<div class="container">
 
-</fieldset>
+    <!-- Portfolio Item Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">プロフィール
+                <small>Profile</small>
+                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action'=>'profileedit')) ;?>" class="btn btn-default">編集する</a>
+				<a href="<?php echo $this->Html->url(array('controller' => 'users', 'action'=>'passwordedit')) ;?>" class="btn btn-default">パスワード変更</a>
+				<a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'myMovieIndex')) ;?>" class="btn btn-default">投稿した動画を確認する</a>
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+        <div class="col-md-8">
+            <?php echo $this->upload->uploadImage($user['UserProfile'],'UserProfile.avatar',array('style'=>'original'),array('class' => 'dashbord_img')); ?>
+        </div>
+
+        <div class="col-md-4">
+            <h3><?php echo $user['UserProfile']['name']; ?></h3>
+            <p><?php echo $user['UserProfile']['introduction']; ?></p>
+			<table class="table">
+				<tr>
+					<td>メールアドレス</td>
+					<td><?php echo $user['User']['email']; ?></td>
+				</tr>
+				<tr>
+					<td>好きな食べ物</td>
+					<td><?php echo $user['UserProfile']['like_food']; ?></td>
+				</tr>
+				<tr>
+					<td>好きな食べ物</td>
+					<td><?php echo $user['UserProfile']['like_genre']; ?></td>
+				</tr>
+				<tr>
+					<td>好きな価格帯</td>
+					<td><?php echo $user['UserProfile']['like_price_zone']; ?></td>
+				</tr>
+				<tr>
+					<td>最寄駅</td>
+					<td><?php echo $user['UserProfile']['near_station']; ?></td>
+				</tr>
+				<tr>
+					<td>住んでいる地域</td>
+					<td><?php echo $user['UserProfile']['living_area']; ?></td>
+				</tr>
+        	</table>
+
+    </div>
+    <!-- /.row -->
+
+    <!-- Related Projects Row -->
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h3 class="page-header">
+            	お気に入りのお食事レポート
+            	<a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'userFavoriteMovieList')) ;?>" class="btn btn-default">もっと見る</a>
+            </h3>
+        </div>
+
+        <?php for ($i=0; $i < count($UserFavoriteMovieList); $i++) : ?>
+        	<?php if(isset($UserFavoriteMovieList[$i]['Movie']['Restaurant']['image_url'])) : ?>
+		        <div class="col-sm-3 col-xs-6">
+		            <a href="#">
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+						    <h3 class="panel-title"><?php echo $UserFavoriteMovieList[$i]['Movie']['Restaurant']['name'] ;?></h3>
+						  </div>
+						  <div class="panel-body">
+		                	<img class="img-responsive portfolio-item rest_photo" src="<?php echo $UserFavoriteMovieList[$i]['Movie']['Restaurant']['image_url'] ;?>" alt="photo">
+		                	<table class="table table-font">
+								<tr>
+									<td>レポーター名</td>
+									<td><?php echo $UserFavoriteMovieList[$i]['Movie']['User']['UserProfile']['name'] ;?></td>
+								</tr>
+								<tr>
+									<td>動画のタイトル</td>
+									<td><?php echo $UserFavoriteMovieList[$i]['Movie']['title'] ; ?></td>
+								</tr>
+								<tr>
+									<td>動画の紹介</td>
+									<td><?php echo $UserFavoriteMovieList[$i]['Movie']['description'] ; ?></td>
+								</tr>
+				        	</table>
+
+	
+						  </div>
+						</div>
+		            </a>
+		        </div>
+		    <?php endif ;?>
+    	<?php endfor ; ?>
+
+    </div>
+    <!-- /.row -->
+
+    <!-- Related Projects Row -->
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h3 class="page-header">
+            	最近見たレポート
+            	<a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'userWatchMovieList')) ;?>" class="btn btn-default">もっと見る</a>
+            </h3>
+        </div>
+
+        <?php for ($i=0; $i < count($UserWatchMovieList); $i++) : ?>
+        	<?php if(isset($UserWatchMovieList[$i]['Movie']['Restaurant']['image_url'])) : ?>
+		        <div class="col-sm-3 col-xs-6">
+		            <a href="#">
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+						    <h3 class="panel-title"><?php echo $UserWatchMovieList[$i]['Movie']['Restaurant']['name'] ;?></h3>
+						  </div>
+						  <div class="panel-body">
+		                	<img class="img-responsive portfolio-item rest_photo" src="<?php echo $UserWatchMovieList[$i]['Movie']['Restaurant']['image_url'] ;?>" alt="photo">
+		                	<table class="table table-font">
+								<tr>
+									<td>レポーター名</td>
+									<td><?php echo $UserWatchMovieList[$i]['Movie']['User']['UserProfile']['name'] ;?></td>
+								</tr>
+								<tr>
+									<td>動画のタイトル</td>
+									<td><?php echo $UserWatchMovieList[$i]['Movie']['title'] ; ?></td>
+								</tr>
+								<tr>
+									<td>動画の紹介</td>
+									<td><?php echo $UserWatchMovieList[$i]['Movie']['description'] ; ?></td>
+								</tr>
+				        	</table>
+						  </div>
+						</div>
+		            </a>
+		        </div>
+		    <?php endif ;?>
+    	<?php endfor ; ?>
+
+    </div>
+    <!-- /.row -->
+
+
+</div>
+<!-- /.container -->
