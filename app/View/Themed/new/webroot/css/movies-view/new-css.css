@@ -1,0 +1,44 @@
+.movie-new {
+	width:800px;
+	height: 500px;
+	display: block; 
+	margin: 0px auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.movie-title-new {
+
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+    margin-left: 50px;
+}
+
+.thumbnails {
+	width: 100%;
+}
+
+.zenbu { 
+	display: block;
+	font-size: 1px;
+	color: black;
+}
+
+.hover:hover {
+	text-decoration: none;
+}
+
+.first-td {
+	width: 60px;
+	height: 1px;
+}
+
+.margin-left-new-2 {
+	margin-left: -100px;
+}
+
+.margin-bottom {
+	margin-bottom: 10px;
+}

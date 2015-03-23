@@ -131,7 +131,7 @@ class MoviesController extends AppController {
 					'not' => array('Movie.id' => $this->request['pass'][0])
 				),
 				'recursive' => 2,
-				'limit' => 10
+				'limit' => 5
 			));
 
 			/*

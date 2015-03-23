@@ -28,6 +28,8 @@ class UsersController extends AppController {
 
     public function signup() {
 
+        $this->autoLayout = false;
+
         if (!$this->request->is('post')) {
             return;
         }
@@ -51,9 +53,11 @@ class UsersController extends AppController {
     }
 
     public function login() {
+
+        $this->autoLayout = false;
+
         if ($this->request->is('post')) {
 
-// pr($this->request->data['User']['del_flg']);
             if ($this->Auth->login()) {
                 if ($this->Auth->user('del_flg') == 1) {
                 $this->Session->setFlash(__('削除されています。'));
