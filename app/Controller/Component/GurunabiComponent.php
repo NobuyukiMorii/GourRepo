@@ -6,12 +6,18 @@ class GurunabiComponent extends Component {
     *xml→連想配列への変換
     */
     public function parseXmlToArray($query) {
+    		echo "queryの表示";
+    		pr($query);
 			//ぐるなびURLにアクセスしてxmlを読み込む
 			$xml = simplexml_load_file($query);
 			//xml形式のデータを連想配列に変換する
 			$xml = get_object_vars($xml);
+			echo "xmlの表示";
+			pr($xml);
 			//残ったSimpleXMLElementオブジェクトをarrayにキャストする
 			$data = json_decode(json_encode($xml), true);
+			echo "$dataの表示";
+			pr($data);
 			//値を返す
 			return $data;
     }
@@ -34,6 +40,10 @@ class GurunabiComponent extends Component {
 		*セレクトボックス用の配列に変換
 		*/
 		foreach ($pref_serch_array['pref'] as $key => $value) {
+echo "keyの表示";
+echo "$valueの表示";
+pr($key);
+pr($value);
 			$pref_serch_info[$value['pref_code']] = $value['pref_name'];
 		}
 		/*
@@ -154,6 +164,7 @@ class GurunabiComponent extends Component {
 		*データの取得+連想配列への変換
 		*/
 		$category_serch_large_array = $this->parseXmlToArray($access_url);
+		pr($category_serch_large_array);
 		/*
 		*セレクトボックス用の配列に変換
 		*/
@@ -215,6 +226,8 @@ class GurunabiComponent extends Component {
 		$hit_per_page = '&hit_per_page=30';
 		$sort = '&sort=2'; //1が店舗名順、2が業態順
 		$access_url = $base_url . $key . $format . $hit_per_page . $sort;
+echo "$access_urlの表示";
+		pr($access_url);
 		/*
 		*アクセスurlの作成（オプション）
 		*/
