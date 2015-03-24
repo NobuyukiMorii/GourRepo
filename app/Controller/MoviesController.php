@@ -18,7 +18,7 @@ class MoviesController extends AppController {
 	//MoviesControllerの中でログイン無しで入れるところの設定
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'serchResult', 'view');
+        $this->Auth->allow('index', 'serchResult', 'view' , 'reporterMovieList');
     }
 
     public function isAuthorized($user) {
@@ -143,8 +143,12 @@ class MoviesController extends AppController {
 			$count_data = array('Movie' => array('id' => $this->request['pass'][0] , 'count' => $streaming_count));
 			// 更新する項目（フィールド指定）
 			$fields = array('count');
-			$flg_movie_count = $this->Movie->save($count_data, false, $fields);
-
+			$this->Movie->id = $this->request['pass'][0];
+			try {
+				$flg_movie_count = $this->Movie->save($count_data, false, $fields);
+			} catch (Exception $e) {
+				$this->Session->setFlash('カウント回数の更新に失敗しました。');
+			}
 			if(empty($flg_movie_count)){
 				$this->Session->setFlash('なんか変だったよ。');
 			}
@@ -456,7 +460,7 @@ class MoviesController extends AppController {
 			),
 			'order' => array('UserFavoriteMovieList.created' => 'DESC'),
 			'limit' => 20,
-			'recursive' => 3
+			'recursive' => 2
 		);
 		$UserFavoriteMovieList = $this->Paginator->paginate('UserFavoriteMovieList');
 		/*
@@ -488,7 +492,7 @@ class MoviesController extends AppController {
 			),
 			'order' => array('UserWatchMovieList.created' => 'DESC'),
 			'limit' => 50,
-			'recursive' => 3
+			'recursive' => 2
 		);
 		$UserWatchMovieList = $this->Paginator->paginate('UserWatchMovieList');
 		/*
@@ -667,5 +671,46 @@ class MoviesController extends AppController {
 		$this->set(compact('userMoviePostHistory'));
 	}
 
+	/*
+	*レポーターの動画を一覧で見る画面
+	*/
+	public function reporterMovieList($id){
+		/*
+		*ムービーの取得
+		*/
+		$this->User->unbindModel(
+            array('hasMany' =>array('Movie', 'UserFavoriteMovieList' , 'UserWatchMovieList'))
+        );
+		$this->Restaurant->unbindModel(
+            array('hasMany' =>array('Movie'))
+        );
+		$this->TagRelation->unbindModel(
+            array('belongsTo' =>array('Movie'))
+        );
+		$this->Paginator->settings = array(
+			 'conditions' => array(
+			 	'Movie.user_id' => $id,
+			 	'Movie.del_flg' => 0
+			 ),
+			 'limit' => 20,
+			 'order' => array('Movie.created' => 'DESC'),
+			 'recursive' => 2
+		);
+		$movie = $this->Paginator->paginate('Movie');
+		/*
+		*レポーターの検索
+		*/
+		$this->Movie->unbindModel(
+            array('belongsTo' =>array('User'))
+        );
+		$this->User->unbindModel(
+            array('hasMany' =>array('Movie', 'UserFavoriteMovieList' , 'UserWatchMovieList'))
+        );
+		$user = $this->User->findById($id);
+		/*
+		*ビューに送る
+		*/
+		$this->set(compact('movie' , 'user'));
+	}
 
 }
