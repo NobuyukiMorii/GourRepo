@@ -108,7 +108,7 @@
 
         <div class="col-lg-12">
             <h3 class="page-header">
-            	最近見たレポート
+            	最近見たお食事レポート
             	<a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'userWatchMovieList')) ;?>" class="btn btn-default">もっと見る</a>
             </h3>
         </div>
