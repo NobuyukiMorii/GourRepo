@@ -33,8 +33,6 @@ class RestaurantsController extends AppController{
 echo "capppppppppptegoriesの表示";
 pr($categories);
 		array_shift($categories);
-		echo "$categoriesの表示";
-		pr($categories);
 		exit;
 		//urlを作成する
 		$page_number = 1;
