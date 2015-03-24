@@ -82,3 +82,106 @@
 			<?php echo $this->Form->end(__('変更')); ?>
 
 </fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php echo $this->Html->css('users-profileedit/users-profileedit'); ?>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Portfolio Item Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">プロフィール
+                <small>Profile</small>
+                <a href="<?php echo $this->Html->url(array('controller' => 'users', 'action'=>'profileedit')) ;?>" class="btn btn-default">編集する</a>
+				<a href="<?php echo $this->Html->url(array('controller' => 'users', 'action'=>'passwordedit')) ;?>" class="btn btn-default">パスワード変更</a>
+				<a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'myMovieIndex')) ;?>" class="btn btn-default">投稿した動画を確認する</a>
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+    	<?php if(!empty($userSession['UserProfile']['avatar_file_name'])) : ?>
+        	<div class="col-md-8">
+            	<?php echo $this->upload->uploadImage($user['UserProfile'],'UserProfile.avatar',array('style'=>'original'),array('class' => 'dashbord_img')); ?>
+ 			<?php echo $this->Form->create('UserProfile', array('type' => 'file')); ?>
+			<?php echo $this->Form->input('avatar', array('type' => 'file', 'label' => false)); ?>
+			<button type="submit" class="btn btn-default">プロフィール画像を変更</button>
+			<?php echo $this->Form->end(); ?>
+        	</div>
+        <?php endif ;?>
+
+        <div class="col-md-4">
+            <h3><?php echo $user['UserProfile']['name']; ?></h3>
+            <p><?php echo $user['UserProfile']['introduction']; ?></p>
+			<table class="table">
+				<tr>
+					<td>メールアドレス</td>
+					<td><?php echo $user['User']['email']; ?></td>
+				</tr>
+				<tr>
+					<td>好きな食べ物</td>
+					<td><?php echo $user['UserProfile']['like_food']; ?></td>
+				</tr>
+				<tr>
+					<td>好きな食べ物</td>
+					<td><?php echo $user['UserProfile']['like_genre']; ?></td>
+				</tr>
+				<tr>
+					<td>好きな価格帯</td>
+					<td><?php echo $user['UserProfile']['like_price_zone']; ?></td>
+				</tr>
+				<tr>
+					<td>最寄駅</td>
+					<td><?php echo $user['UserProfile']['near_station']; ?></td>
+				</tr>
+				<tr>
+					<td>住んでいる地域</td>
+					<td><?php echo $user['UserProfile']['living_area']; ?></td>
+				</tr>
+        	</table>
+
+    </div>
+    <!-- /.row -->
+
+
+
+</div>
+<!-- /.container -->
