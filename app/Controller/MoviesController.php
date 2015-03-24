@@ -8,7 +8,7 @@ class MoviesController extends AppController {
 	/*
 	*利用するモデル
 	*/
-	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList' , 'UserWatchMovieList' , 'Tag' , 'TagRelation' , 'UserProfile');
+	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList' , 'UserWatchMovieList' , 'Tag' , 'TagRelation' , 'UserProfile' , 'Preference' , 'LargeCategory' , 'SmallCategory' , 'LargeArea' , 'MiddleArea' , 'SmallArea');
 
 	/*
 	*利用するコンポーネント
@@ -24,7 +24,7 @@ class MoviesController extends AppController {
     public function isAuthorized($user) {
     	//contributorに権限を与えております。
         if (isset($user['role']) && $user['role'] === 'contributor') {
-        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'userFavoriteMovieList', 'userWatchMovieList', 'edit', 'delete', 'myMovieIndex'))) {
+        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'selectRestForAddMovie' , 'userFavoriteMovieList', 'userWatchMovieList', 'edit', 'delete', 'myMovieIndex'))) {
         		return true;
         	}
         }
@@ -161,10 +161,9 @@ class MoviesController extends AppController {
 	}
 
 	/*
-	*「アップロードボタン」が押された時のムービーの選択画面
+	*「アップロードボタン」が押された時のムービーの選択画面（DB利用しない）
 	*/
 	public function selectMovieForAdd(){
-
 		//都道府県マスタ取得
 		$pref_search_info = $this->Gurunabi->prefSearch();
 		//大業態マスタ取得
@@ -179,6 +178,18 @@ class MoviesController extends AppController {
 		$rest_search_info = $this->Gurunabi->ValidateRestInfo($rest_search_info);
 
 		$this->set(compact('pref_search_info' , 'category_large_search_info' , 'rest_search_info'));
+	}
+
+	/*
+	*「アップロードボタン」が押された時のムービーの選択画面（DB利用）
+	*/
+	public function selectRestForAddMovie(){
+
+
+
+
+
+
 	}
 
 	/*
@@ -655,5 +666,6 @@ class MoviesController extends AppController {
 		*/
 		$this->set(compact('userMoviePostHistory'));
 	}
+
 
 }
