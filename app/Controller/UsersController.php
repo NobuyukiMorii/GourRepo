@@ -28,11 +28,16 @@ class UsersController extends AppController {
 
     public function signup() {
 
-
+        $this->autoLayout = false;
 
         if (!$this->request->is('post')) {
             return;
         }
+
+        //usersテーブルのautoincrementの次回値を取得
+        $query = $this->User->query("SHOW TABLE STATUS LIKE 'users'");
+        $this->request->data['User']['created_user_id'] = $query['Auto_increment'];
+        $this->request->data['User']['modified_user_id'] = $query['Auto_increment'];
 
         $this->User->create();
         if ($this->User->save($this->request->data)) {

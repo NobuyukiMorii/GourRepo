@@ -48,3 +48,25 @@ Our primary goal is to provide a structured framework that enables PHP users at 
 [CONTRIBUTING.md](CONTRIBUTING.md) - Quick pointers for contributing to the CakePHP project
 
 [CookBook "Contributing" Section (2.x)](http://book.cakephp.org/2.0/en/contributing.html) [(3.0)](http://book.cakephp.org/3.0/en/contributing.html) - Version-specific details about contributing to the project
+
+## サーバに移行するときの注意点
+
+[timezoneの書き換え] 
+core.phpに以下を追加
+date_default_timezone_set(‘Asia/Manila’); 
+
+[tmpフォルダのアクセス権の変更]
+chmod -R 777 tmp
+
+[database.phpの変更]
+'login' => 'campDevelopment',
+'password' => 'campDevelopment',
+'database' => 'campDevelopment',
+
+[httpd.confの追記]
+<Directory /var/www/html/cakephp>
+    Options FollowSymLinks
+    AllowOverride All
+    Order Allow,Deny
+    Allow from all
+</Directory> 
