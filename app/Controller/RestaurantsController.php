@@ -97,6 +97,17 @@ class RestaurantsController extends AppController{
 	}
 
 
+	// public function reutaurants_add(){
+	// 	if ($this->request->is('post')){
+	// 		$this->Restaurant->create();
+	// 		if ($this->Restaurants->save($this->request->data)){
+	// 			$this->Session->setFlash(__('Your post has been saved.'));
+	// 			return $this->redirect(array('action' => 'index'));
+	// 		}
+	// 		$this->Session->setFlash(__('Unable to add your post.'));
+	// 	}
+	// }
+
 
 	/*
 	*ここから先のファンクションにアクセスすると、カテゴリーやエリアのDBが更新されてしまいます。基本的にアクセスしないでください。
