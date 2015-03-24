@@ -97,6 +97,7 @@ class RestaurantsController extends AppController{
 	}
 
 
+
 	// public function reutaurants_add(){
 	// 	if ($this->request->is('post')){
 	// 		$this->Restaurant->create();
