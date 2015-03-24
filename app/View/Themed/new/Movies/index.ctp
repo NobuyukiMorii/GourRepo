@@ -14,12 +14,15 @@
       <!-- Features Section -->
       <div class="row">
           <div class="col-lg-12">
-            <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view', $data[$i]['Movie']['id'])) ;?>" class="restaurant-name">
-              <h2 class="page-header">
-                <?php echo $this->upload->uploadImage($data[$i]['User']['UserProfile'],'UserProfile.avatar',array('style'=>'thumb'),array('class' => 'img-circle reporter-img')); ?>&nbsp;&nbsp;
-                  <?php echo $data[$i]['Restaurant']['name'] ;?>
-              </h2>
-            </a>
+            <h2 class="page-header">
+              <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'reporterMovieList', $data[$i]['User']['id'])) ;?>">
+                <?php echo $this->upload->uploadImage($data[$i]['User']['UserProfile'],'UserProfile.avatar',array('style'=>'thumb'),array('class' => 'img-circle reporter-img')); ?>
+              </a>
+              &nbsp;&nbsp;
+              <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view', $data[$i]['Movie']['id'])) ;?>" class="restaurant-name">
+                <span class="black"><?php echo $data[$i]['Restaurant']['name'] ;?></span>
+              </a>
+            </h2>
           </div>
 
           <div class="col-md-4">
