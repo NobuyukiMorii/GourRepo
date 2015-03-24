@@ -45,7 +45,103 @@ class GurunabiComponent extends Component {
 	}
 
 	/*
-	*カテゴリーマスタを取得する
+	*エリアマスタ（大）を取得する
+	*/
+	public function AreaLargeSearch(){
+		/*
+		*URLの定義
+		*/
+		$base_url = 'http://api.gnavi.co.jp/ver2/GAreaLargeSearchAPI/?keyid=';
+		$key = '6f13d54e08f1c5397b1aaa3091cab074';
+		$access_url = $base_url . $key;
+		/*
+		*データの取得+連想配列への変換
+		*/
+		$pref_serch_array = $this->parseXmlToArray($access_url);
+		/*
+		*セレクトボックス用の配列に変換
+		*/
+		foreach ($pref_serch_array['garea_large'] as $key => $value) {
+			$pref_serch_info[$value['areacode_l']]['name'] = $value['areaname_l'];
+			$pref_serch_info[$value['areacode_l']]['pref_code'] = $value['pref']['pref_code'];
+			$pref_serch_info[$value['areacode_l']]['areaname_l'] = $value['pref']['pref_name'];
+		}
+		/*
+		*指定なしの場合の配列を追加
+		*/
+		$not_specified_array[0] = "指定なし";
+		array_unshift($pref_serch_info, $not_specified_array[0]);
+		return $pref_serch_info;
+	}
+
+	/*
+	*エリアマスタ（中）を取得する
+	*/
+	public function AreaMiddleSearch(){
+		/*
+		*URLの定義
+		*/
+		$base_url = 'http://api.gnavi.co.jp/ver2/GAreaMiddleSearchAPI/?keyid=';
+		$key = '6f13d54e08f1c5397b1aaa3091cab074';
+		$access_url = $base_url . $key;
+		/*
+		*データの取得+連想配列への変換
+		*/
+		$pref_serch_array = $this->parseXmlToArray($access_url);
+		/*
+		*セレクトボックス用の配列に変換
+		*/
+		foreach ($pref_serch_array['garea_middle'] as $key => $value) {
+			$pref_serch_info[$value['areacode_m']]['name'] = $value['areaname_m'];
+			$pref_serch_info[$value['areacode_m']]['l_name'] = $value['garea_large']['areacode_l'];
+			$pref_serch_info[$value['areacode_m']]['l_code'] = $value['garea_large']['areaname_l'];
+			$pref_serch_info[$value['areacode_m']]['pref_name'] = $value['pref']['pref_code'];
+			$pref_serch_info[$value['areacode_m']]['pref_code'] = $value['pref']['pref_name'];
+		}
+		/*
+		*指定なしの場合の配列を追加
+		*/
+		$not_specified_array[0] = "指定なし";
+		array_unshift($pref_serch_info, $not_specified_array[0]);
+		return $pref_serch_info;
+	}
+
+	/*
+	*エリアマスタ（小）を取得する
+	*/
+	public function AreaSmallSearch(){
+		/*
+		*URLの定義
+		*/
+		$base_url = 'http://api.gnavi.co.jp/ver2/GAreaSmallSearchAPI/?keyid=';
+		$key = '6f13d54e08f1c5397b1aaa3091cab074';
+		$access_url = $base_url . $key;
+		/*
+		*データの取得+連想配列への変換
+		*/
+		$pref_serch_array = $this->parseXmlToArray($access_url);
+		/*
+		*セレクトボックス用の配列に変換
+		*/
+		foreach ($pref_serch_array['garea_small'] as $key => $value) {
+			$pref_serch_info[$value['areacode_s']]['name'] = $value['areaname_s'];
+			$pref_serch_info[$value['areacode_s']]['l_name'] = $value['garea_large']['areaname_l'];
+			$pref_serch_info[$value['areacode_s']]['l_code'] = $value['garea_large']['areacode_l'];
+			$pref_serch_info[$value['areacode_s']]['m_name'] = $value['garea_middle']['areaname_m'];
+			$pref_serch_info[$value['areacode_s']]['m_code'] = $value['garea_middle']['areacode_m'];
+			$pref_serch_info[$value['areacode_s']]['pref_name'] = $value['pref']['pref_name'];
+			$pref_serch_info[$value['areacode_s']]['pref_code'] = $value['pref']['pref_code'];
+		}
+		/*
+		*指定なしの場合の配列を追加
+		*/
+		$not_specified_array[0] = "指定なし";
+		array_unshift($pref_serch_info, $not_specified_array[0]);
+		return $pref_serch_info;
+	}
+
+	/*
+	*カテゴリーマスタを取得する（大）
 	*/
 	public function categoryLargeSearch(){
 		/*
@@ -63,6 +159,36 @@ class GurunabiComponent extends Component {
 		*/
 		foreach ($category_serch_large_array['category_l'] as $key => $value) {
 			$category_serch_large_info[$value['category_l_code']] = $value['category_l_name'];
+		}
+		/*
+		*指定なしの場合の配列を追加
+		*/
+		$not_specified_array[0] = "指定なし";
+		array_unshift($category_serch_large_info, $not_specified_array[0]);
+		return $category_serch_large_info;
+
+	}
+
+	/*
+	*カテゴリーマスタを取得する（小）
+	*/
+	public function categorySmallSearch(){
+		/*
+		*URLの定義
+		*/
+		$base_url = 'http://api.gnavi.co.jp/ver1/CategorySmallSearchAPI/?keyid=';
+		$key = '6f13d54e08f1c5397b1aaa3091cab074';
+		$access_url = $base_url . $key;
+		/*
+		*データの取得+連想配列への変換
+		*/
+		$category_serch_large_array = $this->parseXmlToArray($access_url);
+		/*
+		*セレクトボックス用の配列に変換
+		*/
+		foreach ($category_serch_large_array['category_s'] as $key => $value) {
+			$category_serch_large_info[$value['category_s_code']]['name'] = $value['category_s_name'];
+			$category_serch_large_info[$value['category_s_code']]['l_code'] = $value['category_l_code'];
 		}
 		/*
 		*指定なしの場合の配列を追加

@@ -78,7 +78,6 @@ class AppController extends Controller {
         *ビューの表示
         */
         $this->theme = 'new';
-        //$this->layout = "mobile";
 
         /*
         *controllerでログインユーザーを呼び出すメソッドを作成
