@@ -460,7 +460,7 @@ class MoviesController extends AppController {
 			),
 			'order' => array('UserFavoriteMovieList.created' => 'DESC'),
 			'limit' => 20,
-			'recursive' => 2
+			'recursive' => 3
 		);
 		$UserFavoriteMovieList = $this->Paginator->paginate('UserFavoriteMovieList');
 		/*
@@ -492,7 +492,7 @@ class MoviesController extends AppController {
 			),
 			'order' => array('UserWatchMovieList.created' => 'DESC'),
 			'limit' => 50,
-			'recursive' => 2
+			'recursive' => 3
 		);
 		$UserWatchMovieList = $this->Paginator->paginate('UserWatchMovieList');
 		/*

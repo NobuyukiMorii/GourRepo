@@ -99,21 +99,21 @@
                 <div class="caption-full">
                     <h4 class="pull-right"><?php echo $movie['Movie']['count'] ;?>回再生</h4>
                     <h4 class="movie-title-new">
-                      <a href="#">
-                        <small>タイトル</small>
-                        <?php echo $movie['Movie']['title'] ;?><br>
-                      </a>
+                      <small>タイトル</small>
+                      <?php echo $movie['Movie']['title'] ;?><br>
                     </h4>
                     <h6 class="movie-title-new">
                       <small>紹介文</small><br>
                       <?php echo $movie['Movie']['description'] ;?>
                     </h6>
                     <div align="right">
+                    <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'reporterMovieList', $movie['User']['id'])) ;?>" class="reporter">
                     <h6 class="movie-title-new">
                       <small>レポーター</small>&nbsp;&nbsp;&nbsp;&nbsp;
-                      <?php echo $movie['User']['UserProfile']['name'] ;?>&nbsp;&nbsp;&nbsp;&nbsp;
-                      <?php echo $this->upload->uploadImage($movie['User']['UserProfile'],'UserProfile.avatar',array('style'=>'thumb'),array('class' => 'img-circle reporter-img')); ?>
+                        <?php echo $movie['User']['UserProfile']['name'] ;?>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <?php echo $this->upload->uploadImage($movie['User']['UserProfile'],'UserProfile.avatar',array('style'=>'thumb'),array('class' => 'img-circle reporter-img')); ?>
                     </h6>
+                    </a>
                   </div>
                     
                 </div>

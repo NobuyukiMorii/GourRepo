@@ -26,7 +26,7 @@
           <?php endif ; ?>
 
             <div class="col-sm-3 col-xs-6">
-              <a href="#">
+              <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $UserFavoriteMovieList[$i]['Movie']['id'])) ;?>" class="text-decorate">
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title"><?php echo $UserFavoriteMovieList[$i]['Movie']['Restaurant']['name'] ;?></h3>
@@ -46,19 +46,15 @@
                         <td>動画の紹介</td>
                         <td><?php echo $UserFavoriteMovieList[$i]['Movie']['description'] ; ?></td>
                       </tr>
-                      <tr>
-                        <td>
-                          <?php echo $this->Form->create('UserFavoriteMovieLists', array('type' => 'post' , 'action' => 'delete')); ?>
-                          <?php echo $this->Form->input('UserFavoriteMovieListsController.id', array(
-                              'label' => false,
-                              'type' => 'hidden',
-                              'value' => $UserFavoriteMovieList[$i]['UserFavoriteMovieList']['id'],
-                          )); ?>
-                          <button type="submit" class="btn btn-warning">お気に入りから削除</button>
-                          <?php echo $this->Form->end(); ?>
-                        </td>
-                      </tr>
                     </table>
+                    <?php echo $this->Form->create('UserFavoriteMovieLists', array('type' => 'post' , 'action' => 'delete')); ?>
+                    <?php echo $this->Form->input('UserFavoriteMovieListsController.id', array(
+                        'label' => false,
+                        'type' => 'hidden',
+                        'value' => $UserFavoriteMovieList[$i]['UserFavoriteMovieList']['id'],
+                    )); ?>
+                    <button type="submit" class="btn btn-warning btn-block">お気に入りから削除</button>
+                    <?php echo $this->Form->end(); ?>
                   </div>
                 </div>
               </a>

@@ -24,32 +24,33 @@
         <div class="col-md-4">
             <h3><?php echo $user['UserProfile']['name']; ?></h3>
             <p><?php echo $user['UserProfile']['introduction']; ?></p>
-			<table class="table">
-				<tr>
-					<td>メールアドレス</td>
-					<td><?php echo $user['User']['email']; ?></td>
-				</tr>
-				<tr>
-					<td>好きな食べ物</td>
-					<td><?php echo $user['UserProfile']['like_food']; ?></td>
-				</tr>
-				<tr>
-					<td>好きな食べ物</td>
-					<td><?php echo $user['UserProfile']['like_genre']; ?></td>
-				</tr>
-				<tr>
-					<td>好きな価格帯</td>
-					<td><?php echo $user['UserProfile']['like_price_zone']; ?></td>
-				</tr>
-				<tr>
-					<td>最寄駅</td>
-					<td><?php echo $user['UserProfile']['near_station']; ?></td>
-				</tr>
-				<tr>
-					<td>住んでいる地域</td>
-					<td><?php echo $user['UserProfile']['living_area']; ?></td>
-				</tr>
-        	</table>
+
+      			<table class="table">
+      				<tr>
+      					<td>メールアドレス</td>
+      					<td><?php echo $user['User']['email']; ?></td>
+      				</tr>
+      				<tr>
+      					<td>好きな食べ物</td>
+      					<td><?php echo $user['UserProfile']['like_food']; ?></td>
+      				</tr>
+      				<tr>
+      					<td>好きな食べ物</td>
+      					<td><?php echo $user['UserProfile']['like_genre']; ?></td>
+      				</tr>
+      				<tr>
+      					<td>好きな価格帯</td>
+      					<td><?php echo $user['UserProfile']['like_price_zone']; ?></td>
+      				</tr>
+      				<tr>
+      					<td>最寄駅</td>
+      					<td><?php echo $user['UserProfile']['near_station']; ?></td>
+      				</tr>
+      				<tr>
+      					<td>住んでいる地域</td>
+      					<td><?php echo $user['UserProfile']['living_area']; ?></td>
+      				</tr>
+            </table>
 
     </div>
     <!-- /.row -->
@@ -71,7 +72,7 @@
           <?php endif ; ?>
 
             <div class="col-sm-3 col-xs-6">
-              <a href="#">
+              <a href="<?php echo $this->Html->url(array('controller' => 'movies' , 'action' => 'view' , $movie[$i]['Movie']['id'])) ;?>">
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title"><?php echo $movie[$i]['Restaurant']['name'] ;?></h3>

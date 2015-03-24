@@ -20,3 +20,18 @@
 	text-decoration: none;
 }
 
+.black {
+	color: black;
+}
+
+.text-decoration {
+	text-decoration: none;
+}
+
+.cursor {
+	cursor:pointer;
+}
+
+.description:hover {
+	text-decoration: none;
+}

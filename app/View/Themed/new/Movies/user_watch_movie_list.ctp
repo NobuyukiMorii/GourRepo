@@ -46,7 +46,7 @@
             </td>
             <td class="movie-list-description-td" valign="top">
               <div class="movie-list-description-div">
-                <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $UserWatchMovieList[$i]['Movie']['id'])) ;?>" class="rest_name_x_reporter_name">
+                <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'reporterMovieList' , $UserWatchMovieList[$i]['Movie']['User']['id'])) ;?>" class="rest_name_x_reporter_name">
                   <?php echo $UserWatchMovieList[$i]['Movie']['User']['UserProfile']['name'] ;?>                    
                 </a>
               </div>
