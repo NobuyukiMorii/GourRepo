@@ -121,4 +121,102 @@ class RestaurantsController extends AppController{
 	// 	}
 	// }
 
+	/*
+	*ここから先のファンクションにアクセスすると、カテゴリーやエリアのDBが更新されてしまいます。基本的にアクセスしないでください。
+	*/
+
+	/*
+	*都道府県を取得する
+	*/
+	public function getPrefDB(){
+		$this->autoRender = false;
+		//都道府県マスタ取得
+		$pref_search_info = $this->Gurunabi->prefSearch();
+		array_shift($pref_search_info);
+
+		foreach ($pref_search_info as $key => $value) {
+			$data['code'] = $key;
+			$data['name'] = $value;
+			$this->Preference->create();
+			$this->Preference->save($data);
+		}
+	}
+
+	/*
+	*カテゴリーを取得する（大）
+	*/
+	public function getCategoryLarge(){
+		$this->autoRender = false;
+		//カテゴリーマスタ取得
+		$category_large_search_info = $this->Gurunabi->categoryLargeSearch();
+		array_shift($category_large_search_info);
+
+		foreach ($category_large_search_info as $key => $value) {
+			$data['code'] = $key;
+			$data['name'] = $value;
+			$this->LargeCategory->create();
+			$this->LargeCategory->save($data);
+		}
+	}
+
+	/*
+	*カテゴリーを取得する（小）
+	*/
+	public function getCategorySmall(){
+		$this->autoRender = false;
+		//カテゴリーマスタ取得
+		$category_small_search_info = $this->Gurunabi->categorySmallSearch();
+		array_shift($category_small_search_info);
+
+		foreach ($category_small_search_info as $key => $value) {
+			$data['code'] = $key;
+			$data['name'] = $value['name'];
+			$data['l_code'] = $value['l_code'];
+			$this->SmallCategory->create();
+			$this->SmallCategory->save($data);
+		}
+	}
+
+	/*
+	*エリアマスタ（大）を取得する
+	*/
+	public function getAreaLargeSearch(){
+		$this->autoRender = false;
+		//カテゴリーマスタ取得
+		$areas = $this->Gurunabi->AreaLargeSearch();
+		array_shift($areas);
+
+		foreach ($areas as $key => $value) {
+			$data['code'] = $key;
+			$data['name'] = $value['name'];
+			$data['pref_code'] = $value['pref_code'];
+			$data['pref_name'] = $value['areaname_l'];
+			$this->LargeArea->create();
+			$this->LargeArea->save($data);
+		}
+	}
+
+	/*
+	*エリアマスタ（小）を取得する
+	*/
+	public function getAreaSmallSearch(){
+		$this->autoRender = false;
+		//カテゴリーマスタ取得
+		$areas = $this->Gurunabi->AreaSmallSearch();
+		array_shift($areas);
+
+		foreach ($areas as $key => $value) {
+			$data['code'] = $key;
+			$data['name'] = $value['name'];
+			$data['l_name'] = $value['l_name'];
+			$data['l_code'] = $value['l_code'];
+			$data['m_name'] = $value['m_name'];
+			$data['m_code'] = $value['m_code'];
+			$data['pref_code'] = $value['pref_code'];
+			$data['pref_name'] = $value['pref_name'];
+			$this->SmallArea->create();
+			$this->SmallArea->save($data);
+		}
+	}
+
 }
