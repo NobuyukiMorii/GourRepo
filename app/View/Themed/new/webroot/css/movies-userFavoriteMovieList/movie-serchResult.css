@@ -31,3 +31,7 @@
 .table-font {
 	font-size: 5px;
 }
+
+.text-decorate:hover {
+	text-decoration: none;
+}

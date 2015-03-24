@@ -46,22 +46,16 @@
                         <td>動画の紹介</td>
                         <td><?php echo $userMoviePostHistory[$i]['Movie']['description'] ; ?></td>
                       </tr>
-                      <tr>
-                        <td>
-                          <a class="btn btn-info" href="<?php echo $this->Html->url(array('controller' => 'Movies' , 'action' => 'edit', $userMoviePostHistory[$i]['Movie']['id'])); ?>">編集</a>
-                        </td>
-                        <td>
-                          <?php echo $this->Form->create('Movie', array('type' => 'post' , 'action' => 'delete')); ?>
-                          <?php echo $this->Form->input('Movie.id', array(
-                              'label' => false,
-                              'type' => 'hidden',
-                              'value' => $userMoviePostHistory[$i]['Movie']['id'],
-                          )); ?>
-                          <button type="submit" class="btn btn-warning">削除</button>
-                          <?php echo $this->Form->end(); ?>
-                        </td>
-                      </tr>
                     </table>
+                    <a class="btn btn-info btn-block" href="<?php echo $this->Html->url(array('controller' => 'Movies' , 'action' => 'edit', $userMoviePostHistory[$i]['Movie']['id'])); ?>">編集</a>
+                    <?php echo $this->Form->create('Movie', array('type' => 'post' , 'action' => 'delete')); ?>
+                    <?php echo $this->Form->input('Movie.id', array(
+                        'label' => false,
+                        'type' => 'hidden',
+                        'value' => $userMoviePostHistory[$i]['Movie']['id'],
+                    )); ?>
+                    <button type="submit" class="btn btn-warning btn-block" style="margin-top:8px;">削除</button>
+                    <?php echo $this->Form->end(); ?>
                   </div>
                 </div>
               </a>
