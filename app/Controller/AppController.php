@@ -77,7 +77,7 @@ class AppController extends Controller {
         /*
         *ビューの表示
         */
-        $this->theme = 'new';
+        $this->theme = 'New';
 
         /*
         *controllerでログインユーザーを呼び出すメソッドを作成
