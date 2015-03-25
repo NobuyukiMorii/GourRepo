@@ -70,7 +70,7 @@ class MoviesController extends AppController {
 		$this->autoLayout = false; 
 
 		if(isset($this->request['pass'][0])){
-			if(!empty(($this->userSession))) {
+			if(!empty($this->userSession)) {
 				/*
 				*20分以上前までに動画を見ていなければ閲覧履歴に登録
 				*/
