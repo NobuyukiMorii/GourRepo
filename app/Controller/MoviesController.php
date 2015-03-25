@@ -189,6 +189,19 @@ class MoviesController extends AppController {
 	*/
 	public function selectRestForAddMovie(){
 		/*
+		*リクエストが送られてきた場合、レストランを検索する
+		*/
+		if($this->request->data){
+			$restaurants = $this->Restaurant->find('all' , array(
+				'conditions' => array(
+					'Restaurant.name LIKE ' => '%'.$this->request->data['Movie']['name'].'%',
+					'Restaurant.category_code_s' => $this->request->data['Movie']['SmallCategory']
+				),
+			));
+
+		}
+
+		/*
 		*カテゴリー（大）の検索
 		*/
 		$LargeCategory = $this->LargeCategory->find('all');
