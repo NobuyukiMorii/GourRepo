@@ -1,22 +1,19 @@
 <?php echo $this->Html->css('movies-add/youtube');?>
 <?php echo $this->Html->css('movies-add/movies-add');?>
 
+
+<span id="signinButton" class="pre-sign-in">
+  <span
+      class="g-signin"
+      data-callback="oauth2Callback"
+      data-clientid="399027015882-els58aji8ffi78a6c06sim69cfje855r.apps.googleusercontent.com"
+      data-cookiepolicy="single_host_origin"
+      data-scope="https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube.upload">
+  </span>
+</span>
+
 <div class="row">
   <div class="post-sign-in" id="youtube-form">
-
-      <div class="form-group">
-        <div class="col-md-8 col-md-offset-2">
-          <span id="signinButton" class="pre-sign-in">
-            <span
-              class="g-signin"
-              data-callback="oauth2Callback"
-              data-clientid="399027015882-els58aji8ffi78a6c06sim69cfje855r.apps.googleusercontent.com"
-              data-cookiepolicy="single_host_origin"
-              data-scope="https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube.upload">
-            </span>
-          </span>
-        </div>
-      </div>
 
     <?php echo $this->Form->create('Movie', array('class' => 'form-horizontal' , 'type' => 'post' , 'action' => 'edit' ,'id' => 'upload-form')); ?>
 
