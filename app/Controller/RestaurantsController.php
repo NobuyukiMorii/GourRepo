@@ -1,13 +1,14 @@
 <?php
 
 class RestaurantsController extends AppController{
-	public $uses = array('Restaurant');
+	public $uses = array('Restaurant' , 'Area');
 	public $helpers = array('Html', 'Form', 'Session');
 	public $components = array('Gurunabi');
 	public function beforeFilter() {
     	   parent::beforeFilter();
-        // $this->Auth->allow('signup', 'login', 'logout');
+        	$this->Auth->allow('getAreaSearch');
     }
+
      public function isAuthorized($user) {
         //contributorに権限を与えております。
         if (isset($user['role']) && $user['role'] === 'contributor') {
@@ -19,11 +20,6 @@ class RestaurantsController extends AppController{
         }
 		return parent::isAuthorized($user);
     }
-	
-
-
-
-
 
 	public function api_add2(){
 		//ビューを使わない
@@ -208,15 +204,29 @@ class RestaurantsController extends AppController{
 		foreach ($areas as $key => $value) {
 			$data['code'] = $key;
 			$data['name'] = $value['name'];
-			$data['l_name'] = $value['l_name'];
-			$data['l_code'] = $value['l_code'];
-			$data['m_name'] = $value['m_name'];
-			$data['m_code'] = $value['m_code'];
-			$data['pref_code'] = $value['pref_code'];
-			$data['pref_name'] = $value['pref_name'];
 			$this->SmallArea->create();
 			$this->SmallArea->save($data);
 		}
 	}
+
+	/*
+	*エリアマスタ（ver1用を取得する）
+	*/
+	public function getAreaSearch(){
+		$this->autoRender = false;
+		//カテゴリーマスタ取得
+		$areas = $this->Gurunabi->AreaSearch();
+		array_shift($areas);
+
+		foreach ($areas as $key => $value) {
+			$data['code'] = $key;
+			$data['name'] = $value['name'];
+			$this->Area->create();
+			$this->Area->save($data);
+		}
+	}
+
+
+
 
 }

@@ -25,3 +25,11 @@
 .black {
 	color: black;
 }
+
+.black:hover {
+	color: black;
+}
+
+.cursor {
+	cursor:pointer;
+}
