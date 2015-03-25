@@ -32,11 +32,13 @@
           </div>
 
           <div class="col-md-3">
-            <p><?php echo $data[$i]['Movie']['description'] ;?></p>
+            <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'reporterMovieList', $data[$i]['User']['id'])) ;?>" class="restaurant-name">
+              <p class="black"><?php echo $data[$i]['Movie']['description'] ;?></p>
+            </a>
           </div>
 
           <div class="col-md-3">
-              <table class="table">
+              <table class="table cursor" onclick="location.href='<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view', $data[$i]['Movie']['id'])) ;?>'">
                 <tr>
                   <td>予算</td>
                   <td><?php echo $data[$i]['Restaurant']['budget'] ;?>円</td>
