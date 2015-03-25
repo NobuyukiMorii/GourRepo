@@ -24,7 +24,7 @@ class MoviesController extends AppController {
     public function isAuthorized($user) {
     	//contributorに権限を与えております。
         if (isset($user['role']) && $user['role'] === 'contributor') {
-        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'selectRestForAddMovie' , 'userFavoriteMovieList', 'userWatchMovieList', 'edit', 'delete', 'myMovieIndex'))) {
+        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'selectRestForAddMovie' , 'userFavoriteMovieList', 'userWatchMovieList', 'edit', 'delete', 'myMovieIndex', 'selectRestForAddMovie'))) {
         		return true;
         	}
         }
@@ -188,12 +188,15 @@ class MoviesController extends AppController {
 	*「アップロードボタン」が押された時のムービーの選択画面（DB利用）
 	*/
 	public function selectRestForAddMovie(){
-
-
-
-
-
-
+		/*
+		*カテゴリー（大）の検索
+		*/
+		$LargeCategory = $this->LargeCategory->find('all');
+		/*
+		*現在のうrlを取得
+		*/
+		$host = $_SERVER["HTTP_HOST"];
+		$this->set(compact('LargeCategory','host'));
 	}
 
 	/*
