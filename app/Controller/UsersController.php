@@ -28,8 +28,6 @@ class UsersController extends AppController {
 
     public function signup() {
 
-        $this->autoLayout = false;
-
         if (!$this->request->is('post')) {
             return;
         }
@@ -58,8 +56,6 @@ class UsersController extends AppController {
     }
 
     public function login() {
-
-
 
         if ($this->request->is('post')) {
 
