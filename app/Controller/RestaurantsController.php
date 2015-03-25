@@ -14,7 +14,7 @@ class RestaurantsController extends AppController{
         if (isset($user['role']) && $user['role'] === 'contributor') {
             //ここにindex,view,add,api_addを記入することで、画面表示ができる
             //indexに飛んで、viewやaddに飛ぶので、全てに権限を与える必要がある
-            if(in_array($this->action, array('api_add2', 'restaurants_add'))) {
+            if(in_array($this->action, array('api_add2', 'restaurants_add', 'index'))) {
                 return true;
             }
         }
@@ -31,7 +31,7 @@ class RestaurantsController extends AppController{
 		array_shift($categories);
 		//exit;
 		//urlを作成する
-		$page_number = 7;
+		$page_number = 10;
 		$url = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=50&pref=PREF13&offset_page='.$page_number;
 		$i = 0;
 		
