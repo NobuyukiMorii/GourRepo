@@ -67,10 +67,10 @@ class RestaurantsController extends AppController{
 		 			$save_data['latitude'] 								= $data[$i]['rest'][$j]['latitude'];
 		 			$save_data['longitude'] 							= $data[$i]['rest'][$j]['longitude'];
 			 		$save_data['category'] 								= $data[$i]['rest'][$j]['category'];
-			 		$save_data['category_name_l'] 						= $data[$i]['rest'][$j]['code']['category_code_l'][0];
-			 		$save_data['category_code_s'] 						= $data[$i]['rest'][$j]['code']['category_name_l'][0];
-			 		$save_data['category_name_s'] 						= $data[$i]['rest'][$j]['code']['category_code_s'][0];
-			 		$save_data['category_code_l'] 						= $data[$i]['rest'][$j]['code']['category_name_s'][0];
+			 		$save_data['category_code_l'] 						= $data[$i]['rest'][$j]['code']['category_code_l'][0];
+			 		$save_data['category_name_l'] 						= $data[$i]['rest'][$j]['code']['category_name_l'][0];
+			 		$save_data['category_code_s'] 						= $data[$i]['rest'][$j]['code']['category_code_s'][0];
+			 		$save_data['category_name_s'] 						= $data[$i]['rest'][$j]['code']['category_name_s'][0];
 			 		$save_data['url'] 									= $data[$i]['rest'][$j]['url'];
 			 		$save_data['url_mobile'] 							= $data[$i]['rest'][$j]['url_mobile'];
 		 			$save_data['opentime'] 								= $data[$i]['rest'][$j]['opentime'];
