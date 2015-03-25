@@ -62,7 +62,7 @@ class RestaurantsController extends AppController{
 					$save_data['address'] 								= $data[$i]['rest'][$j]['address'];
 		 			$save_data['latitude'] 								= $data[$i]['rest'][$j]['latitude'];
 		 			$save_data['longitude'] 							= $data[$i]['rest'][$j]['longitude'];
-			 		$save_data['category'] 								= $data[$i]['rest'][$j]['category'];
+			 		//$save_data['category'] 								= $data[$i]['rest'][$j]['category'];
 			 		$save_data['category_code_l'] 						= $data[$i]['rest'][$j]['code']['category_code_l'][0];
 			 		$save_data['category_name_l'] 						= $data[$i]['rest'][$j]['code']['category_name_l'][0];
 			 		$save_data['category_code_s'] 						= $data[$i]['rest'][$j]['code']['category_code_s'][0];
