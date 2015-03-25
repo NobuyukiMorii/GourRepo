@@ -43,7 +43,7 @@
                 </tr>
                 <tr>
                   <td>カテゴリー</td>
-                  <td><?php echo $data[$i]['Restaurant']['category'] ;?></td>
+                  <td><?php echo $data[$i]['Restaurant']['category_name_s'] ;?></td>
                 </tr>
                 <tr>
                   <td>最寄駅</td>

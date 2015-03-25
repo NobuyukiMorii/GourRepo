@@ -135,7 +135,7 @@
                 </tr>
                 <tr>
                   <td class="table-heading">ジャンル</td>
-                  <td><?php echo $movie['Restaurant']['category'] ;?></td>
+                  <td><?php echo $movie['Restaurant']['category_name_s'] ;?></td>
                 </tr>
                 <tr>
                   <td class="table-heading">TEL・予約</td>

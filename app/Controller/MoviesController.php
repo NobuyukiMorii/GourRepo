@@ -360,7 +360,8 @@ class MoviesController extends AppController {
 						'`Restaurant`.`name` LIKE '          => '%'.$this->request->data['areaname'].'%',
 						'`Restaurant`.`access_line` LIKE '   => '%'.$this->request->data['areaname'].'%',
 						'`Restaurant`.`access_station` LIKE '=> '%'.$this->request->data['areaname'].'%',
-						'`Restaurant`.`category` LIKE '      => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`category_name_s` LIKE '      => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`category_name_l` LIKE '      => '%'.$this->request->data['areaname'].'%',
 						'`Restaurant`.`address` LIKE '       => '%'.$this->request->data['areaname'].'%',
 						'`Movie`.`user_id` IN '        		 => $user_id_array
 					),
@@ -379,7 +380,8 @@ class MoviesController extends AppController {
 						'`Restaurant`.`name` LIKE '          => '%'.$this->request->data['areaname'].'%',
 						'`Restaurant`.`access_line` LIKE '   => '%'.$this->request->data['areaname'].'%',
 						'`Restaurant`.`access_station` LIKE '=> '%'.$this->request->data['areaname'].'%',
-						'`Restaurant`.`category` LIKE '      => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`category_name_s` LIKE '      => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`category_name_l` LIKE '      => '%'.$this->request->data['areaname'].'%',
 						'`Restaurant`.`address` LIKE '       => '%'.$this->request->data['areaname'].'%',
 					),
 					'Movie.del_flg' => 0
