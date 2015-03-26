@@ -74,24 +74,24 @@ class MoviesController extends AppController {
 				/*
 				*20分以上前までに動画を見ていなければ閲覧履歴に登録
 				*/
-				$last_watch_time =  date('Y-m-d H:i:s',strtotime( "-1 minute"));
-				$recent_watch = $this->UserWatchMovieList->find('count' , array(
+				$twenty_minutes_ago =  date('Y-m-d H:i:s',strtotime( "-20 minute"));
+				$recent_watch = $this->UserWatchMovieList->find('first' , array(
 					'conditions' => array(
 						'UserWatchMovieList.movie_id' => $this->request['pass'][0],
 						'UserWatchMovieList.user_id' => $this->userSession['id'],
-						'UserWatchMovieList.created >' => $last_watch_time
-					)
+					),
+					'order' => array('UserWatchMovieList.created' => 'DESC')
 				));
-				/*
-				*動画を保存
-				*/
-				if($recent_watch > 0){
-					$data['user_id'] = $this->userSession['id'];
-					$data['created_user_id'] = $this->userSession['id'];
-					$data['modified_user_id'] = $this->userSession['id'];
-					$data['movie_id'] = $this->request['pass'][0];
-					$this->UserWatchMovieList->create();
-					$flg = $this->UserWatchMovieList->save($data);
+				if(!empty($recent_watch['UserWatchMovieList']['created'])){
+					if (strtotime($recent_watch['UserWatchMovieList']['created']) < strtotime($twenty_minutes_ago)) {
+						$data['user_id'] = $this->userSession['id'];
+						$data['created_user_id'] = $this->userSession['id'];
+						$data['modified_user_id'] = $this->userSession['id'];
+						$data['movie_id'] = $this->request['pass'][0];
+						$this->UserWatchMovieList->create();
+						$flg = $this->UserWatchMovieList->save($data);
+						pr($flg);
+					}
 				}
 			}
 
