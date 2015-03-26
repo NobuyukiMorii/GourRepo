@@ -234,7 +234,10 @@ class MoviesController extends AppController {
 
 			//ぐるなびidを取得する
 			$restaurant_id = $this->request->data['restaurant_id'];
-
+			if(empty($restaurant_id)){
+				$this->Session->setFlash('お店の選択が正しく出来ませんでした。');
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
+			}
 			//保存する（ムービー）
 			$movie_save_data['restaurant_id'] = $restaurant_id;
 			$movie_save_data['user_id'] = $this->userSession['id'];
@@ -243,28 +246,31 @@ class MoviesController extends AppController {
 			$movie_save_data['youtube_url'] = 'https://www.youtube.com/watch?v=' . $this->request->data['youtube_url'];
 			if(empty($movie_save_data['youtube_url'])){
 				$this->Session->setFlash('YouTubeへの動画のアップロードに失敗しました。');
-				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
 			}
 			$movie_save_data['youtube_iframe_url'] = $this->YouTube->get_youtube_iframe_url($movie_save_data['youtube_url']);
 			if(empty($movie_save_data['youtube_iframe_url'])){
 				$this->Session->setFlash('こちらの動画は登録出来ません。');
-				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
 			}
 			$movie_save_data['thumbnails_url'] = $this->request->data['thumbnails_url'];
 			if(empty($movie_save_data['thumbnails_url'])){
 				$this->Session->setFlash('YouTubeへの動画のアップロードに失敗しました。');
-				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
 			}
 			$movie_save_data['created_user_id'] = $this->userSession['id'];
 			$movie_save_data['modified_user_id'] = $this->userSession['id'];
 			$this->Movie->create();
-
 			//エラーの判定（ムービー）
 			try {
 				$flg_movie = $this->Movie->save($movie_save_data);
 			} catch (Exception $e) {
 				$this->Session->setFlash('動画の登録に失敗しました。改めて登録しなおして下さい。');
-				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
+			}
+			if($flg_movie  === false){
+				$this->Session->setFlash('動画の登録に失敗しました。改めて登録しなおして下さい。');
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
 			}
 
 			//保存する（タグ関係）
@@ -285,19 +291,23 @@ class MoviesController extends AppController {
 				$this->Tag->create();
 				$tag_save_data['name'] = $val;
 				try {
-					$this->Tag->save($tag_save_data);
+					$flg_tag = $this->Tag->save($tag_save_data);
 				} catch(Exception $e) {
+					$this->Session->setFlash('タグの登録に失敗しました。後ほど、改めて登録しなおして下さい。');
+				}
+				if($flg_tag === false){
 					$this->Session->setFlash('タグの登録に失敗しました。改めて登録しなおして下さい。');
-					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
 				}
 				//保存する（タグリレーションズ）
 				$tag_relation_save_data['tag_id'] = $this->Tag->getLastInsertID();
 				$this->TagRelation->create();
 				try {
-					$this->TagRelation->save($tag_relation_save_data);
+					$flg_tagRelation = $this->TagRelation->save($tag_relation_save_data);
 				} catch(Exception $e) {
 					$this->Session->setFlash('タグの登録に失敗しました。改めて登録しなおして下さい。');
-					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+				}
+				if($flg_tagRelation === false){
+					$this->Session->setFlash('タグの登録に失敗しました。改めて登録しなおして下さい。');
 				}
 			}
 
