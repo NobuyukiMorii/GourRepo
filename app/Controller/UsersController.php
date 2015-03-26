@@ -36,6 +36,8 @@ class UsersController extends AppController {
         $query = $this->User->query("SHOW TABLE STATUS LIKE 'users'");
         $this->request->data['User']['created_user_id'] = $query['Auto_increment'];
         $this->request->data['User']['modified_user_id'] = $query['Auto_increment'];
+        $this->request->data['UserProfile']['created_user_id'] = $query['Auto_increment'];
+        $this->request->data['UserProfile']['modified_user_id'] = $query['Auto_increment'];
 
         $this->User->create();
         if ($this->User->save($this->request->data)) {
