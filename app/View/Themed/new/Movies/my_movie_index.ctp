@@ -26,10 +26,10 @@
           <?php endif ; ?>
 
             <div class="col-sm-3 col-xs-6">
-              <a href="#">
+              <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $userMoviePostHistory[$i]['Movie']['id'])) ;?>" class="non-decorate">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><?php echo $userMoviePostHistory[$i]['Restaurant']['name'] ;?></h3>
+                    <h3 class="panel-title black"><?php echo $userMoviePostHistory[$i]['Restaurant']['name'] ;?></h3>
                   </div>
                   <div class="panel-body">
                     <img class="img-responsive portfolio-item rest_photo" src="<?php echo $userMoviePostHistory[$i]['Restaurant']['image_url'] ;?>" alt="photo">

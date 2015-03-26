@@ -39,3 +39,11 @@
 .table-font {
 	font-size: 1px;
 }
+
+.black {
+	color: black;
+}
+
+.non-decorate:hover {
+	text-decoration: none;
+}
