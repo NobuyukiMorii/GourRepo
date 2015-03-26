@@ -238,6 +238,7 @@ class MoviesController extends AppController {
 				$this->Session->setFlash('お店の選択が正しく出来ませんでした。');
 				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
 			}
+
 			//保存する（ムービー）
 			$movie_save_data['restaurant_id'] = $restaurant_id;
 			$movie_save_data['user_id'] = $this->userSession['id'];
