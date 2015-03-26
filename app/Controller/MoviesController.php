@@ -197,9 +197,13 @@ class MoviesController extends AppController {
 					'Restaurant.name LIKE ' => '%'.$this->request->data['Movie']['name'].'%',
 					'Restaurant.category_code_s' => $this->request->data['Movie']['SmallCategory']
 				),
+<<<<<<< HEAD
 				'limit' => 30
 			));
 			$this->set(compact('restaurants'));
+=======
+			));
+>>>>>>> WIP MORY
 
 		}
 
