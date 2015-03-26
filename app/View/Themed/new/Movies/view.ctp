@@ -31,7 +31,7 @@
     </div>
     
     <?php echo $this->element('serchInput'); ?>
-    <?php echo $this->element('movieUploadButton' ,array('gurunabi_id' => $movie['Restaurant']['gournabi_id'])); ?>
+    <?php echo $this->element('movieUploadButton' ,array('restaurant_id' => $movie['Restaurant']['id'])); ?>
     <?php echo $this->element('profileImage'); ?>
   </div>
   <!-- /HEADER ============-->
