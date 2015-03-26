@@ -208,7 +208,7 @@ class MoviesController extends AppController {
 		*/
 		$LargeCategory = $this->LargeCategory->find('all');
 		/*
-		*現在のうrlを取得
+		*現在のUrlを取得
 		*/
 		$host = $_SERVER["HTTP_HOST"];
 		$this->set(compact('LargeCategory','host'));
