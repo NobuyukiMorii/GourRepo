@@ -1,8 +1,3 @@
-<?php echo $this->Html->css('movies-userFavoriteMovieList/common-setting'); ?>
-<?php echo $this->Html->css('movies-userFavoriteMovieList/place-title.css'); ?>
-<?php echo $this->Html->css('movies-userFavoriteMovieList/movie-list.css'); ?>
-<?php echo $this->Html->css('movies-userFavoriteMovieList/select-page-button-movie.css'); ?>
-<?php echo $this->Html->css('movies-userFavoriteMovieList/view-reccomend-movie-for-movie.css'); ?>
 <?php echo $this->Html->css('movies-userFavoriteMovieList/movie-serchResult'); ?>
 
 <!-- Page Content -->
@@ -46,6 +41,10 @@
                         <td>動画の紹介</td>
                         <td><?php echo $UserFavoriteMovieList[$i]['Movie']['description'] ; ?></td>
                       </tr>
+                      <tr>
+                        <td>再生回数</td>
+                        <td><?php echo $UserFavoriteMovieList[$i]['Movie']['count'] ; ?>回</td>
+                      </tr>
                     </table>
                     <?php echo $this->Form->create('UserFavoriteMovieLists', array('type' => 'post' , 'action' => 'delete')); ?>
                     <?php echo $this->Form->input('UserFavoriteMovieListsController.id', array(
@@ -72,7 +71,7 @@
   <!-- /.row -->
 
   <!-- /動画 ============-->
-  <div class="pagination" style="margin-left:55px;">                         
+  <div class="pagination">                         
     <ul>                                           
       <?php echo $this->Paginator->prev(__('prev'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
       <?php echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>                              
@@ -80,5 +79,6 @@
     </ul>                                          
   </div>
 
+</div>
 </div>
 <!-- /.container -->

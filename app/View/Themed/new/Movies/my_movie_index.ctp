@@ -46,6 +46,10 @@
                         <td>動画の紹介</td>
                         <td><?php echo $userMoviePostHistory[$i]['Movie']['description'] ; ?></td>
                       </tr>
+                      <tr>
+                        <td>再生回数</td>
+                        <td><?php echo $userMoviePostHistory[$i]['Movie']['count'] ; ?>回</td>
+                      </tr>
                     </table>
                     <a class="btn btn-info btn-block" href="<?php echo $this->Html->url(array('controller' => 'Movies' , 'action' => 'edit', $userMoviePostHistory[$i]['Movie']['id'])); ?>">編集</a>
                     <?php echo $this->Form->create('Movie', array('type' => 'post' , 'action' => 'delete')); ?>

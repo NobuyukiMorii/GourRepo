@@ -54,6 +54,10 @@
                   <td><?php echo $results[$i]['User']['UserProfile']['name'] ;?></td>
                 </tr>
                 <tr>
+                  <td>再生回数</td>
+                  <td><?php echo $results[$i]['Movie']['count'] ;?>回再生</td>
+                </tr>
+                <tr>
                   <td>タグ</td>
                   <td>
                     <?php for ($j = 0; $j < count($results[$i]['TagRelation']); ++$j): ?>

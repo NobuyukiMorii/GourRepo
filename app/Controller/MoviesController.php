@@ -90,7 +90,6 @@ class MoviesController extends AppController {
 						$data['movie_id'] = $this->request['pass'][0];
 						$this->UserWatchMovieList->create();
 						$flg = $this->UserWatchMovieList->save($data);
-						pr($flg);
 					}
 				}
 			}
