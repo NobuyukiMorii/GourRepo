@@ -67,34 +67,36 @@ echo $this->Form->submit('お店を探す', array(
 
 </div>
 
-<div class="container">
-	<div class="table-responsive">
-		<table class="table table-bordered">
-			<?php for ($i = 0; $i < count($restaurants); ++$i): ?>
-			<tr>
-				<td>
-					<img src="<?php echo $restaurants[$i]['Restaurant']['image_url'] ;?>" width='50px' class="img-thumbnail";>
-				</td>
-				<td><?php echo $restaurants[$i]['Restaurant']['name'] ;?></td>
-				<td><?php echo $restaurants[$i]['Restaurant']['address'] ;?></td>
-				<td>
-					<a href="
-					<?php
-						echo $this->Html->url(array(
-					    "controller" => "movies",
-					    "action" => "add",
-					    $restaurants[$i]['Restaurant']['id']
-					));
-					?>
-					" class="btn btn-default">
-					選択
-					</a>
-				</td>
-			</tr>
-			<?php endfor; ?>
-		</table>
+<?php if(isset($restaurants)) : ?>
+	<div class="container">
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<?php for ($i = 0; $i < count($restaurants); ++$i): ?>
+				<tr>
+					<td>
+						<img src="<?php echo $restaurants[$i]['Restaurant']['image_url'] ;?>" width='50px' class="img-thumbnail";>
+					</td>
+					<td><?php echo $restaurants[$i]['Restaurant']['name'] ;?></td>
+					<td><?php echo $restaurants[$i]['Restaurant']['address'] ;?></td>
+					<td>
+						<a href="
+						<?php
+							echo $this->Html->url(array(
+						    "controller" => "movies",
+						    "action" => "add",
+						    $restaurants[$i]['Restaurant']['id']
+						));
+						?>
+						" class="btn btn-default">
+						選択
+						</a>
+					</td>
+				</tr>
+				<?php endfor; ?>
+			</table>
+		</div>
 	</div>
-</div>
+<?php endif ;?>
 
 <!-- JS -->
 <?php echo $this->Html->script('jquery-1.11.2.min');?>
