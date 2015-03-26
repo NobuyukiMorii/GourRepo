@@ -86,7 +86,7 @@
     <form action="/GourRepo/Movies/add/<?php if(isset($videoId)) {echo $videoId ;} ?>" method="post" accept-charset="utf-8">
 
       <input name="title" type="hidden" id="name_form" value="" />
-      <input name="gournabi_id" type="hidden" value=<?php if(isset($gournabi_id)){ echo $gournabi_id; } ?> />
+      <input name="restaurant_id" type="hidden" value=<?php if(isset($restaurant_id)){ echo $restaurant_id; } ?> />
       <input name="description" type="hidden" id="description_form" value="" />
       <input name="youtube_url" type="hidden" id="videoId_form" value="" />
       <input name="thumbnails_url" type="hidden" id="thumbnailsUrl_form" value="" />
