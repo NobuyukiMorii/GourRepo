@@ -197,7 +197,9 @@ class MoviesController extends AppController {
 					'Restaurant.name LIKE ' => '%'.$this->request->data['Movie']['name'].'%',
 					'Restaurant.category_code_s' => $this->request->data['Movie']['SmallCategory']
 				),
+				'limit' => 30
 			));
+			$this->set(compact('restaurants'));
 
 		}
 
@@ -225,59 +227,34 @@ class MoviesController extends AppController {
 		*$this->request->dataがない時
 		*/
 		if(empty($this->request->data)){
-			$this->set('gournabi_id' , $this->params['pass'][0]);
+			$this->set('restaurant_id' , $this->params['pass'][0]);
 		}
 
 		if(!empty($this->request->data)){
 
 			//ぐるなびidを取得する
-			$option['id'] = $this->request->data['gournabi_id'];
-			//同じぐるなびidがなければ新規にsaveする
-			$existent_restraunt = $this->Restaurant->find('all' , array(
-				'conditions' => array('Restaurant.gournabi_id' => $option['id'])
-			));
-			//レストランが未登録の場合、レストランを登録する
-			if(empty($existent_restraunt)){
-				//レストランをぐるなびから検索して取得する
-				$rest_search_info = $this->Gurunabi->RestSearch($option);
-				//DBに保存出来る形に配列を整理する
-				$rest_save_data = $this->Gurunabi->ParseArrayForDB($rest_search_info);
-				//バリデーションする
-				$rest_save_data = $this->Gurunabi->ValidationBeforeSave($rest_save_data);
-				//保存する（レストラン）
-				$rest_save_data['user_id'] = $this->userSession['id'];
-				$rest_save_data['created_user_id'] = $this->userSession['id'];
-				$rest_save_data['modified_user_id'] = $this->userSession['id'];
-				$this->Restaurant->create();
-				try {
-					$flg_restaurant = $this->Restaurant->save($rest_save_data);
-				} catch (Exception $e) {
-					$this->Session->setFlash('レストランの登録に失敗しました。改めて登録しなおして下さい。');
-					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
-				}
-				//エラーハンドリング
-				if($flg_restaurant === false){
-					$this->Session->setFlash('レストランの登録に失敗しました。改めて登録しなおして下さい。');
-					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
-				}
-			}
-			//既にレストランが登録してある場合、レストランを登録しないで、動画だけ登録する
-			if(!empty($existent_restraunt)){
-				$flg_restaurant['Restaurant']['id'] = $existent_restraunt[0]['Restaurant']['id'];
-			}
+			$restaurant_id = $this->request->data['restaurant_id'];
 
 			//保存する（ムービー）
-			$movie_save_data['restaurant_id'] = $flg_restaurant['Restaurant']['id'];
+			$movie_save_data['restaurant_id'] = $restaurant_id;
 			$movie_save_data['user_id'] = $this->userSession['id'];
 			$movie_save_data['title'] = $this->request->data['title'];
 			$movie_save_data['description'] = $this->request->data['description'];
 			$movie_save_data['youtube_url'] = 'https://www.youtube.com/watch?v=' . $this->request->data['youtube_url'];
+			if(empty($movie_save_data['youtube_url'])){
+				$this->Session->setFlash('YouTubeへの動画のアップロードに失敗しました。');
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+			}
 			$movie_save_data['youtube_iframe_url'] = $this->YouTube->get_youtube_iframe_url($movie_save_data['youtube_url']);
 			if(empty($movie_save_data['youtube_iframe_url'])){
 				$this->Session->setFlash('こちらの動画は登録出来ません。');
 				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
 			}
 			$movie_save_data['thumbnails_url'] = $this->request->data['thumbnails_url'];
+			if(empty($movie_save_data['thumbnails_url'])){
+				$this->Session->setFlash('YouTubeへの動画のアップロードに失敗しました。');
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
+			}
 			$movie_save_data['created_user_id'] = $this->userSession['id'];
 			$movie_save_data['modified_user_id'] = $this->userSession['id'];
 			$this->Movie->create();
