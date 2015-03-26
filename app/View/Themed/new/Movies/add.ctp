@@ -1,5 +1,6 @@
 <?php echo $this->Html->css('movies-add/youtube');?>
 <?php echo $this->Html->css('movies-add/movies-add');?>
+<?php echo $this->Html->css('bootstrap');?>
 
 <div class="row center">
     <span id="signinButton" class="pre-sign-in">

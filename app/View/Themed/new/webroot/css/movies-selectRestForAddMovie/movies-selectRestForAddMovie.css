@@ -11,3 +11,12 @@
 .SELECT-SHAPE {
 	width: 350px !important;
 }
+
+.cursor {
+
+}
+
+.cursor:hover {
+	background-color: #f1c40f;
+	cursor:pointer;
+}
