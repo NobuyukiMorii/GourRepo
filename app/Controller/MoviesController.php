@@ -265,6 +265,20 @@ class MoviesController extends AppController {
 				$flg_movie = $this->Movie->save($movie_save_data);
 			} catch (Exception $e) {
 				$this->Session->setFlash('動画の登録に失敗しました。改めて登録しなおして下さい。');
+				/*
+				*動画の投稿に失敗したときは、del_flgを2にして保存する
+				*/
+				$data['title'] = '投稿失敗';
+				$data['count'] = 0;
+				$data['description'] = '投稿失敗';
+				$data['youtube_url'] = 'false';
+				$data['youtube_iframe_url'] = 'false';
+				$data['thumbnails_url'] = 'false';
+				$data['user_id'] = $this->userSession['id'];
+				$data['restaurant_id'] = $restaurant_id;
+				$data['del_flg'] = 2;
+				$data['created_user_id'] = $this->userSession['id'];
+				$data['modified_user_id'] = $this->userSession['id'];
 				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
 			}
 			if($flg_movie  === false){
