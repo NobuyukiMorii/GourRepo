@@ -42,11 +42,12 @@
             <?php echo $movie['Restaurant']['tel'] ;?>
           </span>
 
-
           <?php
 
               if ($same_movie == 0){ 
           ?>
+          <?php if(empty($userfavorite)): ?>
+
           <a href="<?php echo $this->html->url(array('controller' => 'UserFavoriteMovieLists' , 'action' => 'add', $movie['Movie']['id'])) ;?>" class="header-favorite-image-ahref">
             <?php echo $this->Html->image('star.png', array('alt' => 'Favorite' , 'class' => 'header-favorite-image')); ?>
           </a>
@@ -54,6 +55,8 @@
             favorite
           </a>
           <?php } ?>
+
+          <?php endif ;?>
 
         </div>
       </div>
