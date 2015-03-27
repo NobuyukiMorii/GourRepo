@@ -49,19 +49,31 @@
 					'placeholder' => 'メールアドレス',
 					'class' => 'form-control',
 				)); ?>
-				<label for="inputPassword" class="sr-only">User name</label>
-				<?php echo $this->Form->input('UserProfile.name', array(
-					'label' => false,
-					'placeholder' => 'ユーザーネーム',
-					'class' => 'form-control',
-				)); ?>
 				<label for="inputPassword" class="sr-only">Password</label>
 				<?php echo $this->Form->input('password', array(
 					'label' => false,
 					'placeholder' => 'パスワード',
 					'class' => 'form-control',
 				)); ?>
-
+				<?php echo $this->Form->hidden('User.role', array(
+					'value' => 'contributor',
+				)); ?>
+				<?php echo $this->Form->hidden('UserProfile.name', array(
+				)); ?>
+				<?php echo $this->Form->hidden('UserProfile.like_food', array(
+				)); ?>
+				<?php echo $this->Form->hidden('UserProfile.like_genre', array(
+				)); ?>
+				<?php echo $this->Form->hidden('UserProfile.like_price_zone', array(
+				)); ?>
+				<?php echo $this->Form->hidden('UserProfile.near_station', array(
+				)); ?>
+				<?php echo $this->Form->hidden('UserProfile.living_area', array(
+				)); ?>
+				<?php echo $this->Form->hidden('UserProfile.introduction', array(
+				)); ?>
+				<?php echo $this->Form->hidden('UserProfile.avatar_file_name', array(
+				)); ?>
 				<button class="btn btn-lg btn-primary btn-block" type="submit">サインアップ</button>
 				<div class="aida"></div>
 				<a class="btn btn-lg btn-info btn-block" href="<?php echo $this->Html->url(array('controller' => 'Users' , 'action' => 'login')); ?>">ログイン</a>

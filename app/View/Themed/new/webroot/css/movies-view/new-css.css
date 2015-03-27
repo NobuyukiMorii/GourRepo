@@ -1,10 +1,10 @@
 .movie-new {
-	width:100%;
+	width:800px;
 	height: 500px;
 	display: block; 
 	margin: 0px auto;
-	margin-top: 1px;
-	margin-bottom: 30px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .movie-title-new {
@@ -13,6 +13,7 @@
 
 .portfolio-item {
     margin-bottom: 25px;
+    margin-left: 50px;
 }
 
 .thumbnails {
@@ -34,33 +35,10 @@
 	height: 1px;
 }
 
-.midashi {
+.margin-left-new-2 {
+	margin-left: -100px;
+}
+
+.margin-bottom {
 	margin-bottom: 10px;
-	margin-left: 30px;
-	margin-top: 13px;
-}
-
-.margin-tel {
-	margin-left: -40px;
-}
-
-.reporter {
-	color: black;
-}
-
-.reporter:hover {
-	text-decoration: none;
-}
-
-.BGC:hover {
-	background-color: #fffafa;
-}
-
-.container2 {
-	margin-left: 30px;
-	margin-right: -100px;
-}
-
-.padding-left {
-	padding-left: 0px;
 }
