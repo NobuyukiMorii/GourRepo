@@ -69,27 +69,14 @@ echo $this->Form->submit('お店を探す', array(
 <?php if(isset($restaurants)) : ?>
 	<div class="container">
 		<div class="table-responsive">
-			<table class="table table-bordered">
+			<table class="table table-bordered font-color">
 				<?php for ($i = 0; $i < count($restaurants); ++$i): ?>
-				<tr>
+				<tr onclick="location.href='<?php echo $this->Html->url(array("controller" => "movies","action" => "add",$restaurants[$i]['Restaurant']['id']));?>'" class="cursor">
 					<td>
 						<img src="<?php echo $restaurants[$i]['Restaurant']['image_url'] ;?>" width='50px' class="img-thumbnail";>
 					</td>
 					<td><?php echo $restaurants[$i]['Restaurant']['name'] ;?></td>
 					<td><?php echo $restaurants[$i]['Restaurant']['address'] ;?></td>
-					<td>
-						<a href="
-						<?php
-							echo $this->Html->url(array(
-						    "controller" => "movies",
-						    "action" => "add",
-						    $restaurants[$i]['Restaurant']['id']
-						));
-						?>
-						" class="btn btn-default">
-						選択
-						</a>
-					</td>
 				</tr>
 				<?php endfor; ?>
 			</table>
