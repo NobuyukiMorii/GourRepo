@@ -12,13 +12,4 @@
 
 .table-font {
 	font-size: 5px;
-	color: black;
-}
-
-.non-decorate:hover {
-	text-decoration: none;
-}
-
-.BGC:hover {
-	background-color: #fffafa;
 }
