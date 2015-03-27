@@ -8,7 +8,7 @@ class MoviesController extends AppController {
 	/*
 	*利用するモデル
 	*/
-	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList' , 'UserWatchMovieList' , 'Tag' , 'TagRelation' , 'UserProfile' , 'Preference' , 'LargeCategory' , 'SmallCategory' , 'LargeArea' , 'MiddleArea' , 'SmallArea');
+	public $uses = array('Movie' , 'User' , 'Restaurant' , 'TagRelation' , 'UserFavoriteMovieList' , 'UserWatchMovieList' , 'Tag' , 'TagRelation' , 'UserProfile');
 
 	/*
 	*利用するコンポーネント
@@ -18,13 +18,13 @@ class MoviesController extends AppController {
 	//MoviesControllerの中でログイン無しで入れるところの設定
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'serchResult', 'view' , 'reporterMovieList');
+        $this->Auth->allow('index', 'serchResult', 'view');
     }
 
     public function isAuthorized($user) {
     	//contributorに権限を与えております。
         if (isset($user['role']) && $user['role'] === 'contributor') {
-        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'selectRestForAddMovie' , 'userFavoriteMovieList', 'userWatchMovieList', 'edit', 'delete', 'myMovieIndex'))) {
+        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'userFavoriteMovieList', 'userWatchMovieList', 'edit', 'delete', 'myMovieIndex'))) {
         		return true;
         	}
         }
@@ -131,30 +131,13 @@ class MoviesController extends AppController {
 					'not' => array('Movie.id' => $this->request['pass'][0])
 				),
 				'recursive' => 2,
-				'limit' => 5
+				'limit' => 10
 			));
 
 			/*
 			*Movieの再生回数をUpdate
 			*/
 			$streaming_count = $movie['Movie']['count'] + 1;
-<<<<<<< HEAD
-
-			// 更新する内容を設定
-			$count_data = array('Movie' => array('id' => $this->request['pass'][0] , 'count' => $streaming_count));
-			// 更新する項目（フィールド指定）
-			$fields = array('count');
-			$this->Movie->id = $this->request['pass'][0];
-			try {
-				$flg_movie_count = $this->Movie->save($count_data, false, $fields);
-			} catch (Exception $e) {
-				$this->Session->setFlash('カウント回数の更新に失敗しました。');
-			}
-			if(empty($flg_movie_count)){
-				$this->Session->setFlash('なんか変だったよ。');
-			}
-=======
->>>>>>> Make a folder 'Theme/new'
 
 			// 更新する内容を設定
 			$count_data = array('Movie' => array('id' => $this->request['pass'][0] , 'count' => $streaming_count));
@@ -162,18 +145,6 @@ class MoviesController extends AppController {
 			$fields = array('count');
 			$flg_movie_count = $this->Movie->save($count_data, false, $fields);
 
-<<<<<<< HEAD
-			$userfavorite = $this->UserFavoriteMovieList->find('all',array(
-				'conditions' =>array(
-					'`UserFavoriteMovieList`.`user_id`' => $this->userSession['id'],
-					'`UserFavoriteMovieList`.`movie_id`' => $this->request['pass'][0]
-				)
-			));
-=======
-			if(empty($flg_movie_count)){
-				$this->Session->setFlash('なんか変だったよ。');
-			}
->>>>>>> Make a folder 'Theme/new'
 
 			/*
 			*viewに表示
@@ -187,9 +158,10 @@ class MoviesController extends AppController {
 	}
 
 	/*
-	*「アップロードボタン」が押された時のムービーの選択画面（DB利用しない）
+	*「アップロードボタン」が押された時のムービーの選択画面
 	*/
 	public function selectMovieForAdd(){
+
 		//都道府県マスタ取得
 		$pref_search_info = $this->Gurunabi->prefSearch();
 		//大業態マスタ取得
@@ -204,18 +176,6 @@ class MoviesController extends AppController {
 		$rest_search_info = $this->Gurunabi->ValidateRestInfo($rest_search_info);
 
 		$this->set(compact('pref_search_info' , 'category_large_search_info' , 'rest_search_info'));
-	}
-
-	/*
-	*「アップロードボタン」が押された時のムービーの選択画面（DB利用）
-	*/
-	public function selectRestForAddMovie(){
-
-
-
-
-
-
 	}
 
 	/*
@@ -238,11 +198,11 @@ class MoviesController extends AppController {
 
 			//ぐるなびidを取得する
 			$option['id'] = $this->request->data['gournabi_id'];
-			//同じぐるなびidがなければ新規にsaveする
+			//同じぐるなびidがあれば新規にsaveする
 			$existent_restraunt = $this->Restaurant->find('all' , array(
 				'conditions' => array('Restaurant.gournabi_id' => $option['id'])
 			));
-			//レストランが未登録の場合、レストランを登録する
+			//レストランが未登録の場合
 			if(empty($existent_restraunt)){
 				//レストランをぐるなびから検索して取得する
 				$rest_search_info = $this->Gurunabi->RestSearch($option);
@@ -255,19 +215,14 @@ class MoviesController extends AppController {
 				$rest_save_data['created_user_id'] = $this->userSession['id'];
 				$rest_save_data['modified_user_id'] = $this->userSession['id'];
 				$this->Restaurant->create();
-				try {
-					$flg_restaurant = $this->Restaurant->save($rest_save_data);
-				} catch (Exception $e) {
-					$this->Session->setFlash('レストランの登録に失敗しました。改めて登録しなおして下さい。');
-					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
-				}
+				$flg_restaurant = $this->Restaurant->save($rest_save_data);
 				//エラーハンドリング
 				if($flg_restaurant === false){
 					$this->Session->setFlash('レストランの登録に失敗しました。改めて登録しなおして下さい。');
 					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
 				}
 			}
-			//既にレストランが登録してある場合、レストランを登録しないで、動画だけ登録する
+			//既にレストランが登録してある場合
 			if(!empty($existent_restraunt)){
 				$flg_restaurant['Restaurant']['id'] = $existent_restraunt[0]['Restaurant']['id'];
 			}
@@ -313,21 +268,11 @@ class MoviesController extends AppController {
 				//タグそのもの
 				$this->Tag->create();
 				$tag_save_data['name'] = $val;
-				try {
-					$this->Tag->save($tag_save_data);
-				} catch(Exception $e) {
-					$this->Session->setFlash('タグの登録に失敗しました。改めて登録しなおして下さい。');
-					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
-				}
+				$this->Tag->save($tag_save_data);
 				//保存する（タグリレーションズ）
 				$tag_relation_save_data['tag_id'] = $this->Tag->getLastInsertID();
 				$this->TagRelation->create();
-				try {
-					$this->TagRelation->save($tag_relation_save_data);
-				} catch(Exception $e) {
-					$this->Session->setFlash('タグの登録に失敗しました。改めて登録しなおして下さい。');
-					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectMovieForAdd'));
-				}
+				$this->TagRelation->save($tag_relation_save_data);
 			}
 
 			//保存の判定（成功時）
@@ -340,6 +285,12 @@ class MoviesController extends AppController {
 	*検索結果画面
 	*/
 	public function serchResult(){
+		/*
+		*１）キーワードを空欄で区切って配列に変換する
+		*２）moviesのname、description、restaurantsのname、access_line、access_station、category、投稿したユーザーのカラムからfindする
+		*３）その際に、論理削除済みを除外し、moviesテーブルのcount順とする
+		*４）検索したデータをビューに表示する
+		*/
 
 		//ポストされた場合
 		if(!empty($this->request->data['areaname'])){
@@ -535,7 +486,7 @@ class MoviesController extends AppController {
 			),
 			'order' => array('UserFavoriteMovieList.created' => 'DESC'),
 			'limit' => 20,
-			'recursive' => 2
+			'recursive' => 3
 		);
 		$UserFavoriteMovieList = $this->Paginator->paginate('UserFavoriteMovieList');
 		/*
@@ -566,8 +517,8 @@ class MoviesController extends AppController {
 				'Movie.del_flg' => 0
 			),
 			'order' => array('UserWatchMovieList.created' => 'DESC'),
-			'limit' => 50,
-			'recursive' => 2
+			'limit' => 20,
+			'recursive' => 3
 		);
 		$UserWatchMovieList = $this->Paginator->paginate('UserWatchMovieList');
 		/*
@@ -728,7 +679,7 @@ class MoviesController extends AppController {
 			 	'Movie.user_id' => $this->userSession['id'],
 			 	'Movie.del_flg' => 0
 			 ),
-			 'limit' => 20,
+			 'limit' => 5,
 			 'order' => array('Movie.created' => 'DESC'),
 			 'recursive' => 2
 		);
@@ -744,48 +695,6 @@ class MoviesController extends AppController {
 		*ビューに渡す
 		*/
 		$this->set(compact('userMoviePostHistory'));
-	}
-
-	/*
-	*レポーターの動画を一覧で見る画面
-	*/
-	public function reporterMovieList($id){
-		/*
-		*ムービーの取得
-		*/
-		$this->User->unbindModel(
-            array('hasMany' =>array('Movie', 'UserFavoriteMovieList' , 'UserWatchMovieList'))
-        );
-		$this->Restaurant->unbindModel(
-            array('hasMany' =>array('Movie'))
-        );
-		$this->TagRelation->unbindModel(
-            array('belongsTo' =>array('Movie'))
-        );
-		$this->Paginator->settings = array(
-			 'conditions' => array(
-			 	'Movie.user_id' => $id,
-			 	'Movie.del_flg' => 0
-			 ),
-			 'limit' => 20,
-			 'order' => array('Movie.created' => 'DESC'),
-			 'recursive' => 2
-		);
-		$movie = $this->Paginator->paginate('Movie');
-		/*
-		*レポーターの検索
-		*/
-		$this->Movie->unbindModel(
-            array('belongsTo' =>array('User'))
-        );
-		$this->User->unbindModel(
-            array('hasMany' =>array('Movie', 'UserFavoriteMovieList' , 'UserWatchMovieList'))
-        );
-		$user = $this->User->findById($id);
-		/*
-		*ビューに送る
-		*/
-		$this->set(compact('movie' , 'user'));
 	}
 
 }
