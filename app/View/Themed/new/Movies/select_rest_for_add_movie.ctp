@@ -1,89 +1,36 @@
-<?php echo $this->Html->css('movies-selectRestForAddMovie/movies-selectRestForAddMovie'); ?>
-
-
-<div class="Position">
-	<h3>お食事レポートしたお店を選択してください。</h3>
-	<h6>現在は東京のお店のみご選択いただけます。</h6>
-
-	<div style="margin-top:30px;"></div>
+<?php echo $this->Form->create('Movie', array('type' => 'get' ,'action' => 'selectRestForAddMovie')) ;?>
 
 <?php
 foreach ($LargeCategory as $key => $value) {
 	$options[$value['LargeCategory']['code']] = $value['LargeCategory']['name'];
 }
 ?>
-
-<?php
-echo $this->Form->create('Movie', array(
-	'type' => 'Post',
-	'action' => 'selectRestForAddMovie',
-	'class' => "form-inline"
+<?php 
+echo $this->Form->input('LargeCategory', array( 
+    'type' => 'select', 
+    'options' => $options,
+    'id' => 'LargeCategory'
 ));
 ?>
 
-<div class="form-group">
-	<?php
-	echo $this->Form->input('LargeCategory', array( 
-	    'type' => 'select', 
-	    'options' => $options,
-	    'id' => 'LargeCategory',
-	    'label' => false,
-	    'class' => 'form-control SELECT-SHAPE'
-	));
-	?>
-</div>
-
-<div class="form-group">
-	<?php 
-	echo $this->Form->input('SmallCategory', array( 
-	    'type' => 'select', 
-	    'options' => null,
-	    'id' => 'SmallCategory',
-	    'label' => false,
-	    'class' => 'form-control SELECT-SHAPE'
-	));
-	?>
-</div>
-
-<div class="form-group">
-	<?php 
-	echo $this->Form->input('name', array( 
-	    'type' => 'text',
-	    'label' => false,
-	    'class' => 'form-control INPUT-SHAPE',
-	    'placeholder' => '店名'
-	));
-	?>
-</div>
-
-<?php
-echo $this->Form->submit('お店を探す', array(
-	'div' => false,
-	'class' => 'btn btn-default'
+<?php 
+echo $this->Form->input('SmallCategory', array( 
+    'type' => 'select', 
+    'options' => null,
+    'id' => 'SmallCategory'
 ));
 ?>
-<?php echo $this->Form->end(); ?>
 
 
-</div>
 
-<?php if(isset($restaurants)) : ?>
-	<div class="container">
-		<div class="table-responsive">
-			<table class="table table-bordered font-color">
-				<?php for ($i = 0; $i < count($restaurants); ++$i): ?>
-				<tr onclick="location.href='<?php echo $this->Html->url(array("controller" => "movies","action" => "add",$restaurants[$i]['Restaurant']['id']));?>'" class="cursor">
-					<td>
-						<img src="<?php echo $restaurants[$i]['Restaurant']['image_url'] ;?>" width='50px' class="img-thumbnail";>
-					</td>
-					<td><?php echo $restaurants[$i]['Restaurant']['name'] ;?></td>
-					<td><?php echo $restaurants[$i]['Restaurant']['address'] ;?></td>
-				</tr>
-				<?php endfor; ?>
-			</table>
-		</div>
-	</div>
-<?php endif ;?>
+
+
+
+
+
+
+
+
 
 <!-- JS -->
 <?php echo $this->Html->script('jquery-1.11.2.min');?>
