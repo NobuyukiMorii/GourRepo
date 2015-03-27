@@ -77,11 +77,7 @@ class AppController extends Controller {
         /*
         *ビューの表示
         */
-        if ($this->request->isMobile()) {
-            $this->theme = 'Mobile';
-        } else {
-            $this->theme = 'Pc';
-        }
+        $this->theme = 'new';
 
         /*
         *controllerでログインユーザーを呼び出すメソッドを作成
