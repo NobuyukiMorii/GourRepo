@@ -1,108 +1,86 @@
-<?php echo $this->Html->css('view-serchResult/common-setting'); ?>
-<?php echo $this->Html->css('view-serchResult/place-title.css'); ?>
-<?php echo $this->Html->css('view-serchResult/movie-list.css'); ?>
-<?php echo $this->Html->css('view-serchResult/select-page-button-movie.css'); ?>
-<?php echo $this->Html->css('view-serchResult/view-reccomend-movie-for-movie.css'); ?>
+<?php echo $this->Html->css('movies-serchResult/common-setting'); ?>
+<?php echo $this->Html->css('movies-serchResult/place-title'); ?>
+<?php echo $this->Html->css('movies-serchResult/movie-list'); ?>
+<?php echo $this->Html->css('movies-serchResult/select-page-button-movie'); ?>
+<?php echo $this->Html->css('movies-serchResult/view-reccomend-movie-for-movie'); ?>
+<?php echo $this->Html->css('movies-serchResult/movie-serchResult'); ?>
 
-<!--ビューにファイルをアップロードする-->
 
-
-  <!-- CONTENT ============-->
-  <div class="row main-content">
-  <!-- 動画とお店の詳細 ============-->
-  <div class="row">
-    <div class="col-md-7">
+<!-- Page Content -->
+  <div class="container">
+    <?php for ($i = 0; $i < count($results); ++$i): ?>
+      <!-- Features Section -->
       <div class="row">
-        <!-- 動画 ============-->
-        <table class="movie-list-table table table-striped">
-          <?php for ($i = 0; $i < count($results); ++$i): ?>
-          <tr class="movie-list-tr">
-            <td class="movie-list-photo-td">
-              <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $results[$i]['Movie']['id'])) ;?>" class="movie-list-photo-a">
-                <img src="<?php echo $results[$i]['Movie']['thumbnails_url'] ;?>"  class="movie-list-photo">
-              </a>
-            </td>
-            <td class="movie-list-description-td" valign="top">
-              <div class="movie-list-description-div">
-                <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $results[$i]['Movie']['id'])) ;?>" class="movie-list-description-title-ahref">
-                  <span class="movie-list-description-title"><?php echo $results[$i]['Movie']['title'] ;?>（<?php echo $results[$i]['Restaurant']['name'] ;?>）</span><br>
+          <div class="col-lg-12">
+              <h2 class="page-header">
+                <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'reporterMovieList', $results[$i]['User']['id'])) ;?>" class="text-decoratio">
+                <?php echo $this->upload->uploadImage($results[$i]['User']['UserProfile'],'UserProfile.avatar',array('style'=>'thumb'),array('class' => 'img-circle reporter-img')); ?>
                 </a>
-                <a href="/" class="movie-list-reporter-introduction-ahref">
-                  <span class="label label-default">最寄駅</span>&nbsp;<span class="black-text"><?php echo $results[$i]['Restaurant']['access_station'] ;?></span> &nbsp;&nbsp;
-                  <span class="label label-default">ジャンル</span>&nbsp;<span class="black-text"><?php echo $results[$i]['Restaurant']['category'] ;?></span> &nbsp;&nbsp;
-                  <span class="label label-default">料金</span>&nbsp;<span class="black-text"><?php echo $results[$i]['Restaurant']['budget'] ;?>円</span> &nbsp;&nbsp;
-                  <br>
-                  <?php for ($j = 0; $j < count($results[$i]['TagRelation']); ++$j): ?>
-                        <span class="label label-default">
-                          <?php echo $results[$i]['TagRelation'][$j]['Tag']['name'] ;?>
-                        </span>&nbsp;
-                  <?php endfor ;?>
-                  <br>
-                  <span class="movie-list-reporter-introduction"><?php echo $results[$i]['Movie']['description'] ;?></span>
-                </a>  
-              </div>  
-            </td>
-          </tr>
-          <?php endfor ; ?>
+                &nbsp;&nbsp;
+                <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view', $results[$i]['Movie']['id'])) ;?>" class="restaurant-name noneUnderline">
+                  <span class="black"><?php echo $results[$i]['Restaurant']['name'] ;?></span>
+                </a>
+              </h2>
+          </div>
 
-        </table>
+          <div class="col-md-4">
+            <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view', $results[$i]['Movie']['id'])) ;?>">
+              <img class="img-responsive" src="<?php echo $results[$i]['Restaurant']['image_url'] ;?>" alt="Thumbnails" height="400px">
+            </a>
+          </div>
 
-        <!-- /動画 ============-->
-        <div class="pagination" style="margin-left:55px;">                         
-          <ul>                                           
-            <?php echo $this->Paginator->prev(__('prev'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
-            <?php echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>                              
-            <?php echo $this->Paginator->next(__('next'), array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
-          </ul>                                          
-        </div>
+          <div class="col-md-3">
+            <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view', $results[$i]['Movie']['id'])) ;?>" class="black description">
+              <p><?php echo $results[$i]['Movie']['description'] ;?></p>
+            </a>
+          </div>
+
+          <div class="col-md-3">
+              <table class="table cursor" onclick="location.href='<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view', $results[$i]['Movie']['id'])) ;?>'">
+                <tr>
+                  <td>予算</td>
+                  <td><?php echo $results[$i]['Restaurant']['budget'] ;?>円</td>
+                </tr>
+                <tr>
+                  <td>カテゴリー</td>
+                  <td><?php echo $results[$i]['Restaurant']['category_name_s'] ;?></td>
+                </tr>
+                <tr>
+                  <td>最寄駅</td>
+                  <td><?php echo $results[$i]['Restaurant']['access_line'] ;?> <?php echo $results[$i]['Restaurant']['access_station'] ;?></td>
+                </tr>
+                <tr>
+                  <td>レポーター</td>
+                  <td><?php echo $results[$i]['User']['UserProfile']['name'] ;?></td>
+                </tr>
+                <tr>
+                  <td>再生回数</td>
+                  <td><?php echo $results[$i]['Movie']['count'] ;?>回再生</td>
+                </tr>
+                <tr>
+                  <td>タグ</td>
+                  <td>
+                    <?php for ($j = 0; $j < count($results[$i]['TagRelation']); ++$j): ?>
+                      <span class="label label-info">
+                        <?php echo $results[$i]['TagRelation'][$j]['Tag']['name'] ;?>
+                      </span>&nbsp;
+                    <?php endfor ;?>
+                  </td>
+                </tr>
+              </table>
+          </div>
 
       </div>
-    </div>
-    <!-- /動画とお店の詳細 ============-->
+      <!-- /.row -->
+    <?php endfor ; ?>
 
-      <!-- その他のお店のレコメンド ============-->
-      <div class="col-md-4 recommend-movie-sidebar">
-
-        <div class="recommend">
-          最新の投稿
-        </div>
-
-        <table class="reccomend-movie-table">
-          <?php for ($i = 0; $i < count($new_movies); ++$i): ?>
-
-          <tr class="tr-for-reccomend-movie">
-            <td class="reccomend-movie-photo-td">
-              <a href ="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $new_movies[$i]['Movie']['id'])) ;?>">
-                <img src="<?php echo $new_movies[$i]['Movie']['thumbnails_url'] ;?>"  class="reccomend-movie-photo">
-              </a>
-            </td>
-            <td class="recommend-movie-detail-td" valign="top">
-              <div class="reccomend-movie-name-div">
-                <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $new_movies[$i]['Movie']['id'])) ;?>" class="a-href-for-reccomend-movie-place-name">
-                  <span class="reccomend-movie-place-name text-bold"><?php echo $new_movies[$i]['Movie']['title'] ;?> （<?php echo $new_movies[$i]['Restaurant']['name'] ;?>）</span>
-                  <span class="reccomend-movie-genre">（<?php echo $new_movies[$i]['Restaurant']['category'] ;?> </span>
-                  <span class="reccomend-movie-station"> <?php echo $new_movies[$i]['Restaurant']['access_station'] ;?>)</span><br>
-                </a>
-                <a href="/" class="a_href_for_reccomend-movie-td">
-                  <?php for ($j = 0; $j < count($new_movies[$i]['TagRelation']); ++$j): ?>
-                        <span class="label label-default">
-                          <?php echo $new_movies[$i]['TagRelation'][$j]['Tag']['name'] ;?>
-                        </span>&nbsp;
-                  <?php endfor ;?>
-                  <br>
-                  <span class="reccomend-movie-name text-bold"><?php echo $new_movies[$i]['Movie']['description'] ;?></span><br>
-                </a>
-              </div>    
-            </td>
-          </tr>
-
-          <tr class="between-reccomend-movie-tr"></tr>
-
-          <?php endfor ;?>
-
-        </table>
-      </div>
+    <div class="pagination">                         
+      <ul>                                           
+        <?php echo $this->Paginator->prev(__('prev'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+        <?php echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>                              
+        <?php echo $this->Paginator->next(__('next'), array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
+      </ul>                                          
     </div>
 
   </div>
-<!-- /CONTENT ============-->
+  <!-- /.container -->
