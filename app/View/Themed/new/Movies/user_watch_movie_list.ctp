@@ -33,8 +33,7 @@
           <tr class="movie-list-tr">
             <td class="movie-list-photo-td">
                 <?php 
-                  $date = new DateTime($UserWatchMovieList[$i]['UserWatchMovieList']['created']);
-                  echo $date->format('Y年n月t日 H時i分');
+                  echo $UserWatchMovieList[$i]['UserWatchMovieList']['created'];
                 ;?>
             </td>
             <td class="movie-list-description-td" valign="top">
