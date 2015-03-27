@@ -82,7 +82,6 @@
 			<?php echo $this->Form->end(__('変更')); ?>
 
 </fieldset>
-
 <?php echo $this->Html->css('users-profileedit/users-profileedit'); ?>
 
 <!-- Page Content -->
