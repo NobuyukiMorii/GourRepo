@@ -6,8 +6,8 @@
     <!-- Portfolio Item Heading -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">プロフィール
-                <small>Profile</small>
+            <h1 class="page-header">レポーターのプロフィール
+                <small>Reporter's Profile</small>
             </h1>
         </div>
     </div>
@@ -91,6 +91,10 @@
                       <tr>
                         <td>動画の紹介</td>
                         <td><?php echo $movie[$i]['Movie']['description'] ; ?></td>
+                      </tr>
+                      <tr>
+                        <td>再生回数</td>
+                        <td><?php echo $movie[$i]['Movie']['count'] ; ?>回</td>
                       </tr>
                     </table>
                   </div>
