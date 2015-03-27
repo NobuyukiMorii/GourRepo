@@ -28,16 +28,17 @@ class UsersController extends AppController {
 
     public function signup() {
 
+
         if (!$this->request->is('post')) {
             return;
         }
 
         //usersテーブルのautoincrementの次回値を取得
         $query = $this->User->query("SHOW TABLE STATUS LIKE 'users'");
-        $this->request->data['User']['created_user_id'] = $query['Auto_increment'];
-        $this->request->data['User']['modified_user_id'] = $query['Auto_increment'];
-        $this->request->data['UserProfile']['created_user_id'] = $query['Auto_increment'];
-        $this->request->data['UserProfile']['modified_user_id'] = $query['Auto_increment'];
+        $this->request->data['User']['created_user_id'] = $query[0][TABLES]['Auto_increment'];
+        $this->request->data['User']['modified_user_id'] = $query[0][TABLES]['Auto_increment'];
+        $this->request->data['UserProfile']['created_user_id'] = $query[0][TABLES]['Auto_increment'];
+        $this->request->data['UserProfile']['modified_user_id'] = $query[0][TABLES]['Auto_increment'];
 
         $this->User->create();
         if ($this->User->save($this->request->data)) {
@@ -47,8 +48,18 @@ class UsersController extends AppController {
         }
 
         $id = $this->User->getLastInsertID();
+        $data = array('like_food' => '', 'like_genre' => '', 'like_price_zone' => '', 'near_station' => '', 'living_area' => '', 'introduciton' => '');
+
+        //webroot/uploadにデフォルト写真を揚げる処理
+        $query2 = $this->User->query("SHOW TABLE STATUS LIKE 'user_profiles'");
+        mkdir("upload/user_profiles/". $query2[0][TABLES]['Auto_increment']);
+        copy("img/default.jpg", "upload/user_profiles/". $query2[0][TABLES]['Auto_increment']."/default_thumb.jpg");
+        copy( "img/default.jpg", "upload/user_profiles/". $query2[0][TABLES]['Auto_increment']."/default_original.jpp");
+
         $this->UserProfile->create();
         $this->request->data['UserProfile']['user_id'] = $id;
+        $this->request->data['UserProfile'] += $data;
+        $this->request->data['UserProfile']['avatar_file_name'] = 'default.jpg';
         if ($this->UserProfile->save($this->request->data)) {
             $this->Session->setFlash(__('The user has been saved'));
             $this->redirect(array('controller' => 'users', 'action' => 'login'));
