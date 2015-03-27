@@ -75,6 +75,34 @@ class GurunabiComponent extends Component {
 	}
 
 	/*
+	*エリアマスタ（ver1用）を取得する
+	*/
+	public function AreaSearch(){
+		/*
+		*URLの定義
+		*/
+		$base_url = 'http://api.gnavi.co.jp/ver1/AreaSearchAPI/?keyid=';
+		$key = '6f13d54e08f1c5397b1aaa3091cab074';
+		$access_url = $base_url . $key;
+		/*
+		*データの取得+連想配列への変換
+		*/
+		$pref_serch_array = $this->parseXmlToArray($access_url);
+		/*
+		*セレクトボックス用の配列に変換
+		*/
+		foreach ($pref_serch_array['area'] as $key => $value) {
+			$pref_serch_info[$value['area_code']]['name'] = $value['area_name'];
+		}
+		/*
+		*指定なしの場合の配列を追加
+		*/
+		$not_specified_array[0] = "指定なし";
+		array_unshift($pref_serch_info, $not_specified_array[0]);
+		return $pref_serch_info;
+	}
+
+	/*
 	*エリアマスタ（中）を取得する
 	*/
 	public function AreaMiddleSearch(){
