@@ -1,11 +1,8 @@
 <h1>Restaurant Add</h1>
-<?php echo $this->Html->css('view-restaurant/restaurant.css'); ?>
-
 
 <?php
-echo $this->Form->create('Restaurant', array('type' => 'file'));
-//echo $this->Form->input('gournabi_id');
-echo $this->Form->input('gournabi_id', array('type' => 'textarea', 'rows' => 1));
+echo $this->Form->create('Restaurant');
+echo $this->Form->input('gournabi_id');
 echo $this->Form->input('image_url');
 echo $this->Form->input('name');
 echo $this->Form->input('tel');
@@ -36,11 +33,5 @@ echo $this->Form->input('party');
 echo $this->Form->input('lunch');
 echo $this->Form->input('credit_card');
 echo $this->Form->input('equipment');
-echo $this->Form->input('avatar', array('type' => 'file', 'label' => false));
 echo $this->Form->end('Save');
 ?>
-<!-- 
-
-<?php //echo $this->Form->create('Restaurant', array('type' => 'file')); ?>
-<?php //echo $this->Form->input('avatar', array('type' => 'file', 'label' => false)); ?>
-<?php //echo $this->Form->end(__('変更/登録')); ?> -->
