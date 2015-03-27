@@ -123,7 +123,7 @@ echo $this->Form->submit('お店を探す', array(
 			<?php endfor; ?>
 		</table>
 	</div>
-</div>
+<?php endif ;?>
 
 <!-- JS -->
 <?php echo $this->Html->script('jquery-1.11.2.min');?>
