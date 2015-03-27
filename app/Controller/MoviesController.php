@@ -659,7 +659,7 @@ class MoviesController extends AppController {
 			),
 			'fields' => 'DISTINCT UserWatchMovieList.movie_id',
 			'order' => array('UserWatchMovieList.created' => 'DESC'),
-			'limit' => 20,
+			'limit' => 50,
 			'recursive' => 3
 		);
 		$UserWatchMovieList = $this->Paginator->paginate('UserWatchMovieList');
