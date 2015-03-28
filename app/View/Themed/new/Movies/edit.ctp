@@ -1,7 +1,9 @@
+<?php echo $this->Html->css('bootstrap');?>
  <?php echo $this->Form->create('Movie', array('class' => 'form-horizontal' , 'type' => 'post' , 'action' => 'edit')); ?>
 
+<div class="row">
 	<div class="form-group" style="margin-top:50px;">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md- col-md-offset-2">
   			<h4>動画の情報を編集して下さい</h4>
   		</div>
 	</div>
@@ -51,3 +53,7 @@
   		</div>
 	</div>
  <?php echo $this->Form->end(); ?>
+
+</div>
+</div>
+</div>
