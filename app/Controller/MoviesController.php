@@ -24,7 +24,7 @@ class MoviesController extends AppController {
     public function isAuthorized($user) {
     	//contributorに権限を与えております。
         if (isset($user['role']) && $user['role'] === 'contributor') {
-        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'selectRestForAddMovie' , 'userFavoriteMovieList', 'userWatchMovieList', 'edit', 'delete', 'myMovieIndex', 'selectRestForAddMovie'))) {
+        	if(in_array($this->action, array('add', 'selectMovieForAdd', 'selectRestForAddMovie' , 'userFavoriteMovieList', 'userWatchMovieList', 'edit', 'delete', 'myMovieIndex', 'selectRestForAddMovie' , 'selectRestForAddMovieManual', 'addManual'))) {
         		return true;
         	}
         }
@@ -184,7 +184,7 @@ class MoviesController extends AppController {
 	}
 
 	/*
-	*「アップロードボタン」が押された時のムービーの選択画面（DB利用）
+	*「アップロードボタン」が押された時のムービーの選択画面（DB利用「Movie自動投稿用」）
 	*/
 	public function selectRestForAddMovie(){
 		/*
@@ -230,55 +230,107 @@ class MoviesController extends AppController {
 
 		if(!empty($this->request->data)){
 
-			//ぐるなびidを取得する
+			//レストランidを取得する
 			$restaurant_id = $this->request->data['restaurant_id'];
 			if(empty($restaurant_id)){
 				$this->Session->setFlash('お店の選択が正しく出来ませんでした。');
 				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
 			}
-			//保存する（ムービー）
-			$movie_save_data['restaurant_id'] = $restaurant_id;
-			$movie_save_data['user_id'] = $this->userSession['id'];
-			$movie_save_data['title'] = $this->request->data['title'];
-			$movie_save_data['description'] = $this->request->data['description'];
-			$movie_save_data['youtube_url'] = 'https://www.youtube.com/watch?v=' . $this->request->data['youtube_url'];
-			if(empty($movie_save_data['youtube_url'])){
-				$this->Session->setFlash('YouTubeへの動画のアップロードに失敗しました。');
-				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
+
+			/*
+			*YouTubeに動画をアップロードする際は、バリデーションをかける
+			*/
+			if(empty($this->request->data['Movie']['manual'])) {	
+				$movie_save_data['restaurant_id'] = $restaurant_id;
+				$movie_save_data['user_id'] = $this->userSession['id'];
+				$movie_save_data['title'] = $this->request->data['title'];
+				$movie_save_data['description'] = $this->request->data['description'];
+				$movie_save_data['youtube_url'] = 'https://www.youtube.com/watch?v=' . $this->request->data['youtube_url'];
+				$movie_save_data['created_user_id'] = $this->userSession['id'];
+				$movie_save_data['modified_user_id'] = $this->userSession['id'];
+				if(empty($movie_save_data['youtube_url'])){
+					$this->Session->setFlash('YouTubeへの動画のアップロードに失敗しました。');
+					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
+				}
+				$movie_save_data['youtube_iframe_url'] = $this->YouTube->get_youtube_iframe_url($movie_save_data['youtube_url']);
+				if(empty($movie_save_data['youtube_iframe_url'])){
+					$this->Session->setFlash('こちらの動画は登録出来ません。');
+					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
+				}
+				$movie_save_data['thumbnails_url'] = $this->request->data['thumbnails_url'];
+				if(empty($movie_save_data['thumbnails_url'])){
+					$this->Session->setFlash('YouTubeへの動画のアップロードに失敗しました。');
+					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
+				}
+				$this->Movie->create();
+				//エラーの判定（ムービー）
+				try {
+					$flg_movie = $this->Movie->save($movie_save_data);
+				} catch (Exception $e) {
+					$this->Session->setFlash('動画の登録に失敗しました。改めて登録しなおして下さい。');
+					/*
+					*動画の投稿に失敗したときは、del_flgを2にして保存する
+					*/
+					$data['title'] = '投稿失敗';
+					$data['count'] = 0;
+					$data['description'] = '投稿失敗';
+					$data['youtube_url'] = 'false';
+					$data['youtube_iframe_url'] = 'false';
+					$data['thumbnails_url'] = 'false';
+					$data['user_id'] = $this->userSession['id'];
+					$data['restaurant_id'] = $restaurant_id;
+					$data['del_flg'] = 2;
+					$data['created_user_id'] = $this->userSession['id'];
+					$data['modified_user_id'] = $this->userSession['id'];
+					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
+				}
 			}
-			$movie_save_data['youtube_iframe_url'] = $this->YouTube->get_youtube_iframe_url($movie_save_data['youtube_url']);
-			if(empty($movie_save_data['youtube_iframe_url'])){
-				$this->Session->setFlash('こちらの動画は登録出来ません。');
-				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
-			}
-			$movie_save_data['thumbnails_url'] = $this->request->data['thumbnails_url'];
-			if(empty($movie_save_data['thumbnails_url'])){
-				$this->Session->setFlash('YouTubeへの動画のアップロードに失敗しました。');
-				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
-			}
-			$movie_save_data['created_user_id'] = $this->userSession['id'];
-			$movie_save_data['modified_user_id'] = $this->userSession['id'];
-			$this->Movie->create();
-			//エラーの判定（ムービー）
-			try {
-				$flg_movie = $this->Movie->save($movie_save_data);
-			} catch (Exception $e) {
-				$this->Session->setFlash('動画の登録に失敗しました。改めて登録しなおして下さい。');
+
+			/*
+			*既存のyoutube_urlを利用するする際は、埋め込みURLやサムネイル画像のurlを作成
+			*/
+			if(!empty($this->request->data['Movie']['manual'])) {
+				//タグの変数を変更する
+				$this->request->data['tag'] = $this->request->data['Movie']['tag'];
+				unset($this->request->data['Movie']['tag']);
+
+				$movie_save_data['restaurant_id'] = $restaurant_id;
+				$movie_save_data['user_id'] = $this->userSession['id'];
+				$movie_save_data['title'] = $this->request->data['Movie']['title'];
+				$movie_save_data['description'] = $this->request->data['Movie']['description'];
+				$movie_save_data['created_user_id'] = $this->userSession['id'];
+				$movie_save_data['modified_user_id'] = $this->userSession['id'];
 				/*
-				*動画の投稿に失敗したときは、del_flgを2にして保存する
+				*youtube_urlが存在しているか確認する
 				*/
-				$data['title'] = '投稿失敗';
-				$data['count'] = 0;
-				$data['description'] = '投稿失敗';
-				$data['youtube_url'] = 'false';
-				$data['youtube_iframe_url'] = 'false';
-				$data['thumbnails_url'] = 'false';
-				$data['user_id'] = $this->userSession['id'];
-				$data['restaurant_id'] = $restaurant_id;
-				$data['del_flg'] = 2;
-				$data['created_user_id'] = $this->userSession['id'];
-				$data['modified_user_id'] = $this->userSession['id'];
-				return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
+				$fp = @fopen($this->request->data['Movie']['youtube_url'], 'r');
+				if($fp === false){
+					$this->Session->setFlash('こちらのURLは現在存在しません。改めて登録しなおして下さい。');
+					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
+				}
+				$movie_save_data['youtube_url'] = $this->request->data['Movie']['youtube_url'];
+				/*
+				*youtube_idを取得する
+				*/
+				$youtube_id = basename($this->request->data['Movie']['youtube_url']);
+				$youtube_id = substr($youtube_id, 8);
+				/*
+				*埋め込みurlを取得する
+				*/
+				$movie_save_data['youtube_iframe_url'] = 'http://www.youtube.com/embed/' . $youtube_id;
+				/*
+				*サムネイルのURLを取得する
+				*/
+				$movie_save_data['thumbnails_url'] = 'http://i.ytimg.com/vi/' . $youtube_id .'/default.jpg';
+				//保存する
+				$this->Movie->create();
+				//エラーの判定（ムービー）
+				try {
+					$flg_movie = $this->Movie->save($movie_save_data);
+				} catch (Exception $e) {
+					$this->Session->setFlash('動画の登録に失敗しました。改めて登録しなおして下さい。');
+					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
+				}
 			}
 			if($flg_movie  === false){
 				$this->Session->setFlash('動画の登録に失敗しました。改めて登録しなおして下さい。');
@@ -327,6 +379,20 @@ class MoviesController extends AppController {
 			$this->Session->setFlash('登録に成功しました。');
 			$this->redirect(array('controller' => 'Movies', 'action' => 'view' , $tag_relation_save_data['movie_id']));
 		}
+	}
+
+	/*
+	*マニュアルでお店を登録するフォームのビューの表示
+	*/
+	public function addManual(){
+		/*
+		*レイアウトを変更
+		*/
+		$this->layout = 'default-for-form';
+		/*
+		*レストランidを送る
+		*/
+		$this->set('restaurant_id' , $this->params['pass'][0]);
 	}
 
 	/*

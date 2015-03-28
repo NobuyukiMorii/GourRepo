@@ -29,6 +29,7 @@
             <h4>動画の情報を入力して下さい</h4>
           </div>
         </div>
+
         <div class="form-group">
           <label class="col-md-2 control-label">タイトル</label>
           <div class="col-md-8">
@@ -51,7 +52,7 @@
               'label' => false,
               'type' => 'textarea',
               'class' => 'form-control',
-              'rows' => 10,
+              'rows' => 5,
               'value' => '',
               'id' => 'description'
             )); ?>
@@ -70,6 +71,13 @@
             <button type="submit" class="btn btn-default btn-lg" id="submit">アップロード</button>
           </div>
         </div>
+
+        <div class="form-group">
+          <div class="col-md-7 col-md-offset-5">
+            <a class="btn btn-info btn-block" href="<?php echo $this->Html->url(array('controller' => 'Movies' , 'action' => 'addManual', $restaurant_id)); ?>">既にYoutubeに登録されている動画を登録する</a>
+          </div>
+        </div>
+
       </div>
 
       <?php echo $this->Form->end(); ?>

@@ -22,7 +22,6 @@ limitations under the License.
   var INITIAL_STATUS_POLLING_INTERVAL_MS = 15 * 1000;
 
   var accessToken;
-  console.log(accessToken);
 
   /*
   *自分で書いた
