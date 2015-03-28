@@ -5,6 +5,7 @@
 <div class="row center">
     <span id="signinButton" class="pre-sign-in">
       お食事レポートはYouTubeに投稿されます！
+      投稿の前にご自身のGoogleアカウントにログインして下さい！
       <br>
       <span
           class="g-signin"
