@@ -14,7 +14,6 @@
 
       <li class="divider"></li>
       <?php if(!empty($userSession)) : ?>
-
         <?php if($this->action !== 'dashboard') : ?>
           <li><a href="<?php echo $this->html->url(array('controller' => 'Users' , 'action' => 'dashboard')) ;?>">ダッシュボード</a></li>
         <?php endif ;?>

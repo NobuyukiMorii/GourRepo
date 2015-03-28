@@ -32,7 +32,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-    public $uses = array('UserProfile');
+    public $uses = array('UserProfile' , 'User');
 
 	public $helpers = array(
 		'Html' => array('className' => 	'TwitterBootstrap.BootstrapHtml'),

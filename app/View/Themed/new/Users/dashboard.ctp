@@ -70,7 +70,11 @@
         <?php for ($i=0; $i < count($UserFavoriteMovieList); $i++) : ?>
         	<?php if(isset($UserFavoriteMovieList[$i]['Movie']['Restaurant']['image_url'])) : ?>
 		        <div class="col-sm-3 col-xs-6">
+<<<<<<< HEAD
 		            <a href="<?php echo $this->Html->url(array('controller' => 'movies' , 'action' => 'view' , $UserFavoriteMovieList[$i]['Movie']['id'])) ;?>">
+=======
+		            <a href="#">
+>>>>>>> ad59ffc41ab320f2c83c9574462baafa4abf410d
 						<div class="panel panel-default">
 						  <div class="panel-heading">
 						    <h3 class="panel-title"><?php echo $UserFavoriteMovieList[$i]['Movie']['Restaurant']['name'] ;?></h3>
@@ -90,10 +94,13 @@
 									<td>動画の紹介</td>
 									<td><?php echo $UserFavoriteMovieList[$i]['Movie']['description'] ; ?></td>
 								</tr>
+<<<<<<< HEAD
 								<tr>
 									<td>再生回数</td>
 									<td><?php echo $UserFavoriteMovieList[$i]['Movie']['count'] ; ?>回</td>
 								</tr>
+=======
+>>>>>>> ad59ffc41ab320f2c83c9574462baafa4abf410d
 				        	</table>
 
 	
@@ -120,7 +127,11 @@
         <?php for ($i=0; $i < count($UserWatchMovieList); $i++) : ?>
         	<?php if(isset($UserWatchMovieList[$i]['Movie']['Restaurant']['image_url'])) : ?>
 		        <div class="col-sm-3 col-xs-6">
+<<<<<<< HEAD
 		            <a href="<?php echo $this->Html->url(array('controller' => 'movies' , 'action' => 'view' , $UserWatchMovieList[$i]['Movie']['id'])) ;?>">
+=======
+		            <a href="#">
+>>>>>>> ad59ffc41ab320f2c83c9574462baafa4abf410d
 						<div class="panel panel-default">
 						  <div class="panel-heading">
 						    <h3 class="panel-title"><?php echo $UserWatchMovieList[$i]['Movie']['Restaurant']['name'] ;?></h3>
@@ -150,6 +161,11 @@
 
     </div>
     <!-- /.row -->
+<<<<<<< HEAD
 </div>
+=======
+
+
+>>>>>>> ad59ffc41ab320f2c83c9574462baafa4abf410d
 </div>
 <!-- /.container -->
