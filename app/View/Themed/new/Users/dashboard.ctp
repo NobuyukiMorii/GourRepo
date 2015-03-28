@@ -140,6 +140,10 @@
 									<td>動画の紹介</td>
 									<td><?php echo $UserWatchMovieList[$i]['Movie']['description'] ; ?></td>
 								</tr>
+								<tr>
+									<td>再生回数</td>
+									<td><?php echo $UserWatchMovieList[$i]['Movie']['count'] ; ?>回</td>
+								</tr>
 				        	</table>
 						  </div>
 						</div>
