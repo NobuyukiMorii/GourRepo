@@ -66,11 +66,12 @@
               'id' => 'youtube_iframe_url'
             )); ?>
             <?php echo $this->Form->error('Movie.youtube_url');?>
+            <p class="help-block">「https://www.youtube.com/watch?v=」で始まるYoutubeのurlを入力して下さい。</p>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="col-md-2 control-label">タグ</label>
+          <label class="col-md-2 control-label">紹介した料理</label>
           <div class="col-md-8">
             <?php echo $this->Form->input('Movie.tag', array(
               'label' => false,
@@ -80,6 +81,7 @@
               'id' => 'tag'
             )); ?>
             <?php echo $this->Form->error('Movie.tag');?>
+            <p class="help-block">動画で紹介されている料理をスペースで区切って入力して下さい。</p>
           </div>
         </div>
 

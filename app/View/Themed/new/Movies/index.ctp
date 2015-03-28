@@ -32,12 +32,29 @@
           </div>
 
           <div class="col-md-3">
-            <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'reporterMovieList', $data[$i]['User']['id'])) ;?>" class="restaurant-name">
-              <p class="black"><?php echo $data[$i]['Movie']['description'] ;?></p>
-            </a>
+              <span class="label label-default">動画</span>
+              <table class="table cursor" onclick="location.href='<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view', $data[$i]['Movie']['id'])) ;?>'">
+                <tr>
+                  <td>タイトル</td>
+                  <td><?php echo $data[$i]['Movie']['title'] ;?></td>
+                </tr>
+                <tr>
+                  <td>レポーター</td>
+                  <td><?php echo $data[$i]['User']['UserProfile']['name'] ;?></td>
+                </tr>
+                <tr>
+                  <td>再生回数</td>
+                  <td><?php echo $data[$i]['Movie']['count'] ;?>回再生</td>
+                </tr>
+                <tr>
+                  <td>紹介文</td>
+                  <td><?php echo $data[$i]['Movie']['description'] ;?></td>
+                </tr>
+              </table>
           </div>
 
           <div class="col-md-3">
+              <span class="label label-default">レストラン</span>
               <table class="table cursor" onclick="location.href='<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view', $data[$i]['Movie']['id'])) ;?>'">
                 <tr>
                   <td>予算</td>
@@ -52,20 +69,12 @@
                   <td><?php echo $data[$i]['Restaurant']['access_line'] ;?> <?php echo $data[$i]['Restaurant']['access_station'] ;?></td>
                 </tr>
                 <tr>
-                  <td>レポーター</td>
-                  <td><?php echo $data[$i]['User']['UserProfile']['name'] ;?></td>
-                </tr>
-                <tr>
-                  <td>再生回数</td>
-                  <td><?php echo $data[$i]['Movie']['count'] ;?>回</td>
-                </tr>
-                <tr>
-                  <td>タグ</td>
+                  <td>料理</td>
                   <td>
                     <?php for ($j = 0; $j < count($data[$i]['TagRelation']); ++$j): ?>
-                      <span class="label label-info">
-                        <?php echo $data[$i]['TagRelation'][$j]['Tag']['name'] ;?>
-                      </span>&nbsp;
+
+                        <?php echo $data[$i]['TagRelation'][$j]['Tag']['name'] ;?><br>
+
                     <?php endfor ;?>
                   </td>
                 </tr>

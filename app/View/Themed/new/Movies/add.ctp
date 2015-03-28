@@ -102,7 +102,7 @@
       <input name="thumbnails_url" type="hidden" id="thumbnailsUrl_form" value="" />
 
       <div class="form-group" id="tag">
-        <label class="col-md-8 col-md-offset-2 control-label">タグをスペースで区切って入力して下さい。</label>
+        <label class="col-md-8 col-md-offset-2 control-label">動画で紹介されている料理をスペースで区切って入力して下さい。</label>
         <div class="col-md-8 col-md-offset-2">
           <input name="tag" type="text" value="" class="form-control input-lg" />
         </div>
