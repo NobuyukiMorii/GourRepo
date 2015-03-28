@@ -1,4 +1,5 @@
 <div class="col-md-6 header">
+  <?php if($this->action !== 'addManual') : ?>
   <?php if($this->action !== 'add') : ?>
 
   <div class="btn-group header-drop-button">
@@ -13,7 +14,6 @@
 
       <li class="divider"></li>
       <?php if(!empty($userSession)) : ?>
-
         <?php if($this->action !== 'dashboard') : ?>
           <li><a href="<?php echo $this->html->url(array('controller' => 'Users' , 'action' => 'dashboard')) ;?>">ダッシュボード</a></li>
         <?php endif ;?>
@@ -34,6 +34,6 @@
       <?php endif; ?>
     </ul>
   </div>
-
+  <?php endif ;?>
   <?php endif ;?>
 </div>

@@ -84,7 +84,7 @@
 			<?php echo $user['UserProfile']['introduction']; ?>
 		</div>
 	</div>
-		<div class="row">
+	<div class="row">
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-10">

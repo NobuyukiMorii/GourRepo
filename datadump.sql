@@ -1277,7 +1277,7 @@ INSERT INTO `preferences` (`id`, `code`, `name`, `created`, `modified`) VALUES
 
 DROP TABLE IF EXISTS `restaurants`;
 CREATE TABLE IF NOT EXISTS `restaurants` (
-  `id` int(11) unsigned NOT NULL,
+  `id` int(11) unsigned AUTO_INCREMENT PRIMARY_KEY,
   `user_id` int(11) NOT NULL,
   `gournabi_id` varchar(255) NOT NULL,
   `image_url` varchar(255) DEFAULT NULL,
@@ -1286,7 +1286,7 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
   `address` varchar(255) DEFAULT NULL,
   `latitude` decimal(12,9) DEFAULT NULL,
   `longitude` decimal(12,9) DEFAULT NULL,
-  -- `category` varchar(255) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
   `category_code_l` varchar(255) DEFAULT NULL,
   `category_name_l` varchar(255) DEFAULT NULL,
   `category_code_s` varchar(255) DEFAULT NULL,

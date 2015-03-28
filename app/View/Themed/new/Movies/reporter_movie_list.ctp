@@ -15,41 +15,41 @@
 
     <!-- Portfolio Item Row -->
     <div class="row">
-      <?php if(!empty($userSession['UserProfile']['avatar_file_name'])) : ?>
-          <div class="col-md-8">
-              <?php echo $this->upload->uploadImage($user['UserProfile'],'UserProfile.avatar',array('style'=>'original'),array('class' => 'dashbord_img')); ?>
-          </div>
+    	<?php if(!empty($userSession['UserProfile']['avatar_file_name'])) : ?>
+        	<div class="col-md-8">
+            	<?php echo $this->upload->uploadImage($user['UserProfile'],'UserProfile.avatar',array('style'=>'original'),array('class' => 'dashbord_img')); ?>
+        	</div>
         <?php endif ;?>
 
         <div class="col-md-4">
             <h3><?php echo $user['UserProfile']['name']; ?></h3>
             <p><?php echo $user['UserProfile']['introduction']; ?></p>
 
-            <table class="table table-font">
-              <tr>
-                <td>メールアドレス</td>
-                <td><?php echo $user['User']['email']; ?></td>
-              </tr>
-              <tr>
-                <td>好きな食べ物</td>
-                <td><?php echo $user['UserProfile']['like_food']; ?></td>
-              </tr>
-              <tr>
-                <td>好きな食べ物</td>
-                <td><?php echo $user['UserProfile']['like_genre']; ?></td>
-              </tr>
-              <tr>
-                <td>好きな価格帯</td>
-                <td><?php echo $user['UserProfile']['like_price_zone']; ?></td>
-              </tr>
-              <tr>
-                <td>最寄駅</td>
-                <td><?php echo $user['UserProfile']['near_station']; ?></td>
-              </tr>
-              <tr>
-                <td>住んでいる地域</td>
-                <td><?php echo $user['UserProfile']['living_area']; ?></td>
-              </tr>
+      			<table class="table">
+      				<tr>
+      					<td>メールアドレス</td>
+      					<td><?php echo $user['User']['email']; ?></td>
+      				</tr>
+      				<tr>
+      					<td>好きな食べ物</td>
+      					<td><?php echo $user['UserProfile']['like_food']; ?></td>
+      				</tr>
+      				<tr>
+      					<td>好きな食べ物</td>
+      					<td><?php echo $user['UserProfile']['like_genre']; ?></td>
+      				</tr>
+      				<tr>
+      					<td>好きな価格帯</td>
+      					<td><?php echo $user['UserProfile']['like_price_zone']; ?></td>
+      				</tr>
+      				<tr>
+      					<td>最寄駅</td>
+      					<td><?php echo $user['UserProfile']['near_station']; ?></td>
+      				</tr>
+      				<tr>
+      					<td>住んでいる地域</td>
+      					<td><?php echo $user['UserProfile']['living_area']; ?></td>
+      				</tr>
             </table>
 
     </div>
@@ -121,6 +121,6 @@
     </ul>                                          
   </div>
 
-</div>
+
 </div>
 <!-- /.container -->
