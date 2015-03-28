@@ -573,8 +573,9 @@ class MoviesController extends AppController {
 				'UserWatchMovieList.user_id' => $this->userSession['id'],
 				'Movie.del_flg' => 0
 			),
+			'fields' => 'DISTINCT UserWatchMovieList.movie_id',
 			'order' => array('UserWatchMovieList.created' => 'DESC'),
-			'limit' => 50,
+			'limit' => 20,
 			'recursive' => 3
 		);
 		$UserWatchMovieList = $this->Paginator->paginate('UserWatchMovieList');

@@ -27,7 +27,7 @@
         <?php endif ;?>
 
         <?php if($this->action !== 'userWatchMovieList') : ?>
-          <li><a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'userWatchMovieList')) ;?>">閲覧履歴を確認する</a></li>
+          <li><a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'userWatchMovieList')) ;?>">最近見たお食事レポート</a></li>
         <?php endif ;?>
 
         <li><a href="<?php echo $this->html->url(array('controller' => 'Users' , 'action' => 'logout')) ;?>">ログアウト</a></li>

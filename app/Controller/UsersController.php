@@ -109,6 +109,7 @@ class UsersController extends AppController {
         $UserWatchMovieList = $this->UserWatchMovieList->find('all', array(
             'conditions' => array('UserWatchMovieList.user_id' => $this->userSession['id']),
             'order' => array('UserWatchMovieList.created' => 'DESC'),
+            'fields' => 'DISTINCT UserWatchMovieList.movie_id',
             'limit' => 4,
             'recursive' => 3
         ));
