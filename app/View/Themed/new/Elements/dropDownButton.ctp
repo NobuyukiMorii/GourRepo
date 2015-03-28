@@ -1,4 +1,5 @@
 <div class="col-md-6 header">
+  <?php if($this->action !== 'addManual') : ?>
   <?php if($this->action !== 'add') : ?>
 
   <div class="btn-group header-drop-button">
@@ -34,6 +35,6 @@
       <?php endif; ?>
     </ul>
   </div>
-
+  <?php endif ;?>
   <?php endif ;?>
 </div>
