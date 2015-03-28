@@ -233,9 +233,9 @@
                   <!-- Movie Row -->
                   <div class="row">
                       <div class="col-md-12 portfolio-item">
-                        <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $movies_in_same_restaurant[$i]['Movie']['id'])) ;?>" class="hover">
+                        <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $movies_in_same_restaurant[$i]['Movie']['id'])) ;?>">
                         <div class="panel panel-default zenbu">
-                          <div class="panel-body">
+                          <div class="panel-body BGC">
                             
                             <img src="<?php echo $movies_in_same_restaurant[$i]['Movie']['thumbnails_url'] ;?>" class='thumbnails'>
 

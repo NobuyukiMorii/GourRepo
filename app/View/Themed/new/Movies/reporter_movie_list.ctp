@@ -72,12 +72,12 @@
           <?php endif ; ?>
 
             <div class="col-sm-3 col-xs-6">
-              <a href="<?php echo $this->Html->url(array('controller' => 'movies' , 'action' => 'view' , $movie[$i]['Movie']['id'])) ;?>">
+              <a href="<?php echo $this->Html->url(array('controller' => 'movies' , 'action' => 'view' , $movie[$i]['Movie']['id'])) ;?>" class="non-decorate">
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title"><?php echo $movie[$i]['Restaurant']['name'] ;?></h3>
                   </div>
-                  <div class="panel-body">
+                  <div class="panel-body BGC">
                     <img class="img-responsive portfolio-item rest_photo" src="<?php echo $movie[$i]['Restaurant']['image_url'] ;?>" alt="photo">
                     <table class="table table-font">
                       <tr>

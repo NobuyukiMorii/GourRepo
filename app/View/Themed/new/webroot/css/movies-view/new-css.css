@@ -50,3 +50,7 @@
 .reporter:hover {
 	text-decoration: none;
 }
+
+.BGC:hover {
+	background-color: #ecf0f1;
+}

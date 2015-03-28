@@ -27,7 +27,7 @@
 
             <div class="col-sm-3 col-xs-6">
               <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $userMoviePostHistory[$i]['Movie']['id'])) ;?>" class="non-decorate">
-                <div class="panel panel-default">
+                <div class="panel panel-default BGC">
                   <div class="panel-heading">
                     <h3 class="panel-title black"><?php echo $userMoviePostHistory[$i]['Restaurant']['name'] ;?></h3>
                   </div>

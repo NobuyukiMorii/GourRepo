@@ -26,7 +26,7 @@
                   <div class="panel-heading">
                     <h3 class="panel-title"><?php echo $UserFavoriteMovieList[$i]['Movie']['Restaurant']['name'] ;?></h3>
                   </div>
-                  <div class="panel-body">
+                  <div class="panel-body BGC">
                     <img class="img-responsive portfolio-item rest_photo" src="<?php echo $UserFavoriteMovieList[$i]['Movie']['Restaurant']['image_url'] ;?>" alt="photo">
                     <table class="table table-font">
                       <tr>
