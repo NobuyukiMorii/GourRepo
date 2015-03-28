@@ -70,7 +70,7 @@
         <?php for ($i=0; $i < count($UserFavoriteMovieList); $i++) : ?>
         	<?php if(isset($UserFavoriteMovieList[$i]['Movie']['Restaurant']['image_url'])) : ?>
 		        <div class="col-sm-3 col-xs-6">
-		            <a href="#">
+		            <a href="<?php echo $this->Html->url(array('controller' => 'movies' , 'action' => 'view' , $UserFavoriteMovieList[$i]['Movie']['id'])) ;?>" class="text-decoration-non">
 						<div class="panel panel-default">
 						  <div class="panel-heading">
 						    <h3 class="panel-title"><?php echo $UserFavoriteMovieList[$i]['Movie']['Restaurant']['name'] ;?></h3>
@@ -89,6 +89,10 @@
 								<tr>
 									<td>動画の紹介</td>
 									<td><?php echo $UserFavoriteMovieList[$i]['Movie']['description'] ; ?></td>
+								</tr>
+								<tr>
+									<td>再生回数</td>
+									<td><?php echo $UserFavoriteMovieList[$i]['Movie']['count'] ; ?>回</td>
 								</tr>
 				        	</table>
 
@@ -116,7 +120,7 @@
         <?php for ($i=0; $i < count($UserWatchMovieList); $i++) : ?>
         	<?php if(isset($UserWatchMovieList[$i]['Movie']['Restaurant']['image_url'])) : ?>
 		        <div class="col-sm-3 col-xs-6">
-		            <a href="#">
+		            <a href="<?php echo $this->Html->url(array('controller' => 'movies' , 'action' => 'view' , $UserWatchMovieList[$i]['Movie']['id'])) ;?>">
 						<div class="panel panel-default">
 						  <div class="panel-heading">
 						    <h3 class="panel-title"><?php echo $UserWatchMovieList[$i]['Movie']['Restaurant']['name'] ;?></h3>
@@ -136,6 +140,10 @@
 									<td>動画の紹介</td>
 									<td><?php echo $UserWatchMovieList[$i]['Movie']['description'] ; ?></td>
 								</tr>
+								<tr>
+									<td>再生回数</td>
+									<td><?php echo $UserWatchMovieList[$i]['Movie']['count'] ; ?>回</td>
+								</tr>
 				        	</table>
 						  </div>
 						</div>
@@ -146,7 +154,7 @@
 
     </div>
     <!-- /.row -->
-
-
+</div>
+</div>
 </div>
 <!-- /.container -->

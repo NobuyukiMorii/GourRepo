@@ -7,3 +7,7 @@ body{
 overflow-x : hidden;
 overflow-y : auto;
 }
+
+.text-decoration-non:hover {
+	text-decoration: none;
+}

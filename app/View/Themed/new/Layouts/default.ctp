@@ -20,7 +20,6 @@
   <body>
   <!-- HEADER ============-->
   <div class="row">
-    <?php echo $this->Session->flash(); ?>
     <div class="col-md-2 header">
       <?php echo $this->element('headerLogo'); ?>
       <?php echo $this->element('dropDownButton'); ?>
@@ -34,6 +33,7 @@
   <!-- /HEADER ============-->
   
   <!-- CONTENT ============-->
+  <?php echo $this->Session->flash(); ?>
   <?php echo $this->fetch('content'); ?>
 
   <!-- CONTENT ============-->
@@ -52,4 +52,3 @@
   <?php echo $this->Html->script('input-keypress');?>
   </body>
 </html>
-

@@ -41,7 +41,7 @@
 						'class' => 'form-control input-lg'
 					),
 					'class' => 'form-signin'
-				)); ?>a
+				)); ?>
 
 				<label for="inputEmail" class="sr-only">Email address</label>
 				<?php echo $this->Form->input('email', array(

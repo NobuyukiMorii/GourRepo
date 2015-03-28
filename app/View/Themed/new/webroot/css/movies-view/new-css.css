@@ -42,3 +42,11 @@
 .margin-bottom {
 	margin-bottom: 10px;
 }
+
+.reporter {
+	color: black;
+}
+
+.reporter:hover {
+	text-decoration: none;
+}
