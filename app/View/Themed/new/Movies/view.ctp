@@ -39,12 +39,11 @@
   <!-- CONTENT ============-->
   <?php echo $this->Session->flash(); ?>
 
-    <div class="margin-left-new-2">
       <!-- CONTENT ============-->
-      <div class="row main-content">
+      <div class="row">
           <!-- お店の概要 ============-->
-        <div class="row margin-bottom">
-          <div class="col-md-7 col-md-offset-1">
+        <div class="row midashi">
+          <div class="col-md-9">
 
               <a href ="<?php echo $movie['Restaurant']['url'] ;?>" target=”_blank”>
                 <img src="<?php echo $movie['Restaurant']['image_url'] ;?>" class='img-thumbnail reporter-img'>
@@ -65,7 +64,7 @@
             </div>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-3 margin-tel">
             <div class="row">
               <?php echo $this->Html->image('phone.png', array('alt' => 'Day' , 'class' => 'header-phone-image')); ?>
               <span class="view-header-place-tel-number">
@@ -83,16 +82,16 @@
               
             </div>
           </div>
-      </div>
+        </div>
       <!-- /お店の概要 ============-->
     </div>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container2">
 
         <div class="row">
 
-          <div class="col-md-9">
+          <div class="col-md-8">
 
             <div class="thumbnail">
                 <iframe src="<?php echo $movie['Movie']['youtube_iframe_url'] ;?>" frameborder="0" class="movie-new"></iframe>
@@ -289,9 +288,8 @@
         </div>
 
     </div>
-
+    
   <!-- /CONTENT ============-->
-  </div>
 
   <!-- FOOTER ============-->
   <div class="row footer-area">

@@ -1,10 +1,10 @@
 .movie-new {
-	width:800px;
+	width:100%;
 	height: 500px;
 	display: block; 
 	margin: 0px auto;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-top: 1px;
+	margin-bottom: 30px;
 }
 
 .movie-title-new {
@@ -13,7 +13,6 @@
 
 .portfolio-item {
     margin-bottom: 25px;
-    margin-left: 50px;
 }
 
 .thumbnails {
@@ -35,12 +34,14 @@
 	height: 1px;
 }
 
-.margin-left-new-2 {
-	margin-left: -100px;
+.midashi {
+	margin-bottom: 10px;
+	margin-left: 30px;
+	margin-top: 13px;
 }
 
-.margin-bottom {
-	margin-bottom: 10px;
+.margin-tel {
+	margin-left: -40px;
 }
 
 .reporter {
@@ -53,4 +54,9 @@
 
 .BGC:hover {
 	background-color: #ecf0f1;
+}
+
+.container2 {
+	margin-left: 30px;
+	margin-right: -100px;
 }
