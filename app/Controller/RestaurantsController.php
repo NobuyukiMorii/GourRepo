@@ -2,7 +2,7 @@
 
 class RestaurantsController extends AppController{
 	public $uses = array('Restaurant' , 'Area');
-	public $helpers = array('Html', 'Form', 'Session');
+	public $helpers = array('Html', 'Form', 'Session', 'UploadPack.Upload');
 	public $components = array('Gurunabi');
 	public function beforeFilter() {
     	   parent::beforeFilter();
@@ -14,33 +14,29 @@ class RestaurantsController extends AppController{
         if (isset($user['role']) && $user['role'] === 'contributor') {
             //ここにindex,view,add,api_addを記入することで、画面表示ができる
             //indexに飛んで、viewやaddに飛ぶので、全てに権限を与える必要がある
-            if(in_array($this->action, array('api_add2', 'restaurants_add', 'index'))) {
+            if(in_array($this->action, array('api_add2', 'restaurants_add', 'index', 'edit', 'rule'))) {
                 return true;
             }
         }
 		return parent::isAuthorized($user);
     }
 
+
+
 	public function api_add2(){
 		//ビューを使わない
 		$this->autoRender = false;
 		//カテテゴリーを全部取得する
 		$categories = $this->Gurunabi->categoryLargeSearch();
-// echo "capppppppppptegoriesの表示";
-// pr($categories);
 		array_shift($categories);
-		//exit;
 		//urlを作成する
-		$page_number = 10;
+		$page_number = 12;
 		$url = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=50&pref=PREF13&offset_page='.$page_number;
 		$i = 0;
 		
 
 		foreach ($categories as $key => $value) {
 			$url2[$i] = $url.'&category_l='.$key;
-			//echo "$url2のrulを表示する";
-			// pr($url2);
-			// exit;
 			$i++;
 		}
 		
@@ -127,6 +123,33 @@ class RestaurantsController extends AppController{
 			}
 			$this->Session->setFlash(__('Unable to add your post.'));
 		}
+	}
+
+
+
+	public function edit($id=null){
+		if (!$id){
+			throw new NotFoundException(__('Invalid post'));
+		}
+
+		$restaurant = $this->Restaurant->findById($id);
+		if (!$restaurant){
+			throw new NotFoundException(__('Invalid post'));
+		}
+
+		if ($this->request->is(array('post', 'put'))){
+			$this->Restaurant->id = $id;
+			if ($this->Restaurant->save($this->request->data)){
+				$this->Session->setFlash(__('Your post has been updated.'));
+				return $this->redirect(array('action' => 'index'));
+			}
+			$this->Session->setFlash(__('Unable to update your post.'));
+		}
+	}
+
+
+	public function rule(){
+
 	}
 
 
