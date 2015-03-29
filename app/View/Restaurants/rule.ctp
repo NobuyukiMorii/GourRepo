@@ -1,4 +1,4 @@
-<?php echo $this->Html->css('view-rule/rule.css'); ?>
+<?php echo $this->Html->css('view-restaurant/rule.css'); ?>
 
 
 <h2>利用規約</h2>

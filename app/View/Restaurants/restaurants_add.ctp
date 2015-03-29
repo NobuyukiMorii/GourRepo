@@ -1,9 +1,11 @@
 <h1>Restaurant Add</h1>
+<?php echo $this->Html->css('view-restaurant/restaurant.css'); ?>
+
 
 <?php
 echo $this->Form->create('Restaurant', array('type' => 'file'));
 //echo $this->Form->input('gournabi_id');
-echo $this->Form->input('gournabi_id', array('type' => 'textarea', 'rows' => 1))."<br/>";
+echo $this->Form->input('gournabi_id', array('type' => 'textarea', 'rows' => 1));
 echo $this->Form->input('image_url');
 echo $this->Form->input('name');
 echo $this->Form->input('tel');
