@@ -80,7 +80,7 @@ class AppController extends Controller {
         if ($this->request->isMobile()) {
             $this->theme = 'Mobile';
         } else {
-            $this->theme = 'PC';
+            $this->theme = 'Pc';
         }
 
         /*
