@@ -1,0 +1,16 @@
+.center {
+	text-align: center;
+}
+
+.margin {
+	margin-top: 10px;
+	margin-bottom: 100px;
+}
+
+.margin-bottom {
+	margin-bottom: 20px;
+}
+
+.margin2 {
+	margin-bottom: 10px;
+}

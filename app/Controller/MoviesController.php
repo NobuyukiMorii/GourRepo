@@ -314,6 +314,7 @@ class MoviesController extends AppController {
 				*/
 				$youtube_id = basename($this->request->data['Movie']['youtube_url']);
 				$youtube_id = substr($youtube_id, 8);
+				$youtube_id = substr($youtube_id, 0, strcspn($youtube_id,'&'));
 				/*
 				*埋め込みurlを取得する
 				*/

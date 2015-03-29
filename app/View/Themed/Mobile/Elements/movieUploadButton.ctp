@@ -1,0 +1,16 @@
+
+	<?php if($this->action !== 'add') : ?>
+
+		<?php if($this->action !== 'view') : ?>
+		  	<p class="header-margin">
+		    	<a class="btn btn-default btn-xs header-upload-button" type="button" href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'selectRestForAddMovie')) ;?>">お食事動画を投稿</a>
+		  	</p>
+		<?php endif ;?>
+
+		<?php if($this->action == 'view') : ?>
+		  	<p class="header-margin">
+		    	<a class="btn btn-default btn-xs header-upload-button" type="button" href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'add' , $restaurant_id)) ;?>">このお店をレポート</a>
+		  	</p>
+		<?php endif ;?>
+
+  	<?php endif ;?>
