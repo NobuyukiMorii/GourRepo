@@ -1,0 +1,54 @@
+.reporter-img {
+	width: 50px;
+}
+
+.rest_name_x_reporter_name:hover {
+	text-decoration: none;
+}
+
+.movie-list-reporter-title {
+	font-style: bold;
+	color: black;
+}
+
+.margin-top {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.dashbord_img {
+	width:400px;	
+}
+
+.rest_photo {
+	height: 300px;
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+.table-font {
+	font-size: 5px;
+}
+
+.margin-left {
+	margin-left: 55px;
+}
+
+.table-font {
+	font-size: 1px;
+	color:black;
+}
+
+.black {
+	color: black;
+}
+
+.non-decorate:hover {
+	text-decoration: none;
+}
+
+.BGC:hover {
+	background-color: #fffafa;
+}

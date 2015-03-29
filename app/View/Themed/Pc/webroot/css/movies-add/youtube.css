@@ -1,0 +1,29 @@
+body {
+
+}
+
+.post-sign-in {
+  display: none;
+}
+
+.during-upload {
+  display: none;
+}
+
+.post-upload {
+  display: none;
+}
+
+#channel-name {
+
+}
+
+label {
+  display: block;
+}
+
+input[type="text"], textarea, progress {
+  width: 100%;
+  margin-bottom: 1em;
+  padding: 0.5em;
+}

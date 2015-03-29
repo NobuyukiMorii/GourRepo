@@ -1,0 +1,24 @@
+.dashbord_img {
+	width:400px;	
+}
+
+.rest_photo {
+	height: 300px;
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+.table-font {
+	font-size: 5px;
+	color: black !important;
+}
+
+.no-decoration:hover {
+	text-decoration: none;
+}
+
+.BCG:hover {
+	background-color: #fffafa;
+}
