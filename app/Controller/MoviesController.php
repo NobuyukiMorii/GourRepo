@@ -655,15 +655,21 @@ class MoviesController extends AppController {
 			$tag_relation_save_data['modified_user_id'] = $this->userSession['id'];
 			$tag_relation_save_data['movie_id'] = $flg['Movie']['id'];
 
-			foreach($tag_save_data['name'] as $key => $val){
-				//タグそのもの
-				$this->Tag->create();
-				$tag_save_data['name'] = $val;
-				$flg = $this->Tag->save($tag_save_data);
-				//保存する（タグリレーションズ）
-				$tag_relation_save_data['tag_id'] = $this->Tag->getLastInsertID();
-				$this->TagRelation->create();
-				$this->TagRelation->save($tag_relation_save_data);
+
+			try{
+				foreach($tag_save_data['name'] as $key => $val){
+					//タグそのもの
+					$this->Tag->create();
+					$tag_save_data['name'] = $val;
+					$flg = $this->Tag->save($tag_save_data);
+					//保存する（タグリレーションズ）
+					$tag_relation_save_data['tag_id'] = $this->Tag->getLastInsertID();
+					$this->TagRelation->create();
+					$this->TagRelation->save($tag_relation_save_data);
+				}
+			} catch (Exception $e) {
+				$this->Session->setFlash(__('申し訳ございません。タグの編集に失敗しました。'));
+	        	return $this->redirect(array('controller' => 'Movies', 'action' => 'edit'));
 			}
 
 	        if ($flg) {

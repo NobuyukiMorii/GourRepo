@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <?php echo $this->Html->css('view-default/bootstrap'); ?>
     <?php echo $this->Html->css('view-default/header'); ?>
-    <?php echo $this->Html->css('view-default/flash'); ?>
+    <?php echo $this->Html->css('layout/flash'); ?>
     <?php echo $this->Html->css('view-default/body.css'); ?>
     <?php echo $this->Html->css('view-default/footer.css'); ?>
     <?php echo $this->Html->css('movies-view/common-setting'); ?>
@@ -24,7 +24,6 @@
   <body>
   <!-- HEADER ============-->
   <div class="row">
-    <?php echo $this->Session->flash(); ?>
     <div class="col-md-2 header">
       <?php echo $this->element('headerLogo'); ?>
       <?php echo $this->element('dropDownButton'); ?>
@@ -36,8 +35,9 @@
   </div>
   <!-- /HEADER ============-->
   
-  <!-- CONTENT ============-->
   <?php echo $this->Session->flash(); ?>
+
+  <!-- CONTENT ============-->
 
       <!-- CONTENT ============-->
       <div class="row">

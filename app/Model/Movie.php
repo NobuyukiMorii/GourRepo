@@ -25,59 +25,51 @@ class Movie extends AppModel {
         'title' => array(
             'notEmpty' => array(
                 'rule'    => 'notEmpty',
-                'message' => 'notEmpty',
-                'last'    => 'タイトルは必ず入力して下さい。'
+                'message' => 'タイトルは必ず入力して下さい。'
             ),
-            'between' => array(
-                'rule'    => array('between', 1, 50),
+            'maxLength' => array(
+                'rule'    => array('maxLength', 50),
                 'message' => 'タイトルは50文字以内で入力して下さい。'
             )
         ),
         'description' => array(
             'notEmpty' => array(
                 'rule'    => 'notEmpty',
-                'message' => 'notEmpty',
-                'last'    => '紹介文は必ず入力して下さい。'
+                'message' => '紹介文は必ず入力して下さい。',
             ),
-            'between' => array(
-                'rule'    => array('between', 1, 100),
-                'message' => '紹介文は100文字以内で入力して下さい。'
+            'maxLength' => array(
+                'rule'    => array('maxLength', 200),
+                'message' => 'タイトルは200文字以内で入力して下さい。'
             )
         ),
         'youtube_url' => array(
             'notEmpty' => array(
                 'rule'    => 'notEmpty',
-                'message' => 'notEmpty',
-                'last'    => 'YoutubeのURLは必ず入力して下さい。'
+                'message' => '紹介文は必ず入力して下さい。'
             ),
             'website' => array(
                 'rule' => 'url',
-                'message' => 'notEmpty',
-                'last'    => 'YoutubeのURLは必ず入力して下さい。'
+                'message' => '紹介文は必ず入力して下さい。'
             )
         ),
         'youtube_iframe_url' => array(
             'notEmpty' => array(
                 'rule'    => 'notEmpty',
-                'message' => 'notEmpty',
-                'last'    => 'YoutubeのURLは必ず入力して下さい。'
+                'message' => '紹介文は必ず入力して下さい。'
             ),
             'website' => array(
                 'rule' => 'url',
-                'message' => 'notEmpty',
-                'last'    => 'YoutubeのURLは必ず入力して下さい。'
+                'message' => '紹介文は必ず入力して下さい。'
             )
         ),
         'thumbnails_url' => array(
             'notEmpty' => array(
                 'rule'    => 'notEmpty',
-                'message' => 'notEmpty',
-                'last'    => 'YoutubeのURLは必ず入力して下さい。'
+                'message' => '紹介文は必ず入力して下さい。'
             ),
             'website' => array(
                 'rule' => 'url',
-                'message' => 'notEmpty',
-                'last'    => 'YoutubeのURLは必ず入力して下さい。'
+                'message' => '紹介文は必ず入力して下さい。'
             )
         )
     );
