@@ -30,7 +30,7 @@ class RestaurantsController extends AppController{
 		$categories = $this->Gurunabi->categoryLargeSearch();
 		array_shift($categories);
 		//urlを作成する
-		$page_number = 11;
+		$page_number = 16;
 		$url = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=50&pref=PREF13&offset_page='.$page_number;
 		$i = 0;
 		
@@ -89,8 +89,7 @@ class RestaurantsController extends AppController{
 							$this->Restaurant->create();
 				 			$this->Restaurant->save($save_data);	
 						} catch (Exception $e) {
-							echo 'gournabi_id:'.$save_data['gournabi_id'].'を無視しました';
-							//echo 'gournabi_id:',$e->getMessage();				
+							echo 'gournabi_id:'.$save_data['gournabi_id'].'を無視しました';			
 						}
 
 
