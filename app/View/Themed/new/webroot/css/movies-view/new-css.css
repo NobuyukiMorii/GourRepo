@@ -53,10 +53,14 @@
 }
 
 .BGC:hover {
-	background-color: #ecf0f1;
+	background-color: #fffafa;
 }
 
 .container2 {
 	margin-left: 30px;
 	margin-right: -100px;
+}
+
+.padding-left {
+	padding-left: 0px;
 }

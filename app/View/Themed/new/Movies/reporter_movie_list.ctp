@@ -59,7 +59,7 @@
 
       <div class="col-lg-12">
           <h3 class="page-header">
-            お気に入りのレポート
+            レポートした動画
           </h3>
       </div>
 

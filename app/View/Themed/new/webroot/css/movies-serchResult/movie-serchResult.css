@@ -1,22 +1,24 @@
-.reporter-img {
+.movie {
+	width: 79%;
+	height: 500px;
+	margin-top: 20px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+
+.center {
+	text-align: center;
+}
+
+.top-movie-thmbnails {
+	height:300px;
+}
+
+.reporter-img{
 	width: 50px;
 }
 
-.rest_name_x_reporter_name:hover {
-	text-decoration: none;
-}
-
-.movie-list-reporter-title {
-	font-style: bold;
-	color: black;
-}
-
-.margin-top {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.noneUnderline:hover {
+.restaurant-name:hover {
 	text-decoration: none;
 }
 
@@ -24,14 +26,14 @@
 	color: black;
 }
 
-.text-decoration {
-	text-decoration: none;
+.black:hover {
+	color: black;
 }
 
 .cursor {
 	cursor:pointer;
 }
 
-.description:hover {
-	text-decoration: none;
+.cursor:hover {
+	background-color: #fffafa;
 }

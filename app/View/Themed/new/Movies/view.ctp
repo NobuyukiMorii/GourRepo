@@ -155,7 +155,7 @@
                 <tr>
                   <td class="table-heading">住所</td>
                   <td><?php echo $movie['Restaurant']['address'] ;?>
-                    <iframe src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCgCauF4jrJHZxT41rZ6NocFHSuOMbA6UY&q=<?php echo $movie['Restaurant']['latitude'] ;?>,<?php echo $movie['Restaurant']['longitude'] ;?>&zoom=16&q=%E9%A3%B2%E9%A3%9F%E5%BA%97" frameborder="0" class="map"></iframe>
+                    <iframe src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCgCauF4jrJHZxT41rZ6NocFHSuOMbA6UY&q=<?php echo $movie['Restaurant']['latitude'] ;?>,<?php echo $movie['Restaurant']['longitude'] ;?>&zoom=16&q=%E9%A3%B2%E9%A3%9F%E5%BA%97" frameborder="0" scrolling="no"  class="map"></iframe>
                   </td>
                 </tr>
                 <tr>
@@ -231,7 +231,7 @@
                 <?php for ($i = 0; $i < count($movies_in_same_restaurant); ++$i): ?>
                   <!-- Movie Row -->
                   <div class="row">
-                      <div class="col-md-12 portfolio-item">
+                      <div class="col-md-12 padding-left">
                         <a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'view' , $movies_in_same_restaurant[$i]['Movie']['id'])) ;?>">
                         <div class="panel panel-default zenbu">
                           <div class="panel-body BGC">

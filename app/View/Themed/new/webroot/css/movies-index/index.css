@@ -1,9 +1,9 @@
 .movie {
-	width: 70%;
+	width: 79%;
 	height: 500px;
 	margin-top: 20px;
 	margin-bottom: 0px;
-	margin-left: -107px;
+	margin-left: 0px;
 }
 
 .center {
@@ -32,4 +32,8 @@
 
 .cursor {
 	cursor:pointer;
+}
+
+.cursor:hover {
+	background-color: #fffafa;
 }

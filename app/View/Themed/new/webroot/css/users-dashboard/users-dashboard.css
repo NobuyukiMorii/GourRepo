@@ -18,3 +18,7 @@
 .no-decoration:hover {
 	text-decoration: none;
 }
+
+.BCG:hover {
+	background-color: #fffafa;
+}
