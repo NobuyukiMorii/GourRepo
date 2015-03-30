@@ -109,6 +109,10 @@ CakeLog::config('error', array(
 
 CakePlugin::loadAll();
 
+//即時反映させる？
+Configure::write('Asset.timestamp', 'force');
+
+
 
 // CakePlugin::load('DebugKit');
 // CakePlugin::load(array('TwitterBootstrap'));
