@@ -152,10 +152,11 @@ class MoviesController extends AppController {
 				$this->Session->setFlash('なんか変だったよ。');
 			}
 
+
 			/*
 			*viewに表示
 			*/
-			$this->set(compact('movie' , 'movies_in_same_restaurant'));
+			$this->set(compact('movie' , 'movies_in_same_restaurant', 'movie_get_count' , 'userfavorite'));
 
 		} else {
 			$this->Session->setFlash('お探しの動画はありませんでした。申し訳ございません。');
