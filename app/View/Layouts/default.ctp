@@ -1,63 +1,58 @@
-<?php
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.View.Layouts
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
-
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
-$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
-?>
 <!DOCTYPE html>
-<html>
-<head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
+<html lang="ja">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>GourRepo</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <?php echo $this->Html->css('bootstrap.min'); ?>
+    <?php echo $this->Html->css('view-default/header'); ?>
+    <?php echo $this->Html->css('view-default/serch-input.css'); ?>
+    <?php echo $this->Html->css('view-default/flash'); ?>
+    <?php echo $this->Html->css('view-default/body.css'); ?>
+    <?php echo $this->Html->css('view-default/footer.css'); ?>
+    <style>
+    .input-group-addon {
+    }
+    </style>
+  </head>
+  <body>
+  <!-- HEADER ============-->
+  <div class="row">
+    <div class="col-md-2 header">
+      <?php echo $this->element('headerLogo'); ?>
+      <?php echo $this->element('dropDownButton'); ?>
+    </div>
+    
+    <?php echo $this->element('serchInput'); ?>
+    <?php echo $this->element('movieUploadButton'); ?>
+    <?php echo $this->element('profileImage'); ?>
 
-		echo $this->Html->css('cake.generic');
+  </div>
+  <!-- /HEADER ============-->
+  
+  <!-- CONTENT ============-->
+  <?php echo $this->Session->flash(); ?>
+  <?php echo $this->fetch('content'); ?>
 
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
-</head>
-<body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
-		<div id="content">
+  <!-- 開発用に追加 -->
+  <?php pr($userSession['role']) ;?>
+  <?php pr($userSession['email']) ;?>
+  <!-- CONTENT ============-->
 
-			<?php echo $this->Session->flash(); ?>
+  <!-- FOOTER ============-->
+  <div class="row footer-area">
+    <?php echo $this->element('footerLogo'); ?>
+    <?php echo $this->element('footerConcept'); ?>
+    <?php echo $this->element('footerCopyright'); ?>
+  </div>
+  <!-- /FOOTER ============-->
 
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-			?>
-			<p>
-				<?php echo $cakeVersion; ?>
-			</p>
-		</div>
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
-</body>
+  <!-- script references -->
+  <?php echo $this->Html->script('jquery-1.11.2.min');?>
+  <?php echo $this->Html->script('bootstrap');?>
+  <?php echo $this->Html->script('input-keypress');?>
+  </body>
 </html>
+
