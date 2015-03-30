@@ -18,7 +18,7 @@ class MoviesController extends AppController {
 	//MoviesControllerの中でログイン無しで入れるところの設定
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'serchResult', 'view' , 'reporterMovieList');
+        $this->Auth->allow('index', 'serchResult', 'view' , 'reporterMovieList' , 'landingPage');
     }
 
     public function isAuthorized($user) {
@@ -803,5 +803,16 @@ class MoviesController extends AppController {
 		*/
 		$this->set(compact('movie' , 'user'));
 	}
+
+	/*
+	*ランディングページ
+	*/
+	public function landingPage(){
+		$this->theme = false;
+		$this->autoLayout = false;
+	}
+
+
+
 
 }
