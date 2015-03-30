@@ -53,13 +53,13 @@ class UsersController extends AppController {
         //webroot/uploadにデフォルト写真を揚げる処理
         $query2 = $this->User->query("SHOW TABLE STATUS LIKE 'user_profiles'");
         mkdir("upload/user_profiles/". $query2[0]['TABLES']['Auto_increment']);
-        copy("img/default.jpg", "upload/user_profiles/". $query2[0]['TABLES']['Auto_increment']."/default_thumb.jpg");
-        copy( "img/default.jpg", "upload/user_profiles/". $query2[0]['TABLES']['Auto_increment']."/default_original.jpp");
+        copy("img/default.png", "upload/user_profiles/". $query2[0]['TABLES']['Auto_increment']."/default_thumb.png");
+        copy( "img/default.png", "upload/user_profiles/". $query2[0]['TABLES']['Auto_increment']."/default_original.png");
 
         $this->UserProfile->create();
         $this->request->data['UserProfile']['user_id'] = $id;
         $this->request->data['UserProfile'] += $data;
-        $this->request->data['UserProfile']['avatar_file_name'] = 'default.jpg';
+        $this->request->data['UserProfile']['avatar_file_name'] = 'default.png';
         if ($this->UserProfile->save($this->request->data)) {
             $this->Session->setFlash(__('The user has been saved'));
             $this->redirect(array('controller' => 'users', 'action' => 'login'));
