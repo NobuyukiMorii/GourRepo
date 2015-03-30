@@ -1,7 +1,7 @@
 <?php
 
 class RestaurantsController extends AppController{
-	public $uses = array('Restaurant' , 'Area');
+	public $uses = array('Restaurant' , 'Area' , 'Area' , 'Preference' , 'LargeCategory' , 'SmallCategory');
 	public $helpers = array('Html', 'Form', 'Session', 'UploadPack.Upload');
 	public $components = array('Gurunabi');
 	public function beforeFilter() {
@@ -14,7 +14,7 @@ class RestaurantsController extends AppController{
         if (isset($user['role']) && $user['role'] === 'contributor') {
             //ここにindex,view,add,api_addを記入することで、画面表示ができる
             //indexに飛んで、viewやaddに飛ぶので、全てに権限を与える必要がある
-            if(in_array($this->action, array('api_add2', 'restaurants_add', 'index', 'edit', 'rule'))) {
+            if(in_array($this->action, array('api_add2', 'addRestaurants', 'index', 'edit', 'rule'))) {
                 return true;
             }
         }
@@ -114,8 +114,31 @@ class RestaurantsController extends AppController{
 	/*
 	*addアクション
 	*/
-	public function restaurants_add(){
+	public function addRestaurants(){
+		$options_category_name_l	= $this->LargeCategory->find('list');
+		$options_category_name_s 	= $this->SmallCategory->find('list');
+		$options_areaname 			= $this->Area->find('list');
+		$options_prefname 			= $this->Preference->find('list');
+		$this->set(compact('options_category_name_l' , 'options_category_name_s' , 'options_areaname' , 'options_prefname'));
+
 		if ($this->request->is('post')){
+			//カテゴリーコード（大）を取得
+			$this->request->data['category_code_l'] = $this->LargeCategory->find('first', array(
+				'conditions' => array('name' => $this->request->data['Restaurant']['category_name_l'])
+			));
+			//カテゴリーコード（小）を取得
+			$this->request->data['category_code_s'] = $this->SmallCategory->find('first', array(
+				'conditions' => array('name' => $this->request->data['Restaurant']['category_name_s'])
+			));
+			//エリアコードを取得
+			$this->request->data['areacode'] = $this->Area->find('first', array(
+				'conditions' => array('name' => $this->request->data['Restaurant']['areacode'])
+			));
+			//都道府県コードを取得
+			$this->request->data['prefcode'] = $this->Preference->find('first', array(
+				'conditions' => array('name' => $this->request->data['Restaurant']['prefcode'])
+			));
+
 			$this->Restaurant->create();
 			if ($this->Restaurant->save($this->request->data)){
 				$this->Session->setFlash(__('Your post has been saved.'));
