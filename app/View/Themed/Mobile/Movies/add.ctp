@@ -37,6 +37,8 @@
               'type' => 'text',
               'class' => 'input-lg',
               'value' => '',
+              'maxlength' => 50,
+              'placeholder' => '1文字以上、50文字以下でご記入下さい',
               'id' => 'title'
             )); ?>
             <?php echo $this->Form->error('Movie.title');?>
@@ -53,6 +55,8 @@
               'class' => 'form-control',
               'rows' => 5,
               'value' => '',
+              'maxlength' => 200,
+              'placeholder' => '1文字以上、200文字以下でご記入下さい',
               'id' => 'description'
             )); ?>
             <?php echo $this->Form->error('Movie.description');?>

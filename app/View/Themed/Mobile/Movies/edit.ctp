@@ -15,7 +15,9 @@
 				'label' => false,
 				'type' => 'text',
 				'class' => 'form-control input-lg',
-				'value' => $movie['Movie']['title']
+				'value' => $movie['Movie']['title'],
+				'maxlength' => 50,
+				'placeholder' => '1文字以上、50文字以下でご記入下さい',
 			)); ?>
 			<?php echo $this->Form->error('Movie.title');?>
       	</div>
@@ -30,6 +32,8 @@
 			'class' => 'form-control',
 			'rows' => 10,
 			'value' => $movie['Movie']['description'],
+			'maxlength' => 200,
+			'placeholder' => '1文字以上、200文字以下でご記入下さい',
 		)); ?>
 		<?php echo $this->Form->error('Movie.description');?>
       </div>

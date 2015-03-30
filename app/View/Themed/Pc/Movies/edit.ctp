@@ -1,5 +1,5 @@
 <?php echo $this->Html->css('bootstrap');?>
- <?php echo $this->Form->create('Movie', array('class' => 'form-horizontal' , 'type' => 'post' , 'action' => 'edit')); ?>
+ <?php echo $this->Form->create('Movie', array('class' => 'form-horizontal' , 'type' => 'post' , 'action' => 'edit' , 'novalidate' => true)); ?>
 
 <div class="row">
 	<div class="form-group" style="margin-top:50px;">
@@ -15,12 +15,14 @@
 				'label' => false,
 				'type' => 'text',
 				'class' => 'form-control input-lg',
-				'value' => $movie['Movie']['title']
+				'value' => $movie['Movie']['title'],
+				'maxlength' => 50,
+				'placeholder' => '1文字以上、50文字以下でご記入下さい',
 			)); ?>
-			<?php echo $this->Form->error('Movie.title');?>
+			
       	</div>
     </div>
-
+<?php echo $this->Form->error('Movie.title');?>
     <div class="form-group">
       <label class="col-md-2 control-label">紹介文</label>
       <div class="col-md-8">
@@ -30,6 +32,8 @@
 			'class' => 'form-control',
 			'rows' => 10,
 			'value' => $movie['Movie']['description'],
+			'maxlength' => 200,
+			'placeholder' => '1文字以上、200文字以下でご記入下さい',
 		)); ?>
 		<?php echo $this->Form->error('Movie.description');?>
       </div>
@@ -42,6 +46,8 @@
 			'label' => false,
 			'type' => 'text',
 			'class' => 'form-control input-lg',
+			'required' => false,
+			'placeholder' => '１料理ごとに30文字以内で、スペースで区切ってご記入下さい。',
 		)); ?>
 		<?php echo $this->Form->error('Tag.name');?>
       </div>

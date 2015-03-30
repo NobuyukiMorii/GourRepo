@@ -351,8 +351,21 @@ class MoviesController extends AppController {
 			$tag_relation_save_data['modified_user_id'] = $this->userSession['id'];
 			$tag_relation_save_data['movie_id'] = $this->Movie->getLastInsertID();
 
+			//タグのバリデーションのために変数を定義
+			$tag_validation = true;
 			foreach($tag_save_data['name'] as $key => $val){
-				//タグそのもの
+				/*
+				*バリデーション
+				*/
+				$tag_length = mb_strlen($val);
+				if($val=== 0 || $tag_length > 30) {
+					$tag_validation = false;
+					continue;
+				}
+				/*
+				*保存
+				*/
+				//タグ保存
 				$this->Tag->create();
 				$tag_save_data['name'] = $val;
 				try {
@@ -363,7 +376,7 @@ class MoviesController extends AppController {
 				if($flg_tag === false){
 					$this->Session->setFlash('タグの登録に失敗しました。改めて登録しなおして下さい。');
 				}
-				//保存する（タグリレーションズ）
+				//タグリレーションズ保存
 				$tag_relation_save_data['tag_id'] = $this->Tag->getLastInsertID();
 				$this->TagRelation->create();
 				try {
@@ -375,7 +388,11 @@ class MoviesController extends AppController {
 					$this->Session->setFlash('タグの登録に失敗しました。改めて登録しなおして下さい。');
 				}
 			}
-
+			//タグのバリデーション
+        	if($tag_validation === false){
+	            $this->Session->setFlash(__('入力文字数の関係で、一部料理名の登録に失敗しました。'));
+	            return $this->redirect(array('controller' => 'Movies', 'action' => 'myMovieIndex'));    		
+        	}
 			//保存の判定（成功時）
 			$this->Session->setFlash('登録に成功しました。');
 			$this->redirect(array('controller' => 'Movies', 'action' => 'view' , $tag_relation_save_data['movie_id']));
@@ -692,7 +709,6 @@ class MoviesController extends AppController {
 	*ムービー編集画面
 	*/
 	public function edit($id = null){
-
 		/*
 		*レイアウトを変更
 		*/
@@ -735,6 +751,19 @@ class MoviesController extends AppController {
 	    *フォームが送信されていれば、動画をアップデートする
 	    */
 	    if ($this->request->is(array('post', 'put'))) {
+			/*
+			*バリデーションを記載する
+			*/
+			$title_length = mb_strlen($this->request->data['Movie']['title']);
+			if($title_length === 0 || $title_length > 50) {
+				$this->Session->setFlash('タイトルは1文字以上、50文字以内でご記入下さい');
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'edit' , $id));
+			}
+			$discription_length = mb_strlen($this->request->data['Movie']['description']);
+			if($discription_length === 0 || $discription_length > 200) {
+				$this->Session->setFlash('紹介文は1文字以上、200文字以内でご記入下さい');
+				return $this->redirect(array('controller' => 'Movies', 'action' => 'edit' , $id));
+			}
 
 	    	/*
 	    	*一部項目のみアップデート
@@ -758,14 +787,25 @@ class MoviesController extends AppController {
 			$tag_relation_save_data['modified_user_id'] = $this->userSession['id'];
 			$tag_relation_save_data['movie_id'] = $flg['Movie']['id'];
 
-
+			$tag_validation = true;
 			try{
 				foreach($tag_save_data['name'] as $key => $val){
-					//タグそのもの
+					/*
+					*バリデーション
+					*/
+					$tag_length = mb_strlen($val);
+					if($val=== 0 || $tag_length > 30) {
+						$tag_validation = false;
+						continue;
+					}
+					/*
+					*保存
+					*/
+					//タグの保存
 					$this->Tag->create();
 					$tag_save_data['name'] = $val;
 					$flg = $this->Tag->save($tag_save_data);
-					//保存する（タグリレーションズ）
+					//タグリレーションズの保存
 					$tag_relation_save_data['tag_id'] = $this->Tag->getLastInsertID();
 					$this->TagRelation->create();
 					$this->TagRelation->save($tag_relation_save_data);
@@ -775,6 +815,10 @@ class MoviesController extends AppController {
 	        	return $this->redirect(array('controller' => 'Movies', 'action' => 'edit'));
 			}
 
+        	if($tag_validation === false){
+	            $this->Session->setFlash(__('入力文字数の関係で、一部料理名の登録に失敗しました。'));
+	            return $this->redirect(array('controller' => 'Movies', 'action' => 'myMovieIndex'));    		
+        	}
 	        if ($flg) {
 	            $this->Session->setFlash(__('動画の編集が完了しました.'));
 	            return $this->redirect(array('controller' => 'Movies', 'action' => 'myMovieIndex'));
