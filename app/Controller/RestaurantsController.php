@@ -115,29 +115,54 @@ class RestaurantsController extends AppController{
 	*addアクション
 	*/
 	public function addRestaurants(){
-		$options_category_name_l	= $this->LargeCategory->find('list');
-		$options_category_name_s 	= $this->SmallCategory->find('list');
-		$options_areaname 			= $this->Area->find('list');
-		$options_prefname 			= $this->Preference->find('list');
+		$options_category_name_l	= $this->LargeCategory->find('list', array(
+		    'fields' => array(
+		        'LargeCategory.code',
+		        'LargeCategory.name'
+		    ),
+		));
+		$options_category_name_s 	= $this->SmallCategory->find('list',array(
+		    'fields' => array(
+		        'SmallCategory.code',
+		        'SmallCategory.name'
+		    ),
+		));
+		$options_areaname 			= $this->Area->find('list' ,array(
+		    'fields' => array(
+		        'Area.code',
+		        'Area.name'
+		    ),
+		));
+		$options_prefname 			= $this->Preference->find('list' ,array(
+		    'fields' => array(
+		        'Preference.code',
+		        'Preference.name'
+		    ),
+		));
 		$this->set(compact('options_category_name_l' , 'options_category_name_s' , 'options_areaname' , 'options_prefname'));
 
 		if ($this->request->is('post')){
+			$save_data = $this->request->data['Restaurant'];
 			//カテゴリーコード（大）を取得
-			$this->request->data['category_code_l'] = $this->LargeCategory->find('first', array(
-				'conditions' => array('name' => $this->request->data['Restaurant']['category_name_l'])
+			$category_name_l = $this->LargeCategory->find('first', array(
+				'conditions' => array('LargeCategory.code' => $this->request->data['Restaurant']['category_code_l'])
 			));
+			$save_data['category_name_l'] = $category_name_l['LargeCategory']['name'];
 			//カテゴリーコード（小）を取得
-			$this->request->data['category_code_s'] = $this->SmallCategory->find('first', array(
-				'conditions' => array('name' => $this->request->data['Restaurant']['category_name_s'])
+			$category_name_s = $this->SmallCategory->find('first', array(
+				'conditions' => array('SmallCategory.code' => $this->request->data['Restaurant']['category_code_s'])
 			));
+			$save_data['category_name_s'] = $category_name_s['SmallCategory']['name'];
 			//エリアコードを取得
-			$this->request->data['areacode'] = $this->Area->find('first', array(
-				'conditions' => array('name' => $this->request->data['Restaurant']['areacode'])
+			$areaname = $this->Area->find('first', array(
+				'conditions' => array('Area.code' => $this->request->data['Restaurant']['areacode'])
 			));
+			$save_data['areaname'] = $areaname['Area']['name'];
 			//都道府県コードを取得
-			$this->request->data['prefcode'] = $this->Preference->find('first', array(
-				'conditions' => array('name' => $this->request->data['Restaurant']['prefcode'])
+			$prefname = $this->Preference->find('first', array(
+				'conditions' => array('Preference.code' => $this->request->data['Restaurant']['prefcode'])
 			));
+			$save_data['prefname'] = $prefname['Preference']['name'];
 
 			$this->Restaurant->create();
 			if ($this->Restaurant->save($this->request->data)){
