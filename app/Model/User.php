@@ -7,16 +7,32 @@ class User extends AppModel {
 
     public $validate = array(
         'email' => array(
+            'email' => array(
+                'rule' => array('email', true),
+                'message' => 'メールアドレス形式が間違っています'
+            ),
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'A username is required'
+                'message' => 'メールアドレスを入力してください'
+            ),
+            'isUnique' => array(
+                'rule'    => 'isUnique',
+                'message' => 'このメールアドレスは既に入力されています'
             )
         ),
         'password' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'A password is required'
-            )
+                'message' => 'パスワードを入力してください'
+            ),
+            'between' => array(
+                'rule'    => array('between', 6, 15),
+                'message' => 'パスワードは6文字以上15文字以内で入力してください'   
+            ),
+            'alphaNumeric' => array(
+                'rule' => 'alphaNumeric',
+                'message' => '半角英数字で入力してください'
+            ),       
         ),
         'role' => array(
             'valid' => array(

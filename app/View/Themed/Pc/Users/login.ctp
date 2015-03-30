@@ -48,14 +48,16 @@
 					'label' => false,
 					'placeholder' => 'メールアドレス',
 					'class' => 'form-control',
+					'maxLength' => 50
 				)); ?>
 				<label for="inputPassword" class="sr-only">Password</label>
 				<?php echo $this->Form->input('password', array(
 					'label' => false,
 					'placeholder' => 'パスワード',
 					'class' => 'form-control',
+					'maxLength' => 50
 				)); ?>
-				<button class="btn btn-lg btn-primary btn-block" type="submit">ログイン</button>
+				<button class="btn btn-lg btn-primary btn-block" type="submit" formnovalidate="formnovalidate">ログイン</button>
 				<div class="aida"></div>
 				<a class="btn btn-lg btn-info btn-block" href="<?php echo $this->Html->url(array('controller' => 'Users' , 'action' => 'signup')); ?>">サインアップ</a>
 				<?php echo $this->Form->end(); ?>

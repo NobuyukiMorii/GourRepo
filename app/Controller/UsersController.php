@@ -35,10 +35,10 @@ class UsersController extends AppController {
 
         //usersテーブルのautoincrementの次回値を取得
         $query = $this->User->query("SHOW TABLE STATUS LIKE 'users'");
-        $this->request->data['User']['created_user_id'] = $query[0][TABLES]['Auto_increment'];
-        $this->request->data['User']['modified_user_id'] = $query[0][TABLES]['Auto_increment'];
-        $this->request->data['UserProfile']['created_user_id'] = $query[0][TABLES]['Auto_increment'];
-        $this->request->data['UserProfile']['modified_user_id'] = $query[0][TABLES]['Auto_increment'];
+        $this->request->data['User']['created_user_id'] = $query[0]['TABLES']['Auto_increment'];
+        $this->request->data['User']['modified_user_id'] = $query[0]['TABLES']['Auto_increment'];
+        $this->request->data['UserProfile']['created_user_id'] = $query[0]['TABLES']['Auto_increment'];
+        $this->request->data['UserProfile']['modified_user_id'] = $query[0]['TABLES']['Auto_increment'];
 
         $this->User->create();
         if ($this->User->save($this->request->data)) {
@@ -52,9 +52,9 @@ class UsersController extends AppController {
 
         //webroot/uploadにデフォルト写真を揚げる処理
         $query2 = $this->User->query("SHOW TABLE STATUS LIKE 'user_profiles'");
-        mkdir("upload/user_profiles/". $query2[0][TABLES]['Auto_increment']);
-        copy("img/default.jpg", "upload/user_profiles/". $query2[0][TABLES]['Auto_increment']."/default_thumb.jpg");
-        copy( "img/default.jpg", "upload/user_profiles/". $query2[0][TABLES]['Auto_increment']."/default_original.jpp");
+        mkdir("upload/user_profiles/". $query2[0]['TABLES']['Auto_increment']);
+        copy("img/default.jpg", "upload/user_profiles/". $query2[0]['TABLES']['Auto_increment']."/default_thumb.jpg");
+        copy( "img/default.jpg", "upload/user_profiles/". $query2[0]['TABLES']['Auto_increment']."/default_original.jpp");
 
         $this->UserProfile->create();
         $this->request->data['UserProfile']['user_id'] = $id;

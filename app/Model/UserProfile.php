@@ -12,4 +12,14 @@ class UserProfile extends AppModel {
     );
 
 	public $name = 'UserProfile';
+
+    public $validate = array(
+        'name' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'ユーザーネームを入力してください'
+            )
+        ),
+    );
+
 }
