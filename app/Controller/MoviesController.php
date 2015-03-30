@@ -428,6 +428,7 @@ class MoviesController extends AppController {
 
 		        //キーワードに合致したuser_idだけの配列を作成する
 		        $user_id_array = array();
+
 		        foreach ($UserName as $key => $value) {
 			        $user_id_array[] = $value['UserProfile']['user_id'];
 
@@ -437,15 +438,15 @@ class MoviesController extends AppController {
 	        	$conditions = array(
 					'OR' =>
 					array(	
-						'`Movie`.`title` LIKE '			     =>	'%'.$this->request->data['areaname'].'%',
-						'`Movie`.`description` LIKE '	     => '%'.$this->request->data['areaname'].'%',
-						'`Restaurant`.`name` LIKE '          => '%'.$this->request->data['areaname'].'%',
-						'`Restaurant`.`access_line` LIKE '   => '%'.$this->request->data['areaname'].'%',
-						'`Restaurant`.`access_station` LIKE '=> '%'.$this->request->data['areaname'].'%',
+						'`Movie`.`title` LIKE '			     		=> '%'.$this->request->data['areaname'].'%',
+						'`Movie`.`description` LIKE '	     		=> '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`name` LIKE '          		=> '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`access_line` LIKE '   		=> '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`access_station` LIKE '		=> '%'.$this->request->data['areaname'].'%',
 						'`Restaurant`.`category_name_s` LIKE '      => '%'.$this->request->data['areaname'].'%',
 						'`Restaurant`.`category_name_l` LIKE '      => '%'.$this->request->data['areaname'].'%',
-						'`Restaurant`.`address` LIKE '       => '%'.$this->request->data['areaname'].'%',
-						'`Movie`.`user_id` IN '        		 => $user_id_array
+						'`Restaurant`.`address` LIKE '       		=> '%'.$this->request->data['areaname'].'%',
+						'`Movie`.`user_id` IN '        		 		=> $user_id_array
 					),
 					'Movie.del_flg' => 0
 				);
@@ -457,19 +458,120 @@ class MoviesController extends AppController {
 	        	$conditions = array(
 					'OR' =>
 					array(	
-						'`Movie`.`title` LIKE '			     =>	'%'.$this->request->data['areaname'].'%',
-						'`Movie`.`description` LIKE '	     => '%'.$this->request->data['areaname'].'%',
-						'`Restaurant`.`name` LIKE '          => '%'.$this->request->data['areaname'].'%',
-						'`Restaurant`.`access_line` LIKE '   => '%'.$this->request->data['areaname'].'%',
-						'`Restaurant`.`access_station` LIKE '=> '%'.$this->request->data['areaname'].'%',
+						'`Movie`.`title` LIKE '			     		=> '%'.$this->request->data['areaname'].'%',
+						'`Movie`.`description` LIKE '	     		=> '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`name` LIKE '          		=> '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`access_line` LIKE '   		=> '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`access_station` LIKE '		=> '%'.$this->request->data['areaname'].'%',
 						'`Restaurant`.`category_name_s` LIKE '      => '%'.$this->request->data['areaname'].'%',
 						'`Restaurant`.`category_name_l` LIKE '      => '%'.$this->request->data['areaname'].'%',
-						'`Restaurant`.`address` LIKE '       => '%'.$this->request->data['areaname'].'%',
+						'`Restaurant`.`address` LIKE '       		=> '%'.$this->request->data['areaname'].'%',
 					),
 					'Movie.del_flg' => 0
 				);
 			}
 
+	        //タグid検索
+	        $Tagid = $this->TagRelation->find('all',array(
+	        	'conditions'=>
+	        		array( '`Tag`.`name` LIKE ' => '%'.$this->request->data['areaname'].'%'
+	        			),
+	        	'fields' => array('movie_id')
+	        ));
+
+	       	//キーワードに合致したTagidだけの配列を作成する
+			$tag_id_array = array();
+			foreach ($Tagid as $key => $value) {
+		 		//echo var_dump($value);
+	 	    	$tag_id_array[] = $value['TagRelation']['movie_id'];
+			}
+
+			//キーワードに合致したuser_idだけの配列を作成する
+		    $user_id_array = array();
+	        foreach ($UserName as $key => $value) {
+	        $user_id_array[] = $value['UserProfile']['user_id'];
+	        }
+
+	        //ユーザーidがあるか判定する
+	        if(empty($Tagid)){
+	        	if(empty($UserName)){
+
+	        		//MovieのidとMovieのuser_idがない場合
+	        		$conditions = array(
+						'OR' =>
+						array(	
+								'`Movie`.`title` LIKE '			     		=> '%'.$this->request->data['areaname'].'%',
+								'`Movie`.`description` LIKE '	     		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`name` LIKE '          		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`access_line` LIKE '   		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`access_station` LIKE '		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`category_name_s` LIKE '      => '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`category_name_l` LIKE '      => '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`address` LIKE '       		=> '%'.$this->request->data['areaname'].'%'
+						),
+						'Movie.del_flg' => 0
+					);
+					//echo var_dump($UserName);
+
+	        	}else{
+
+	        		//MovieのUser_idだけある場合
+	        		$conditions = array(
+						'OR' =>
+						array(	
+								'`Movie`.`title` LIKE '			     		=> '%'.$this->request->data['areaname'].'%',
+								'`Movie`.`description` LIKE '	     		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`name` LIKE '          		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`access_line` LIKE '   		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`access_station` LIKE '		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`category_name_s` LIKE '      => '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`category_name_l` LIKE '      => '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`address` LIKE '       		=> '%'.$this->request->data['areaname'].'%',
+								'`Movie`.`user_id` IN '						=> $user_id_array,
+						),
+						'Movie.del_flg' => 0
+					);
+	        	}
+	        }else{
+	        	if(empty($UserName)){
+
+	        		//Movieのuser_idだけある場合
+	        		$conditions = array(
+						'OR' =>
+						array(	
+								'`Movie`.`title` LIKE '			     		=> '%'.$this->request->data['areaname'].'%',
+								'`Movie`.`description` LIKE '	     		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`name` LIKE '          		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`access_line` LIKE '   		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`access_station` LIKE '		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`category_name_s` LIKE '      => '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`category_name_l` LIKE '      => '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`address` LIKE '       		=> '%'.$this->request->data['areaname'].'%',
+								'`Movie`.`id`'					 			=> $tag_id_array,
+						),		
+						'Movie.del_flg' => 0
+					);
+	        	}else{
+
+	        		//どっちもある場合
+	        		$conditions = array(
+						'OR' =>
+						array(	
+								'`Movie`.`title` LIKE '			     		=> '%'.$this->request->data['areaname'].'%',
+								'`Movie`.`description` LIKE '	     		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`name` LIKE '          		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`access_line` LIKE '   		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`access_station` LIKE '		=> '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`category_name_s` LIKE '      => '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`category_name_l` LIKE '      => '%'.$this->request->data['areaname'].'%',
+								'`Restaurant`.`address` LIKE '       		=> '%'.$this->request->data['areaname'].'%',
+								'`Movie`.`id'					 			=> $tag_id_array,
+								'`Movie`.`user_id` IN '        		 		=> $user_id_array
+						),
+						'Movie.del_flg' => 0
+					);
+	        	}
+	        }
 
 			$this->Paginator->settings = array(
 				 'conditions' => $conditions,
