@@ -30,7 +30,7 @@ class RestaurantsController extends AppController{
 		$categories = $this->Gurunabi->categoryLargeSearch();
 		array_shift($categories);
 		//urlを作成する
-		$page_number = 21;
+		$page_number = 54;
 		$url = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=50&pref=PREF13&offset_page='.$page_number;
 		$i = 0;
 		
