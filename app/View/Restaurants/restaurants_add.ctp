@@ -1,21 +1,10 @@
+<h1>Restaurant Add</h1>
+<?php echo $this->Html->css('view-restaurant/restaurant.css'); ?>
+
+
 <?php
-class Restaurant extends AppModel {
-	
-	public $actsAs = array(
-        'UploadPack.Upload' => array(
-            'avatar' => array(
-            'styles' => array(
-                'thumb' => '85x85'
-            )
-            )
-        )
-    );
-
-
-    public $validate = array(
-        'gournabi_id' => array(
-                'rule' => 'alphaNumeric')
-            '')
+echo $this->Form->create('Restaurant', array('type' => 'file'));
+echo $this->Form->input('gournabi_id', array('type' => 'textarea', 'rows' => 1));
 echo $this->Form->input('image_url');
 echo $this->Form->input('name');
 echo $this->Form->input('tel');
@@ -47,8 +36,5 @@ echo $this->Form->input('lunch');
 echo $this->Form->input('credit_card');
 echo $this->Form->input('equipment');
 echo $this->Form->input('avatar', array('type' => 'file', 'label' => false));
-    )
-	
-}
-
-
+echo $this->Form->end('Save');
+?>
