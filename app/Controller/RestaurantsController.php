@@ -142,6 +142,19 @@ class RestaurantsController extends AppController{
 		$this->set(compact('options_category_name_l' , 'options_category_name_s' , 'options_areaname' , 'options_prefname'));
 
 		if ($this->request->is('post')){
+			/*
+			*ジオコーディングで緯度と経度を取得
+			*/
+			$address = urlencode($this->request->data['Restaurant']['address']);
+			$url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' . $address . '&sensor=false';
+			$json = file_get_contents($url);
+			$geometry = json_decode($json, true);
+			$save_data['latitude'] = $geometry['results'][0]['geometry']['location']['lat'];
+			$save_data['longitude'] = $geometry['results'][0]['geometry']['location']['lng'];
+
+			/*
+			*カテゴリーコードからカテゴリー名を取得
+			*/
 			$save_data = $this->request->data['Restaurant'];
 			//カテゴリーコード（大）を取得
 			$category_name_l = $this->LargeCategory->find('first', array(

@@ -170,7 +170,7 @@ echo $this->Form->input('access_station',
 echo $this->Form->input('access_station_exit', 
 	array(
 		'type' => 'text', 
-		'label' => '最寄駅名',
+		'label' => '最寄出口',
 		'class' => 'form-control',
 		'value' => false,
 		'maxlength' => 100,
@@ -204,17 +204,6 @@ echo $this->Form->input('parking_lots',
 	array(
 		'type' => 'text', 
 		'label' => '駐車場台数',
-		'class' => 'form-control',
-		'value' => false,
-		'maxlength' => 100,
-		'required' => false,
-	)
-);
-
-echo $this->Form->input('pr', 
-	array(
-		'type' => 'text', 
-		'label' => '紹介文',
 		'class' => 'form-control',
 		'value' => false,
 		'maxlength' => 100,
