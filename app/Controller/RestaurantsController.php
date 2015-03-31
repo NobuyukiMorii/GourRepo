@@ -6,7 +6,7 @@ class RestaurantsController extends AppController{
 	public $components = array('Gurunabi');
 	public function beforeFilter() {
     	   parent::beforeFilter();
-        	$this->Auth->allow('getAreaSearch');
+        	$this->Auth->allow('getAreaSearch', 'api_add2', 'addRestaurants');
     }
 
      public function isAuthorized($user) {
@@ -30,7 +30,7 @@ class RestaurantsController extends AppController{
 		$categories = $this->Gurunabi->categoryLargeSearch();
 		array_shift($categories);
 		//urlを作成する
-		$page_number = 54;
+		$page_number = 55;
 		$url = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=50&pref=PREF13&offset_page='.$page_number;
 		$i = 0;
 		
