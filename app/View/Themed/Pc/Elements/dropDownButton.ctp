@@ -30,6 +30,10 @@
           <li><a href="<?php echo $this->html->url(array('controller' => 'Movies' , 'action' => 'userWatchMovieList')) ;?>">最近見たお食事レポート</a></li>
         <?php endif ;?>
 
+        <?php if($this->action !== 'addRestaurants') : ?>
+          <li><a href="<?php echo $this->html->url(array('controller' => 'Restaurants' , 'action' => 'addRestaurants')) ;?>">レストランを登録する</a></li>
+        <?php endif ;?>
+
         <li><a href="<?php echo $this->html->url(array('controller' => 'Users' , 'action' => 'logout')) ;?>">ログアウト</a></li>
       <?php endif; ?>
     </ul>

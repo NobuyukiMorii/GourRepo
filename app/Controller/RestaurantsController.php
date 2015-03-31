@@ -143,19 +143,22 @@ class RestaurantsController extends AppController{
 
 		if ($this->request->is('post')){
 			/*
+			*カテゴリーコードからカテゴリー名を取得
+			*/
+			$save_data = $this->request->data['Restaurant'];
+
+			/*
 			*ジオコーディングで緯度と経度を取得
 			*/
 			$address = urlencode($this->request->data['Restaurant']['address']);
 			$url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' . $address . '&sensor=false';
 			$json = file_get_contents($url);
 			$geometry = json_decode($json, true);
-			$save_data['latitude'] = $geometry['results'][0]['geometry']['location']['lat'];
-			$save_data['longitude'] = $geometry['results'][0]['geometry']['location']['lng'];
+			if($geometry['status'] !== 'ZERO_RESULTS'){
+				$save_data['latitude'] = $geometry['results'][0]['geometry']['location']['lat'];
+				$save_data['longitude'] = $geometry['results'][0]['geometry']['location']['lng'];
+			}
 
-			/*
-			*カテゴリーコードからカテゴリー名を取得
-			*/
-			$save_data = $this->request->data['Restaurant'];
 			//カテゴリーコード（大）を取得
 			$category_name_l = $this->LargeCategory->find('first', array(
 				'conditions' => array('LargeCategory.code' => $this->request->data['Restaurant']['category_code_l'])
@@ -170,23 +173,43 @@ class RestaurantsController extends AppController{
 			$areaname = $this->Area->find('first', array(
 				'conditions' => array('Area.code' => $this->request->data['Restaurant']['areacode'])
 			));
-			$save_data['areaname'] = $areaname['Area']['name'];
+			$save_data['code_areaname'] = $areaname['Area']['name'];
+			$save_data['code_areacode'] = $this->request->data['Restaurant']['areacode'];
 			//都道府県コードを取得
 			$prefname = $this->Preference->find('first', array(
 				'conditions' => array('Preference.code' => $this->request->data['Restaurant']['prefcode'])
 			));
-			$save_data['prefname'] = $prefname['Preference']['name'];
+			$save_data['code_prefname'] = $prefname['Preference']['name'];
+			$save_data['code_prefcode'] = $this->request->data['Restaurant']['prefcode'];
+
+			/*
+			*足りない変数を補完する
+			*/
+			$save_data['gournabi_id'] 	= '';
+			$save_data['image_url'] 	= null;
+			$save_data['equipment'] 	= null;
+			$save_data['credit_card'] 	= null;
+			$save_data['lunch'] 		= null;
+			$save_data['party'] 		= null;
+
+			//ユーザーid等を設定する
+			$save_data['created_user_id'] = $this->userSession['id'];
+			$save_data['modified_user_id'] = $this->userSession['id'];
 
 			$this->Restaurant->create();
-			if ($this->Restaurant->save($this->request->data)){
-				$this->Session->setFlash(__('Your post has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+			if ($this->Restaurant->save($save_data)){
+				$last_restaurant_id = $this->Restaurant->getLastInsertID();
+				$this->Session->setFlash(__('レストランの投稿に成功しました。'));
+
+				if($this->request->data['Restaurant']['RedirectUrl'] === 'Movie-Add'){
+					return $this->redirect(array('controller' => 'Movies' , 'action' => 'add' , $last_restaurant_id ));
+				} else {
+					return $this->redirect(array('controller' => 'Movies' , 'action' => 'index'));
+				}
 			}
 			$this->Session->setFlash(__('Unable to add your post.'));
 		}
 	}
-
-
 
 	public function edit($id=null){
 		if (!$id){
@@ -327,8 +350,5 @@ class RestaurantsController extends AppController{
 			$this->Area->save($data);
 		}
 	}
-
-
-
 
 }
