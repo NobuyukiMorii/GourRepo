@@ -4,6 +4,7 @@
 <div class="Position">
 	<h3>お食事レポートしたお店を選択してください。</h3>
 	<h6>現在は東京のお店のみご選択いただけます。</h6>
+	<h6>新しくお店を登録する場合は<a hred="<?php echo $this->Html->url(array('controller' => 'Restaurant' , 'action' => 'addRestaurants')) ;?>">こちら</a>から。</h6>
 
 	<div style="margin-top:30px;"></div>
 

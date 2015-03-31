@@ -243,7 +243,7 @@ input {
 <?php echo $this->Html->script('jquery-1.11.2.min');?>
 <script>
 $("#add").submit(function() {
-	if (confirm('このまま動画を保存しますか？')) {
+	if (confirm('このまま動画投稿に進みますか？')) {
 		$("#RedirectUrl").val('Movie-Add');
 	} else {
 		$("#RedirectUrl").val('Movie-Index');
