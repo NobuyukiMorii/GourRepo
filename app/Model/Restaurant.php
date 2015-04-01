@@ -34,7 +34,7 @@ class Restaurant extends AppModel {
         'tel' => array(
             'rule' => array('phone', null),
             'message' => '電話番号の形式が間違っています'
-            'allowEmpty'
+            'allowEmpty'　=> true,
         ),
         'address' => array(
             'rule' => array('alphaNumeric'),
