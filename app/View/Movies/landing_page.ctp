@@ -59,6 +59,7 @@
         <div class="col-lg-4" >
           <div class="align-center">
             <i class="fa fa-code fa-5x mar-bot20"></i>
+            <?php echo $this->Html->image('icon/restaurant.png' , array('class' => 'img-responsive img-size2')); ?>
             <h4 class="text-bold">お店の雰囲気がよくわかる</h4>
             <p>店内に広がる笑い声、店員さんの笑顔、できたての料理から湧き上がる湯気など、お食事レポーターがお店の雰囲気をより正しくお伝えします。
             </p>
@@ -68,6 +69,7 @@
         <div class="col-lg-4" >
           <div class="align-center">
             <i class="fa fa-terminal fa-5x mar-bot20"></i>
+            <?php echo $this->Html->image('icon/upload.jpg' , array('class' => 'img-responsive img-size2')); ?>
             <h4 class="text-bold">簡単に投稿できる</h4>
             <p>ぐるれぽはYoutubeと連携しているので、あなたのお食事動画を簡単に投稿することが出来ます。
             </p>
@@ -77,6 +79,7 @@
         <div class="col-lg-4" >
           <div class="align-center">
             <i class="fa fa-bolt fa-5x mar-bot20"></i>
+            <?php echo $this->Html->image('icon/smile.png' , array('class' => 'img-responsive img-size2')); ?>
             <h4 class="text-bold">お店探しが楽しくなる</h4>
             <p>可愛く、コミカルで、美味しそうに食べるお食事レポーターの動画で、あなたのお店探しがもっと楽しくなります。
             </p>
