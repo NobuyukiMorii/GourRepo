@@ -154,7 +154,7 @@ class RestaurantsController extends AppController{
 			$url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' . $address . '&sensor=false';
 			$json = file_get_contents($url);
 			$geometry = json_decode($json, true);
-			if($geometry['status'] !== 'ZERO_RESULTS'){
+			if($geometry['status'] === "OK"){
 				$save_data['latitude'] = $geometry['results'][0]['geometry']['location']['lat'];
 				$save_data['longitude'] = $geometry['results'][0]['geometry']['location']['lng'];
 			}
@@ -207,7 +207,7 @@ class RestaurantsController extends AppController{
 					return $this->redirect(array('controller' => 'Movies' , 'action' => 'index'));
 				}
 			}
-			$this->Session->setFlash(__('Unable to add your post.'));
+			$this->Session->setFlash(__('登録に失敗しました。'));
 		}
 	}
 
