@@ -6,6 +6,7 @@
     <title>GourRepo</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <?php echo $this->Html->meta('icon'); ?>
     <?php echo $this->Html->css('view-default/bootstrap'); ?>
     <?php echo $this->Html->css('view-default/header'); ?>
     <?php echo $this->Html->css('layout/flash'); ?>

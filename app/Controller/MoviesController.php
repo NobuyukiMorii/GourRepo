@@ -258,6 +258,7 @@ class MoviesController extends AppController {
 					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
 				}
 				$movie_save_data['thumbnails_url'] = $this->request->data['thumbnails_url'];
+				$movie_save_data['thumbnails_url'] = str_replace('default.jpg', "hqdefault.jpg", $movie_save_data['thumbnails_url']);
 				if(empty($movie_save_data['thumbnails_url'])){
 					$this->Session->setFlash('YouTubeへの動画のアップロードに失敗しました。');
 					return $this->redirect(array('controller' => 'Movies', 'action' => 'selectRestForAddMovie'));
@@ -322,7 +323,7 @@ class MoviesController extends AppController {
 				/*
 				*サムネイルのURLを取得する
 				*/
-				$movie_save_data['thumbnails_url'] = 'http://i.ytimg.com/vi/' . $youtube_id .'/default.jpg';
+				$movie_save_data['thumbnails_url'] = 'http://i.ytimg.com/vi/' . $youtube_id .'/hqdefault.jpg';
 				//保存する
 				$this->Movie->create();
 				//エラーの判定（ムービー）
