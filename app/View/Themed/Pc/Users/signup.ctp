@@ -64,7 +64,10 @@
 					'class' => 'form-control',
 					'maxLength' => 50
 				)); ?>
-
+				<?php echo $this->Form->hidden('role', array(
+					'label' => false,
+					'value' => 'contributor'
+				)); ?>
 				<button class="btn btn-lg btn-primary btn-block" type="submit" formnovalidate="formnovalidate">サインアップ</button>
 				<div class="aida"></div>
 				<a class="btn btn-lg btn-info btn-block" href="<?php echo $this->Html->url(array('controller' => 'Users' , 'action' => 'login')); ?>">ログイン</a>
