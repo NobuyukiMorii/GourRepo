@@ -41,11 +41,12 @@ class UsersController extends AppController {
         $this->request->data['UserProfile']['modified_user_id'] = $query[0]['TABLES']['Auto_increment'];
 
         $this->User->create();
-        if ($this->User->save($this->request->data)) {
-            $this->Session->setFlash(__('The user has been saved'));
-        } else {
+        if (!$this->User->save($this->request->data)) {
             $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+            return;
         }
+
+        $this->Session->setFlash(__('The user has been saved'));
 
         $id = $this->User->getLastInsertID();
         $data = array('like_food' => '', 'like_genre' => '', 'like_price_zone' => '', 'near_station' => '', 'living_area' => '', 'introduciton' => '');
