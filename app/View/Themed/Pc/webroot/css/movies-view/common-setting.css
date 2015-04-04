@@ -1,0 +1,14 @@
+/*コンテンツ全体の設定*/
+.main-content {
+	padding-left: 100px;
+	margin-top: 10px;
+	font-family:"Lucida Grande", "segoe UI", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", Meiryo, Verdana, Arial, sans-serif;
+}
+/*文字を太くする*/
+.text-bold {
+	font-weight: bold;
+}
+
+.reporter-img {
+	width: 50px;
+}

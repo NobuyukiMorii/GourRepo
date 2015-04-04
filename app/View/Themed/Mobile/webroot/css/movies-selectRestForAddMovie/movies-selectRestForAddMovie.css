@@ -1,0 +1,29 @@
+.Position {
+	margin-left:3%;
+}
+
+.INPUT-SHAPE {
+	width:90%;
+	height:34px !important;
+}
+
+.SELECT-SHAPE {
+	width: 90% !important;
+}
+
+.cursor {
+
+}
+
+.cursor:hover {
+	background-color: #f1c40f;
+	cursor:pointer;
+}
+
+.container2 {
+	width: 100%;
+}
+
+.font-size {
+	font-size: 5px;
+}

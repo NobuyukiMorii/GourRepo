@@ -1,0 +1,58 @@
+.movie {
+	width: 100%;
+	height: 200px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+
+.center {
+	text-align: center;
+}
+
+.top-movie-thmbnails {
+	height:300px;
+}
+
+.reporter-img{
+	width: 5px;
+}
+
+.restaurant-name:hover {
+	text-decoration: none;
+}
+
+.black {
+	color: black;
+	font-size: 5px;
+}
+
+.black:hover {
+	color: black;
+}
+
+.cursor {
+	cursor:pointer;
+}
+
+.cursor:hover {
+	background-color: #fffafa;
+}
+
+
+.RestPhoto {
+	width: 40%;
+	vertical-align:top;
+}
+
+hr {
+	margin: 0px;
+}
+
+.screen-width {
+	width: 100%;
+}
+
+.text-width {
+	width:60%;
+	float: right;
+}
