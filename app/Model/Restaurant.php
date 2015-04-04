@@ -13,19 +13,10 @@ class Restaurant extends AppModel {
 
     public $validate = array(
         'gournabi_id' => array(
-<<<<<<< HEAD
+
           'rule' => array('alphaNumeric','isUnique'),
           'message' => 'このidは既に入力されています'
         ),
-=======
-           'rule' => array('alphaNumeric','isUnique'),
-           'message' => 'このidは既に入力されています'
-         ),
-        'image_url' => array(
-            'rule' => array('extension' => array('gif', 'jpeg', 'png', 'jpg'),
-            'message' => 'ファイル形式が間違っています'
-        )), 
->>>>>>> no message
         'name' => array(
             'required' => array(
                 'rule' => 'notEmpty',
@@ -40,11 +31,7 @@ class Restaurant extends AppModel {
         'category_code_l' => array(
             'required' => array(
                 'rule' => 'notEmpty',
-<<<<<<< HEAD
                 'message' => 'カテゴリー(大)を選択してください'
-=======
-                 'message' => 'カテゴリー(大)を選択してください'
->>>>>>> no message
             ),
         ),
         'category_code_s' => array(
