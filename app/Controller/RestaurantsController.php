@@ -6,7 +6,7 @@ class RestaurantsController extends AppController{
 	public $components = array('Gurunabi');
 	public function beforeFilter() {
     	   parent::beforeFilter();
-        	$this->Auth->allow('getAreaSearch', 'api_add2', 'addRestaurants','index','rule');
+        	$this->Auth->allow('getAreaSearch', 'api_add2' ,'index','rule', 'add_restaurants');
     }
 
      public function isAuthorized($user) {
@@ -30,7 +30,7 @@ class RestaurantsController extends AppController{
 		$categories = $this->Gurunabi->categoryLargeSearch();
 		array_shift($categories);
 		//urlを作成する
-		$page_number = 40;
+		$page_number = 41;
 		$url = 'http://api.gnavi.co.jp/ver1/RestSearchAPI/?keyid=ca96f7d6d44f10f53e2cfde38f182b7f&hit_per_page=500&pref=PREF13&offset_page='.$page_number;
 		$i = 0;
 		
@@ -49,7 +49,9 @@ class RestaurantsController extends AppController{
 				/*
 				*DB保存用の配列を作成する
 				*/	
+				
 				$save_data = null;
+				var_dump($data);
 				for($j = 0; $j < count($data[$i]['rest']); $j++){
 					$save_data['gournabi_id']		 					= $data[$i]['rest'][$j]['id'];
 			 		$save_data['image_url'] 							= $data[$i]['rest'][$j]['image_url']['shop_image1'];
